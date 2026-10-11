@@ -1,14 +1,14 @@
-"""rebot-esc outline: 34 x 21 mm rounded rectangle.
+"""rebot-esc outline: 36 x 20 mm rounded rectangle, laid out like an off-the-shelf ESC (B-CUBE 35 x 18).
 
 Board coordinates: mm, origin top-left, +X right, +Y down (KiCad convention).
-Size from the gate-2 layout: the bottom edge carries the 2x5 carrier header (left, through-hole, its
-pads block the top side) and the three motor pads (right); the power stage, driver, MCU and supplies
-share the 34 x 15 mm above. The module lies flat on the carrier, so 21 mm of width uses 21 of the carrier's ~30 mm
-height (docs/projects/battlebot.md, Board location). No cutouts: the M2 retention hole is a part (H1).
+Left short edge: the keyed 2x5 carrier header (battery + signals in). Right short edge: the three motor
+pads in a column, one per phase row. Between them: MCU / driver / supplies, then the power stage as
+three rows (VBAT cap -> high-side FET -> low-side FET -> motor pad). The module lies flat on the carrier,
+so 20 mm of width uses 20 of the carrier's ~30 mm height. No cutouts: the M2 retention hole is a part (H1).
 """
 from shapely.geometry import box
 
-W, H = 34.0, 21.0
+W, H = 36.0, 20.0
 CORNER_R = 1.0
 
 

@@ -1,7 +1,7 @@
 # rebot-esc — checks FAIL
 
 136 errors · 0 warnings · 0 waived  
-board 34.05 × 21.05 mm · 58 footprints · 0 track segments · 0 vias · 0 mm copper
+board 36.05 × 20.05 mm · 58 footprints · 0 track segments · 0 vias · 0 mm copper
 
 ## circuit
 - ✓ `circuit/assertion` MOSFET Vds: spike budget vs 60 V rating: 40 V in [0, 48]
@@ -19,23 +19,23 @@ board 34.05 × 21.05 mm · 58 footprints · 0 track segments · 0 vias · 0 mm c
 - ✓ `erc/ok` KiCad ERC: no violations
 
 ## drc
-- ✗ `drc/unconnected` unconnected: PTH pad 1 [PH_A] of J2; Pad 1 [PH_A] of R11 on F.Cu
-- ✗ `drc/unconnected` unconnected: PTH pad 1 [VBAT] of J1; Pad 1 [VBAT] of C17 on F.Cu
-- ✗ `drc/unconnected` unconnected: PTH pad 2 [VBAT] of J1; PTH pad 1 [VBAT] of J1
-- ✗ `drc/unconnected` unconnected: PTH pad 3 [VBAT] of J1; PTH pad 1 [VBAT] of J1
-- ✗ `drc/unconnected` unconnected: PTH pad 4 [GND] of J1; PTH pad 6 [GND] of J1
+- ✗ `drc/unconnected` unconnected: PTH pad 1 [PH_A] of J2; Pad 5 [PH_A] of Q2 on F.Cu
+- ✗ `drc/unconnected` unconnected: PTH pad 1 [PH_B] of J3; Pad 5 [PH_B] of Q4 on F.Cu
+- ✗ `drc/unconnected` unconnected: PTH pad 1 [PH_C] of J4; Pad 5 [PH_C] of Q6 on F.Cu
+- ✗ `drc/unconnected` unconnected: PTH pad 1 [VBAT] of J1; PTH pad 2 [VBAT] of J1
+- ✗ `drc/unconnected` unconnected: PTH pad 10 [SWCLK] of J1; Pad 22 [SWCLK] of U1 on F.Cu
 - … 131 more `drc/unconnectederror`
 
 ## parity
 - ✓ `parity/ok` board matches the schematic (KiCad schematic parity)
 
 ## placement
-- ✓ `placement/near` C9 -> U1 pad 17: 1.51 mm (max 2.0) — MCU VDD decoupling
-- ✓ `placement/near` C10 -> U1 pad 5: 2.85 mm (max 3.4) — VDDA decoupling
-- ✓ `placement/near` C11 -> U1 pad 4: 2.76 mm (max 3.3) — NRST cap
-- ✓ `placement/near` R4 -> U1 pad 25: 1.33 mm (max 1.8) — DShot series resistor at PB4
-- ✓ `placement/near` C13 -> U2 pad 4: 1.51 mm (max 2.0) — GVDD HF decoupling
-- … 21 more `placement/nearok`
+- ✓ `placement/near` C9 -> U1 pad 17: 1.43 mm (max 1.9) — MCU VDD decoupling
+- ✓ `placement/near` C10 -> U1 pad 5: 2.80 mm (max 3.3) — VDDA decoupling
+- ✓ `placement/near` C11 -> U1 pad 4: 1.55 mm (max 2.1) — NRST cap
+- ✓ `placement/near` R4 -> U1 pad 25: 1.74 mm (max 2.2) — DShot series resistor at PB4
+- ✓ `placement/near` C13 -> U2 pad 4: 3.00 mm (max 3.5) — GVDD HF decoupling
+- … 24 more `placement/nearok`
 
 ## parts
 - · `parts/tiers` 17 unique parts: basic 12, preferred 0, extended 5 (extended: C2870127 LMR36506RRPER, C167761 FNR3015S220MT, C2765098 AT32F421G8U7, C3655801 DRV8300DRGER, C2828498 HSBB6066)

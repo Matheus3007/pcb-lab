@@ -14,16 +14,17 @@ iFlight Xing 2207 1800 kV motor rewired to wye (~1040 kV).
 ## Mechanical
 - Envelope: rear-right channel of the chassis, one module at each end of the carrier
   (`RebotAssemblyV3.STEP`; channel ≈35 mm deep at the wheel end, 17–20 mm at the centre end).
-- Outline: **34 × 21 mm** (gate 2). Bottom edge: the 2×5 header (left) and the three motor pads (right, one
-  under each half bridge). Parts (one-sided, Economic) fill the 34 × 15 mm above. Two modules = 68 mm of the
-  ~78 mm carrier.
+- Outline: **36 × 20 mm** (gate 2), laid out like an off-the-shelf ESC (B-CUBE 45A: 35 × 18): battery +
+  signal header on the LEFT short edge, three motor pads in a column on the RIGHT short edge, one row per
+  phase in between (VBAT cap → high-side FET → low-side FET → motor pad), MCU/driver/supplies left of the
+  power stage. Two modules = 72 mm of the ~78 mm carrier if mounted end to end.
 - Thickness: 1.0 mm (keeps the stack ≈15 mm; Economic allows 0.8–1.6).
 - Parts: **top side only** (SMD); the male 2×5 header is through-hole, body on the bottom side, pins down
   into the carrier's socket. Motor pads on the top side, far edge.
 - Height: top-side parts ≤ 2 mm (MOSFETs ~1 mm, MCU/driver ~0.8 mm, 1206 caps ~1.6 mm).
 - Mounting: one M2 hole in the middle (screw into a standoff on the carrier, no current); must also
   work with Kapton tape only. Keep copper/parts clear of the screw head (≈ Ø4.5 mm).
-- Mass: ≈ 2.3 g each (1.0 mm FR-4 34×21 ≈ 1.3 g, parts ≈ 0.5 g, 2×5 header ≈ 0.5 g), plus the motor wires.
+- Mass: ≈ 2.3 g each (1.0 mm FR-4 36×20 ≈ 1.3 g, parts ≈ 0.5 g, 2×5 header ≈ 0.5 g), plus the motor wires.
 - Environment: combat robot, **shock first** (weapon hits, arena slams). No tall or heavy parts,
   no parts on the edges that touch the screw head, keep the MCU/driver away from board flex near the header.
 
@@ -80,3 +81,4 @@ iFlight Xing 2207 1800 kV motor rewired to wye (~1040 kV).
 | 2026-10-11 | Gate 2 placement (superseded) | 34 × 21 mm, 4-layer; header along the bottom edge, three vertical half bridges on the right, supplies/MCU/driver left; 26 placement rules |
 | 2026-10-11 | Architecture: motor pads on the module | Owner: phases to solder pads like a normal ESC, short 2×5 header for battery/DShot/SWD; gate 1 pre-approved for this change |
 | 2026-10-11 | Gate 2 placement (redo) | 2×5 header bottom-left, motor pads bottom-right under the half bridges; rest of the layout unchanged |
+| 2026-10-11 | Gate 2 placement (ESC-style rows) | Owner: lay it out like a B-CUBE. 36 × 20 mm: header column left, motor-pad column right, one row per phase; 29 placement rules |
