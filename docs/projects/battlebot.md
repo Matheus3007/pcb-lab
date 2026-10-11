@@ -48,9 +48,16 @@ Current plan first; superseded plans are kept under "History" with the reason th
     problem 1), LDO → 3.3 V.
   - **Receiver: locking JST-GH** (5 V, GND, CRSF TX/RX).
   - **Log flash: yes** (whole fight: currents, gyro, sticks, RPM, link quality).
-  - **USB: pads only**, plus a small bench adapter (lighter than a connector). SWD pads for flashing.
-  - **BLE header** for the team's HM-19 module (optional, nothing fitted by default).
-  - Target ~15 × 20 mm, ~1.5–2 g. Must fit inside the G45M outline (33 × 30 mm).
+  - **USB-C on board, doubling as the BLE port** (owner, 2026-10-11: pads are a hassle in a rushed pit;
+    copy the Micras trick). Micras routes USB-C D-/D+ to PA11/PA12, which are a UART on their H7. On
+    the **G431, PA11/PA12 can only be USB** (DS12589 table 12: no USART RX/TX there), so D-/D+ go to
+    **both** USB (PA11 DM / PA12 DP) **and a spare USART in parallel**. Same mapping as Micras's
+    HM-19 dongle: D- = dongle TX -> MCU RX, D+ = MCU TX; **SBU1/SBU2 = 3.3 V through a ~300 mA
+    resettable fuse** to power the dongle; CC1/CC2 5.1 k to GND. **VBUS** is sensed to pick the mode
+    (cable = USB device: logs, config, DFU flashing; no VBUS = UART for the dongle) and ORed into the
+    5 V rail so the board runs from USB on the bench. Connector: HRO TYPE-C-31-M-12 (already verified
+    in pipeline-demo). Replaces the USB pads and the separate HM-19 header. SWD pads stay for recovery.
+  - Target ~15 × 20 mm, ~2–2.5 g with the USB-C. Must fit inside the G45M outline (33 × 30 mm).
   - **Mounting:** taped to the 4-in-1 (which is isolated), the stack taped to the chassis. The gyro
     needs the board to be rigid in rotation relative to the chassis; foam/tape is fine.
 - Firmware: CRSF in, DShot out, gyro turn-rate loop (driving), weapon passthrough, logging, ELRS
