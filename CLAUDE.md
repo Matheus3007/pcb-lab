@@ -152,6 +152,12 @@ Schematic generation:
 - SKiDL was considered and rejected (2026-10): its schematic output is KiCad V5-only.
 - Sanity of the generator is proven by KiCad itself: `sch export netlist` must equal circuit.py.
 
+- Repo-local footprint libraries (`lib/footprints/<Lib>.pretty`) need an `fp-lib-table` next to the schematic
+  for ERC; `stage_schematic` writes one (forward-slash Windows paths). A brand-new board's first `make sch`
+  shows ~50 `lib_symbol_issues` warnings until `make build` has written a `.kicad_pro`; they are not real.
+- **Trace a 2xN board-to-board header plugged in rotated 180° (pin n -> 2N+1-n).** On an ESC the body
+  diodes can turn a "harmless" mismatch into a battery short (rebot-esc); key it mechanically.
+
 Parts and data:
 - **atopile is dead locally** (decision 0002). Don't reintroduce it.
 - **JLC catalog**: `POST https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList`

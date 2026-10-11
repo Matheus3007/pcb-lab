@@ -39,9 +39,12 @@ iFlight Xing 2207 1800 kV motor rewired to wye (~1040 kV).
 - Connector: **2×10 2.54 mm male header, through-hole**, hand-soldered; mating 2×10 socket on the
   carrier (2×9 parts researched: HX PZ2.54-2x9P ZZ C42372517 / HC-PM254-8.5H-2x9PZ C22373914). Pinout:
   - Phases A, B, C: 3 pins each (9)
-  - VBAT: 3 · GND: 4 · 12 V: 1 · DShot: 1 · SWDIO: 1 · SWCLK: 1
-  - Keyed by placement on the carrier (the module only fits one way; asymmetric pin assignment so a
-    180° plug-in can't short VBAT to GND). TBD exact map at gate 1.
+  - VBAT: 3 (pins 1–3) · GND: 3 (4–6) · **KEY: 7** · 12 V: 8 · DShot: 9 · SWDIO: 10 · SWCLK: 11 ·
+    A: 12–14 · B: 15–17 · C: 18–20
+  - **Mechanically keyed:** pin 7 is pulled out of the module's header and hole 7 of the carrier's
+    socket is blocked (a cut pin soldered in). A module rotated 180° can't go in. Electrically a
+    rotated module would short the battery through body diodes and a motor winding, so the key is
+    required, not optional. The M2 screw hole also only aligns one way.
 - Programming: SWDIO/SWCLK on the main header. One-time AM32 bootloader flash with a 2×10 socket jig:
   ST-LINK 5 V → the 12 V pin (HT7533 regulates from 5 V), GND, SWDIO, SWCLK.
 - Current sense: **none on the module.** The owner doesn't use AM32 current limiting ("rather lose the

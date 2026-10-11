@@ -60,3 +60,113 @@ MountingHole_M2:
   pins: {}
   pinout_source: "mechanical, no pins"
   pinout_verified: 2026-10-11
+
+# ---- Rebot drive-ESC module (boards/rebot-esc) ----------------------------------------------
+
+AT32F421G8U7:
+  lcsc: C2765098
+  value: AT32F421G8U7
+  footprint: Package_DFN_QFN:QFN-28-1EP_4x4mm_P0.4mm_EP2.4x2.4mm
+  symbol: Rebot:AT32F421G8U7
+  pins:
+    BOOT0: 1
+    PF0: 2
+    PF1: 3
+    NRST: 4
+    VDDA: 5
+    PA0: 6
+    PA1: 7
+    PA2: 8
+    PA3: 9
+    PA4: 10
+    PA5: 11
+    PA6: 12
+    PA7: 13
+    PB0: 14
+    PB1: 15
+    VSS: 16
+    VDD: 17
+    PA8: 18
+    PA9: 19
+    PA10: 20
+    PA13: 21
+    PA14: 22
+    PA15: 23
+    PB3: 24
+    PB4: 25
+    PB5: 26
+    PB6: 27
+    PB7: 28
+    EP: 29
+  pinout_source: "Artery AT32F421 datasheet v1.01 (2020.9.16) p.23 fig.6 QFN28 pinout, cross-checked with p.25-27 table 5 QFN28 column; EP 29 = VSS/VSSA"
+  pinout_verified: 2026-10-11
+  extended_reason: "AM32 needs an MCU from its supported families; JLC Basic/Preferred have none (Preferred MCUs: F030/F103/L151/ATmega/STM8). Cheapest AM32-capable MCU at JLC and the one the stock OPENESC_20_F421 target uses."
+  notes: "VDD 2.4-3.6 V. Exposed pad D2 = 2.80 mm (table 50); the 2.4 mm land is smaller than the pad (fine, same land as the proven OpenESC-20x20). QFN28 has no PA11/PA12 (datasheet table 5 note 4). SWD: PA13 = SWDIO, PA14 = SWCLK. AM32 pin map (HARDWARE_GROUP_AT_B): input PB4, A low PB1 / high PA10, B low PB0 / high PA9, C low PA7 / high PA8; BEMF comparator: PA0/PA4/PA5 phases, PA1 common (OpenESC-20x20 netlist)."
+
+DRV8300DRGER:
+  lcsc: C3655801
+  value: DRV8300DRGER
+  footprint: Package_DFN_QFN:VQFN-24-1EP_4x4mm_P0.5mm_EP2.45x2.45mm
+  symbol: Rebot:DRV8300DRGE
+  pins:
+    INLA: 1
+    INLB: 2
+    INLC: 3
+    GVDD: 4
+    MODE: 5
+    GND: 6
+    NC1: 7
+    NC2: 8
+    GLC: 9
+    GLB: 10
+    GLA: 11
+    SHC: 12
+    GHC: 13
+    BSTC: 14
+    SHB: 15
+    GHB: 16
+    BSTB: 17
+    SHA: 18
+    GHA: 19
+    BSTA: 20
+    DT: 21
+    INHA: 22
+    INHB: 23
+    INHC: 24
+    EP: 25
+  pinout_source: "TI DRV8300 ZHCSMX4D (rev. March 2022) p.4 fig.6-1 + table 6-1, 24-pin VQFN RGE (DRV8300D/N)"
+  pinout_verified: 2026-10-11
+  extended_reason: "No three-phase gate driver exists in JLC Basic/Preferred. Genuine TI, 100 V, highest stock (23.7k) of the AM32-compatible drivers."
+  notes: "GVDD 4.8-20 V, >=10 uF local + small HF cap (sec. 9.2.2/10). Bootstrap cap BSTx-SHx: 100 nF min example for 59 nC; 33 nC gates here. MODE floating = non-inverted INLx (AM32 AT_B polarity); MODE to GVDD would invert. DT floating = fixed dead time, resistor to GND = variable. NC 7/8 may float or go to GND. RGE0024B thermal pad 2.45 mm (p.33-34). PowerPAD to GND."
+
+HSBB6066:
+  lcsc: C2828498
+  value: HSBB6066 60V
+  footprint: Rebot:PRPAK3x3-8_HSBB
+  symbol: Transistor_FET:Q_NMOS_SSSGD_AvalancheRated
+  pins: {S: [1, 2, 3], G: 4, D: 5}
+  pinout_source: "Huashuo HSBB6066 datasheet Ver 3.0 p.1 PRPAK3X3 pin configuration (S S S G, D = top leads + pad), p.5 package outline"
+  pinout_verified: 2026-10-11
+  extended_reason: "No power MOSFET above 30 V / a few amps in JLC Basic/Preferred. 60 V for 6S LiHV regen margin; best stock (28.5k) of 60 V 3x3 parts."
+  notes: "60 V, 4.4 mOhm typ / 5.2 max @10 V, Qg 33 nC, Vgs +-20 V, 130 A pulsed. Footprint is ours (lib/footprints/Rebot.pretty), drawn from the p.5 outline; EasyEDA's has an off-centre origin and a courtyard that misses the pads. 3D model: TODO before gate 2."
+
+HT7533-1:
+  lcsc: C14289
+  value: HT7533 3.3V
+  footprint: Package_TO_SOT_SMD:SOT-89-3
+  symbol: Regulator_Linear:HT75xx-1-SOT89
+  pins: {GND: 1, VIN: 2, VOUT: 3}
+  pinout_source: "Holtek HT75xx-1 Rev. 2.80 p.5 pin descriptions, SOT89 (1=GND 2=VIN 3=VOUT); KiCad stock symbol agrees"
+  pinout_verified: 2026-10-11
+  notes: "Basic part. Vin max 30 V operating / 33 V abs, 100 mA, Iq 2.5 uA. SOT-89 theta-JA 200 C/W: from 12 V at 30 mA = 0.26 W, +52 C. Datasheet application uses 10 uF in/out; stable with ceramics."
+
+PinHeader_2x10:
+  lcsc: null
+  dnp: true
+  value: 2x10 2.54mm (hand-soldered)
+  footprint: Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Vertical
+  symbol: Connector_Generic:Conn_02x10_Odd_Even
+  pins: {"1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10, "11": 11, "12": 12, "13": 13, "14": 14, "15": 15, "16": 16, "17": 17, "18": 18, "19": 19, "20": 20}
+  pinout_source: "generic header, pin n = pad n (odd row / even row)"
+  pinout_verified: 2026-10-11
+  notes: "Owner hand-solders it (not in the JLC BOM). Body on the bottom side, pins down into the carrier's 2x10 socket."

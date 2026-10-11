@@ -13,6 +13,20 @@
   "tier": "basic",
   "unit_price_usd": 0.0035
  },
+ "C14289": {
+  "category": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312191111_Holtek-Semicon-HT7533-1_C14289.pdf",
+  "datasheet_file_id": "8579707787284303872",
+  "description": "-40\u2103~+85\u2103@(Ta) 1 100mA 2.5uA 25mV@(1mA) 3.3V 30V Fixed Positive SOT-89-3 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C14289",
+  "manufacturer": "Holtek Semicon",
+  "mpn": "HT7533-1",
+  "package": "SOT-89-3",
+  "stock": 75616,
+  "tier": "basic",
+  "unit_price_usd": 0.1434
+ },
  "C14663": {
   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2211101700_YAGEO-CC0603KRX7R9BB104_C14663.pdf",
@@ -122,6 +136,48 @@
   "stock": 5603466,
   "tier": "basic",
   "unit_price_usd": 0.0024
+ },
+ "C2765098": {
+  "category": "Microcontrollers (MCU/MPU/SOC)",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_ARTERY-AT32F421G8U7_C2765098.pdf",
+  "datasheet_file_id": "8588894236372164608",
+  "description": "-40\u2103~+105\u2103 120MHz 16KB 2.4V~3.6V 23 32 Bit 64KB ARM Cortex-M4 Built-in+External FLASH QFN-28-EP(4x4) Microcontrollers (MCU/MPU/SOC) ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C2765098",
+  "manufacturer": "ARTERY",
+  "mpn": "AT32F421G8U7",
+  "package": "QFN-28-EP(4x4)",
+  "stock": 5887,
+  "tier": "extended",
+  "unit_price_usd": 0.9577
+ },
+ "C2828498": {
+  "category": "MOSFETs",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2105241831_HUASHUO-HSBB6066_C2828498.pdf",
+  "datasheet_file_id": "8757802694280908800",
+  "description": "-55\u2103~+150\u2103 1 N-channel 1.67nF 2.3V 25pF 33nC@10V 438pF 45W 5.2m\u03a9@10V 60A 60V N-Channel PRPAK3x3-8L MOSFETs ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C2828498",
+  "manufacturer": "HUASHUO",
+  "mpn": "HSBB6066",
+  "package": "PRPAK3x3-8L",
+  "stock": 28531,
+  "tier": "extended",
+  "unit_price_usd": 0.5326
+ },
+ "C3655801": {
+  "category": "Brushless DC (BLDC) Motor Driver",
+  "datasheet": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302220130_Texas-Instruments-DRV8300DRGER_C3655801.pdf",
+  "datasheet_file_id": "8589836222165389312",
+  "description": "-40\u2103~+125\u2103 1.5A 10ns 3 5V~20V 5ns 750mA 800uA Interleaved conduction protection\u3001Dead-time control\u3001Built-in bootstrap diode Low Side\u3001High Side MOSFET VQFN-24(4x4) Brushless DC (BLDC) Motor Driver ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C3655801",
+  "manufacturer": "Texas Instruments",
+  "mpn": "DRV8300DRGER",
+  "package": "VQFN-24(4x4)",
+  "stock": 23748,
+  "tier": "extended",
+  "unit_price_usd": 0.5896
  },
  "C52923": {
   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
