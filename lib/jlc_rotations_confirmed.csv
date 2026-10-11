@@ -2,9 +2,13 @@
 # Each row: confirmed by looking at JLC's placement preview. Add a comment with date + board + evidence.
 # "Footprint pattern","Rotation","Offset X","Offset Y"
 #
-# 2026-10-11 pipeline-demo: with the community +180 the preview showed the leads at the board edge
-# (mouth facing inward), so the KiCad orientation is already right for C165948.
-"^USB_C_Receptacle_HRO_TYPE-C-31-M-12",0
+# 2026-10-11 pipeline-demo, preview 1: with the community +180 the leads sat at the board edge (mouth
+# facing inward), so the KiCad orientation is right (rotation 0) for C165948.
+# Preview 2 (rotation 0): the body overhung the edge and the leads landed in front of the pads. JLC places
+# from the EasyEDA footprint origin, which sits 1.575 mm toward the pads from KiCad's (pads at
+# y=-2.47 vs -4.045). Offset is in KiCad pos coordinates (Y up), footprint-local, rotated with the part.
+# TENTATIVE offset: confirm in the next preview.
+"^USB_C_Receptacle_HRO_TYPE-C-31-M-12",0,0,1.575
 # 2026-10-11 pipeline-demo: with the community -90 the SOT-23 legs missed the pads in the preview.
 # TENTATIVE (0 = KiCad orientation): re-check U1 in the next preview, then remove "TENTATIVE".
 "^SOT-23",0
