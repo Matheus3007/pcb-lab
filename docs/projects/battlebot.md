@@ -1,6 +1,6 @@
-# Project: 3 lb battlebot integrated board ("Rebot")
+# Project: Rebot electronics (3 lb battlebot)
 
-Context only, not yet a spec. Turn into `boards/<name>/spec.md` with the human once Phase 0 is done.
+Current plan first; superseded plans are kept under "History" with the reason they changed.
 
 ## The robot (2026-10-11)
 - Rebot: 3 lb (beetleweight) undercutter, ~23 cm bar, exactly at weight limit. Robocore/LBR rules
@@ -28,48 +28,43 @@ Context only, not yet a spec. Turn into `boards/<name>/spec.md` with the human o
 2. Cable management in a cramped chassis.
 3. XT30s in the power bus physically disconnect (a fight was lost to the weapon ESC unplugging).
 
-## Decisions so far
-- Battery is **never** soldered to the board. Board has PTH pads for **two pigtails**: the battery
-  XT30 lead, and an independent power-link lead that stays open until a shorted XT30 female is
-  plugged in before the fight (the robot's power switch today). Onboard kill switch: later.
-- Off-board ESCs attach by soldered wires/pads, swappable in **< 5 min per ESC**. Signals on locking
-  connectors (JST-GH style).
-- **v1 board:** controller + power + **onboard AM32 drive ESCs**; the weapon stays on the Aria.
-  **v2:** onboard weapon ESC, only after v1 drive ESCs prove out, preceded by a deep open-source
-  ESC research pass. Each order cycle should cost **< R$600 all-inclusive** (shipping + import tax) delivered to Brazil.
-- Weapon current path sized for **40 A** (35 A acceptable if space/weight demands).
-- **Carrier MCU: STM32G431CBT6** (LQFP-48 7×7, C529355), locked 2026-10-11. Same G4 family as the
-  Team-Micras v0 board (STM32G474), so their CubeMX/CMake setup and `micras_core`/`micras_hal` carry
-  over (https://github.com/Team-Micras/MicrasFirmware). **IMU: LSM6DSV32X** (C22461202), ±32 g /
-  ±4000 °/s, same family as their LSM6DSV driver. BLE: their HM-19 module + `micras_comm` link.
-- Receiver → MCU via CRSF; MCU → ESCs via DShot (bidirectional for eRPM).
-- Firmware wanted: gyro-assisted driving, closed-loop wheel speed, weapon RPM, telemetry back to
-  the radio over ELRS, fight logs to onboard flash downloaded over USB-C. Firmware lives outside
-  the PCB pipeline. Auto control inversion when flipped: not wanted for now.
-- Bluetooth: optional plug-in module on a UART header.
-- **Current sensing lives on the carrier:** total battery current plus one sensor per ESC feed
-  (left drive, right drive, weapon), battery side. No current sense on the ESC modules (no AM32
-  current limiting wanted).
-- MCU crash or link loss must stop DShot so all ESCs disarm (watchdog, weapon-off failsafe).
+## Plan (decided 2026-10-11, driven by weight: the bot is at the 1360 g limit)
+**Off-the-shelf power, our own tiny controller.**
 
-## Architecture: carrier + plug-in ESC modules (decided 2026-10-11)
-- **Carrier** (~78 × 30 mm, vertical on the rear wall): MCU, IMU, power, logging, USB-C, bulk
-  capacitance, and **every wire** in the robot soldered to it (battery + link pigtails, receiver,
-  Aria, all motor phases).
-- **Drive-ESC modules** (~25 × 15 mm, identical, ~1–2 g): AM32 MCU + gate driver + small MOSFETs,
-  no wires and no bulk cap. They plug into the carrier's inner face through **one 2×9 2.54 mm
-  through-hole header** (phases, battery, GND, DShot, SWD), retained by one M2 screw (preferred) or
-  Kapton tape alone. A swap is pull and push, no soldering. See `battlebot-esc-research.md`.
-- **Sizing:** the 2.5 A drive figure is battery-side. At low duty (stall against a wall) the phase
-  current can be several times that, so modules are designed for **20–30 A peak phase current**
-  with the AM32 current limit set to match. Three header pins per phase.
-- **Fallback:** an adapter module with pads for an off-the-shelf ESC (e.g. BCube).
-- **v2 weapon ESC:** a larger module of the same kind, connection sized for its current.
-- Stack ≈ 15 mm, so the modules sit at the two ends of the channel (deep enough), one per end,
-  rotated 180° from each other so each faces its own motor.
-- Only the controller section is non-modular: carry a spare carrier per event.
+- **ESCs: one Flywoo GOKU G45M 4-in-1** (AM32, 45 A per channel / 50 A 10 s peak, 3–6S, 33 × 30 ×
+  6.1 mm, 6.4 g) replaces the Aria + 2 B-CUBEs. Channels: left drive, right drive, weapon, one spare.
+  Bought from the FLYWOO Official Store on AliExpress. Notes:
+  - 6S-rated (like the B-CUBEs): add a low-ESR ~35 V capacitor on its battery pads for weapon braking spikes.
+  - Fits standing in the rear channel (30 mm tall of ~31 mm free, z 6 to 37 from the CAD): solder the
+    edge-facing wires flat along the board face. It is stood up where the Aria and a drive ESC were.
+  - ESC power leads soldered straight to the battery pigtail: **no XT30s inside the bot** (problem 3).
+- **Controller: our own board, `boards/rebot-ctrl`** (to be started with /new-board). Only what the
+  4-in-1 can't do:
+  - **STM32G431** (G4, same family as Team-Micras v0, reuse `micras_hal/core/comm`) + **LSM6DSV32X**
+    IMU (gyro used for heading/turn-rate control; accelerometer not relied on).
+  - **8-pin JST-SH ESC connector**, standard 4-in-1 pinout as on the G45M (GND, VBAT, M1–M4, CURR,
+    TLM): VBAT in, DShot out (bidirectional for eRPM), ESC current-sensor input for logging.
+  - **Own power: 65 V LMR36506 buck → 5 V** (also powers the receiver, replacing the 7–26 V BEC:
+    problem 1), LDO → 3.3 V.
+  - **Receiver: locking JST-GH** (5 V, GND, CRSF TX/RX).
+  - **Log flash: yes** (whole fight: currents, gyro, sticks, RPM, link quality).
+  - **USB: pads only**, plus a small bench adapter (lighter than a connector). SWD pads for flashing.
+  - **BLE header** for the team's HM-19 module (optional, nothing fitted by default).
+  - Target ~15 × 20 mm, ~1.5–2 g. Must fit inside the G45M outline (33 × 30 mm).
+  - **Mounting:** taped to the 4-in-1 (which is isolated), the stack taped to the chassis. The gyro
+    needs the board to be rigid in rotation relative to the chassis; foam/tape is fine.
+- Firmware: CRSF in, DShot out, gyro turn-rate loop (driving), weapon passthrough, logging, ELRS
+  telemetry, BLE link. MCU crash or link loss must stop DShot so the ESC disarms (watchdog,
+  weapon-off failsafe). Firmware lives outside the PCB pipeline.
+- Off-the-shelf fallback for the controller if needed: Flywoo GOKU H743 Pro Mini + ArduPilot Rover
+  (ACRO, gyro-only, Lua), 5.8 g.
+- Each order should stay < R$600 all-inclusive (shipping + import tax) to Brazil.
 
-## Board location (measured from RebotAssemblyV3.STEP, 2026-10-11)
+## Weight
+- Today's electronics bundle (3 ESCs, wiring, connectors, RX, BEC): 64 g.
+- New: G45M 6.4 g + controller ~2 g + short leads. Owner to weigh the old parts to confirm savings.
+
+## Chassis measurements (from RebotAssemblyV3.STEP, 2026-10-11)
 STEP frame: z up (floor top z=2, lid underside z=37.5), x forward (chevron tip x=0), y lateral;
 y<0 is the user's "right" side (weapon motor side). The space under the lid is too shallow, so the
 board goes in the **rear-right channel** where the weapon ESC and one drive ESC sit now: between
@@ -83,10 +78,8 @@ Height 35.5 mm floor to lid.
   Weapon ESC fits in the deep end (y -60…-85). **Chosen** (2026-10-11). The rear wall is rarely
   hit (once, by a vert's victim landing on the lid), but mount it on soft TPU clips/pads anyway.
 
-## Open
-- Drive ESC reference design: which AM32 target to clone (MCU, gate driver, FETs ≥ 40 V, 60 V preferred).
-- Layer count, copper weight, assembly tier (likely < 70 mm → Standard + panel if two-sided).
-- Cost per order cycle incl. shipping and Brazilian import tax.
+- Rear channel height free of obstacles: about **31 mm** (chassis floor z ≈ 6 to lid z ≈ 37) where the
+  Aria and the stacked drive ESC sit (measured again for the 4-in-1 fit).
 
 ## Design considerations to carry into the spec
 - Shock: avoid tall/heavy unsupported parts, prefer small packages, strain relief on wires,
@@ -96,3 +89,15 @@ Height 35.5 mm floor to lid.
 - Current sense: Kelvin connections, sense routing away from switching nodes.
 - Thermal: high-current paths sized from IPC-2152 for short-duration peaks.
 - Input protection: TVS + bulk capacitance; regulators rated well above 26.1 V (≥ 40–60 V).
+
+## History (superseded, kept for the reasoning)
+1. **Carrier + onboard drive ESCs, weapon on the Aria** (first plan). Then **carrier + plug-in
+   custom ESC modules** (`boards/rebot-esc`): modules passed gate 1 (AT32F421 + DRV8300D + 6× HSBB6066,
+   self-contained 11 V buck, keyed header) and reached gate 2 (36 × 20 mm, B-CUBE-style rows), not approved.
+   **Parked** because a one-sided custom module came out no smaller than a B-CUBE, the carrier plus
+   modules weighed more than an off-the-shelf 4-in-1, and the weight limit made that decisive. Kept in
+   the repo for a possible future all-in-one board. Research: `battlebot-esc-research.md`.
+2. Decisions from that phase that still hold: STM32G431 + LSM6DSV32X, CRSF in / DShot out, current
+   sensing not on ESCs, battery never soldered to a board, firmware wanted (see Plan).
+3. Superseded details (carrier pigtails, 78 × 30 mm vertical carrier, per-ESC current shunts,
+   40 A weapon path on the carrier) are in git history before this commit.

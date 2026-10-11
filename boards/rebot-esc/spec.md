@@ -1,6 +1,6 @@
 # rebot-esc: spec
 
-Status: draft (spec interview) · Owner: Matheus3007 · Assembly tier: see board.yaml
+Status: **parked** after gate 2 (not approved), see docs/projects/battlebot.md History · Owner: Matheus3007 · Assembly tier: see board.yaml
 Project context: `docs/projects/battlebot.md`, part research: `docs/projects/battlebot-esc-research.md`
 
 > Every `TBD` that affects layout must be resolved before gate 2.
@@ -82,3 +82,4 @@ iFlight Xing 2207 1800 kV motor rewired to wye (~1040 kV).
 | 2026-10-11 | Architecture: motor pads on the module | Owner: phases to solder pads like a normal ESC, short 2×5 header for battery/DShot/SWD; gate 1 pre-approved for this change |
 | 2026-10-11 | Gate 2 placement (redo) | 2×5 header bottom-left, motor pads bottom-right under the half bridges; rest of the layout unchanged |
 | 2026-10-11 | Gate 2 placement (ESC-style rows) | Owner: lay it out like a B-CUBE. 36 × 20 mm: header column left, motor-pad column right, one row per phase; 29 placement rules |
+| 2026-10-11 | Parked | Replaced by an off-the-shelf 4-in-1 (Flywoo GOKU G45M) for weight; kept for a possible future all-in-one |
