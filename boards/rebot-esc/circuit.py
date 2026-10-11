@@ -133,7 +133,7 @@ def circuit() -> Circuit:
     c.connect("FB_COMMON", u1.PA1)
 
     # --- net classes --------------------------------------------------------------------------
-    c.net_class(NetClass("Power", track_width=1.0, clearance=0.2, current_a=10.0),
+    c.net_class(NetClass("Power", track_width=1.0, clearance=0.2, current_a=5.0),   # 5 A continuous, short 20-30 A peaks (gate 1)
                 "VBAT", "GND", "PH_A", "PH_B", "PH_C")
     c.net_class(NetClass("Gate", track_width=0.3, clearance=0.15, current_a=1.0),
                 "12V", *(f"{k}_{p}{s}" for k in ("GH", "GL") for p in PHASES for s in ("", "_Q")),
