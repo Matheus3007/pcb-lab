@@ -47,6 +47,9 @@ Context only, not yet a spec. Turn into `boards/<name>/spec.md` with the human o
   the radio over ELRS, fight logs to onboard flash downloaded over USB-C. Firmware lives outside
   the PCB pipeline. Auto control inversion when flipped: not wanted for now.
 - Bluetooth: optional plug-in module on a UART header.
+- **Current sensing lives on the carrier:** total battery current plus one sensor per ESC feed
+  (left drive, right drive, weapon), battery side. No current sense on the ESC modules (no AM32
+  current limiting wanted).
 - MCU crash or link loss must stop DShot so all ESCs disarm (watchdog, weapon-off failsafe).
 
 ## Architecture: carrier + plug-in ESC modules (decided 2026-10-11)
