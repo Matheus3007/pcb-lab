@@ -33,12 +33,16 @@ panel with rails/fiducials (not yet automated: flag it as a blocker).
 2. Enable assembly → upload BOM + CPL → check every part matched the intended LCSC ID.
 3. **Placement preview: check each part's rotation and polarity** (pin 1 dots, LED cathode, diode
    bands, connector mouths facing out). The CPL corrections are community hints, not verified.
-4. Any wrong rotation: tell me ref + the correct angle → I add a confirmed rule at the TOP of
-   `lib/jlc_rotations.csv`, regenerate, and they re-upload.
-5. Note the order number.
+4. Any wrong rotation: tell me ref + the correct angle → I add a rule to
+   `lib/jlc_rotations_confirmed.csv` (with date, board and evidence), regenerate, and they re-upload.
+   Screenshots of the 3D preview are enough: zoom (crop + upscale) on each IC/connector and check that
+   legs land on pads and connector mouths face the edge.
+5. If JLC says "component may be offset from the PCB": the origins disagree. That's a pipeline bug, not an
+   "OK, auto-align" situation; fix it.
+6. Note the order number.
 
 ## 5. After the order
 - Record in `spec.md` changelog: date, order number, quantity, tier, confirmed rotation fixes.
 - `git tag <name>/vX.Y -m "JLC order <number>"` and commit. Fab files are reproducible from the tag;
   keep the zip/CSVs the human uploaded too (e.g. attach them to a GitHub release).
-- Any rotation confirmed correct or fixed: mark it confirmed in `lib/jlc_rotations.csv` (comment with date and board).
+- Any rotation confirmed correct or fixed: record it in `lib/jlc_rotations_confirmed.csv` (comment with date and board).

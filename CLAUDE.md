@@ -65,8 +65,9 @@ edit source → make all BOARD=<name> → read build/reports/summary.md + LOOK a
   the mechanical-fit checks blind.
 - **Assembly tier** (board.yaml `assembly_tier`) drives side/package/size checks.
 - **Coordinates**: mm, board origin top-left, **+Y down** (KiCad convention), rotations CCW.
-- **CPL rotations** come from `lib/jlc_rotations.csv` (community hints, unverified). The human
-  confirms in JLC's preview at gate 3; confirmed corrections go at the top of that file.
+- **CPL rotations**: `lib/jlc_rotations_confirmed.csv` (ours, verified in JLC's preview) is checked first,
+  then `lib/jlc_rotations.csv` (community hints, often outdated: its HRO USB-C +180 and SOT-23 −90 were
+  both wrong in JLC's 2026 preview). The human confirms every part at gate 3.
 
 ## Skills (use them; they encode the procedures below)
 
@@ -111,6 +112,9 @@ Environment and tools:
 - To view a board in the GUI use `make open BOARD=x`. KiCad's project manager reopens whatever project
   the user had last (e.g. their own `Documents\KiCad Projects\...`), which looks like "a blank PCB".
   The pcbnew-written `.kicad_prl` can hide everything in the GUI, so the build deletes it.
+- **Gerbers, drill and CPL must share the aux origin** (the builder puts it at the outline's bottom-left).
+  Otherwise JLC's preview says "component may be offset" and auto-aligns. Don't ship drill-map
+  files in the zip (JLC shows them as an extra layer).
 - THT pads that anchor into a pour (connector shields) can get `starved_thermal` after a reroute: set
   `zone_connection: {SH: full}` on the part in parts.yaml (applied per pad by the builder).
 - WSL has no sudo password: everything installs to `~/.local` (uv, JRE) or the repo.

@@ -20,14 +20,24 @@ GERBER_LAYERS = "F.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Ma
 
 
 def _rotations():
+    """Our confirmed corrections first (lib/jlc_rotations_confirmed.csv), then community hints."""
     rows = []
-    with open(ROOT / "lib" / "jlc_rotations.csv", newline="") as f:
+    for name in ("jlc_rotations_confirmed.csv", "jlc_rotations.csv"):
+        rows += _read_rotations(ROOT / "lib" / name, confirmed=name.endswith("confirmed.csv"))
+    return rows
+
+
+def _read_rotations(path, confirmed):
+    rows = []
+    if not path.exists():
+        return rows
+    with open(path, newline="") as f:
         for r in csv.reader(line for line in f if not line.startswith("#")):
             if not r or r[0].startswith("Footprint"):
                 continue
             rows.append((re.compile(r[0].strip()), float(r[1]),
                          float(r[2]) if len(r) > 2 and r[2].strip() else 0.0,
-                         float(r[3]) if len(r) > 3 and r[3].strip() else 0.0))
+                         float(r[3]) if len(r) > 3 and r[3].strip() else 0.0, confirmed))
     return rows
 
 
@@ -38,9 +48,9 @@ def fab(name: str) -> dict:
     shutil.rmtree(tmp, ignore_errors=True)
     tmp.mkdir()
     kicad_cli("pcb", "export", "gerbers", "-o", tmp, "--layers", GERBER_LAYERS,
-              "--subtract-soldermask", "--check-zones", b.pcb)
+              "--subtract-soldermask", "--check-zones", "--use-drill-file-origin", b.pcb)
     kicad_cli("pcb", "export", "drill", "-o", tmp, "--format", "excellon", "--excellon-units", "mm",
-              "--drill-origin", "absolute", "--excellon-separate-th", "--generate-map", "--map-format", "gerberx2", b.pcb)
+              "--drill-origin", "plot", "--excellon-separate-th", b.pcb)
     zpath = out / f"{name}-gerbers.zip"
     with zipfile.ZipFile(zpath, "w", zipfile.ZIP_DEFLATED) as z:
         for f in sorted(tmp.iterdir()):
@@ -73,14 +83,15 @@ def fab(name: str) -> dict:
         for r in csv.DictReader(f):
             fpname = r["Package"]
             rot, x, y = float(r["Rot"]), float(r["PosX"]), float(r["PosY"])
-            for rx, drot, dx, dy in rules:
+            for rx, drot, dx, dy, confirmed in rules:
                 if rx.search(fpname):
                     rot = (rot + drot) % 360
                     a = math.radians(float(r["Rot"]))
                     x += dx * math.cos(a) - dy * math.sin(a)
                     y += dx * math.sin(a) + dy * math.cos(a)
                     corrections.append({"ref": r["Ref"], "footprint": fpname, "rule": rx.pattern,
-                                        "rotation_delta": drot, "offset": [dx, dy]})
+                                        "rotation_delta": drot, "offset": [dx, dy],
+                                        "source": "confirmed" if confirmed else "community hint (unverified)"})
                     break
             layer = "Top" if r["Side"].lower() == "top" else "Bottom"
             w.writerow([r["Ref"], f"{x:.4f}mm", f"{y:.4f}mm", layer, f"{rot:g}"])

@@ -1,0 +1,10 @@
+# OUR rotation/offset corrections for JLC CPL, checked first (first match wins).
+# Each row: confirmed by looking at JLC's placement preview. Add a comment with date + board + evidence.
+# "Footprint pattern","Rotation","Offset X","Offset Y"
+#
+# 2026-10-11 pipeline-demo: with the community +180 the preview showed the leads at the board edge
+# (mouth facing inward), so the KiCad orientation is already right for C165948.
+"^USB_C_Receptacle_HRO_TYPE-C-31-M-12",0
+# 2026-10-11 pipeline-demo: with the community -90 the SOT-23 legs missed the pads in the preview.
+# TENTATIVE (0 = KiCad orientation): re-check U1 in the next preview, then remove "TENTATIVE".
+"^SOT-23",0

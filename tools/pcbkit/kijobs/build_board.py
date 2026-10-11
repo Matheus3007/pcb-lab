@@ -65,7 +65,11 @@ class Builder:
         for net, info in j["nets"].items():
             if info["class"] != "Default":
                 ns.SetNetclassPatternAssignment(net, info["class"])
-        ds.SetAuxOrigin(self.pt(0, 0))
+        # drill/place (aux) origin at the outline's bottom-left: gerbers, drill and CPL all use it,
+        # so JLC sees matching coordinates and CPL positions are positive
+        xs = [x for x, _ in j["geometry"]["outline"]]
+        ys = [y for _, y in j["geometry"]["outline"]]
+        ds.SetAuxOrigin(self.pt(min(xs), max(ys)))
         ds.SetGridOrigin(self.pt(0, 0))
 
         for name in j["nets"]:

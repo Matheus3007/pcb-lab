@@ -100,7 +100,7 @@ def gate(name: str, n: int) -> str:
         L += [f"- {p.name}" for p in sorted(b.fab.iterdir())]
         cor = json.loads((b.fab / "cpl_corrections.json").read_text()) if (b.fab / "cpl_corrections.json").exists() else []
         L += ["", "## CPL rotation corrections applied (UNVERIFIED until you check JLC's preview)"]
-        L += [f"- {c['ref']} `{c['footprint']}`: {c['rotation_delta']:+g}° (rule `{c['rule']}`)" for c in cor] or ["- none"]
+        L += [f"- {c['ref']} `{c['footprint']}`: {c['rotation_delta']:+g}° (rule `{c['rule']}`, {c.get('source', 'hint')})" for c in cor] or ["- none"]
         cost = sum((r["unit_price_usd"] or 0) * len(r["refs"]) for r in chk["bom"])
         L += ["", f"Parts cost per board ≈ ${cost:.2f} + extended-part fees ({sum(r['tier'] == 'extended' for r in chk['bom'])} unique extended)",
               "", "## Before paying", "1. Upload the gerber zip; inspect JLC's Gerber viewer (outline, cutouts, drills).",
