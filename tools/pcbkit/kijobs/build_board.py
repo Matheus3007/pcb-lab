@@ -214,5 +214,5 @@ class Builder:
 if __name__ == "__main__":
     job = json.load(open(sys.argv[1], encoding="utf-8"))
     rep = Builder(job).run()
-    json.dump(rep, open(job["report_path"], "w", encoding="utf-8"), indent=1)
+    json.dump(rep, open(job["report_path"], "w", encoding="utf-8", newline="\n"), indent=1)
     print(f"board written: {job['board_path']} ({len(rep['placed'])} parts, {len(rep['warnings'])} warnings)")

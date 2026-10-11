@@ -69,5 +69,5 @@ json.dump({
     "totals": {"tracks": len(tracks), "vias": len(vias),
                "track_length": round(sum(t["length"] for t in tracks), 2)},
     "tracks": tracks, "vias": vias,
-}, open(out, "w", encoding="utf-8"), indent=1)
+}, open(out, "w", encoding="utf-8", newline="\n"), indent=1)
 print(f"dumped {len(fps)} footprints, {len(tracks)} tracks, {len(vias)} vias")
