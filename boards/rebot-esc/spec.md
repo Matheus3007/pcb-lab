@@ -73,3 +73,4 @@ iFlight Xing 2207 1800 kV motor rewired to wye (~1040 kV).
 | 2026-10-11 | Interview closed | SWD on a 2×10 header; current sense moved to the carrier |
 | 2026-10-11 | Gate 1 review: items approved, one change pending | OK: header key at pin 7 (GND 4→3), size copper for 5 A continuous, 10 Ω gate resistors, own MOSFET footprint, MCU EP land. Item 5 changed: module made self-contained (owner's call), see next row |
 | 2026-10-11 | Self-contained power | LMR36506 65 V buck → 11 V gate rail on the module; carrier's 12 V removed; header pin 8 → GND |
+| 2026-10-11 | gate 1 approved | Self-contained power block accepted; on to outline + placement |
