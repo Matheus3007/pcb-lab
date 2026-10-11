@@ -70,16 +70,18 @@
  ],
  "bom": [
   {
-   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05A105KA5NQNC_C52923.pdf",
-   "description": "1uF 25V X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
-   "fetched": "2026-10-11",
    "lcsc": "C52923",
-   "manufacturer": "Samsung Electro-Mechanics",
    "mpn": "CL05A105KA5NQNC",
+   "manufacturer": "Samsung Electro-Mechanics",
    "package": "0402",
-   "stock": 7475165,
+   "description": "1uF 25V X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
    "tier": "basic",
+   "stock": 7473805,
    "unit_price_usd": 0.0087,
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05A105KA5NQNC_C52923.pdf",
+   "datasheet_file_id": "8579707174974914560",
+   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+   "fetched": "2026-10-11",
    "refs": [
     "C1",
     "C2"
@@ -88,16 +90,18 @@
    "footprint": "Capacitor_SMD:C_0402_1005Metric"
   },
   {
-   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL10A106KP8NNNC_C19702.pdf",
-   "description": "10V 10uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
-   "fetched": "2026-10-11",
    "lcsc": "C19702",
-   "manufacturer": "Samsung Electro-Mechanics",
    "mpn": "CL10A106KP8NNNC",
+   "manufacturer": "Samsung Electro-Mechanics",
    "package": "0603",
-   "stock": 10375663,
+   "description": "10V 10uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
    "tier": "basic",
+   "stock": 10369080,
    "unit_price_usd": 0.0305,
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL10A106KP8NNNC_C19702.pdf",
+   "datasheet_file_id": "8579707107920437248",
+   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+   "fetched": "2026-10-11",
    "refs": [
     "C3"
    ],
@@ -105,16 +109,18 @@
    "footprint": "Capacitor_SMD:C_0603_1608Metric"
   },
   {
-   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810231112_Hubei-KENTO-Elec-KT-0603R_C2286.pdf",
-   "description": "-40℃~+85℃ 1.6mm x 0.8mm square LED 1.8V~2.4V 120° 20mA 300mcd 40mW 615nm~630nm 645nm Discrete Diode Red Water Clear 0603 LED Indication - Discrete ROHS",
-   "fetched": "2026-10-11",
    "lcsc": "C2286",
-   "manufacturer": "Hubei KENTO Elec",
    "mpn": "KT-0603R",
+   "manufacturer": "Hubei KENTO Elec",
    "package": "0603",
-   "stock": 7259718,
+   "description": "-40℃~+85℃ 1.6mm x 0.8mm square LED 1.8V~2.4V 120° 20mA 300mcd 40mW 615nm~630nm 645nm Discrete Diode Red Water Clear 0603 LED Indication - Discrete ROHS",
    "tier": "basic",
+   "stock": 7258640,
    "unit_price_usd": 0.0076,
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810231112_Hubei-KENTO-Elec-KT-0603R_C2286.pdf",
+   "datasheet_file_id": "8763907065070653440",
+   "category": "LED Indication - Discrete",
+   "fetched": "2026-10-11",
    "refs": [
     "D1"
    ],
@@ -122,16 +128,18 @@
    "footprint": "LED_SMD:LED_0603_1608Metric"
   },
   {
-   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2205251630_Korean-Hroparts-Elec-TYPE-C-31-M-12_C165948.pdf",
-   "description": "-30℃~+80℃ 1 10,000 cycles 16P 20V 5A 7.35mm Female Surface Mount, Right Angle Type-C SMD USB Connectors ROHS",
-   "fetched": "2026-10-11",
    "lcsc": "C165948",
-   "manufacturer": "Korean Hroparts Elec",
    "mpn": "TYPE-C-31-M-12",
+   "manufacturer": "Korean Hroparts Elec",
    "package": "SMD",
-   "stock": 408465,
+   "description": "-30℃~+80℃ 1 10,000 cycles 16P 20V 5A 7.35mm Female Surface Mount, Right Angle Type-C SMD USB Connectors ROHS",
    "tier": "extended",
+   "stock": 408411,
    "unit_price_usd": 0.186,
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2205251630_Korean-Hroparts-Elec-TYPE-C-31-M-12_C165948.pdf",
+   "datasheet_file_id": "8550723676069908480",
+   "category": "USB Connectors",
+   "fetched": "2026-10-11",
    "refs": [
     "J1"
    ],
@@ -139,16 +147,18 @@
    "footprint": "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12"
   },
   {
-   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010045_UNI-ROYAL-Uniroyal-Elec-0402WGF5101TCE_C25905.pdf",
-   "description": "-55℃~+155℃ 5.1kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
-   "fetched": "2026-10-11",
    "lcsc": "C25905",
-   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
    "mpn": "0402WGF5101TCE",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 5603926,
+   "description": "-55℃~+155℃ 5.1kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
    "tier": "basic",
+   "stock": 5603466,
    "unit_price_usd": 0.0024,
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010045_UNI-ROYAL-Uniroyal-Elec-0402WGF5101TCE_C25905.pdf",
+   "datasheet_file_id": "8579706036003409920",
+   "category": "Chip Resistor - Surface Mount",
+   "fetched": "2026-10-11",
    "refs": [
     "R1",
     "R2"
@@ -157,16 +167,18 @@
    "footprint": "Resistor_SMD:R_0402_1005Metric"
   },
   {
-   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010216_UNI-ROYAL-Uniroyal-Elec-0402WGF1001TCE_C11702.pdf",
-   "description": "-55℃~+155℃ 1kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
-   "fetched": "2026-10-11",
    "lcsc": "C11702",
-   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
    "mpn": "0402WGF1001TCE",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
    "package": "0402",
-   "stock": 8260608,
+   "description": "-55℃~+155℃ 1kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
    "tier": "basic",
+   "stock": 8264648,
    "unit_price_usd": 0.0035,
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010216_UNI-ROYAL-Uniroyal-Elec-0402WGF1001TCE_C11702.pdf",
+   "datasheet_file_id": "8579705924167974912",
+   "category": "Chip Resistor - Surface Mount",
+   "fetched": "2026-10-11",
    "refs": [
     "R3"
    ],
@@ -174,14 +186,16 @@
    "footprint": "Resistor_SMD:R_0402_1005Metric"
   },
   {
+   "category": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
    "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Torex-Semicon-XC6206P332MR-G_C5446.pdf",
+   "datasheet_file_id": "8579707861620228096",
    "description": "-40℃~+85℃@(Ta) 1 1uA 200mA 3.3V 6V Fixed Over Current Protection Positive SOT-23-3L Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS",
    "fetched": "2026-10-11",
    "lcsc": "C5446",
    "manufacturer": "Torex Semicon",
    "mpn": "XC6206P332MR-G",
    "package": "SOT-23-3L",
-   "stock": 422922,
+   "stock": 422914,
    "tier": "basic",
    "unit_price_usd": 0.1429,
    "refs": [

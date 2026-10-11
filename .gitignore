@@ -11,3 +11,5 @@ toolchain/.venv/
 toolchain/.kipy-site/
 # local viewer, regenerated every check (contains build time)
 boards/*/build/review/index.html
+# datasheets: re-downloadable via `make part`, not ours to redistribute
+lib/datasheets/

@@ -1,0 +1,11 @@
+# JLC Basic passives VERIFIED against JLC's catalog (tier/stock re-check with `make parts`).
+# Use with Circuit.passive(ref, kind, value, size, lcsc=...). Add entries only after a lookup.
+# kind/value/size -> LCSC        (checked 2026-10-11)
+R:
+  0402: {"1k": C11702, "5.1k": C25905, "10k": C25744}
+  0603: {"10k": C25804}
+C:
+  0402: {"100nF": C1525, "1uF": C52923}        # 100nF 16V X7R · 1uF 25V X5R
+  0603: {"100nF": C14663, "10uF": C19702}      # 100nF 50V X7R · 10uF 10V X5R
+LED:
+  0603: {"red": C2286}                         # KT-0603R, Vf 1.8-2.4V; pad 1 = K

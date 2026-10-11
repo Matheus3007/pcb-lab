@@ -8,8 +8,9 @@ from . import pipeline
 
 def main() -> int:
     ap = argparse.ArgumentParser(prog="pcbkit")
-    ap.add_argument("command", choices=["build", "check", "render", "fab", "report", "gate", "diff", "all", "parts"])
-    ap.add_argument("board")
+    ap.add_argument("command", choices=["build", "check", "render", "fab", "report", "gate", "diff", "all", "parts",
+                                        "part", "footprint"])
+    ap.add_argument("board", help="board name (or an LCSC ID for `part`, Lib:Name for `footprint`)")
     ap.add_argument("--ref", default="HEAD", help="diff: git ref to compare against")
     ap.add_argument("--fast", action="store_true", help="render/all: skip 3D views")
     ap.add_argument("--gate", type=int, choices=[1, 2, 3], help="gate: which review packet")
@@ -42,6 +43,12 @@ def main() -> int:
         if a.command == "diff":
             from . import diff
             print(diff.diff(a.board, a.ref))
+        if a.command == "part":
+            from . import partinfo
+            print(partinfo.part(a.board))
+        if a.command == "footprint":
+            from . import partinfo
+            print(partinfo.footprint(a.board, pipeline.ROOT / "lib" / "datasheets" / "fp"))
         if a.command == "parts":
             from . import jlc
             net = json.loads((pipeline.Board(a.board).work / "netlist.json").read_text())

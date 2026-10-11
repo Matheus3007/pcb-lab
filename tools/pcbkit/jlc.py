@@ -53,16 +53,37 @@ def fetch(lcsc: str) -> dict:
         "stock": hit.get("stockCount"),
         "unit_price_usd": prices[0]["productPrice"] if prices else None,
         "datasheet": hit.get("dataManualUrl"),
+        "datasheet_file_id": hit.get("dataManualFileAccessId"),
+        "category": hit.get("componentTypeEn"),
         "fetched": time.strftime("%Y-%m-%d"),
     }
 
 
+DATASHEET_URL = "https://jlcpcb.com/api/file/downloadByFileSystemAccessId/{}"
+
+
 def lookup(lcsc: str, refresh: bool = False) -> dict:
     cache = _load_cache()
-    if refresh or lcsc not in cache:
+    if refresh or lcsc not in cache or "datasheet_file_id" not in cache[lcsc]:
         cache[lcsc] = fetch(lcsc)
         _save_cache(cache)
     return cache[lcsc]
+
+
+def datasheet(lcsc: str, dest: Path) -> Path:
+    """Download the datasheet PDF through JLC's file endpoint (LCSC's own links return HTML)."""
+    info = lookup(lcsc)
+    if not info.get("datasheet_file_id"):
+        raise LookupError(f"{lcsc}: JLC has no datasheet file")
+    if not dest.exists():
+        r = requests.get(DATASHEET_URL.format(info["datasheet_file_id"]), timeout=60,
+                         headers={"User-Agent": "Mozilla/5.0"})
+        r.raise_for_status()
+        if not r.content.startswith(b"%PDF"):
+            raise LookupError(f"{lcsc}: datasheet download did not return a PDF")
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(r.content)
+    return dest
 
 
 if __name__ == "__main__":

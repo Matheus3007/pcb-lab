@@ -58,7 +58,8 @@ edit source → make all BOARD=<name> → read build/reports/summary.md + LOOK a
   read the pin table, and record it. Watch for clones with different pinouts (see XC6206 note).
 - **Footprint origin/orientation**: before placing a new footprint, read its pads/fab
   geometry (which way does a connector's mouth face at rot 0?) and confirm in the render.
-- **Prefer JLC Basic / Preferred parts.** `make parts BOARD=x` shows the tier, stock and price.
+- **Prefer JLC Basic / Preferred parts.** `make parts BOARD=x` shows the tier, stock and price;
+  `make part LCSC=C...` researches a new part; `make footprint FP=Lib:Name` inspects a footprint.
 - **3D models**: if KiCad has no model, fetch one (easyeda2kicad), re-origin it via
   `model.offset` in parts.yaml, and confirm alignment in `3d_iso.png`. Missing models make
   the mechanical-fit checks blind.
@@ -66,6 +67,70 @@ edit source → make all BOARD=<name> → read build/reports/summary.md + LOOK a
 - **Coordinates**: mm, board origin top-left, **+Y down** (KiCad convention), rotations CCW.
 - **CPL rotations** come from `lib/jlc_rotations.csv` (community hints, unverified). The human
   confirms in JLC's preview at gate 3; confirmed corrections go at the top of that file.
+
+## Skills (use them; they encode the procedures below)
+
+| Skill | When |
+|---|---|
+| `/new-board` | starting a board: scaffold, spec interview, gate plan |
+| `/add-part` | adding any IC/connector/non-trivial part to `lib/parts.yaml` |
+| `/board-iteration` | every edit → build → check → look → fix cycle, incl. a DRC-fix playbook |
+| `/review-gate` | producing a gate packet and stopping for the human |
+| `/jlc-order` | final fab outputs, order checklist, tagging |
+
+## Hard-won lessons (read before debugging anything)
+
+Environment and tools:
+- **KiCad's Windows Python ignores `PYTHONPATH`.** `toolchain/bin/kipy` injects `tools/` and
+  `toolchain/.kipy-site` into `sys.path` itself. Install extra KiCad-side deps with
+  `pip --target toolchain/.kipy-site`, never into Program Files, and delete numpy from there
+  (KiCad's own numpy must win).
+- Windows executables need Windows paths: the wrappers convert absolute `/mnt/...` and `/tmp/...`
+  args with `wslpath -w`. Any new wrapper or job argument must go through the same conversion.
+- **KiCad 10 `kicad-cli` has no DSN/SES commands.** Use `pcbnew.ExportSpecctraDSN(board, path)`
+  and `pcbnew.ImportSpecctraSES(board, path)` (kijobs/specctra.py).
+- **`pcbnew.SaveBoard()`** writes the `.kicad_pro` too, which net classes need; `board.Save()` doesn't.
+- `fp.SetField(k, v)` creates a **visible field on silkscreen**: always `GetField(k).SetVisible(False)`.
+- Zones: use `ZONE_CONNECTION_THT_THERMAL` (SMD pads solid). Full thermals on small SMD pads
+  give `starved_thermal` DRC errors. `ISLAND_REMOVAL_MODE_ALWAYS` removes floating copper only;
+  an island touching a pad of the net stays, so the stitcher adds a via to each such island.
+- **Freerouting is non-deterministic** even with `-mt 1` (unseeded randomness). Hence the
+  route lock (docs/pipeline.md). KiCad's DSN export varies component/net/pin ORDER run to run, so the
+  lock fingerprint is a canonical sorted S-expression. The DSN line `(string_quote ")` contains a lone
+  quote that breaks naive tokenizers.
+- Freerouting has built-in analytics: the wrapper passes `--usage_and_diagnostic_data.disable_analytics=true`.
+- The repo lives on NTFS (`core.fileMode=false`): new scripts need
+  `git update-index --chmod=+x <file>` or they're non-executable in clones.
+- KiCad's Windows Python writes CRLF unless you `open(..., newline="\n")`; committed reports must be LF.
+- Committed artifacts must be stable across identical builds: the DRC report has its `date` and
+  per-item `uuid` stripped; renders are only replaced when pixels change visibly
+  (antialiasing and ray-tracer noise otherwise churn git); the dashboard HTML is untracked.
+- WSL has no sudo password: everything installs to `~/.local` (uv, JRE) or the repo.
+
+Parts and data:
+- **atopile is dead locally** (decision 0002). Don't reintroduce it.
+- **JLC catalog**: `POST https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList`
+  `{"keyword": "<LCSC>"}` works anonymously. `componentLibraryType`: `base` = Basic, `expand` = Extended;
+  `preferredComponentFlag` = Preferred Extended.
+- **Datasheets**: LCSC's `datasheet` URLs and manufacturer sites (e.g. Torex) return HTML or 403.
+  `https://jlcpcb.com/api/file/downloadByFileSystemAccessId/<dataManualFileAccessId>` returns the real PDF
+  (`make part` does this). The Read tool can't render PDFs here (no poppler): use the page PNGs from `make part`.
+- **Clones have different pinouts** (Torex XC6206: 1=VSS 2=VOUT 3=VIN; UMW's documented
+  "XC6206P332MR" differs). Always verify the exact manufacturer behind the LCSC ID.
+- Verified Basic passives live in `lib/basic_passives.yaml`. Reuse them before searching.
+- KiCad stock 3D models are incomplete (e.g. no model for `USB_C_Receptacle_HRO_TYPE-C-31-M-12`).
+  easyeda2kicad models use EasyEDA's footprint origin: compare pad coordinates of both footprints to get
+  `model.offset` (Y is up in model space, down in footprint space). That connector needed `[0, 1.575, 0]`, rot 180.
+- `MountingHole_*` and other parts with no pins: `pins: {}` in parts.yaml, `dnp: true`.
+
+Geometry and placement:
+- KiCad SOT-23-3 at rot 0: pads 1 (−1.14, −0.95), 2 (−1.14, +0.95), 3 (+1.14, 0). Pin 3 is alone on the right.
+- HRO TYPE-C-31-M-12 at rot 0: SMD pads at −Y, mouth at +Y. Rot 180 = mouth up (to the top edge),
+  and the footprint origin is 3.65 mm behind the mouth.
+- `PinHeader_1xNN` at rot 90: pins run +X from pin 1.
+- Rotation is CCW on screen (+Y down): a +Y-pointing feature at rot 90 points +X.
+- JLC Standard PCBA needs a board of at least 70×70 mm (otherwise a panel); Economic is one-sided
+  and 0402 minimum. Check `assembly_tier` before placing anything on the bottom.
 
 ## Git conventions
 
@@ -83,12 +148,16 @@ toolchain/                setup.sh, env.sh, wrappers (kicad-cli, kipy, freerouti
 tools/pcbkit/             pipeline code: circuit, pipeline, checks, render, fab, report, diff, jlc
 tools/pcbkit/kijobs/      scripts that run inside KiCad's Python (board build, DSN/SES, stitch, dump)
 lib/parts.yaml            shared part definitions with pinout evidence
+lib/basic_passives.yaml   verified JLC Basic passives (R/C/LED by size and value)
+lib/datasheets/           downloaded by `make part` (gitignored)
 lib/3d/, lib/footprints/  models/footprints KiCad doesn't ship
 lib/jlc_cache.json        JLC catalog cache   lib/jlc_rotations.csv  CPL corrections
 boards/_template/         copy to start a board
 boards/<name>/            spec.md, board.yaml, circuit.py, mechanical/, placement.yaml, routing.yaml, waivers.yaml
   build/reports|renders|review   committed results   build/work|fab   generated, ignored
 docs/                     pipeline, jlcpcb, review gates, monitoring, decisions, projects
+.claude/skills/           project skills (new-board, add-part, board-iteration, review-gate, jlc-order)
+.vscode/                  extensions, tasks (Ctrl+Shift+B = make all), viewer settings
 ```
 
 ## Starting a new board
