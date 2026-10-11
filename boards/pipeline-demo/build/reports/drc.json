@@ -41,16 +41,14 @@
      "pos": {
       "x": 102.0,
       "y": 100.0
-     },
-     "uuid": "cf8f75c8-8437-422e-b89b-7d18113217ef"
+     }
     },
     {
      "description": "Segment of J1 on F.Silkscreen",
      "pos": {
       "x": 110.3,
       "y": 101.65
-     },
-     "uuid": "f44487e2-a8a0-4fe1-8a07-e2a24f0adbfd"
+     }
     }
    ],
    "severity": "warning",
@@ -64,16 +62,14 @@
      "pos": {
       "x": 102.0,
       "y": 100.0
-     },
-     "uuid": "cf8f75c8-8437-422e-b89b-7d18113217ef"
+     }
     },
     {
      "description": "Segment of J1 on F.Silkscreen",
      "pos": {
       "x": 119.7,
       "y": 101.65
-     },
-     "uuid": "3675f2c3-bede-47ca-8b92-8cab445128fa"
+     }
     }
    ],
    "severity": "warning",

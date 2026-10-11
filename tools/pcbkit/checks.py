@@ -28,7 +28,13 @@ def drc(b: Board) -> list[dict]:
     kicad_cli("pcb", "drc", "--format", "json", "--severity-all", "--units", "mm",
               "-o", raw, b.pcb, ok_codes=(0, 5))
     d = json.loads(raw.read_text())
-    d.pop("date", None)  # keep the committed report stable across identical builds
+    # keep the committed report stable across identical builds: no date, no per-build UUIDs
+    d.pop("date", None)
+    for key in ("violations", "unconnected_items", "schematic_parity"):
+        for v in d.get(key, []):
+            for it in v.get("items", []):
+                it.pop("uuid", None)
+        d.get(key, []).sort(key=lambda v: json.dumps(v, sort_keys=True))
     (b.reports / "drc.json").write_text(json.dumps(d, indent=1) + "\n")
     res = []
     for v in d.get("violations", []):
