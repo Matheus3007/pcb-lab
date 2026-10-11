@@ -69,6 +69,9 @@ def gate(name: str, n: int) -> str:
     netlist = json.loads((b.work / "netlist.json").read_text())
     L = [f"# {name}: review gate {n}", f"_generated {time.strftime('%Y-%m-%d %H:%M')} · checks {'PASS' if chk['pass'] else 'FAIL'}_", ""]
     open_items = [f for f in chk["findings"] if f["severity"] in ("error", "warning") and "waived" not in f]
+    if n == 1:   # gate 1 is before outline/placement: layout findings are noise there (they belong to gate 2)
+        open_items = [f for f in open_items
+                      if not f["check"].startswith(("drc/", "placement/", "routing/", "current/", "models/", "mech"))]
     if open_items:
         L += ["## Open items (read first)"] + [f"- **{f['severity']}** `{f['check']}` {f['msg']}" for f in open_items] + [""]
     if n == 1:

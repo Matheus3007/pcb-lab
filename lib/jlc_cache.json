@@ -53,6 +53,34 @@
   "tier": "basic",
   "unit_price_usd": 0.0045
  },
+ "C15849": {
+  "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL10A105KB8NNNC_C15849.pdf",
+  "datasheet_file_id": "8556213788459761664",
+  "description": "1uF 50V X5R \u00b110% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C15849",
+  "manufacturer": "Samsung Electro-Mechanics",
+  "mpn": "CL10A105KB8NNNC",
+  "package": "0603",
+  "stock": 8604279,
+  "tier": "basic",
+  "unit_price_usd": 0.0163
+ },
+ "C15850": {
+  "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL21A106KAYNNNE_C15850.pdf",
+  "datasheet_file_id": "8579706853615591424",
+  "description": "10uF 25V X5R \u00b110% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C15850",
+  "manufacturer": "Samsung Electro-Mechanics",
+  "mpn": "CL21A106KAYNNNE",
+  "package": "0805",
+  "stock": 4303759,
+  "tier": "basic",
+  "unit_price_usd": 0.0688
+ },
  "C165948": {
   "category": "USB Connectors",
   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2205251630_Korean-Hroparts-Elec-TYPE-C-31-M-12_C165948.pdf",
@@ -94,6 +122,34 @@
   "stock": 7258640,
   "tier": "basic",
   "unit_price_usd": 0.0076
+ },
+ "C25077": {
+  "category": "Chip Resistor - Surface Mount",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2411221126_UNI-ROYAL-Uniroyal-Elec-0402WGF100JTCE_C25077.pdf",
+  "datasheet_file_id": "8579705954880966656",
+  "description": "-55\u2103~+155\u2103 10\u03a9 50V 62.5mW Thick Film Resistor \u00b11% \u00b1200ppm/\u2103 0402 Chip Resistor - Surface Mount ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C25077",
+  "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+  "mpn": "0402WGF100JTCE",
+  "package": "0402",
+  "stock": 4515933,
+  "tier": "basic",
+  "unit_price_usd": 0.0029
+ },
+ "C25091": {
+  "category": "Chip Resistor - Surface Mount",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2205311900_UNI-ROYAL-Uniroyal-Elec-0402WGF2200TCE_C25091.pdf",
+  "datasheet_file_id": "8579705994546499584",
+  "description": "-55\u2103~+155\u2103 220\u03a9 50V 62.5mW Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0402 Chip Resistor - Surface Mount ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C25091",
+  "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+  "mpn": "0402WGF2200TCE",
+  "package": "0402",
+  "stock": 1316134,
+  "tier": "basic",
+  "unit_price_usd": 0.0035
  },
  "C25744": {
   "category": "Chip Resistor - Surface Mount",
@@ -165,6 +221,20 @@
   "tier": "extended",
   "unit_price_usd": 0.5326
  },
+ "C307331": {
+  "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05B104KB54PNC_C307331.pdf",
+  "datasheet_file_id": "8554627388281098240",
+  "description": "100nF 50V X7R \u00b110% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C307331",
+  "manufacturer": "Samsung Electro-Mechanics",
+  "mpn": "CL05B104KB54PNC",
+  "package": "0402",
+  "stock": 16047630,
+  "tier": "basic",
+  "unit_price_usd": 0.0104
+ },
  "C3655801": {
   "category": "Brushless DC (BLDC) Motor Driver",
   "datasheet": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302220130_Texas-Instruments-DRV8300DRGER_C3655801.pdf",
@@ -178,6 +248,20 @@
   "stock": 23748,
   "tier": "extended",
   "unit_price_usd": 0.5896
+ },
+ "C440198": {
+  "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2411041759_Murata-Electronics-GRM21BR61H106KE43L_C440198.pdf",
+  "datasheet_file_id": "8588884955182718976",
+  "description": "10uF 50V X5R \u00b110% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C440198",
+  "manufacturer": "Murata Electronics",
+  "mpn": "GRM21BR61H106KE43L",
+  "package": "0805",
+  "stock": 1367301,
+  "tier": "basic",
+  "unit_price_usd": 0.2069
  },
  "C52923": {
   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
