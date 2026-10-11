@@ -55,12 +55,18 @@ MPN-or-short-key:
   lcsc: C12345
   value: short label for BOM
   footprint: Lib:Name
+  symbol: Lib:Name              # KiCad stock symbol (grep share/kicad/symbols/*.kicad_sym), or lib/symbols/
+  symbol_aliases: {DP1: "D+"}   # only for spelling-only differences, AFTER checking the datasheet
   pins: {VDD: [1, 8], GND: [4, EP], SDA: 5, SCL: 6, NC1: 2}   # every pad covered; group same-net pads
   pinout_source: "<Mfr> <doc id/rev> p.<n> <table name>, <package> column"
   pinout_verified: YYYY-MM-DD
   model: {path: lib/3d/..., offset: [x, y, z], rotate: [0, 0, r]}   # only if KiCad has none
   notes: "facing, clone warnings, abs-max ratings that matter, required external parts"
 ```
+Pick a symbol whose pin NUMBERS are the footprint's pad numbers (the build cross-checks names per pad
+and DRC schematic parity checks numbers). `make sch BOARD=<board>` shows mismatches in seconds.
+A `schematic/pin_name` error is a real question: read the datasheet before adding an alias.
+
 Every pad must appear in `pins` (unused ones too: give them names and `c.nc(...)` them in the circuit), or
 `validate()` can't catch an unconnected pin.
 

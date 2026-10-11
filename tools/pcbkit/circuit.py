@@ -6,6 +6,7 @@ here imports pcbnew; the circuit is serialized to build/netlist.json for later s
 from __future__ import annotations
 
 import json
+from contextlib import contextmanager
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -54,6 +55,7 @@ class Part:
     mpn: str | None = None
     dnp: bool = False              # do not populate (not assembled by JLC)
     meta: dict = field(default_factory=dict)
+    block: str | None = None       # functional block (schematic grouping), set by `with c.block(...)`
 
     def __getitem__(self, name: str) -> Pin:
         if name not in self.pins:
@@ -95,7 +97,18 @@ class Circuit:
         self.no_connect: set[tuple[str, str]] = set()
         self.net_classes: dict[str, NetClass] = {}
         self.assertions: list[dict] = []
+        self.power_flags: list[str] = []
+        self._block: str | None = None
         self._lib = _load_library()
+
+    @contextmanager
+    def block(self, name: str):
+        """Group the parts created inside: one framed block per group in the generated schematic."""
+        prev, self._block = self._block, name
+        try:
+            yield
+        finally:
+            self._block = prev
 
     # -- parts ---------------------------------------------------------------
     def part(self, ref: str, key: str, value: str | None = None, dnp: bool = False) -> Part:
@@ -117,6 +130,7 @@ class Circuit:
     def _add(self, p: Part) -> Part:
         if p.ref in self.parts:
             raise CircuitError(f"duplicate ref {p.ref}")
+        p.block = self._block
         self.parts[p.ref] = p
         return p
 
@@ -134,6 +148,13 @@ class Circuit:
         """Mark pins as intentionally unconnected."""
         for pin in pins:
             self.no_connect.add((pin.part.ref, pin.name))
+
+    def power_flag(self, *net_names: str) -> None:
+        """Declare nets powered from off the board (a connector, a battery). KiCad's ERC requires every
+        power-input pin to be driven; this is the honest way to say "driven externally"."""
+        for n in net_names:
+            if n not in self.power_flags:
+                self.power_flags.append(n)
 
     def net_class(self, nc: NetClass, *net_names: str) -> None:
         self.net_classes[nc.name] = nc
@@ -172,6 +193,10 @@ class Circuit:
             if not part.lcsc and not part.dnp:
                 issues.append({"severity": "error", "check": "no_lcsc",
                                "msg": f"{part.ref} is assembled but has no LCSC ID"})
+        for n in self.power_flags:
+            if n not in self.nets:
+                issues.append({"severity": "error", "check": "power_flag_unknown_net",
+                               "msg": f"power_flag({n!r}): no such net"})
         for a in self.assertions:
             if not a["ok"]:
                 issues.append({"severity": "error", "check": "assertion",
@@ -194,7 +219,7 @@ class Circuit:
             "name": self.name,
             "parts": [{
                 "ref": p.ref, "footprint": p.footprint, "value": p.value, "lcsc": p.lcsc,
-                "mpn": p.mpn, "dnp": p.dnp, "pins": p.pins, "pad_nets": self.pad_nets(p.ref),
+                "mpn": p.mpn, "dnp": p.dnp, "block": p.block, "pins": p.pins, "pad_nets": self.pad_nets(p.ref),
                 "meta": {k: v for k, v in p.meta.items() if k not in ("pins",)},
             } for p in self.parts.values()],
             "nets": {n.name: {"class": n.net_class, "pins": [repr(p) for p in n.pins]}
@@ -202,6 +227,7 @@ class Circuit:
             "no_connect": sorted(f"{r}.{p}" for r, p in self.no_connect),
             "net_classes": {k: vars(v) for k, v in self.net_classes.items()},
             "assertions": self.assertions,
+            "power_flags": self.power_flags,
         }
 
     def write(self, path: Path) -> None:

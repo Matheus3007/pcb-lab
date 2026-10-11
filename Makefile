@@ -6,11 +6,12 @@ REF ?= HEAD
 GATE ?= 1
 PCBKIT = . toolchain/env.sh && cd tools && python -m pcbkit
 
-.PHONY: open part footprint help toolchain build check render render-fast diff fab report gate parts all _need_board
+.PHONY: sch sch-open open part footprint help toolchain build check render render-fast diff fab report gate parts all _need_board
 
 help:
 	@echo "make {all|build|check|render|render-fast|fab|diff|gate|parts|report} BOARD=<name> [REF=<git ref>] [GATE=1|2|3]"
 	@echo "make open BOARD=<name>   # view the board in KiCad's PCB editor"
+	@echo "make sch BOARD=<name> | make sch-open BOARD=<name>   # generated schematic; edit its layout in KiCad"
 	@echo "make part LCSC=<C...> | make footprint FP=<Lib:Name>   # part research"
 	@echo "make toolchain   # one-time setup (see toolchain/README.md)"
 	@ls boards | grep -v -e '^_' -e README || echo '(no boards yet)'
@@ -27,6 +28,15 @@ all: _need_board          ## build -> render -> check (+ dashboard). The iterati
 
 build: _need_board        ## circuit -> outline -> place -> route -> stitch -> board.json
 	@$(PCBKIT) build $(BOARD) $(if $(REROUTE),--reroute,)
+
+sch: _need_board          ## circuit -> schematic (+ ERC, pin table, schematic.png) only; no board needed
+	@$(PCBKIT) sch $(BOARD)
+
+sch-open: _need_board     ## edit the schematic LAYOUT in KiCad; save, then `make sch` imports it into schematic.yaml
+	@test -f boards/$(BOARD)/build/work/$(BOARD).kicad_sch || (echo "generate first: make sch BOARD=$(BOARD)"; exit 2)
+	@("/mnt/c/Program Files/KiCad/10.0/bin/eeschema.exe" "$$(wslpath -w boards/$(BOARD)/build/work/$(BOARD).kicad_sch)" >/dev/null 2>&1 &)
+	@echo "opening the schematic in KiCad: move symbols/labels, draw wires or notes, SAVE, then run make sch BOARD=$(BOARD)"
+	@echo "(connectivity stays in circuit.py: wires/labels that contradict it are dropped and reported)"
 
 render: _need_board       ## 2D + 3D renders -> build/renders/
 	@$(PCBKIT) render $(BOARD)

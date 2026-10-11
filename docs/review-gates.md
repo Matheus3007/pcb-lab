@@ -10,6 +10,9 @@ automated check.
 ## Gate 1: Parts and pinouts (after circuit, before placement)
 Packet contains:
 - BOM table: ref, value, package, LCSC ID, Basic/Preferred/Extended, stock, unit price.
+- The generated schematic (`renders/schematic.png`) and a pin table per part: pad, KiCad symbol pin
+  name, our name, electrical type, net. Read it next to the datasheet. Layout changes for readability
+  are welcome (`make sch-open`); they can't change connectivity.
 - For each IC/connector: datasheet link, the pin mapping used, and whether the agent
   verified it against the datasheet (yes / partially / no + why).
 - Power tree: rails, sources, max currents, regulator dissipation estimates.

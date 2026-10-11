@@ -22,6 +22,7 @@ never opens the KiCad GUI. Your job is to make those results trustworthy and eas
 | Concern | How | Source of truth |
 |---|---|---|
 | Circuit, parts, values, assertions | **plain Python** (`pcbkit.circuit`) | `boards/<name>/circuit.py`, `lib/parts.yaml` |
+| Schematic (review view) | generated `.kicad_sch` (`pcbkit.schematic`), KiCad ERC + parity | connectivity: `circuit.py`; layout only: `boards/<name>/schematic.yaml` |
 | Outline, cutouts, keepouts | **Python + shapely** | `boards/<name>/mechanical/outline.py` (+ chassis CAD) |
 | Placement | explicit positions + verified rules | `boards/<name>/placement.yaml` |
 | Routing | scripted tracks/zones + **Freerouting** + auto GND stitching | `boards/<name>/routing.yaml` |
@@ -56,6 +57,10 @@ edit source → make all BOARD=<name> → read build/reports/summary.md + LOOK a
   `lib/parts.yaml` needs `pinout_source` (datasheet + page/table) and `pinout_verified`.
   Get the datasheet from JLC's file endpoint (`dataManualFileAccessId`, see `pcbkit/jlc.py`),
   read the pin table, and record it. Watch for clones with different pinouts (see XC6206 note).
+- **The schematic is generated, never a source of connectivity.** Humans may rearrange it in KiCad
+  (`make sch-open`, save, `make sch`): the layout is harvested into `schematic.yaml`; wires/labels that
+  contradict circuit.py are dropped and reported. A `schematic/user_wire_short` may be the human telling
+  you the circuit is wrong: ask, don't just delete it. Every part needs `symbol:` in parts.yaml.
 - **Footprint origin/orientation**: before placing a new footprint, read its pads/fab
   geometry (which way does a connector's mouth face at rot 0?) and confirm in the render.
 - **Routing: no unneeded bends.** Every bend, jog (short sideways step) and detour adds length, loop
@@ -134,6 +139,16 @@ Environment and tools:
   `zone_connection: {SH: full}` on the part in parts.yaml (applied per pad by the builder).
 - WSL has no sudo password: everything installs to `~/.local` (uv, JRE) or the repo.
 
+Schematic generation:
+- Use **global labels**, not local ones: KiCad names a local-label net `/NET` (sheet path prefix), which
+  breaks DRC schematic parity against the board's `NET`.
+- Schematic symbols and footprints must carry the same optional fields (LCSC, MPN only when set), or
+  parity reports `footprint_symbol_field_mismatch`.
+- Stock symbols often `extends` another (XC6206PxxxMR extends APE8865N-12-HF-3): flatten before embedding;
+  unit sub-symbols are named `<Name>_<unit>_<style>` and must be renamed with the symbol.
+- SKiDL was considered and rejected (2026-10): its schematic output is KiCad V5-only.
+- Sanity of the generator is proven by KiCad itself: `sch export netlist` must equal circuit.py.
+
 Parts and data:
 - **atopile is dead locally** (decision 0002). Don't reintroduce it.
 - **JLC catalog**: `POST https://jlcpcb.com/api/overseas-pcb-order/v1/shoppingCart/smtGood/selectSmtComponentList`
@@ -172,7 +187,7 @@ Geometry and placement:
 ```
 Makefile                  make <target> BOARD=<name>   (make help)
 toolchain/                setup.sh, env.sh, wrappers (kicad-cli, kipy, freerouting), rules/jlc.yaml
-tools/pcbkit/             pipeline code: circuit, pipeline, checks, render, fab, report, diff, jlc
+tools/pcbkit/             pipeline code: circuit, schematic, pipeline, checks, render, fab, report, diff, jlc
 tools/pcbkit/kijobs/      scripts that run inside KiCad's Python (board build, DSN/SES, stitch, dump)
 lib/parts.yaml            shared part definitions with pinout evidence
 lib/basic_passives.yaml   verified JLC Basic passives (R/C/LED by size and value)
@@ -180,7 +195,8 @@ lib/datasheets/           downloaded by `make part` (gitignored)
 lib/3d/, lib/footprints/  models/footprints KiCad doesn't ship
 lib/jlc_cache.json        JLC catalog cache   lib/jlc_rotations.csv  CPL corrections
 boards/_template/         copy to start a board
-boards/<name>/            spec.md, board.yaml, circuit.py, mechanical/, placement.yaml, routing.yaml, waivers.yaml
+boards/<name>/            spec.md, board.yaml, circuit.py, schematic.yaml (layout, optional), mechanical/,
+                          placement.yaml, routing.yaml, waivers.yaml
   build/reports|renders|review   committed results   build/work|fab   generated, ignored
 docs/                     pipeline, jlcpcb, review gates, monitoring, decisions, projects
 .claude/skills/           project skills (new-board, add-part, board-iteration, review-gate, jlc-order)
@@ -190,7 +206,8 @@ docs/                     pipeline, jlcpcb, review gates, monitoring, decisions,
 ## Starting a new board
 
 1. `cp -r boards/_template boards/<name>`, then fill `spec.md` **with the human**.
-2. Write `circuit.py` (+ new parts in `lib/parts.yaml` with pinout evidence) → `make build` until
-   the circuit validates → `make gate GATE=1` and **stop for review**.
+2. Write `circuit.py` (+ new parts in `lib/parts.yaml` with pinout evidence and `symbol:`) → `make sch`
+   until circuit, pin cross-check and ERC pass and `schematic.png` reads well → `make gate GATE=1` and
+   **stop for review**.
 3. Outline + placement → `make all` until clean → `make gate GATE=2` and **stop**.
 4. Routing → `make all` until clean → `make fab` → `make gate GATE=3` and **stop**.

@@ -9,7 +9,7 @@ from . import pipeline
 def main() -> int:
     ap = argparse.ArgumentParser(prog="pcbkit")
     ap.add_argument("command", choices=["build", "check", "render", "fab", "report", "gate", "diff", "all", "parts",
-                                        "part", "footprint"])
+                                        "part", "footprint", "sch"])
     ap.add_argument("board", help="board name (or an LCSC ID for `part`, Lib:Name for `footprint`)")
     ap.add_argument("--ref", default="HEAD", help="diff: git ref to compare against")
     ap.add_argument("--fast", action="store_true", help="render/all: skip 3D views")
@@ -21,6 +21,8 @@ def main() -> int:
         if a.command in ("build", "all"):
             res = pipeline.build(a.board, reroute=a.reroute)
             print(json.dumps({k: v for k, v in res.items() if k != "circuit"}))
+        if a.command == "sch":
+            print(json.dumps(pipeline.schematic(a.board)))
         if a.command in ("render", "all"):
             from . import render
             print("renders:", ", ".join(render.render(a.board, three_d=not a.fast)))

@@ -25,7 +25,8 @@ def _f(check, severity, msg, **extra):
 # --------------------------------------------------------------------------- DRC
 def drc(b: Board) -> list[dict]:
     raw = b.work / "drc.json"
-    kicad_cli("pcb", "drc", "--format", "json", "--severity-all", "--units", "mm",
+    # --schematic-parity: the board must match the generated schematic (same dir + name)
+    kicad_cli("pcb", "drc", "--format", "json", "--severity-all", "--units", "mm", "--schematic-parity",
               "-o", raw, b.pcb, ok_codes=(0, 5))
     d = json.loads(raw.read_text())
     # keep the committed report stable across identical builds: no date, no per-build UUIDs
@@ -43,6 +44,30 @@ def drc(b: Board) -> list[dict]:
     for v in d.get("unconnected_items", []):
         items = "; ".join(i["description"] for i in v["items"])
         res.append(_f("drc/unconnected", "error", f"unconnected: {items}"))
+    # KiCad names NC pins "unconnected-(...)"; our board leaves NC pads net-less, which means the same
+    d["schematic_parity"] = [v for v in d.get("schematic_parity", [])
+                             if not ("unconnected-(" in v["description"] and "missing net" in v["description"])]
+    for v in d.get("schematic_parity", []):
+        items = "; ".join(i["description"] for i in v["items"])
+        res.append(_f(f"parity/{v['type']}", "error", f"{v['description']}: {items}"))
+    if not d.get("schematic_parity"):
+        res.append(_f("parity/ok", "ok", "board matches the schematic (KiCad schematic parity)"))
+    return res
+
+
+# --------------------------------------------------------------------------- schematic
+def schematic(b: Board) -> list[dict]:
+    """Pin-name cross-check, KiCad-netlist equality, hand-edit validation, and ERC."""
+    sj = b.reports / "schematic.json"
+    if not sj.exists():
+        return [_f("schematic/missing", "error", "no schematic report: run make sch / make build")]
+    res = [_f(f["check"], f["severity"], f["msg"]) for f in json.loads(sj.read_text())["findings"]]
+    erc = json.loads((b.reports / "erc.json").read_text())
+    for v in erc["violations"]:
+        items = "; ".join(i["description"] for i in v["items"])
+        res.append(_f(f"erc/{v['type']}", v["severity"], f"{v['description']}: {items}"))
+    if not erc["violations"]:
+        res.append(_f("erc/ok", "ok", "KiCad ERC: no violations"))
     return res
 
 
@@ -199,6 +224,7 @@ def check(name: str) -> dict:
     findings += [_f("circuit/assertion", "ok" if a["ok"] else "error",
                     f"{a['name']}: {a['value']:.4g} {a['unit']} in [{a['min']:.4g}, {a['max']:.4g}]")
                  for a in circ["assertions"]]
+    findings += schematic(b)
     findings += drc(b)
     findings += placement(b, dump)
     findings += assembly(b, dump, netlist)

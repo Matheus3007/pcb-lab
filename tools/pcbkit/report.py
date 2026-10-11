@@ -11,7 +11,7 @@ import time
 
 from .pipeline import Board, yload
 
-VIEWS = ["3d_iso", "3d_top", "3d_bottom", "top", "bottom", "placement", "copper_top", "copper_bottom"]
+VIEWS = ["schematic", "3d_iso", "3d_top", "3d_bottom", "top", "bottom", "placement", "copper_top", "copper_bottom"]
 
 
 def _esc(s) -> str:
@@ -74,6 +74,18 @@ def gate(name: str, n: int) -> str:
     if n == 1:
         L += ["## BOM", "| refs | value | MPN | LCSC | tier | stock | unit $ |", "|---|---|---|---|---|---|---|"]
         L += [f"| {', '.join(r['refs'])} | {r['value']} | {r['mpn']} | {r['lcsc']} | {r['tier']} | {r['stock']:,} | {r['unit_price_usd']} |" for r in chk["bom"]]
+        sj = json.loads((b.reports / "schematic.json").read_text()) if (b.reports / "schematic.json").exists() else None
+        if sj:
+            L += ["", "## Schematic (generated from circuit.py; read it next to the datasheets)",
+                  "![schematic](../renders/schematic.png)", ""]
+            L += [f"- {'✓' if f['severity'] == 'ok' else '✗'} `{f['check']}` {f['msg']}" for f in sj["findings"]
+                  if f["severity"] in ("ok", "error", "warning")]
+            L += ["", "## Pin tables (pad → KiCad symbol name / parts.yaml name → electrical type → net)"]
+            for ref, rows in sj["pin_table"].items():
+                if not rows:
+                    continue
+                L += ["", f"**{ref}**", "", "| pad | symbol | ours | type | net |", "|---|---|---|---|---|"]
+                L += [f"| {r['pad']} | {r['symbol_name'] or '—'} | {r['name']} | {r['type']} | {r['net']} |" for r in rows]
         L += ["", "## Pinout evidence (ICs and connectors)"]
         for p in netlist["parts"]:
             m = p["meta"]

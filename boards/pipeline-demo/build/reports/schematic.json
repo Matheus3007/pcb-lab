@@ -1,0 +1,309 @@
+{
+ "harvested": false,
+ "findings": [
+  {
+   "check": "schematic/pins_match",
+   "severity": "ok",
+   "msg": "all 38 symbol pins match parts.yaml"
+  },
+  {
+   "check": "schematic/netlist_match",
+   "severity": "ok",
+   "msg": "KiCad's netlist of the schematic equals circuit.py (6 nets)"
+  }
+ ],
+ "pin_table": {
+  "J1": [
+   {
+    "pad": "A1",
+    "symbol_name": "GND",
+    "name": "GND",
+    "type": "passive",
+    "net": "GND"
+   },
+   {
+    "pad": "A4",
+    "symbol_name": "VBUS",
+    "name": "VBUS",
+    "type": "passive",
+    "net": "VBUS"
+   },
+   {
+    "pad": "A5",
+    "symbol_name": "CC1",
+    "name": "CC1",
+    "type": "bidirectional",
+    "net": "CC1"
+   },
+   {
+    "pad": "A6",
+    "symbol_name": "D+",
+    "name": "DP1",
+    "type": "bidirectional",
+    "net": "NC"
+   },
+   {
+    "pad": "A7",
+    "symbol_name": "D-",
+    "name": "DN1",
+    "type": "bidirectional",
+    "net": "NC"
+   },
+   {
+    "pad": "A8",
+    "symbol_name": "SBU1",
+    "name": "SBU1",
+    "type": "bidirectional",
+    "net": "NC"
+   },
+   {
+    "pad": "A9",
+    "symbol_name": "VBUS",
+    "name": "VBUS",
+    "type": "passive",
+    "net": "VBUS"
+   },
+   {
+    "pad": "A12",
+    "symbol_name": "GND",
+    "name": "GND",
+    "type": "passive",
+    "net": "GND"
+   },
+   {
+    "pad": "B1",
+    "symbol_name": "GND",
+    "name": "GND",
+    "type": "passive",
+    "net": "GND"
+   },
+   {
+    "pad": "B4",
+    "symbol_name": "VBUS",
+    "name": "VBUS",
+    "type": "passive",
+    "net": "VBUS"
+   },
+   {
+    "pad": "B5",
+    "symbol_name": "CC2",
+    "name": "CC2",
+    "type": "bidirectional",
+    "net": "CC2"
+   },
+   {
+    "pad": "B6",
+    "symbol_name": "D+",
+    "name": "DP2",
+    "type": "bidirectional",
+    "net": "NC"
+   },
+   {
+    "pad": "B7",
+    "symbol_name": "D-",
+    "name": "DN2",
+    "type": "bidirectional",
+    "net": "NC"
+   },
+   {
+    "pad": "B8",
+    "symbol_name": "SBU2",
+    "name": "SBU2",
+    "type": "bidirectional",
+    "net": "NC"
+   },
+   {
+    "pad": "B9",
+    "symbol_name": "VBUS",
+    "name": "VBUS",
+    "type": "passive",
+    "net": "VBUS"
+   },
+   {
+    "pad": "B12",
+    "symbol_name": "GND",
+    "name": "GND",
+    "type": "passive",
+    "net": "GND"
+   },
+   {
+    "pad": "SH",
+    "symbol_name": "SHIELD",
+    "name": "SHIELD",
+    "type": "passive",
+    "net": "GND"
+   }
+  ],
+  "R1": [
+   {
+    "pad": "1",
+    "symbol_name": "",
+    "name": "1",
+    "type": "passive",
+    "net": "CC1"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "",
+    "name": "2",
+    "type": "passive",
+    "net": "GND"
+   }
+  ],
+  "R2": [
+   {
+    "pad": "1",
+    "symbol_name": "",
+    "name": "1",
+    "type": "passive",
+    "net": "CC2"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "",
+    "name": "2",
+    "type": "passive",
+    "net": "GND"
+   }
+  ],
+  "U1": [
+   {
+    "pad": "1",
+    "symbol_name": "GND",
+    "name": "VSS",
+    "type": "power_in",
+    "net": "GND"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "VO",
+    "name": "VOUT",
+    "type": "power_out",
+    "net": "3V3"
+   },
+   {
+    "pad": "3",
+    "symbol_name": "VI",
+    "name": "VIN",
+    "type": "power_in",
+    "net": "VBUS"
+   }
+  ],
+  "C1": [
+   {
+    "pad": "1",
+    "symbol_name": "",
+    "name": "1",
+    "type": "passive",
+    "net": "VBUS"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "",
+    "name": "2",
+    "type": "passive",
+    "net": "GND"
+   }
+  ],
+  "C2": [
+   {
+    "pad": "1",
+    "symbol_name": "",
+    "name": "1",
+    "type": "passive",
+    "net": "3V3"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "",
+    "name": "2",
+    "type": "passive",
+    "net": "GND"
+   }
+  ],
+  "C3": [
+   {
+    "pad": "1",
+    "symbol_name": "",
+    "name": "1",
+    "type": "passive",
+    "net": "3V3"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "",
+    "name": "2",
+    "type": "passive",
+    "net": "GND"
+   }
+  ],
+  "R3": [
+   {
+    "pad": "1",
+    "symbol_name": "",
+    "name": "1",
+    "type": "passive",
+    "net": "3V3"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "",
+    "name": "2",
+    "type": "passive",
+    "net": "LED_A"
+   }
+  ],
+  "D1": [
+   {
+    "pad": "1",
+    "symbol_name": "K",
+    "name": "K",
+    "type": "passive",
+    "net": "GND"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "A",
+    "name": "A",
+    "type": "passive",
+    "net": "LED_A"
+   }
+  ],
+  "J2": [
+   {
+    "pad": "1",
+    "symbol_name": "Pin_1",
+    "name": "1",
+    "type": "passive",
+    "net": "VBUS"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "Pin_2",
+    "name": "2",
+    "type": "passive",
+    "net": "3V3"
+   },
+   {
+    "pad": "3",
+    "symbol_name": "Pin_3",
+    "name": "3",
+    "type": "passive",
+    "net": "GND"
+   },
+   {
+    "pad": "4",
+    "symbol_name": "Pin_4",
+    "name": "4",
+    "type": "passive",
+    "net": "GND"
+   }
+  ],
+  "H1": []
+ },
+ "erc_violations": 0,
+ "power_flags": [
+  "VBUS",
+  "GND"
+ ]
+}

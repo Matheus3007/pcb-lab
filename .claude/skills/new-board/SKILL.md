@@ -33,7 +33,9 @@ Leave every `TBD` that affects layout in "Open questions"; resolve them before g
 `copper_oz` if not 1, `rules:` overrides only with a reason comment.
 
 ## 4. Plan the work as gates (docs/review-gates.md)
-1. Circuit + parts (`circuit.py`, new parts via `/add-part`) → `make build` until the circuit validates
+1. Circuit + parts (`circuit.py`, new parts via `/add-part`; group them with `with c.block(...)`, declare
+   off-board supplies with `c.power_flag(...)`) → `make sch` until circuit, ERC and pin checks pass and
+   `renders/schematic.png` reads well
    → `/review-gate` 1 → **stop**.
 2. Outline (`mechanical/outline.py`) + placement (`placement.yaml` with rules) → `/board-iteration`
    → `/review-gate` 2 → **stop**.

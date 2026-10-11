@@ -43,6 +43,12 @@ e.g. to try for a better result. Freerouting is random, so several attempts may 
 | `current/width` | trace too thin for the class current | raise NetClass `track_width` or use a pour |
 | `models/missing` | no 3D model | `/add-part` step 4 |
 | `routing/jog` | autorouter sideways step the straightener couldn't fix (no clearance) | `REROUTE=1` (more `attempts`), nudge the parts causing the squeeze, or script that net in `routing.yaml` |
+| `schematic/pin_name` | KiCad symbol and parts.yaml disagree on a pad's function | read the datasheet: fix `pins` (wrong pinout!) or add `symbol_aliases` (spelling only) |
+| `schematic/pin_unmapped` | symbol pin numbers ≠ footprint pads | pick a symbol matching the footprint, or a local symbol in lib/symbols/ |
+| `schematic/user_wire_short`, `user_label_wrong_net` | a hand-drawn wire/label contradicts circuit.py | the human may have found a real bug: ask; else remove it from schematic.yaml |
+| `erc/power_pin_not_driven` | power-input pin with no source on its net | regulator output missing, or an off-board supply: `c.power_flag("NET")` |
+| `erc/*` other | pin-type conflicts (two outputs together, input undriven) | fix circuit.py; KiCad's ERC knows pin types we don't |
+| `parity/*` | board and schematic disagree | pipeline bug (both come from netlist.json): fix the generator, never waive |
 | `parts/extended` | plain Extended part without justification | find a Basic/Preferred alternative (`/add-part`), or add `extended_reason:` |
 
 ## Routing quality (no unneeded bends)

@@ -9,9 +9,19 @@ board 30.05 × 24.05 mm · 11 footprints · 40 track segments · 42 vias · 74.5
 - ✓ `circuit/assertion` LDO input max vs XC6206 6.0V rating: 5.25 V in [0, 6]
 - ✓ `circuit/assertion` LDO dissipation @100mA, Vin=5.25V: 0.195 W in [0, 0.25]
 
+## schematic
+- ✓ `schematic/pins_match` all 38 symbol pins match parts.yaml
+- ✓ `schematic/netlist_match` KiCad's netlist of the schematic equals circuit.py (6 nets)
+
+## erc
+- ✓ `erc/ok` KiCad ERC: no violations
+
 ## drc
 - ! `drc/silk_edge_clearance` Silkscreen clipped by board edge (board setup constraints silk clearance 0.1500 mm; actual 0.0000 mm): Polygon on Edge.Cuts; Segment of J1 on F.Silkscreen _(waived: USB-C footprint silk outline intentionally crosses the board edge (connector overhang marker); clipped by fab)_
 - ! `drc/silk_edge_clearance` Silkscreen clipped by board edge (board setup constraints silk clearance 0.1500 mm; actual 0.0000 mm): Polygon on Edge.Cuts; Segment of J1 on F.Silkscreen _(waived: USB-C footprint silk outline intentionally crosses the board edge (connector overhang marker); clipped by fab)_
+
+## parity
+- ✓ `parity/ok` board matches the schematic (KiCad schematic parity)
 
 ## placement
 - ✓ `placement/near` C1 -> U1 pad 3: 1.54 mm (max 3.0) — LDO input cap

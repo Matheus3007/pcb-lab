@@ -5,6 +5,8 @@ agent can run on its own. Proven end to end on `boards/pipeline-demo` (2026-10-1
 
 ```
 circuit.py ──validate/assert──▶ build/work/netlist.json            reports/circuit.json
+   schematic.py (+ schematic.yaml layout) ─▶ work/<board>.kicad_sch ─▶ ERC, KiCad netlist == circuit.py,
+       symbol-vs-parts.yaml pin names ─▶ reports/erc.json, schematic.json, renders/schematic.png
 mechanical/outline.py ────────▶ build/work/geometry.json
 placement.yaml + routing.yaml ─┐
                                ▼
@@ -31,7 +33,9 @@ placement.yaml + routing.yaml ─┐
 |---|---|
 | `make toolchain` | one-time install (uv, Python venv, Java 25, Freerouting, KiCad-Python deps) |
 | `make all BOARD=x [REROUTE=1]` | build → render → check → dashboard. **The iteration command.** |
-| `make build BOARD=x` | circuit → board → route → stitch → dump |
+| `make build BOARD=x` | circuit → schematic → board → route → stitch → dump |
+| `make sch BOARD=x` | circuit → schematic only (+ ERC, pin table, schematic.png): seconds, no board needed |
+| `make sch-open BOARD=x` | open the schematic in KiCad to improve its LAYOUT; save, then `make sch` imports it |
 | `make render[-fast] BOARD=x` | renders (fast = 2D only) |
 | `make check BOARD=x` | all checks; exits non-zero on any unwaived error |
 | `make fab BOARD=x` | JLC gerbers zip + BOM + CPL |
@@ -58,7 +62,10 @@ Force a fresh route with `make all BOARD=x REROUTE=1`. Commit both lock files.
   **+Y down**; rotation in degrees, CCW as seen from the top. Bottom-side parts: `side: bottom`.
 - **circuit.py** defines `circuit() -> Circuit`. Use `c.part(ref, lib_key)` for parts in
   `lib/parts.yaml`, `c.passive(ref, "R"|"C"|"LED", value, size, lcsc=...)` for 2-pin parts,
-  `c.connect(net, *pins)`, `c.nc(*pins)`, `c.net_class(NetClass(...), *nets)`, `c.check(...)`.
+  `c.connect(net, *pins)`, `c.nc(*pins)`, `c.net_class(NetClass(...), *nets)`, `c.check(...)`,
+  `with c.block("name"):` (groups parts into a framed block in the schematic) and
+  `c.power_flag(*nets)` (nets powered from off the board, e.g. USB VBUS/GND; ERC needs it).
+- **schematic.yaml** (optional): schematic LAYOUT only. See "Schematic" below.
 - **outline.py** defines `board()` returning shapely geometry (outline, cutouts, keepouts,
   height zones). Derive from chassis CAD when there is one, and name the feature each value comes from.
 - **placement.yaml** `parts:` gives every footprint `at/rot/side`; `rules:` (near, on_edge) are
@@ -66,6 +73,35 @@ Force a fresh route with `make all BOARD=x REROUTE=1`. Commit both lock files.
 - **routing.yaml**: `tracks`/`vias` (scripted critical copper, placed before autorouting),
   `zones`, `stitch`, `autoroute` (passes, timeout).
 - **board.yaml**: layers, thickness, assembly tier, quantity, silk refs, per-board rule overrides.
+
+## Schematic (pcbkit/schematic.py)
+
+A review view generated from circuit.py every build, so the wiring can be checked against datasheets
+before any copper exists (gate 1). One sheet, KiCad stock symbols (`symbol:` in parts.yaml; R/C/LED
+automatic), a global net label on every pin and a no-connect flag on every NC pin, parts grouped by
+`c.block(...)`, PWR_FLAGs for `c.power_flag(...)` nets. Symbols are copied into a project library
+(`work/pcbkit.kicad_sym` + `sym-lib-table`), so the file doesn't depend on the user's KiCad setup.
+
+**Who owns what (why human edits can't break anything):**
+- Connectivity = circuit.py only. Labels, NC flags and symbol pins are regenerated every build.
+- Layout = `boards/<name>/schematic.yaml`: symbol position/rotation/mirror, Reference/Value positions,
+  and hand-drawn wires, labels, junctions and text notes. Parts not in it are auto-placed (new parts
+  land below the existing layout). Without the file, everything is auto-placed.
+- Harvest: the build records the hash of the schematic it wrote. If the file changed (someone moved
+  things in KiCad and saved), the next `make sch`/`make build` copies the layout into schematic.yaml
+  *before* regenerating. Moving a symbol just moves its labels with it.
+- Hand-drawn wires/labels are validated: a wire group touching pins of two nets, or a label naming
+  a different net than the pin it sits on, is dropped and reported as an error
+  (`schematic/user_wire_short`, `user_label_wrong_net`): either the drawing or circuit.py is wrong.
+  Symbols added in KiCad are ignored. To change the circuit, edit circuit.py.
+
+**Checks it adds:** `schematic/pin_name` (KiCad symbol pin name vs parts.yaml name per pad; synonyms
+like VSS/GND and VIN/VI are accepted, other spelling-only differences need `symbol_aliases:`),
+`schematic/pin_unmapped`, `schematic/netlist_match` (KiCad's netlist of the drawing == circuit.py,
+pad for pad), `erc/*` (KiCad ERC with pin electrical types), and `parity/*` (DRC `--schematic-parity`:
+the board matches the schematic). NC pads: KiCad's `unconnected-(…)` nets == our net-less pads.
+The symbol is an independent second opinion on the pinout, not proof: a library symbol can be wrong
+too, and both must still be checked against the datasheet at gate 1.
 
 ## Custom checks (pcbkit/checks.py)
 
@@ -85,6 +121,8 @@ per net class · missing 3D models · waivers.
 
 ## Known limitations / next improvements
 
+- Schematic: one sheet, single-unit symbols only (multi-unit, e.g. quad op-amps, not yet), simple
+  row auto-layout; power nets are labels, not power symbols.
 - Placement is explicit (agent-written coordinates + rules), not an optimizer.
 - No mechanical interference check against chassis CAD yet (needs chassis files; planned:
   STEP export of the board vs chassis STEP, plus height zones from outline.py).

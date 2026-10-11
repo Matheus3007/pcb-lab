@@ -1,12 +1,15 @@
 # Shared parts library: everything except generic two-pin passives.
 # Each entry: LCSC ID, footprint ("Lib:Name": KiCad stock lib, or lib/footprints/<Lib>.pretty),
-# pins (name -> pad numbers), and the EVIDENCE for the pin mapping. An entry without
+# symbol (KiCad "Lib:Name" for the generated schematic: stock libs, or lib/symbols/<Lib>.kicad_sym;
+# the build cross-checks its pin names against `pins`, `symbol_aliases: {ours: theirs}` for spelling-only
+# differences), pins (name -> pad numbers), and the EVIDENCE for the pin mapping. An entry without
 # `pinout_source` + `pinout_verified` must not reach review gate 1.
 
 XC6206P332MR-G:
   lcsc: C5446
   value: XC6206 3.3V
   footprint: Package_TO_SOT_SMD:SOT-23-3
+  symbol: Regulator_Linear:XC6206PxxxMR   # KiCad stock: 1=GND 2=VO 3=VI (agrees with Torex)
   pins: {VSS: 1, VOUT: 2, VIN: 3}
   pinout_source: "Torex ETR0305_004b p.2 PIN ASSIGNMENT, SOT-23 column (1=VSS, 2=VOUT, 3=VIN)"
   pinout_verified: 2026-10-11
@@ -16,6 +19,7 @@ TYPE-C-31-M-12:
   lcsc: C165948
   value: USB-C 16P
   footprint: Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12
+  symbol: Connector:USB_C_Receptacle_USB2.0_16P
   pins:
     GND: [A1, A12, B1, B12]
     VBUS: [A4, A9, B4, B9]
@@ -42,6 +46,7 @@ PinHeader_1x04:
   dnp: true
   value: 1x04 2.54mm
   footprint: Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical
+  symbol: Connector_Generic:Conn_01x04
   pins: {"1": 1, "2": 2, "3": 3, "4": 4}
   pinout_source: "generic header, pin n = pad n"
   pinout_verified: 2026-10-11
@@ -51,6 +56,7 @@ MountingHole_M2:
   dnp: true
   value: M2
   footprint: MountingHole:MountingHole_2.2mm_M2
+  symbol: Mechanical:MountingHole
   pins: {}
   pinout_source: "mechanical, no pins"
   pinout_verified: 2026-10-11
