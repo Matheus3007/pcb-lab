@@ -9,3 +9,5 @@ __pycache__/
 # toolchain installs (toolchain/setup.sh recreates them)
 toolchain/.venv/
 toolchain/.kipy-site/
+# local viewer, regenerated every check (contains build time)
+boards/*/build/review/index.html

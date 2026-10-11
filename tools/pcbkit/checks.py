@@ -24,10 +24,12 @@ def _f(check, severity, msg, **extra):
 
 # --------------------------------------------------------------------------- DRC
 def drc(b: Board) -> list[dict]:
-    out = b.reports / "drc.json"
+    raw = b.work / "drc.json"
     kicad_cli("pcb", "drc", "--format", "json", "--severity-all", "--units", "mm",
-              "-o", out, b.pcb, ok_codes=(0, 5))
-    d = json.loads(out.read_text())
+              "-o", raw, b.pcb, ok_codes=(0, 5))
+    d = json.loads(raw.read_text())
+    d.pop("date", None)  # keep the committed report stable across identical builds
+    (b.reports / "drc.json").write_text(json.dumps(d, indent=1) + "\n")
     res = []
     for v in d.get("violations", []):
         items = "; ".join(i["description"] for i in v["items"])

@@ -1,84 +1,83 @@
 {
-    "$schema": "https://schemas.kicad.org/drc.v1.json",
-    "coordinate_units": "mm",
-    "date": "2026-10-11T09:57:31",
-    "ignored_checks": [
-        {
-            "description": "Footprint has no courtyard defined",
-            "key": "missing_courtyard"
-        },
-        {
-            "description": "Track endpoint not centered on via",
-            "key": "track_not_centered_on_via"
-        },
-        {
-            "description": "Tuning profile track geometries",
-            "key": "tuning_profile_track_geometries"
-        },
-        {
-            "description": "Footprint doesn't match symbol's footprint filters",
-            "key": "footprint_filters_mismatch"
-        },
-        {
-            "description": "Footprint component type doesn't match footprint pads",
-            "key": "footprint_type_mismatch"
-        }
-    ],
-    "included_severities": [
-        "error",
-        "warning",
-        "exclusion"
-    ],
-    "kicad_version": "10.0.5",
-    "schematic_parity": [],
-    "source": "pipeline-demo.kicad_pcb",
-    "unconnected_items": [],
-    "violations": [
-        {
-            "description": "Silkscreen clipped by board edge (board setup constraints silk clearance 0.1500 mm; actual 0.0000 mm)",
-            "items": [
-                {
-                    "description": "Polygon on Edge.Cuts",
-                    "pos": {
-                        "x": 102.0,
-                        "y": 100.0
-                    },
-                    "uuid": "798bf0a6-c902-4248-b097-690f2082031b"
-                },
-                {
-                    "description": "Segment of J1 on F.Silkscreen",
-                    "pos": {
-                        "x": 110.3,
-                        "y": 101.65
-                    },
-                    "uuid": "b349e8b4-b8ab-49ef-ac78-4eac5d2fc0b3"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_edge_clearance"
-        },
-        {
-            "description": "Silkscreen clipped by board edge (board setup constraints silk clearance 0.1500 mm; actual 0.0000 mm)",
-            "items": [
-                {
-                    "description": "Polygon on Edge.Cuts",
-                    "pos": {
-                        "x": 102.0,
-                        "y": 100.0
-                    },
-                    "uuid": "798bf0a6-c902-4248-b097-690f2082031b"
-                },
-                {
-                    "description": "Segment of J1 on F.Silkscreen",
-                    "pos": {
-                        "x": 119.7,
-                        "y": 101.65
-                    },
-                    "uuid": "16181ff6-bf88-4396-ae47-37e376921f1d"
-                }
-            ],
-            "severity": "warning",
-            "type": "silk_edge_clearance"
-        }
-    ]
+ "$schema": "https://schemas.kicad.org/drc.v1.json",
+ "coordinate_units": "mm",
+ "ignored_checks": [
+  {
+   "description": "Footprint has no courtyard defined",
+   "key": "missing_courtyard"
+  },
+  {
+   "description": "Track endpoint not centered on via",
+   "key": "track_not_centered_on_via"
+  },
+  {
+   "description": "Tuning profile track geometries",
+   "key": "tuning_profile_track_geometries"
+  },
+  {
+   "description": "Footprint doesn't match symbol's footprint filters",
+   "key": "footprint_filters_mismatch"
+  },
+  {
+   "description": "Footprint component type doesn't match footprint pads",
+   "key": "footprint_type_mismatch"
+  }
+ ],
+ "included_severities": [
+  "error",
+  "warning",
+  "exclusion"
+ ],
+ "kicad_version": "10.0.5",
+ "schematic_parity": [],
+ "source": "pipeline-demo.kicad_pcb",
+ "unconnected_items": [],
+ "violations": [
+  {
+   "description": "Silkscreen clipped by board edge (board setup constraints silk clearance 0.1500 mm; actual 0.0000 mm)",
+   "items": [
+    {
+     "description": "Polygon on Edge.Cuts",
+     "pos": {
+      "x": 102.0,
+      "y": 100.0
+     },
+     "uuid": "cf8f75c8-8437-422e-b89b-7d18113217ef"
+    },
+    {
+     "description": "Segment of J1 on F.Silkscreen",
+     "pos": {
+      "x": 110.3,
+      "y": 101.65
+     },
+     "uuid": "f44487e2-a8a0-4fe1-8a07-e2a24f0adbfd"
+    }
+   ],
+   "severity": "warning",
+   "type": "silk_edge_clearance"
+  },
+  {
+   "description": "Silkscreen clipped by board edge (board setup constraints silk clearance 0.1500 mm; actual 0.0000 mm)",
+   "items": [
+    {
+     "description": "Polygon on Edge.Cuts",
+     "pos": {
+      "x": 102.0,
+      "y": 100.0
+     },
+     "uuid": "cf8f75c8-8437-422e-b89b-7d18113217ef"
+    },
+    {
+     "description": "Segment of J1 on F.Silkscreen",
+     "pos": {
+      "x": 119.7,
+      "y": 101.65
+     },
+     "uuid": "3675f2c3-bede-47ca-8b92-8cab445128fa"
+    }
+   ],
+   "severity": "warning",
+   "type": "silk_edge_clearance"
+  }
+ ]
 }

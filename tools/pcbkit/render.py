@@ -5,7 +5,10 @@ from kicad-cli's renderer; a GLB is exported for interactive 3D viewing in VS Co
 """
 from __future__ import annotations
 
+import os
+
 import cairosvg
+from PIL import Image, ImageChops
 
 from .pipeline import Board, kicad_cli
 
@@ -27,6 +30,18 @@ VIEWS_3D = {
 }
 
 
+def _keep_if_same(new, dest, tol_px: int) -> None:
+    """Replace dest with new only if they differ visibly (> tol_px pixels changed by more than
+    40/255). Renderer antialiasing and ray-tracer sampling noise would otherwise make every
+    build look like a change in git."""
+    if dest.exists():
+        a, b = Image.open(dest).convert("L"), Image.open(new).convert("L")
+        if a.size == b.size and sum(ImageChops.difference(a, b).histogram()[40:]) <= tol_px:
+            os.remove(new)
+            return
+    os.replace(new, dest)
+
+
 def render(name: str, three_d: bool = True) -> list[str]:
     b = Board(name)
     size = __import__("json").loads((b.reports / "board.json").read_text())["size_mm"]
@@ -36,14 +51,18 @@ def render(name: str, three_d: bool = True) -> list[str]:
         kicad_cli("pcb", "export", "svg", "--mode-single", "--page-size-mode", "2",
                   "--exclude-drawing-sheet", "--layers", layers, *extra, "-o", svg, b.pcb)
         png = b.renders / f"{view}.png"
-        cairosvg.svg2png(url=str(svg), write_to=str(png),
+        tmp = b.work / f"{view}.png"
+        cairosvg.svg2png(url=str(svg), write_to=str(tmp),
                          output_width=int((size[0] + 2) * PX_PER_MM), background_color=BG)
+        _keep_if_same(tmp, png, tol_px=0)
         out.append(png.name)
     if three_d:
         for view, args in VIEWS_3D.items():
             png = b.renders / f"{view}.png"
-            kicad_cli("pcb", "render", "-o", png, "--width", 1400, "--height", 1050,
+            tmp = b.work / f"{view}.png"
+            kicad_cli("pcb", "render", "-o", tmp, "--width", 1400, "--height", 1050,
                       "--quality", "high", "--background", "opaque", *args, b.pcb)
+            _keep_if_same(tmp, png, tol_px=2000)
             out.append(png.name)
         kicad_cli("pcb", "export", "glb", "-f", "--grid-origin", "--subst-models", "--include-tracks", "--include-pads",
                   "--include-zones", "--include-silkscreen", "--include-soldermask",
