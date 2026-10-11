@@ -53,17 +53,17 @@ Context only, not yet a spec. Turn into `boards/<name>/spec.md` with the human o
 - **Carrier** (~78 × 30 mm, vertical on the rear wall): MCU, IMU, power, logging, USB-C, bulk
   capacitance, and **every wire** in the robot soldered to it (battery + link pigtails, receiver,
   Aria, all motor phases).
-- **Drive-ESC modules** (~15 × 22 mm target, identical, ~1 g): AM32 MCU + gate driver + small
-  MOSFETs, no wires and no bulk cap. They lie flat on the carrier's inner face (~5 mm stack) on a
-  board-to-board header (VBAT, GND, phases A/B/C, DShot) and are retained by one M2 screw. A swap is
-  one screw, no soldering, about a minute.
+- **Drive-ESC modules** (~25 × 15 mm, identical, ~1–2 g): AM32 MCU + gate driver + small MOSFETs,
+  no wires and no bulk cap. They plug into the carrier's inner face through **one 2×9 2.54 mm
+  through-hole header** (phases, battery, GND, 12 V, DShot), retained by one M2 screw (preferred) or
+  Kapton tape alone. A swap is pull and push, no soldering. See `battlebot-esc-research.md`.
 - **Sizing:** the 2.5 A drive figure is battery-side. At low duty (stall against a wall) the phase
   current can be several times that, so modules are designed for **20–30 A peak phase current**
-  with the AM32 current limit set to match. Header pin count per phase must carry it.
+  with the AM32 current limit set to match. Three header pins per phase.
 - **Fallback:** an adapter module with pads for an off-the-shelf ESC (e.g. BCube).
-- **v2 weapon ESC:** a larger module of the same kind with screw-down power lugs.
-- Expected stack at the channel waist: TPU pad 1.5 + carrier 1.0 + stack 5 + module 1.0 + parts
-  ~2 ≈ 10.5 mm of 13–15 mm available.
+- **v2 weapon ESC:** a larger module of the same kind, connection sized for its current.
+- Stack ≈ 15 mm, so the modules sit at the two ends of the channel (deep enough), one per end,
+  rotated 180° from each other so each faces its own motor.
 - Only the controller section is non-modular: carry a spare carrier per event.
 
 ## Board location (measured from RebotAssemblyV3.STEP, 2026-10-11)

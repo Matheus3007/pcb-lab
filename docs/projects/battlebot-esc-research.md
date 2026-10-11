@@ -73,25 +73,29 @@ Siliup SP60N05GNJ (60 V, 4.7 mΩ, $0.25). Branded alternative: AON7262E (10 mΩ)
 **Module supplies.** The carrier provides ~12 V (one buck shared by all ESC modules) for GVDD; the module
 makes 3.3 V with an HT7533 (Basic, 30 V max) from that 12 V. No buck or inductor on the module.
 
-**Screw joints.** The carrier gets JLC-placed SMD M2 threaded standoffs (Sinhoo SMTSO20x0, 2/3/6 mm
-tall, $0.08). Motor phases A/B/C go through **3 M2 screws** that also retain the module. VBAT, GND,
-12 V and DShot go through a small header with several pins each for power; the stack height is set
-by that header. A swap = 3 screws.
-- **Pull-out (2026-10-11, corrected).** SMTSO2020 drawing: brass, Ø5.56 × 2.0 mm flange with a Ø3.6 ×
-  1.53 mm pilot that sits **in a hole** in the PCB (PEM SMTSO style), so side loads go into the board.
-  With the standoff on the carrier's **front** and the screw threading into it from the module side,
-  the clamp force closes inside screw → module → standoff: the standoff's solder joint does **not**
-  carry the screw preload (an earlier note here said it did; that was wrong). The joint only sees the
-  module's inertia (≈1.5 g, a few newtons even in a big hit) and the **twisting torque while
-  tightening**, which is the real risk: snug an M2 gently with a small driver. Brass threads wear over
-  many swaps. No pull-out or torque rating is given in the drawing.
-- **Signal contacts:** the standoff height (2–3 mm) leaves room for SMD pogo pins on the carrier pressing
-  module pads (e.g. BWCD-L3.5W2.0H1.0, C2826547: Ø2 mm, 1.5 A, 36 V, 10k cycles, $0.08, 10.5k stock).
-  Battery/GND get several pins each. Exact working height vs standoff height: check the drawing.
+**Module connection (decided 2026-10-11): one 2×9 2.54 mm header carries everything.** Screw joints
+(SMD M2 standoffs carrying the phases) and pogo pins were considered and dropped: too many parts and
+failure points for a v1, and 5 screws per module for a rigid two-edge clamp.
+- Pins: phases A/B/C 3 each (9), battery + 3, GND 4, 12 V gate supply 1, DShot 1 = 18. About 3 A per
+  pin continuous, so ~9 A per phase continuous with short 20–30 A peaks; parallel pins mean one weak
+  contact doesn't cut a function. Check against the first fight logs.
+- Through-hole on both sides (insertion forces and hits): female socket on the carrier, e.g.
+  HC-PM254-8.5H-2x9PZ (C22373914, 8.5 mm tall, 2.5k stock, $0.19); male header on the module, e.g.
+  HX PZ2.54-2x9P ZZ (C42372517, 6.2k stock, $0.14). Lower-profile sockets still to be checked.
+- Retention: **one M2 screw** through the module centre into a standoff on the carrier (no current),
+  preferred; the design must also work with **only Kapton tape** over the module.
+- Module grows to about 25 × 15 mm. Stack ≈ 15 mm (TPU pad 1.5 + carrier 1.6 + socket 8.5 + module 1.0 +
+  parts ~2), so the modules sit at the **two ends** of the channel (≈35 mm deep at the wheel end,
+  17–20 mm at the centre end), not at the 13–15 mm waist. Confirm against the CAD at placement.
+- If it misbehaves, redesign in v2.
+
+**Placement.** The two modules are identical boards mounted **180° from each other**, one at each end
+of the carrier, so each faces its own motor: right module at the wheel end, left module at the centre
+end (where the left motor's wires arrive). AM32 reverses direction in software.
 
 ## Open questions
 
-- Signal/power header part and stack height (sets the standoff height).
-- Battery-side current per module through header pins: verify from the first logs, or move VBAT to a 4th screw.
+- Lower-profile 2×9 socket (reduces the stack).
+- Header current per function: verify from the first fight logs.
 - Per-module current sense (shunt + amplifier on PA3) vs carrier-level only.
 - MOSFET choice: compare the switching loss (Qg) and the dead time the AM32 target sets (60).
