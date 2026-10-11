@@ -44,12 +44,47 @@ Started 2026-10-11. Feeds the drive-ESC module spec (see `battlebot.md`, "Archit
 Datasheets were downloaded for NSG2065Q, JSM6288Q, HSBB6066 and AON7264E. The pinouts get verified
 through `/add-part` when the module's circuit is written.
 
+## Deep dive (2026-10-11): our own part choices
+
+**JLC tiers.** The full Basic (351) and Preferred (1235) lists were downloaded and filtered. They hold
+**no** power MOSFET above 30 V / a few amps, **no** three-phase gate driver, and **no** MCU that AM32
+supports (Preferred MCUs are F030/F103/L151/ATmega/STM8). So the ESC's core parts are Extended no
+matter what; everything else (passives, 50 V MLCCs, LDO) can be Basic. Extended parts were then
+ranked by fit, stock (popular, low supply risk) and price.
+
+**MCU: AT32F421G8U7 stays, on merit.** Cheapest AM32-capable MCU at JLC ($0.96, Cortex-M4 120 MHz,
+105 °C), the most common MCU in current AM32 ESCs, and it keeps the stock `OPENESC_20_F421` firmware.
+Alternatives: GD32E230G8U6 (C380534), STM32G031G8U6 (C432211); STM32F051/G071/L431 are scarce or
+expensive at JLC.
+
+**Gate driver: TI DRV8300DRGER instead of NSG2065Q.** Genuine TI, 100 V, integrated bootstrap diodes,
+adjustable dead time (DT pin), 23.7k in stock, $0.59. INHx/INLx are active-high with MODE floating,
+the same polarity as the NSG2065Q ("in phase" in its datasheet), so the AT_B pin mapping and stock
+firmware still apply. GVDD 5–20 V: fed with ~12 V from the carrier.
+- DRV8328 was considered: it runs straight from the battery (to 60 V, VDS overcurrent protection)
+  and AM32 already supports it (ARK 4IN1, F051 targets). But only the C/D variants have the 3.3 V
+  LDO, and DRV8328C has 33 in stock at JLC. Kept as a watch item.
+
+**MOSFET: HSBB6066 (60 V, 5.2 mΩ @10 V, Qg 33 nC, 28.5k stock).** ~3,600 JLC MOSFETs were swept;
+40–100 V single N-channel in 3x3 packages with stock ≥ 2000 were ranked. Cheaper alternative:
+Siliup SP60N05GNJ (60 V, 4.7 mΩ, $0.25). Branded alternative: AON7262E (10 mΩ). A 40 V option
+(Winsok WSD4070DN33) is listed but 60 V is preferred for regen margin.
+
+**Module supplies.** The carrier provides ~12 V (one buck shared by all ESC modules) for GVDD; the module
+makes 3.3 V with an HT7533 (Basic, 30 V max) from that 12 V. No buck or inductor on the module.
+
+**Screw joints.** The carrier gets JLC-placed SMD M2 threaded standoffs (Sinhoo SMTSO20x0, 2/3/6 mm
+tall, $0.08). Motor phases A/B/C go through **3 M2 screws** that also retain the module. VBAT, GND,
+12 V and DShot go through a small header with several pins each for power; the stack height is set
+by that header. A swap = 3 screws.
+
+**Placement.** The two modules are identical boards mounted **180° from each other** on the carrier,
+so each one's phase-screw edge faces its own motor: right module toward the wheel end, left module
+toward the centre end (where the left motor's wires arrive). AM32 reverses direction in software.
+
 ## Open questions
 
-- **Header current.** Motor phases through a board-to-board header at 20–30 A peak: 2.54 mm pins are
-  rated about 3 A each continuous. Options: 3 pins per phase (2×8 header, ~20×5 mm), a higher-current
-  board-to-board connector, or carrying the phases through the screw/standoff joints. Needs a decision
-  before the module outline.
-- Gate rail from the carrier (10 V) or a buck per module (isolation vs area).
+- Signal/power header part and stack height (sets the standoff height).
+- Battery-side current per module through header pins: verify from the first logs, or move VBAT to a 4th screw.
 - Per-module current sense (shunt + amplifier on PA3) vs carrier-level only.
 - MOSFET choice: compare the switching loss (Qg) and the dead time the AM32 target sets (60).
