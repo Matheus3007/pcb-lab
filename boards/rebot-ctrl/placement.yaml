@@ -1,0 +1,100 @@
+# Placement for rebot-ctrl. Units mm / deg, board coords (+Y down). Board 30 x 28 mm (inside the
+# G45M's 33 x 30). Top edge: USB-C (left) and the ESC JST-SH 8P (right), mouths up. Left edge: receiver
+# JST-GH 4P. MCU in the middle at rot 180, so DShot/ADC/telemetry pins face the ESC connector (top
+# right), USART1 + USB pins face left (receiver, USB-C), SPI pins face down/right (IMU, flash).
+# Bottom band: buck + LDO (left/middle, away from the IMU), IMU, test pads (bottom right).
+parts:
+  # connectors
+  J3: {at: [6.0, 3.65], rot: 180}     # USB-C, origin 3.65 mm behind the mouth
+  J1: {at: [22.6, 3.125], rot: 180}   # ESC 8P, 0.55 mm in so the shell pads clear the edge;: pin 1 (GND) at x 26.1 ... pin 8 (TLM) at x 19.1
+  J2: {at: [3.05, 14.5], rot: 270}    # receiver 4P, 0.6 mm in for the shell pads; pin 1 (+5V) top
+  # MCU + its passives
+  U1: {at: [15.0, 14.0], rot: 180}
+  C10: {at: [13.5, 6.7], rot: 0}      # VDD pin 23 (top)
+  C15: {at: [13.5, 7.75], rot: 0}     # VDDA/VREF+ HF (pins 20/21, top)
+  C14: {at: [13.5, 8.8], rot: 0}      # VDDA 1 uF
+  C11: {at: [9.0, 16.6], rot: 0}      # VDD pin 35 (left)
+  C12: {at: [18.3, 19.4], rot: 90}    # VDD pin 48 (bottom right)
+  C13: {at: [17.25, 19.4], rot: 90}   # 3V3 bulk
+  R7: {at: [16.2, 19.4], rot: 90}     # BOOT0 pull-down (PB8, bottom)
+  C16: {at: [19.8, 15.6], rot: 90}    # NRST (pin 7, right)
+  D3: {at: [13.0, 19.85], rot: 90}     # status LED
+  R8: {at: [14.4, 20.2], rot: 90}
+  # ESC signal resistors, grid between J1 and the MCU top
+  R17: {at: [19.6, 7.0], rot: 0}      # TLM 1k (pin 8)
+  R13: {at: [21.7, 7.0], rot: 0}      # CURR divider top (pin 7)
+  R15: {at: [23.8, 7.0], rot: 0}      # VBAT divider top (pin 2)
+  R12: {at: [19.6, 8.05], rot: 0}     # M4
+  R11: {at: [21.7, 8.05], rot: 0}     # M3
+  R10: {at: [23.8, 8.05], rot: 0}     # M2
+  R9: {at: [25.9, 8.05], rot: 0}      # M1
+  # ADC dividers + NRST, column right of the MCU (PA1 / PA0 / NRST)
+  R14: {at: [19.8, 11.6], rot: 90}
+  C17: {at: [20.85, 11.6], rot: 90}
+  R16: {at: [19.8, 13.6], rot: 90}
+  C18: {at: [20.85, 13.6], rot: 90}
+  # USB-C + receiver side (left of the MCU)
+  D2: {at: [7.3, 11.5], rot: 90}      # VBUS -> +5V
+  R3: {at: [9.3, 9.5], rot: 0}       # CC1 5.1k
+  R4: {at: [9.3, 10.55], rot: 0}     # CC2 5.1k
+  R1: {at: [9.0, 14.5], rot: 0}       # CRSF in 100R
+  R2: {at: [9.0, 15.55], rot: 0}      # CRSF out 100R
+  # flash (right) + IMU (bottom)
+  U5: {at: [25.5, 14.5], rot: 90}
+  C21: {at: [24.0, 10.0], rot: 0}     # flash VCC (pin 8)
+  R19: {at: [25.5, 19.0], rot: 0}     # flash CS pull-up
+  U4: {at: [21.0, 21.0], rot: 0}
+  C19: {at: [21.0, 23.4], rot: 0}     # IMU VDD/VDDIO
+  C20: {at: [23.5, 21.0], rot: 90}
+  R18: {at: [24.55, 21.0], rot: 90}   # IMU CS pull-up
+  # buck VBAT -> 5.5 V (bottom left)
+  U2: {at: [3.0, 23.5], rot: 0}
+  C2: {at: [0.9, 23.5], rot: 90}      # VIN HF
+  C1: {at: [3.0, 26.3], rot: 0}       # VIN 2.2 uF
+  R6: {at: [3.0, 21.0], rot: 0}       # FB to GND
+  R5: {at: [5.8, 20.3], rot: 0}       # FB to V5_BUCK
+  C4: {at: [5.3, 22.4], rot: 90}      # VCC
+  C3: {at: [5.3, 24.6], rot: 90}      # BOOT-SW
+  L1: {at: [8.4, 23.8], rot: 0}
+  C5: {at: [11.4, 23.8], rot: 90}     # 22 uF out
+  D1: {at: [13.7, 23.8], rot: 90}     # V5_BUCK -> +5V
+  # +5V / 3.3 V LDO
+  U3: {at: [17.0, 25.2], rot: 180}   # VIN (pad 3) left toward D1, VOUT (pad 2) right toward C8
+  C6: {at: [16.4, 21.35], rot: 0}    # +5V 4.7 uF
+  C7: {at: [16.4, 22.4], rot: 0}     # LDO in (+5V)
+  C8: {at: [19.6, 25.2], rot: 90}    # LDO out
+  C9: {at: [20.65, 25.2], rot: 90}   # 3V3 4.7 uF
+  # SWD / boot pads (bottom right): 3V3, GND, SWDIO / SWCLK, NRST, BOOT0
+  TP1: {at: [24.4, 24.0]}
+  TP2: {at: [26.55, 24.0]}
+  TP3: {at: [28.7, 24.0]}
+  TP4: {at: [24.4, 26.2]}
+  TP5: {at: [26.55, 26.2]}
+  TP6: {at: [28.7, 26.2]}
+rules:   # max_dist = as placed + 0.5 mm
+  - {rule: near, ref: C10, to: U1, pin_pad: "23", max_dist: 4.4, why: "MCU VDD (pin 23) decoupling"}
+  - {rule: near, ref: C11, to: U1, pin_pad: "35", max_dist: 2.6, why: "MCU VDD (pin 35) decoupling"}
+  - {rule: near, ref: C12, to: U1, pin_pad: "48", max_dist: 2.1, why: "MCU VDD (pin 48) decoupling"}
+  - {rule: near, ref: C15, to: U1, pin_pad: "21", max_dist: 3.3, why: "VDDA HF decoupling"}
+  - {rule: near, ref: C14, to: U1, pin_pad: "21", max_dist: 2.3, why: "VDDA bulk"}
+  - {rule: near, ref: C16, to: U1, pin_pad: "7", max_dist: 2.4, why: "NRST cap"}
+  - {rule: near, ref: R7, to: U1, pin_pad: "46", max_dist: 2.1, why: "BOOT0 pull-down"}
+  - {rule: near, ref: R14, to: U1, pin_pad: "9", max_dist: 2.0, why: "CURR divider at PA1"}
+  - {rule: near, ref: C17, to: U1, pin_pad: "9", max_dist: 3.0, why: "CURR filter at PA1"}
+  - {rule: near, ref: R16, to: U1, pin_pad: "8", max_dist: 1.9, why: "VBAT divider at PA0"}
+  - {rule: near, ref: C18, to: U1, pin_pad: "8", max_dist: 2.9, why: "VBAT filter at PA0"}
+  - {rule: near, ref: R1, to: U1, pin_pad: "32", max_dist: 2.6, why: "CRSF RX series (PA10)"}
+  - {rule: near, ref: R2, to: U1, pin_pad: "31", max_dist: 2.9, why: "CRSF TX series (PA9)"}
+  - {rule: near, ref: C19, to: U4, pin_pad: "8", max_dist: 2.3, why: "IMU VDD decoupling"}
+  - {rule: near, ref: C21, to: U5, pin_pad: "8", max_dist: 2.3, why: "flash VCC decoupling"}
+  - {rule: near, ref: C2, to: U2, pin_pad: "4", max_dist: 1.9, why: "buck VIN HF"}
+  - {rule: near, ref: C1, to: U2, pin_pad: "4", max_dist: 2.4, why: "buck VIN bulk"}
+  - {rule: near, ref: C3, to: U2, pin_pad: "6", max_dist: 1.9, why: "buck BOOT"}
+  - {rule: near, ref: C4, to: U2, pin_pad: "7", max_dist: 1.9, why: "buck VCC"}
+  - {rule: near, ref: R6, to: U2, pin_pad: "8", max_dist: 2.1, why: "buck FB divider"}
+  - {rule: near, ref: L1, to: U2, pin_pad: "5", max_dist: 4.0, why: "buck inductor at SW"}
+  - {rule: near, ref: C7, to: U3, pin_pad: "3", max_dist: 3.3, why: "LDO input cap at VIN (pad 3)"}
+  - {rule: near, ref: C8, to: U3, pin_pad: "2", max_dist: 2.0, why: "LDO output cap at VOUT (pad 2)"}
+  - {rule: on_edge, ref: J1, edge: top, why: "ESC cable plugs in from the top edge"}
+  - {rule: on_edge, ref: J3, edge: top, why: "USB-C mouth at the top edge (reachable with the lid off)"}
+  - {rule: on_edge, ref: J2, edge: left, why: "receiver cable comes from the robot left side"}

@@ -1,0 +1,7 @@
+# Routing intent for rebot-ctrl. Net classes (widths/currents) live in circuit.py.
+# Placement first (autoroute off); turned on once the placement is done.
+tracks: []
+vias: []
+zones: []
+stitch: []
+autoroute: {enabled: false, max_passes: 100, timeout_s: 300}

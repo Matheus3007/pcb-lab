@@ -1,0 +1,8 @@
+# Machine-readable board config (human-facing requirements live in spec.md).
+layers: 4                   # owner: no extra cost at JLC; GND plane under the MCU/IMU/USB
+thickness: 1.0
+assembly_tier: economic     # one-sided
+origin: [100.0, 100.0]
+rules: {}
+silk_refs: false
+quantity: 5

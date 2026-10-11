@@ -223,3 +223,141 @@ MotorPad:
   pinout_source: "single solder pad (all copper is pad 1)"
   pinout_verified: 2026-10-11
   notes: "Motor phase wire lap-soldered on top, like an ESC phase pad. Not a BOM part (copper only)."
+
+# ---- Rebot mini controller (boards/rebot-ctrl) ----------------------------------------------
+
+STM32G431CBU6:
+  lcsc: C529356
+  value: STM32G431CBU6
+  footprint: Package_DFN_QFN:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm
+  symbol: MCU_ST_STM32G4:STM32G431CBUx
+  pins:
+    VBAT: 1
+    PC13: 2
+    PC14: 3
+    PC15: 4
+    PF0: 5
+    PF1: 6
+    PG10: 7
+    PA0: 8
+    PA1: 9
+    PA2: 10
+    PA3: 11
+    PA4: 12
+    PA5: 13
+    PA6: 14
+    PA7: 15
+    PC4: 16
+    PB0: 17
+    PB1: 18
+    PB2: 19
+    VREF+: 20
+    VDDA: 21
+    PB10: 22
+    VDD: [23, 35, 48]
+    PB11: 24
+    PB12: 25
+    PB13: 26
+    PB14: 27
+    PB15: 28
+    PC6: 29
+    PA8: 30
+    PA9: 31
+    PA10: 32
+    PA11: 33
+    PA12: 34
+    PA13: 36
+    PA14: 37
+    PA15: 38
+    PC10: 39
+    PC11: 40
+    PB3: 41
+    PB4: 42
+    PB5: 43
+    PB6: 44
+    PB7: 45
+    PB8: 46
+    PB9: 47
+    VSS: 49
+  pinout_source: "ST DS12589 Rev 2 p.45 fig.7 UFQFPN48 pinout (VSS only on the exposed pad); AF table 13 p.61 (port A); KiCad STM32G431CBUx symbol agrees pin for pin"
+  pinout_verified: 2026-10-11
+  model:   # KiCad has no model for the EP5.6 variant; same 7x7x0.85 UFQFPN body
+    path: "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/QFN-48-1EP_7x7mm_P0.5mm_EP5.15x5.15mm.step"
+  extended_reason: "No STM32 G4 in JLC Basic/Preferred (Preferred MCUs: F030/F103/L151). G4 = Team-Micras code base; the 7x7 QFN instead of the locked LQFP-48 for size."
+  notes: "PG10 = NRST (internal pull-up, 100 nF to GND), PB8 = BOOT0 (10k pull-down). PA11/PA12 are USB DM/DP only (no USART there). USB clock from HSI48 + CRS, no crystal needed. Used AFs: TIM3_CH1-4 = PA6/PA7/PB0/PB1 (AF2), USART1 TX/RX = PA9/PA10 (AF7), USART2_RX = PA3 (AF7), SPI1 SCK/MISO/MOSI = PB3/PB4/PB5 (AF5). PA0/PA1 = ADC12_IN1/IN2."
+
+LSM6DSV32XTR:
+  lcsc: C22461202
+  value: LSM6DSV32X
+  footprint: Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y
+  symbol: Sensor_Motion:LSM6DSL
+  symbol_aliases: {SDO: "SDO/SA0"}
+  pins: {SDO: 1, SDX: 2, SCX: 3, INT1: 4, VDDIO: 5, GND: [6, 7], VDD: 8, INT2: 9, NC: [10, 11], CS: 12, SCL: 13, SDA: 14}
+  pinout_source: "ST LSM6DSV32X DS13511 Rev 2 p.11 table 2 (pin description); same LGA-14 2.5x3 pinout as the LSM6DSL symbol"
+  pinout_verified: 2026-10-11
+  extended_reason: "No IMU in JLC Basic/Preferred except the MPU-6050 (16 g, obsolete, $20). +-32 g / +-4000 dps for weapon hits; LSM6DSV family = Team-Micras driver."
+  notes: "SPI mode: CS low = SPI. Pins 2/3 (SDx/SCx) must go to VDD_IO or GND when the analog hub/Qvar is unused; 10/11 (OCS_Aux/SDO_Aux) may be left unconnected (soldered). 100 nF on VDD and VDD_IO."
+
+W25Q128JVPIQ:
+  lcsc: C190862
+  value: W25Q128JV 16MB
+  footprint: Package_SON:WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4.3mm
+  symbol: Memory_Flash:W25Q128JVP
+  symbol_aliases: {CS: "~{CS}", DO: "DO/IO_{1}", WP: "~{WP}/IO_{2}", DI: "DI/IO_{0}", HOLD: "~{HOLD}/~{RESET}/IO_{3}"}
+  pins: {CS: 1, DO: 2, WP: 3, GND: 4, DI: 5, CLK: 6, HOLD: 7, VCC: 8, EP: 9}
+  pinout_source: "Winbond W25Q128JV datasheet p.5 fig.1b WSON 6x5 pad assignment + table 3.3; KiCad W25Q128JVP symbol agrees"
+  pinout_verified: 2026-10-11
+  extended_reason: "The Basic W25Q128JVSIQ is SOIC-8 208 mil (about 8 x 5.3 mm); the WSON 6x5 saves area and weight on a ~2 g board."
+  notes: "2.7-3.6 V. /WP and /HOLD tied high for standard SPI. Exposed pad: GND."
+
+SM08B-SRSS-TB:
+  lcsc: C160407
+  value: JST-SH 8P (ESC)
+  footprint: Connector_JST:JST_SH_SM08B-SRSS-TB_1x08-1MP_P1.00mm_Horizontal
+  symbol: Connector_Generic_MountingPin:Conn_01x08_MountingPin
+  symbol_aliases: {MP: "MountPin"}   # the shell/locking pads, spelling only
+  pins: {"1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, MP: MP}
+  pinout_source: "connector: pin n = pad n (JST SH SM08B, KiCad stock footprint); signal order matches the FPV 4-in-1 cable, see rebot-ctrl spec"
+  pinout_verified: 2026-10-11
+  extended_reason: "No JST-SH in JLC Basic/Preferred; the 8-pin SH is the standard FC-to-4in1 ESC connector (genuine JST, 78k stock)."
+
+SM04B-GHS-TB:
+  lcsc: C189895
+  value: JST-GH 4P (receiver)
+  footprint: Connector_JST:JST_GH_SM04B-GHS-TB_1x04-1MP_P1.25mm_Horizontal
+  symbol: Connector_Generic_MountingPin:Conn_01x04_MountingPin
+  symbol_aliases: {MP: "MountPin"}   # the shell/locking pads, spelling only
+  pins: {"1": 1, "2": 2, "3": 3, "4": 4, MP: MP}
+  pinout_source: "connector: pin n = pad n (JST GH SM04B, KiCad stock footprint)"
+  pinout_verified: 2026-10-11
+  extended_reason: "Owner wants a locking connector for the receiver; no JST-GH in JLC Basic/Preferred (genuine JST)."
+
+B5819W_SL:
+  lcsc: C8598
+  value: B5819W 40V 1A
+  footprint: Diode_SMD:D_SOD-123
+  symbol: Device:D_Schottky
+  pins: {K: 1, A: 2}
+  pinout_source: "two-terminal diode; KiCad SOD-123 pad 1 = cathode (band), symbol pin 1 = K"
+  pinout_verified: 2026-10-11
+  notes: "Basic. 40 V, 1 A, Vf ~0.35 V at 0.25 A. Check the cathode band in JLC's placement preview."
+
+TestPoint_1mm:
+  lcsc: null
+  dnp: true
+  value: pad
+  footprint: TestPoint:TestPoint_Pad_D1.0mm
+  symbol: Connector:TestPoint
+  pins: {"1": 1}
+  pinout_source: "single test pad"
+  pinout_verified: 2026-10-11
+
+B5819WS:
+  lcsc: C64886
+  value: B5819WS 40V 1A
+  footprint: Diode_SMD:D_SOD-323
+  symbol: Device:D_Schottky
+  pins: {K: 1, A: 2}
+  pinout_source: "two-terminal diode; KiCad SOD-323 pad 1 = cathode (band), symbol pin 1 = K"
+  pinout_verified: 2026-10-11
+  notes: "JLC Preferred (no setup fee). 40 V, 1 A. Smaller sibling of B5819W SL for tight spots. Check the cathode band in JLC's preview."

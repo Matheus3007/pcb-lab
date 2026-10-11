@@ -1,0 +1,13 @@
+# Accepted findings. Each needs a reason. {check: prefix, match: substring of message, reason}
+- check: erc/pin_to_pin
+  match: "Symbol U4 Pin 2 [SDX"
+  reason: "LSM6DSV32X DS13511 table 2: SDx must be tied to VDD_IO or GND when the analog hub/Qvar is unused; tied to GND"
+- check: erc/pin_to_pin
+  match: "Symbol U5 Pin 3"
+  reason: "W25Q128JV: /WP tied high for standard (non-quad) SPI, as the datasheet requires; IO2 is never driven"
+- check: erc/pin_to_pin
+  match: "Symbol U5 Pin 7"
+  reason: "W25Q128JV: /HOLD tied high for standard (non-quad) SPI, as the datasheet requires; IO3 is never driven"
+- check: drc/silk_edge_clearance
+  match: "of J3 on F.Silkscreen"
+  reason: "USB-C footprint silk outline intentionally reaches the board edge (connector overhang marker, as in pipeline-demo); clipped by fab"
