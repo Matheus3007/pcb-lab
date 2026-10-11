@@ -1,0 +1,19 @@
+# Placement rules, read by tools/place.py (planned). Units: mm, degrees.
+# Coordinates are relative to the board origin defined in mechanical/outline.py.
+# Prefer relational rules (near/align/group) over absolute coordinates; anchor only what
+# the mechanics dictate (connectors, holes, sensors with an orientation requirement).
+
+anchors: []
+#  - ref: J1            # e.g. battery connector
+#    at: [0.0, 0.0]
+#    rotation: 90
+#    side: top
+#    reason: "lines up with chassis wire channel"
+
+groups: []
+#  - name: mcu_decoupling
+#    rule: near_pins     # each cap within max_dist of the pin it decouples
+#    target: U1
+#    max_dist: 2.0
+
+keepouts_from_outline: true   # honour keepouts/height zones emitted by outline.py

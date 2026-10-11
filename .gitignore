@@ -1,0 +1,15 @@
+# generated
+boards/*/build/*
+!boards/*/build/reports/
+!boards/*/build/renders/
+!boards/*/build/review/
+*.zip
+*.step
+!boards/*/mechanical/chassis/*.step
+*-backups/
+fp-info-cache
+*.kicad_prl
+*.lck
+.ato/
+__pycache__/
+.venv/
