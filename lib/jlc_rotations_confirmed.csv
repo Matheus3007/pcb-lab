@@ -7,8 +7,10 @@
 # Preview 2 (rotation 0): the body overhung the edge and the leads landed in front of the pads. JLC places
 # from the EasyEDA footprint origin, which sits 1.575 mm toward the pads from KiCad's (pads at
 # y=-2.47 vs -4.045). Offset is in KiCad pos coordinates (Y up), footprint-local, rotated with the part.
-# TENTATIVE offset: confirm in the next preview.
+# Preview 3 (2D, 0 deg + offset): body front at the board edge, leads on the pad row, shield tabs in
+# their slots. CONFIRMED 2026-10-11.
 "^USB_C_Receptacle_HRO_TYPE-C-31-M-12",0,0,1.575
-# 2026-10-11 pipeline-demo: with the community -90 the SOT-23 legs missed the pads in the preview.
-# TENTATIVE (0 = KiCad orientation): re-check U1 in the next preview, then remove "TENTATIVE".
-"^SOT-23",0
+# 2026-10-11 pipeline-demo (C5446 XC6206P332MR-G, KiCad SOT-23-3): community -90 put the legs off the pads;
+# 0 showed JLC's single leg on the LEFT (KiCad pads 1+2 are on the left) with its pin-1 dot bottom-right
+# (ours is top-left) -> JLC's SOT-23 model is 180 deg from KiCad. Set 180; TENTATIVE until the next preview.
+"^SOT-23",180

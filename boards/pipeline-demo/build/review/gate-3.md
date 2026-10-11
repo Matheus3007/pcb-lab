@@ -1,5 +1,5 @@
 # pipeline-demo: review gate 3
-_generated 2026-10-11 11:15 · checks PASS_
+_generated 2026-10-11 11:20 · checks PASS_
 
 ## Renders
 ![top](../renders/top.png)
@@ -17,7 +17,7 @@ _generated 2026-10-11 11:15 · checks PASS_
 
 ## CPL rotation corrections applied (UNVERIFIED until you check JLC's preview)
 - J1 `USB_C_Receptacle_HRO_TYPE-C-31-M-12`: +0° (rule `^USB_C_Receptacle_HRO_TYPE-C-31-M-12`, confirmed)
-- U1 `SOT-23-3`: +0° (rule `^SOT-23`, confirmed)
+- U1 `SOT-23-3`: +180° (rule `^SOT-23`, confirmed)
 
 Parts cost per board ≈ $0.39 + extended-part fees (1 unique extended)
 
