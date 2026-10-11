@@ -38,7 +38,11 @@ Context only, not yet a spec. Turn into `boards/<name>/spec.md` with the human o
   **v2:** onboard weapon ESC, only after v1 drive ESCs prove out, preceded by a deep open-source
   ESC research pass. Each order cycle should cost **< R$600 all-inclusive** (shipping + import tax) delivered to Brazil.
 - Weapon current path sized for **40 A** (35 A acceptable if space/weight demands).
-- MCU: STM32 (F/G). Receiver → MCU via CRSF; MCU → ESCs via DShot (bidirectional for eRPM).
+- **Carrier MCU: STM32G431CBT6** (LQFP-48 7×7, C529355), locked 2026-10-11. Same G4 family as the
+  Team-Micras v0 board (STM32G474), so their CubeMX/CMake setup and `micras_core`/`micras_hal` carry
+  over (https://github.com/Team-Micras/MicrasFirmware). **IMU: LSM6DSV32X** (C22461202), ±32 g /
+  ±4000 °/s, same family as their LSM6DSV driver. BLE: their HM-19 module + `micras_comm` link.
+- Receiver → MCU via CRSF; MCU → ESCs via DShot (bidirectional for eRPM).
 - Firmware wanted: gyro-assisted driving, closed-loop wheel speed, weapon RPM, telemetry back to
   the radio over ELRS, fight logs to onboard flash downloaded over USB-C. Firmware lives outside
   the PCB pipeline. Auto control inversion when flipped: not wanted for now.
