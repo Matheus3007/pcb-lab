@@ -6,10 +6,11 @@ REF ?= HEAD
 GATE ?= 1
 PCBKIT = . toolchain/env.sh && cd tools && python -m pcbkit
 
-.PHONY: part footprint help toolchain build check render render-fast diff fab report gate parts all _need_board
+.PHONY: open part footprint help toolchain build check render render-fast diff fab report gate parts all _need_board
 
 help:
 	@echo "make {all|build|check|render|render-fast|fab|diff|gate|parts|report} BOARD=<name> [REF=<git ref>] [GATE=1|2|3]"
+	@echo "make open BOARD=<name>   # view the board in KiCad's PCB editor"
 	@echo "make part LCSC=<C...> | make footprint FP=<Lib:Name>   # part research"
 	@echo "make toolchain   # one-time setup (see toolchain/README.md)"
 	@ls boards | grep -v -e '^_' -e README || echo '(no boards yet)'
@@ -47,6 +48,12 @@ gate: _need_board         ## review packet for GATE=1|2|3 -> build/review/gate-N
 
 parts: _need_board        ## JLC tier/stock/price for every part (add REFRESH=1 to re-query)
 	@$(PCBKIT) parts $(BOARD) $(if $(REFRESH),--refresh,)
+
+open: _need_board         ## view the generated board in KiCad's PCB editor (read-only use: edits are overwritten by the next build)
+	@test -f boards/$(BOARD)/build/work/$(BOARD).kicad_pcb || (echo "build first: make build BOARD=$(BOARD)"; exit 2)
+	@rm -f boards/$(BOARD)/build/work/$(BOARD).kicad_prl
+	@("/mnt/c/Program Files/KiCad/10.0/bin/pcbnew.exe" "$$(wslpath -w boards/$(BOARD)/build/work/$(BOARD).kicad_pcb)" >/dev/null 2>&1 &)
+	@echo "opening boards/$(BOARD)/build/work/$(BOARD).kicad_pcb in KiCad (look, don't edit: change the source and rebuild)"
 
 part:                     ## research a part: make part LCSC=C5446 (JLC data, datasheet pin pages, footprint candidates)
 	@test -n "$(LCSC)" || (echo "LCSC=<C-number> required"; exit 2)

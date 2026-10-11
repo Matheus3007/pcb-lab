@@ -11,7 +11,7 @@ listed in `.vscode/extensions.json`).
 | Review packets | `boards/<name>/build/review/gate-N.md` | Markdown preview (images inline) |
 | Renders | `boards/<name>/build/renders/*.png` | click to open; pin the tab |
 | **Interactive 3D** | `boards/<name>/build/work/<name>.glb` | opens in the GLB viewer (rotate/zoom) |
-| Interactive board | `boards/<name>/build/work/<name>.kicad_pcb` | opens in KiCad Viewer (layers, zoom) |
+| Interactive board | `boards/<name>/build/work/<name>.kicad_pcb` | `make open BOARD=<name>` (KiCad PCB editor, Alt+3 for 3D), or the KiCad Viewer extension. Look only: the file is regenerated every build. |
 | Diff vs last commit | `boards/<name>/build/work/diff.md` | after `make diff BOARD=<name>` |
 
 Run anything yourself from **Terminal → Run Task** (or `Ctrl+Shift+B` for `make all`):
