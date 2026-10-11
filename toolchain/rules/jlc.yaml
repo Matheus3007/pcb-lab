@@ -1,0 +1,26 @@
+# Design rules applied to every board, per JLC tier. Values are OUR defaults from
+# docs/jlcpcb.md (safer than JLC's absolute minimums). A board may tighten/loosen
+# a value in its board.yaml `rules:` override, with a reason.
+2layer:
+  min_clearance: 0.15
+  min_track_width: 0.15
+  min_via_diameter: 0.55
+  min_drill: 0.3
+  min_annular_ring: 0.13
+  copper_edge_clearance: 0.3
+  hole_to_hole: 0.5
+  min_silk_text_height: 1.0
+  silk_clearance: 0.15
+multilayer:
+  min_clearance: 0.125
+  min_track_width: 0.125
+  min_via_diameter: 0.45
+  min_drill: 0.2
+  min_annular_ring: 0.125
+  copper_edge_clearance: 0.3
+  hole_to_hole: 0.5
+  min_silk_text_height: 1.0
+  silk_clearance: 0.15
+assembly:
+  economic: {sides: [top], min_package: "0402", min_board_mm: [10, 10]}
+  standard: {sides: [top, bottom], min_package: "0201", min_board_mm: [70, 70]}

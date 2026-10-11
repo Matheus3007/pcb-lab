@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "ms-vscode.live-server",
+    "ohziinteractivestudio.ohzi-vscode-glb-viewer",
+    "lukaslang.kicad-viewer",
+    "redhat.vscode-yaml",
+    "ms-python.python"
+  ]
+}

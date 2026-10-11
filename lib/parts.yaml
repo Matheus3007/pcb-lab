@@ -1,0 +1,54 @@
+# Shared parts library: everything except generic two-pin passives.
+# Each entry: LCSC ID, footprint ("Lib:Name": KiCad stock lib, or lib/footprints/<Lib>.pretty),
+# pins (name -> pad numbers), and the EVIDENCE for the pin mapping. An entry without
+# `pinout_source` + `pinout_verified` must not reach review gate 1.
+
+XC6206P332MR-G:
+  lcsc: C5446
+  value: XC6206 3.3V
+  footprint: Package_TO_SOT_SMD:SOT-23-3
+  pins: {VSS: 1, VOUT: 2, VIN: 3}
+  pinout_source: "Torex ETR0305_004b p.2 PIN ASSIGNMENT, SOT-23 column (1=VSS, 2=VOUT, 3=VIN)"
+  pinout_verified: 2026-10-11
+  notes: "Torex original. Clones (e.g. UMW XC6206P332MR) are documented with different pin orders, so never substitute without re-checking. Vin max 6.0V operating."
+
+TYPE-C-31-M-12:
+  lcsc: C165948
+  value: USB-C 16P
+  footprint: Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12
+  pins:
+    GND: [A1, A12, B1, B12]
+    VBUS: [A4, A9, B4, B9]
+    CC1: A5
+    CC2: B5
+    DP1: A6
+    DN1: A7
+    DP2: B6
+    DN2: B7
+    SBU1: A8
+    SBU2: B8
+    SHIELD: SH
+  model:   # KiCad ships no model for this footprint; STEP from LCSC/EasyEDA, re-origined
+    path: lib/3d/HRO_TYPE-C-31-M-12_C165948.step
+    offset: [0, 1.575, 0]   # EasyEDA fp origin is 1.575 mm forward of KiCad's (pads y=-2.47 vs -4.045)
+    rotate: [0, 0, 180]
+  pinout_source: "USB Type-C spec pin names; KiCad footprint is specific to this exact part (HRO TYPE-C-31-M-12), pads named by spec pin"
+  pinout_verified: 2026-10-11
+
+PinHeader_1x04:
+  lcsc: null
+  dnp: true
+  value: 1x04 2.54mm
+  footprint: Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical
+  pins: {"1": 1, "2": 2, "3": 3, "4": 4}
+  pinout_source: "generic header, pin n = pad n"
+  pinout_verified: 2026-10-11
+
+MountingHole_M2:
+  lcsc: null
+  dnp: true
+  value: M2
+  footprint: MountingHole:MountingHole_2.2mm_M2
+  pins: {}
+  pinout_source: "mechanical, no pins"
+  pinout_verified: 2026-10-11

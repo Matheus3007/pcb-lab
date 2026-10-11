@@ -1,6 +1,6 @@
 # <board name>: spec
 
-Status: draft · Owner: <human> · Assembly tier: Economic | Standard (TBD)
+Status: draft · Owner: <human> · Assembly tier: see board.yaml
 
 > Fill with the human. Every `TBD` that affects layout must be resolved before gate 2.
 > This file is the single source for constraints; YAML/py files reference it.

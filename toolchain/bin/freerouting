@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Headless Freerouting (version pinned in toolchain/versions.env).
+set -euo pipefail
+source "$(dirname "$0")/../versions.env"
+java="$(ls -d "$HOME"/.local/opt/jdk-${JAVA_VERSION}*/ | head -1)bin/java"
+exec "$java" -Djava.awt.headless=true -jar "$HOME/.local/opt/freerouting/freerouting-${FREEROUTING_VERSION}.jar" --gui.enabled=false "$@"

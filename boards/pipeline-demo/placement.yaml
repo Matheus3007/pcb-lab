@@ -1,0 +1,21 @@
+# Placement for pipeline-demo. Units: mm / degrees, board coords (+Y down).
+# `parts` positions every footprint (written by the agent, reviewed at gate 2).
+# `rules` are verified by `make check`, so a bad position fails the build.
+
+parts:
+  J1: {at: [15.0, 3.65], rot: 180}     # mouth flush with top edge (footprint mouth is +Y at rot 0)
+  R1: {at: [11.5, 10.5], rot: 90}
+  R2: {at: [18.5, 10.5], rot: 90}
+  U1: {at: [15.0, 14.0], rot: 0}
+  C1: {at: [17.6, 14.0], rot: 90}     # input cap at VIN (pad 3, right side of SOT-23)
+  C2: {at: [12.4, 15.6], rot: 90}     # output cap at VOUT (pad 2, lower left)
+  C3: {at: [10.7, 15.6], rot: 90}
+  D1: {at: [7.0, 7.0], rot: 90}
+  R3: {at: [7.0, 10.0], rot: 90}
+  J2: {at: [11.2, 21.0], rot: 90}      # pins run +X from pin 1
+  H1: {at: [26.0, 20.5]}
+
+rules:
+  - {rule: near, ref: C1, to: U1, pin_pad: "3", max_dist: 3.0, why: "LDO input cap"}
+  - {rule: near, ref: C2, to: U1, pin_pad: "2", max_dist: 3.0, why: "LDO output cap"}
+  - {rule: on_edge, ref: J1, edge: top, why: "USB-C mouth must reach the board edge"}

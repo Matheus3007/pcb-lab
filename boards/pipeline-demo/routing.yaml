@@ -1,0 +1,15 @@
+# Routing intent for pipeline-demo. Net classes (widths/currents) live in circuit.py.
+tracks: []      # scripted critical traces: {net, layer, width, points: [[x,y],...]}
+vias: []        # {net, at: [x,y], diameter, drill}
+
+zones:
+  - {net: GND, layer: B.Cu, outline: board, clearance: 0.3}
+  - {net: GND, layer: F.Cu, outline: board, clearance: 0.3}
+
+stitch:         # GND stitching vias added after routing wherever they fit in both pours
+  - {net: GND, pitch: 3.5, via_diameter: 0.6, via_drill: 0.3, edge_margin: 1.0}
+
+autoroute:
+  enabled: true
+  max_passes: 100
+  timeout_s: 300

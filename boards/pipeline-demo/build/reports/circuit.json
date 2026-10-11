@@ -1,0 +1,38 @@
+{
+ "issues": [],
+ "assertions": [
+  {
+   "name": "LED current @Vf=1.8V",
+   "value": 0.0014999999999999998,
+   "min": 0.0005,
+   "max": 0.005,
+   "unit": "A",
+   "ok": true
+  },
+  {
+   "name": "LED current @Vf=2.4V",
+   "value": 0.0008999999999999999,
+   "min": 0.0005,
+   "max": 0.005,
+   "unit": "A",
+   "ok": true
+  },
+  {
+   "name": "LDO input max vs XC6206 6.0V rating",
+   "value": 5.25,
+   "min": 0,
+   "max": 6.0,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "LDO dissipation @100mA, Vin=5.25V",
+   "value": 0.19500000000000003,
+   "min": 0,
+   "max": 0.25,
+   "unit": "W",
+   "ok": true
+  }
+ ],
+ "ok": true
+}

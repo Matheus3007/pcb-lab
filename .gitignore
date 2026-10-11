@@ -1,15 +1,11 @@
-# generated
-boards/*/build/*
-!boards/*/build/reports/
-!boards/*/build/renders/
-!boards/*/build/review/
-*.zip
-*.step
-!boards/*/mechanical/chassis/*.step
+# generated, reproducible from sources
+boards/*/build/work/
+boards/*/build/fab/
 *-backups/
 fp-info-cache
 *.kicad_prl
 *.lck
-.ato/
 __pycache__/
-.venv/
+# toolchain installs (toolchain/setup.sh recreates them)
+toolchain/.venv/
+toolchain/.kipy-site/

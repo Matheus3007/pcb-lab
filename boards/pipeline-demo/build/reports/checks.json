@@ -1,0 +1,204 @@
+{
+ "board": "pipeline-demo",
+ "pass": true,
+ "errors": 0,
+ "warnings": 0,
+ "waived": 2,
+ "findings": [
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "LED current @Vf=1.8V: 0.0015 A in [0.0005, 0.005]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "LED current @Vf=2.4V: 0.0009 A in [0.0005, 0.005]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "LDO input max vs XC6206 6.0V rating: 5.25 V in [0, 6]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "LDO dissipation @100mA, Vin=5.25V: 0.195 W in [0, 0.25]"
+  },
+  {
+   "check": "drc/silk_edge_clearance",
+   "severity": "warning",
+   "msg": "Silkscreen clipped by board edge (board setup constraints silk clearance 0.1500 mm; actual 0.0000 mm): Polygon on Edge.Cuts; Segment of J1 on F.Silkscreen",
+   "waived": "USB-C footprint silk outline intentionally crosses the board edge (connector overhang marker); clipped by fab"
+  },
+  {
+   "check": "drc/silk_edge_clearance",
+   "severity": "warning",
+   "msg": "Silkscreen clipped by board edge (board setup constraints silk clearance 0.1500 mm; actual 0.0000 mm): Polygon on Edge.Cuts; Segment of J1 on F.Silkscreen",
+   "waived": "USB-C footprint silk outline intentionally crosses the board edge (connector overhang marker); clipped by fab"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C1 -> U1 pad 3: 1.54 mm (max 3.0) — LDO input cap"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C2 -> U1 pad 2: 1.47 mm (max 3.0) — LDO output cap"
+  },
+  {
+   "check": "placement/on_edge",
+   "severity": "ok",
+   "msg": "J1 courtyard -0.52 mm from top edge — USB-C mouth must reach the board edge"
+  },
+  {
+   "check": "parts/tiers",
+   "severity": "info",
+   "msg": "7 unique parts: basic 6, preferred 0, extended 1 (extended: C165948 TYPE-C-31-M-12)"
+  },
+  {
+   "check": "current/width",
+   "severity": "ok",
+   "msg": "VBUS: min track 0.4 mm vs 0.033 mm needed for 0.2 A (IPC-2221, ΔT 10 °C, 1.0 oz)"
+  },
+  {
+   "check": "current/width",
+   "severity": "ok",
+   "msg": "3V3: min track 0.4 mm vs 0.033 mm needed for 0.2 A (IPC-2221, ΔT 10 °C, 1.0 oz)"
+  }
+ ],
+ "bom": [
+  {
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05A105KA5NQNC_C52923.pdf",
+   "description": "1uF 25V X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C52923",
+   "manufacturer": "Samsung Electro-Mechanics",
+   "mpn": "CL05A105KA5NQNC",
+   "package": "0402",
+   "stock": 7475165,
+   "tier": "basic",
+   "unit_price_usd": 0.0087,
+   "refs": [
+    "C1",
+    "C2"
+   ],
+   "value": "1uF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric"
+  },
+  {
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL10A106KP8NNNC_C19702.pdf",
+   "description": "10V 10uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C19702",
+   "manufacturer": "Samsung Electro-Mechanics",
+   "mpn": "CL10A106KP8NNNC",
+   "package": "0603",
+   "stock": 10375663,
+   "tier": "basic",
+   "unit_price_usd": 0.0305,
+   "refs": [
+    "C3"
+   ],
+   "value": "10uF",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric"
+  },
+  {
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810231112_Hubei-KENTO-Elec-KT-0603R_C2286.pdf",
+   "description": "-40℃~+85℃ 1.6mm x 0.8mm square LED 1.8V~2.4V 120° 20mA 300mcd 40mW 615nm~630nm 645nm Discrete Diode Red Water Clear 0603 LED Indication - Discrete ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C2286",
+   "manufacturer": "Hubei KENTO Elec",
+   "mpn": "KT-0603R",
+   "package": "0603",
+   "stock": 7259718,
+   "tier": "basic",
+   "unit_price_usd": 0.0076,
+   "refs": [
+    "D1"
+   ],
+   "value": "red",
+   "footprint": "LED_SMD:LED_0603_1608Metric"
+  },
+  {
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2205251630_Korean-Hroparts-Elec-TYPE-C-31-M-12_C165948.pdf",
+   "description": "-30℃~+80℃ 1 10,000 cycles 16P 20V 5A 7.35mm Female Surface Mount, Right Angle Type-C SMD USB Connectors ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C165948",
+   "manufacturer": "Korean Hroparts Elec",
+   "mpn": "TYPE-C-31-M-12",
+   "package": "SMD",
+   "stock": 408465,
+   "tier": "extended",
+   "unit_price_usd": 0.186,
+   "refs": [
+    "J1"
+   ],
+   "value": "USB-C 16P",
+   "footprint": "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12"
+  },
+  {
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010045_UNI-ROYAL-Uniroyal-Elec-0402WGF5101TCE_C25905.pdf",
+   "description": "-55℃~+155℃ 5.1kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C25905",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "mpn": "0402WGF5101TCE",
+   "package": "0402",
+   "stock": 5603926,
+   "tier": "basic",
+   "unit_price_usd": 0.0024,
+   "refs": [
+    "R1",
+    "R2"
+   ],
+   "value": "5.1k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric"
+  },
+  {
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010216_UNI-ROYAL-Uniroyal-Elec-0402WGF1001TCE_C11702.pdf",
+   "description": "-55℃~+155℃ 1kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C11702",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "mpn": "0402WGF1001TCE",
+   "package": "0402",
+   "stock": 8260608,
+   "tier": "basic",
+   "unit_price_usd": 0.0035,
+   "refs": [
+    "R3"
+   ],
+   "value": "1k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric"
+  },
+  {
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Torex-Semicon-XC6206P332MR-G_C5446.pdf",
+   "description": "-40℃~+85℃@(Ta) 1 1uA 200mA 3.3V 6V Fixed Over Current Protection Positive SOT-23-3L Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C5446",
+   "manufacturer": "Torex Semicon",
+   "mpn": "XC6206P332MR-G",
+   "package": "SOT-23-3L",
+   "stock": 422922,
+   "tier": "basic",
+   "unit_price_usd": 0.1429,
+   "refs": [
+    "U1"
+   ],
+   "value": "XC6206 3.3V",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-3"
+  }
+ ],
+ "stats": {
+  "size_mm": [
+   30.05,
+   24.05
+  ],
+  "tracks": 45,
+  "vias": 45,
+  "track_length": 78.19,
+  "parts": 11
+ }
+}

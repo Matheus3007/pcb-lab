@@ -1,6 +1,6 @@
 # 0001: Toolchain: atopile + KiCad 10 + scripted geometry/placement + Freerouting
 
-Date: 2026-10-11 · Status: accepted
+Date: 2026-10-11 · Status: accepted; circuit tool superseded by 0002 (atopile → plain Python)
 
 ## Context
 We want PCBs fully described as code so an agent can edit → build → check → look → iterate,

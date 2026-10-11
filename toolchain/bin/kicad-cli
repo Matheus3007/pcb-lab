@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# kicad-cli wrapper: runs the Windows KiCad 10 kicad-cli.exe from WSL, converting
+# absolute Linux paths in arguments (incl. --opt=/path) to Windows paths.
+set -euo pipefail
+exe="${KICAD_BIN:-/mnt/c/Program Files/KiCad/10.0/bin}/kicad-cli.exe"
+conv() { case "$1" in /*) wslpath -w "$1" ;; *) printf '%s' "$1" ;; esac; }
+args=()
+for a in "$@"; do
+  if [[ "$a" == --*=/* ]]; then args+=("${a%%=*}=$(conv "${a#*=}")")
+  else args+=("$(conv "$a")"); fi
+done
+exec "$exe" "${args[@]}"

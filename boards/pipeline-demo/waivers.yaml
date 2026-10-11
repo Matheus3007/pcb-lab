@@ -1,0 +1,4 @@
+# Accepted findings. Each needs a reason. {check: prefix, match: substring of message, reason}
+- check: drc/silk_edge_clearance
+  match: "of J1 on F.Silkscreen"
+  reason: "USB-C footprint silk outline intentionally crosses the board edge (connector overhang marker); clipped by fab"

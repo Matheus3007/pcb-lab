@@ -1,0 +1,98 @@
+{
+ "C11702": {
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010216_UNI-ROYAL-Uniroyal-Elec-0402WGF1001TCE_C11702.pdf",
+  "description": "-55\u2103~+155\u2103 1k\u03a9 50V 62.5mW Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0402 Chip Resistor - Surface Mount ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C11702",
+  "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+  "mpn": "0402WGF1001TCE",
+  "package": "0402",
+  "stock": 8260608,
+  "tier": "basic",
+  "unit_price_usd": 0.0035
+ },
+ "C1525": {
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05B104KO5NNNC_C1525.pdf",
+  "description": "100nF 16V X7R \u00b110% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C1525",
+  "manufacturer": "Samsung Electro-Mechanics",
+  "mpn": "CL05B104KO5NNNC",
+  "package": "0402",
+  "stock": 24531635,
+  "tier": "basic",
+  "unit_price_usd": 0.0045
+ },
+ "C165948": {
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2205251630_Korean-Hroparts-Elec-TYPE-C-31-M-12_C165948.pdf",
+  "description": "-30\u2103~+80\u2103 1 10,000 cycles 16P 20V 5A 7.35mm Female Surface Mount, Right Angle Type-C SMD USB Connectors ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C165948",
+  "manufacturer": "Korean Hroparts Elec",
+  "mpn": "TYPE-C-31-M-12",
+  "package": "SMD",
+  "stock": 408465,
+  "tier": "extended",
+  "unit_price_usd": 0.186
+ },
+ "C19702": {
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL10A106KP8NNNC_C19702.pdf",
+  "description": "10V 10uF X5R \u00b110% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C19702",
+  "manufacturer": "Samsung Electro-Mechanics",
+  "mpn": "CL10A106KP8NNNC",
+  "package": "0603",
+  "stock": 10375663,
+  "tier": "basic",
+  "unit_price_usd": 0.0305
+ },
+ "C2286": {
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810231112_Hubei-KENTO-Elec-KT-0603R_C2286.pdf",
+  "description": "-40\u2103~+85\u2103 1.6mm x 0.8mm square LED 1.8V~2.4V 120\u00b0 20mA 300mcd 40mW 615nm~630nm 645nm Discrete Diode Red Water Clear 0603 LED Indication - Discrete ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C2286",
+  "manufacturer": "Hubei KENTO Elec",
+  "mpn": "KT-0603R",
+  "package": "0603",
+  "stock": 7259718,
+  "tier": "basic",
+  "unit_price_usd": 0.0076
+ },
+ "C25905": {
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010045_UNI-ROYAL-Uniroyal-Elec-0402WGF5101TCE_C25905.pdf",
+  "description": "-55\u2103~+155\u2103 5.1k\u03a9 50V 62.5mW Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0402 Chip Resistor - Surface Mount ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C25905",
+  "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+  "mpn": "0402WGF5101TCE",
+  "package": "0402",
+  "stock": 5603926,
+  "tier": "basic",
+  "unit_price_usd": 0.0024
+ },
+ "C52923": {
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05A105KA5NQNC_C52923.pdf",
+  "description": "1uF 25V X5R \u00b110% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C52923",
+  "manufacturer": "Samsung Electro-Mechanics",
+  "mpn": "CL05A105KA5NQNC",
+  "package": "0402",
+  "stock": 7475165,
+  "tier": "basic",
+  "unit_price_usd": 0.0087
+ },
+ "C5446": {
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Torex-Semicon-XC6206P332MR-G_C5446.pdf",
+  "description": "-40\u2103~+85\u2103@(Ta) 1 1uA 200mA 3.3V 6V Fixed Over Current Protection Positive SOT-23-3L Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C5446",
+  "manufacturer": "Torex Semicon",
+  "mpn": "XC6206P332MR-G",
+  "package": "SOT-23-3L",
+  "stock": 422922,
+  "tier": "basic",
+  "unit_price_usd": 0.1429
+ }
+}

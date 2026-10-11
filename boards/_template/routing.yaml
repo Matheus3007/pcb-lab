@@ -1,22 +1,5 @@
-# Routing intent, read by tools/route.py (planned). Units: mm.
-
-net_classes: []
-#  - name: motor
-#    nets: [VBAT, PHASE_*]
-#    current_a: 20          # continuous; width checked against IPC-2152 by tools/checks
-#    width: 3.0
-#    clearance: 0.3
-
-critical: []                # routed by script BEFORE the autorouter, in this order
-#  - net: VBAT
-#    style: pour            # pour | trace | diff_pair
-#    layers: [F.Cu, B.Cu]
-
-zones: []
-#  - net: GND
-#    layer: B.Cu
-#    outline: board
-
-autoroute:
-  enabled: true
-  exclude_net_classes: [motor]
+tracks: []      # {net, layer, width, points: [[x,y],...]}  routed BEFORE the autorouter
+vias: []        # {net, at: [x,y], diameter, drill}
+zones: []       # {net, layer, outline: board | [[x,y],...], clearance}
+stitch: []      # {net: GND, pitch: 3.5, via_diameter: 0.6, via_drill: 0.3, edge_margin: 1.0}
+autoroute: {enabled: true, max_passes: 100, timeout_s: 300}

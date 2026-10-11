@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# kipy SCRIPT.py [args...]: run a script under KiCad 10's bundled Windows Python (has pcbnew).
+# Absolute Linux path args are converted to Windows paths; the repo's tools/ dir and
+# toolchain/.kipy-site (extra deps) are put on sys.path.
+set -euo pipefail
+root="$(cd "$(dirname "$0")/../.." && pwd)"
+py="${KICAD_BIN:-/mnt/c/Program Files/KiCad/10.0/bin}/python.exe"
+conv() { case "$1" in /*) wslpath -w "$1" ;; *) printf '%s' "$1" ;; esac; }
+script="$(conv "$(realpath "$1")")"; shift
+args=(); for a in "$@"; do args+=("$(conv "$a")"); done
+boot="import sys,runpy; sys.path[:0]=[r'$(wslpath -w "$root/tools")']; sys.path.append(r'$(wslpath -w "$root/toolchain/.kipy-site")'); sys.argv=sys.argv[1:]; runpy.run_path(sys.argv[0], run_name='__main__')"
+exec "$py" -X utf8 -c "$boot" "$script" "${args[@]}"

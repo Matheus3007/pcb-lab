@@ -4,98 +4,97 @@ This repo designs PCBs from zero, as text, so every change can be diffed, checke
 machine, and reviewed visually. The end product of each board is an order for a
 **fully assembled board from JLCPCB** (PCB + PCBA).
 
-The human owner reviews **results** (renders, check reports, BOM, 3D fit), not code.
-Your job is to make those results trustworthy and easy to review.
+The human owner reviews **results** (renders, check reports, BOM, 3D fit), not code, and
+never opens the KiCad GUI. Your job is to make those results trustworthy and easy to review.
 
 ## Read first (in order)
 
-1. `docs/pipeline.md`: the stages, what each one reads and writes, the tools, and what's implemented so far.
-2. `docs/jlcpcb.md`: fab and assembly limits. Every design rule traces back to this file.
+1. `docs/pipeline.md`: stages, files, tools, the authoring conventions.
+2. `docs/jlcpcb.md`: fab/assembly limits. Every design rule traces back to this file.
 3. `docs/review-gates.md`: where the human signs off. Never skip a gate.
-4. The `spec.md` of the board you are working on (`boards/<name>/spec.md`).
+4. The board's `spec.md` (`boards/<name>/spec.md`).
 5. `docs/decisions/`: why the toolchain is what it is. Don't reopen these without a new reason.
-6. `docs/projects/`: context for the larger projects boards belong to (e.g. the battlebot).
+6. `docs/projects/`: context for larger projects (e.g. the battlebot).
+7. `boards/pipeline-demo/`: the reference example of a complete, passing board.
 
-## Toolchain (decided, see docs/decisions/0001-toolchain.md)
+## Toolchain (see docs/decisions/0001 + 0002)
 
-| Concern | Tool | Source of truth |
+| Concern | How | Source of truth |
 |---|---|---|
-| Circuit, parts, values | **atopile** (`.ato`) | `boards/<name>/*.ato`, `parts/` |
-| Board outline, cutouts, keepouts, holes | **Python** (`mechanical/outline.py`) | derived from chassis CAD in `mechanical/chassis/` |
-| Placement | **Python + rules file** (`placement.yaml`) | rules, not hand-placed coordinates where avoidable |
-| Routing | scripted critical nets (`routing.yaml`) + **Freerouting** for the rest | |
-| Checks | **kicad-cli** DRC (JSON) + atopile assertions + `tools/` custom checks | |
-| Outputs | **kicad-cli** (Gerbers, drill, pos, STEP, renders) + JLC BOM/CPL | |
+| Circuit, parts, values, assertions | **plain Python** (`pcbkit.circuit`) | `boards/<name>/circuit.py`, `lib/parts.yaml` |
+| Outline, cutouts, keepouts | **Python + shapely** | `boards/<name>/mechanical/outline.py` (+ chassis CAD) |
+| Placement | explicit positions + verified rules | `boards/<name>/placement.yaml` |
+| Routing | scripted tracks/zones + **Freerouting** + auto GND stitching | `boards/<name>/routing.yaml` |
+| Board generation | KiCad 10 `pcbnew` (Windows KiCad, driven from WSL) | regenerated every build |
+| Checks | KiCad DRC (JSON) + `pcbkit.checks` | `build/reports/` |
+| Renders / fab | `kicad-cli` | `build/renders/`, `build/fab/` |
 
-KiCad 10 is the engine, but nobody opens the GUI. Generated `.kicad_pcb` files are build
-outputs of the code above. **Never hand-edit a generated file.** Change the source and rebuild.
+**Never hand-edit a generated file** (`build/**`). Change the source and rebuild.
+
+## Setup (once per machine)
+
+`make toolchain` (= `toolchain/setup.sh`; no sudo; needs KiCad 10 on Windows). Then every
+command goes through `make`, which sources `toolchain/env.sh` itself.
 
 ## The loop
 
 ```
-edit source → make build BOARD=<name> → make check BOARD=<name> → read reports + renders → fix → repeat
+edit source → make all BOARD=<name> → read build/reports/summary.md + LOOK at build/renders/*.png → fix → repeat
 ```
 
-- One command per iteration. If you find yourself running a multi-step sequence by
-  hand, add it to the Makefile/tools instead.
-- **Done for any iteration** = `make check` exits 0 (zero DRC errors, zero failed
-  assertions, zero failed custom checks) **and** you have looked at the renders in
-  `boards/<name>/build/renders/` and described what you saw.
-- Warnings are not ignored silently. Fix them, or waive them in `boards/<name>/waivers.yaml`
-  with a one-line reason each.
+- `make all` = build → render → check (+ dashboard). ~45 s on the demo board.
+- **Done for any iteration** = `make check` exits 0 **and** you have opened the renders
+  (at least `placement.png`, `top.png`, `3d_iso.png`) and said what you saw. DRC can't see
+  ugly or wrong-looking placement; you can.
+- Warnings are fixed or waived in `boards/<name>/waivers.yaml` with a reason. No silent ignores.
+- Before committing a changed board, run `make diff BOARD=<name>` and put the highlights in
+  the commit message.
 
 ## Rules that are easy to get wrong
 
-- **Pinouts and footprints pass every check even when they're wrong.** For every IC and connector,
-  write the datasheet pin table next to the part (comment in the `.ato`) and say in
-  your summary that you cross-checked it. Flag anything you could not verify.
-- **Prefer JLC Basic / Preferred parts.** Each unique Extended part adds a setup fee
-  and stock risk. Report the Basic/Extended split in every BOM summary.
-- **Pin critical parts by LCSC ID** (`lcsc_id = "C…"`). Let atopile auto-pick passives only.
-  Picked parts are vendored into `parts/` and committed, so builds don't need atopile's API.
-- **Respect the assembly tier** chosen in the board spec (Economic vs Standard, see
-  `docs/jlcpcb.md`). It changes min package size, sides, and whether panel rails are needed.
-- **Units are mm everywhere** in our own code and YAML.
-- **Mechanical fit is a check, not a vibe**: when chassis CAD exists, the board STEP must
-  pass the interference check in `make check`.
+- **Pinouts and footprints pass every check even when they're wrong.** Every IC/connector entry in
+  `lib/parts.yaml` needs `pinout_source` (datasheet + page/table) and `pinout_verified`.
+  Get the datasheet from JLC's file endpoint (`dataManualFileAccessId`, see `pcbkit/jlc.py`),
+  read the pin table, and record it. Watch for clones with different pinouts (see XC6206 note).
+- **Footprint origin/orientation**: before placing a new footprint, read its pads/fab
+  geometry (which way does a connector's mouth face at rot 0?) and confirm in the render.
+- **Prefer JLC Basic / Preferred parts.** `make parts BOARD=x` shows the tier, stock and price.
+- **3D models**: if KiCad has no model, fetch one (easyeda2kicad), re-origin it via
+  `model.offset` in parts.yaml, and confirm alignment in `3d_iso.png`. Missing models make
+  the mechanical-fit checks blind.
+- **Assembly tier** (board.yaml `assembly_tier`) drives side/package/size checks.
+- **Coordinates**: mm, board origin top-left, **+Y down** (KiCad convention), rotations CCW.
+- **CPL rotations** come from `lib/jlc_rotations.csv` (community hints, unverified). The human
+  confirms in JLC's preview at gate 3; confirmed corrections go at the top of that file.
 
 ## Git conventions
 
-- One logical change per commit; message says *what changed in the board* and *why*
+- One logical change per commit; message says what changed on the board and why
   (e.g. `bot-main: move IMU to board centroid to reduce vibration coupling`).
-- Commit sources and the small, reviewable artifacts (check reports, PNG renders,
-  BOM/CPL). Gerber zips and STEP are reproduced from sources, so don't commit them,
-  except in a tagged release (`<board>/vX.Y`) that was actually ordered.
-- Every order to JLC gets a git tag. The tag is the record of what was built.
+- Committed: sources, `build/reports/`, `build/renders/`, `build/review/`. Ignored:
+  `build/work/` (intermediates, .kicad_pcb, .glb) and `build/fab/` (regenerated).
+- Every JLC order gets a tag `<board>/vX.Y`, and its fab outputs are attached to the tag (or saved).
 
 ## Repo layout
 
 ```
-CLAUDE.md                 this file
-Makefile                  single entry point: make <target> BOARD=<name>
-docs/                     pipeline, fab rules, review gates, decisions (ADRs)
-toolchain/                pinned tool versions + container definition
-tools/                    our Python pipeline code (placement, routing, checks, diff, export)
-boards/_template/         copy this to start a new board
-boards/<name>/            one self-contained atopile project per board
-  spec.md                 requirements, written with the human, and the single source for constraints
-  ato.yaml, *.ato, parts/ circuit (atopile)
-  mechanical/             outline.py + chassis/ (STEP/SVG/DXF supplied by the human)
-  placement.yaml          placement rules
-  routing.yaml            critical-net routing + net classes
-  waivers.yaml            accepted warnings with reasons
-  build/                  generated (mostly gitignored; see .gitignore)
+Makefile                  make <target> BOARD=<name>   (make help)
+toolchain/                setup.sh, env.sh, wrappers (kicad-cli, kipy, freerouting), rules/jlc.yaml
+tools/pcbkit/             pipeline code: circuit, pipeline, checks, render, fab, report, diff, jlc
+tools/pcbkit/kijobs/      scripts that run inside KiCad's Python (board build, DSN/SES, stitch, dump)
+lib/parts.yaml            shared part definitions with pinout evidence
+lib/3d/, lib/footprints/  models/footprints KiCad doesn't ship
+lib/jlc_cache.json        JLC catalog cache   lib/jlc_rotations.csv  CPL corrections
+boards/_template/         copy to start a board
+boards/<name>/            spec.md, board.yaml, circuit.py, mechanical/, placement.yaml, routing.yaml, waivers.yaml
+  build/reports|renders|review   committed results   build/work|fab   generated, ignored
+docs/                     pipeline, jlcpcb, review gates, monitoring, decisions, projects
 ```
 
 ## Starting a new board
 
-1. `cp -r boards/_template boards/<name>`
-2. Fill `spec.md` **with the human**: ask about anything left as `TBD` that affects
-   layout (size, layers, currents, connectors, assembly tier, mechanical envelope).
-3. Write the circuit, build, then stop at **review gate 1** (parts and pinouts) before placement.
-
-## Status
-
-Pipeline implementation status lives in `docs/pipeline.md`. Check it before assuming a
-`make` target works. Anything marked *planned* must be built and proven before you
-rely on it.
+1. `cp -r boards/_template boards/<name>`, then fill `spec.md` **with the human**.
+2. Write `circuit.py` (+ new parts in `lib/parts.yaml` with pinout evidence) → `make build` until
+   the circuit validates → `make gate GATE=1` and **stop for review**.
+3. Outline + placement → `make all` until clean → `make gate GATE=2` and **stop**.
+4. Routing → `make all` until clean → `make fab` → `make gate GATE=3` and **stop**.

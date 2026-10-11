@@ -1,0 +1,1678 @@
+{
+ "board_bbox": [
+  -0.025,
+  -0.025,
+  30.025,
+  24.025
+ ],
+ "size_mm": [
+  30.05,
+  24.05
+ ],
+ "layers": 2,
+ "footprints": [
+  {
+   "ref": "C1",
+   "value": "1uF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    17.6,
+    14.0
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    17.095,
+    13.045,
+    18.105,
+    14.955
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VBUS",
+     "at": [
+      17.6,
+      14.48
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      17.6,
+      13.52
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C2",
+   "value": "1uF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    12.4,
+    15.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    11.895,
+    14.645,
+    12.905,
+    16.555
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "3V3",
+     "at": [
+      12.4,
+      16.08
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      12.4,
+      15.12
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C3",
+   "value": "10uF",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "at": [
+    10.7,
+    15.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    9.925,
+    14.075,
+    11.475,
+    17.125
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "3V3",
+     "at": [
+      10.7,
+      16.375
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      10.7,
+      14.825
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "D1",
+   "value": "red",
+   "footprint": "LED_SMD:LED_0603_1608Metric",
+   "at": [
+    7.0,
+    7.0
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    6.225,
+    5.475,
+    7.775,
+    8.525
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "GND",
+     "at": [
+      7.0,
+      7.787
+     ]
+    },
+    {
+     "num": "2",
+     "net": "LED_A",
+     "at": [
+      7.0,
+      6.213
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "H1",
+   "value": "M2",
+   "footprint": "MountingHole:MountingHole_2.2mm_M2",
+   "at": [
+    26.0,
+    20.5
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": true,
+   "courtyard": [
+    23.502,
+    18.004,
+    28.495,
+    22.996
+   ],
+   "smd": false,
+   "pads": [
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      26.0,
+      20.5
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "J1",
+   "value": "USB-C 16P",
+   "footprint": "Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12",
+   "at": [
+    15.0,
+    3.65
+   ],
+   "rot": 180.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    9.635,
+    -0.545,
+    20.365,
+    8.965
+   ],
+   "smd": false,
+   "pads": [
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      17.89,
+      6.25
+     ]
+    },
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      12.11,
+      6.25
+     ]
+    },
+    {
+     "num": "A1",
+     "net": "GND",
+     "at": [
+      18.25,
+      7.695
+     ]
+    },
+    {
+     "num": "A4",
+     "net": "VBUS",
+     "at": [
+      17.45,
+      7.695
+     ]
+    },
+    {
+     "num": "A5",
+     "net": "CC1",
+     "at": [
+      16.25,
+      7.695
+     ]
+    },
+    {
+     "num": "A6",
+     "net": "",
+     "at": [
+      15.25,
+      7.695
+     ]
+    },
+    {
+     "num": "A7",
+     "net": "",
+     "at": [
+      14.75,
+      7.695
+     ]
+    },
+    {
+     "num": "A8",
+     "net": "",
+     "at": [
+      13.75,
+      7.695
+     ]
+    },
+    {
+     "num": "A9",
+     "net": "VBUS",
+     "at": [
+      12.55,
+      7.695
+     ]
+    },
+    {
+     "num": "A12",
+     "net": "GND",
+     "at": [
+      11.75,
+      7.695
+     ]
+    },
+    {
+     "num": "B1",
+     "net": "GND",
+     "at": [
+      11.75,
+      7.695
+     ]
+    },
+    {
+     "num": "B4",
+     "net": "VBUS",
+     "at": [
+      12.55,
+      7.695
+     ]
+    },
+    {
+     "num": "B5",
+     "net": "CC2",
+     "at": [
+      13.25,
+      7.695
+     ]
+    },
+    {
+     "num": "B6",
+     "net": "",
+     "at": [
+      14.25,
+      7.695
+     ]
+    },
+    {
+     "num": "B7",
+     "net": "",
+     "at": [
+      15.75,
+      7.695
+     ]
+    },
+    {
+     "num": "B8",
+     "net": "",
+     "at": [
+      16.75,
+      7.695
+     ]
+    },
+    {
+     "num": "B9",
+     "net": "VBUS",
+     "at": [
+      17.45,
+      7.695
+     ]
+    },
+    {
+     "num": "B12",
+     "net": "GND",
+     "at": [
+      18.25,
+      7.695
+     ]
+    },
+    {
+     "num": "SH",
+     "net": "GND",
+     "at": [
+      19.32,
+      6.78
+     ]
+    },
+    {
+     "num": "SH",
+     "net": "GND",
+     "at": [
+      19.32,
+      2.6
+     ]
+    },
+    {
+     "num": "SH",
+     "net": "GND",
+     "at": [
+      10.68,
+      6.78
+     ]
+    },
+    {
+     "num": "SH",
+     "net": "GND",
+     "at": [
+      10.68,
+      2.6
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "J2",
+   "value": "1x04 2.54mm",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
+   "at": [
+    11.2,
+    21.0
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": true,
+   "courtyard": [
+    9.385,
+    19.185,
+    20.635,
+    22.815
+   ],
+   "smd": false,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VBUS",
+     "at": [
+      11.2,
+      21.0
+     ]
+    },
+    {
+     "num": "2",
+     "net": "3V3",
+     "at": [
+      13.74,
+      21.0
+     ]
+    },
+    {
+     "num": "3",
+     "net": "GND",
+     "at": [
+      16.28,
+      21.0
+     ]
+    },
+    {
+     "num": "4",
+     "net": "GND",
+     "at": [
+      18.82,
+      21.0
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R1",
+   "value": "5.1k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    11.5,
+    10.5
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    10.985,
+    9.525,
+    12.015,
+    11.475
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "CC1",
+     "at": [
+      11.5,
+      11.01
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      11.5,
+      9.99
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R2",
+   "value": "5.1k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    18.5,
+    10.5
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    17.985,
+    9.525,
+    19.015,
+    11.475
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "CC2",
+     "at": [
+      18.5,
+      11.01
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      18.5,
+      9.99
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R3",
+   "value": "1k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    7.0,
+    10.0
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    6.485,
+    9.025,
+    7.515,
+    10.975
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "3V3",
+     "at": [
+      7.0,
+      10.51
+     ]
+    },
+    {
+     "num": "2",
+     "net": "LED_A",
+     "at": [
+      7.0,
+      9.49
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "U1",
+   "value": "XC6206 3.3V",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-3",
+   "at": [
+    15.0,
+    14.0
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    12.905,
+    12.255,
+    17.095,
+    15.745
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "GND",
+     "at": [
+      13.862,
+      13.05
+     ]
+    },
+    {
+     "num": "2",
+     "net": "3V3",
+     "at": [
+      13.862,
+      14.95
+     ]
+    },
+    {
+     "num": "3",
+     "net": "VBUS",
+     "at": [
+      16.138,
+      14.0
+     ]
+    }
+   ]
+  }
+ ],
+ "nets": {
+  "3V3": {
+   "track_length": 17.927,
+   "min_width": 0.4,
+   "segments": 8
+  },
+  "CC1": {
+   "track_length": 11.04,
+   "min_width": 0.2,
+   "segments": 8,
+   "vias": 2
+  },
+  "CC2": {
+   "track_length": 9.082,
+   "min_width": 0.2,
+   "segments": 6,
+   "vias": 2
+  },
+  "GND": {
+   "track_length": 0.0,
+   "min_width": null,
+   "segments": 0,
+   "vias": 40
+  },
+  "LED_A": {
+   "track_length": 3.927,
+   "min_width": 0.2,
+   "segments": 3
+  },
+  "VBUS": {
+   "track_length": 36.21,
+   "min_width": 0.4,
+   "segments": 20,
+   "vias": 1
+  }
+ },
+ "totals": {
+  "tracks": 45,
+  "vias": 45,
+  "track_length": 78.19
+ },
+ "tracks": [
+  {
+   "net": "CC2",
+   "layer": "F.Cu",
+   "width": 0.2,
+   "length": 0.862,
+   "start": [
+    15.942,
+    10.4
+   ],
+   "end": [
+    16.552,
+    11.01
+   ]
+  },
+  {
+   "net": "CC2",
+   "layer": "F.Cu",
+   "width": 0.2,
+   "length": 0.593,
+   "start": [
+    13.25,
+    10.774
+   ],
+   "end": [
+    13.67,
+    11.194
+   ]
+  },
+  {
+   "net": "CC2",
+   "layer": "F.Cu",
+   "width": 0.2,
+   "length": 3.079,
+   "start": [
+    13.25,
+    7.695
+   ],
+   "end": [
+    13.25,
+    10.774
+   ]
+  },
+  {
+   "net": "CC2",
+   "layer": "F.Cu",
+   "width": 0.2,
+   "length": 1.948,
+   "start": [
+    16.552,
+    11.01
+   ],
+   "end": [
+    18.5,
+    11.01
+   ]
+  },
+  {
+   "net": "CC2",
+   "layer": "B.Cu",
+   "width": 0.2,
+   "length": 1.122,
+   "start": [
+    15.148,
+    11.194
+   ],
+   "end": [
+    15.942,
+    10.4
+   ]
+  },
+  {
+   "net": "CC2",
+   "layer": "B.Cu",
+   "width": 0.2,
+   "length": 1.478,
+   "start": [
+    13.67,
+    11.194
+   ],
+   "end": [
+    15.148,
+    11.194
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 1.252,
+   "start": [
+    11.2,
+    21.0
+   ],
+   "end": [
+    12.452,
+    21.0
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 1.31,
+   "start": [
+    12.55,
+    9.005
+   ],
+   "end": [
+    12.55,
+    7.695
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 0.165,
+   "start": [
+    12.433,
+    9.122
+   ],
+   "end": [
+    12.55,
+    9.005
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 0.75,
+   "start": [
+    17.45,
+    8.445
+   ],
+   "end": [
+    17.45,
+    7.695
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 1.061,
+   "start": [
+    16.539,
+    14.48
+   ],
+   "end": [
+    17.6,
+    14.48
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 0.079,
+   "start": [
+    16.539,
+    14.48
+   ],
+   "end": [
+    16.539,
+    14.401
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 1.214,
+   "start": [
+    15.2,
+    10.086
+   ],
+   "end": [
+    16.059,
+    9.228
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 1.325,
+   "start": [
+    16.138,
+    14.0
+   ],
+   "end": [
+    15.2,
+    13.063
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 1.107,
+   "start": [
+    16.667,
+    9.228
+   ],
+   "end": [
+    17.45,
+    8.445
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 5.505,
+   "start": [
+    15.01,
+    21.514
+   ],
+   "end": [
+    15.01,
+    16.009
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 0.548,
+   "start": [
+    12.452,
+    21.0
+   ],
+   "end": [
+    12.452,
+    21.548
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 0.568,
+   "start": [
+    16.539,
+    14.401
+   ],
+   "end": [
+    16.138,
+    14.0
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 0.609,
+   "start": [
+    16.059,
+    9.228
+   ],
+   "end": [
+    16.667,
+    9.228
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 2.162,
+   "start": [
+    15.01,
+    16.009
+   ],
+   "end": [
+    16.539,
+    14.48
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 1.038,
+   "start": [
+    13.195,
+    22.291
+   ],
+   "end": [
+    14.233,
+    22.291
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 1.052,
+   "start": [
+    12.452,
+    21.548
+   ],
+   "end": [
+    13.195,
+    22.291
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 1.099,
+   "start": [
+    14.233,
+    22.291
+   ],
+   "end": [
+    15.01,
+    21.514
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 2.977,
+   "start": [
+    15.2,
+    13.063
+   ],
+   "end": [
+    15.2,
+    10.086
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "B.Cu",
+   "width": 0.4,
+   "length": 10.645,
+   "start": [
+    11.2,
+    21.0
+   ],
+   "end": [
+    11.2,
+    10.355
+   ]
+  },
+  {
+   "net": "VBUS",
+   "layer": "B.Cu",
+   "width": 0.4,
+   "length": 1.744,
+   "start": [
+    11.2,
+    10.355
+   ],
+   "end": [
+    12.433,
+    9.122
+   ]
+  },
+  {
+   "net": "CC1",
+   "layer": "F.Cu",
+   "width": 0.2,
+   "length": 0.776,
+   "start": [
+    16.25,
+    7.695
+   ],
+   "end": [
+    16.25,
+    6.919
+   ]
+  },
+  {
+   "net": "CC1",
+   "layer": "F.Cu",
+   "width": 0.2,
+   "length": 0.369,
+   "start": [
+    12.711,
+    11.852
+   ],
+   "end": [
+    12.342,
+    11.852
+   ]
+  },
+  {
+   "net": "CC1",
+   "layer": "F.Cu",
+   "width": 0.2,
+   "length": 0.691,
+   "start": [
+    16.25,
+    6.919
+   ],
+   "end": [
+    15.761,
+    6.43
+   ]
+  },
+  {
+   "net": "CC1",
+   "layer": "F.Cu",
+   "width": 0.2,
+   "length": 1.191,
+   "start": [
+    12.342,
+    11.852
+   ],
+   "end": [
+    11.5,
+    11.01
+   ]
+  },
+  {
+   "net": "CC1",
+   "layer": "F.Cu",
+   "width": 0.2,
+   "length": 2.266,
+   "start": [
+    15.761,
+    6.43
+   ],
+   "end": [
+    13.495,
+    6.43
+   ]
+  },
+  {
+   "net": "CC1",
+   "layer": "B.Cu",
+   "width": 0.2,
+   "length": 0.504,
+   "start": [
+    13.068,
+    11.496
+   ],
+   "end": [
+    12.711,
+    11.852
+   ]
+  },
+  {
+   "net": "CC1",
+   "layer": "B.Cu",
+   "width": 0.2,
+   "length": 4.639,
+   "start": [
+    13.068,
+    6.857
+   ],
+   "end": [
+    13.068,
+    11.496
+   ]
+  },
+  {
+   "net": "CC1",
+   "layer": "B.Cu",
+   "width": 0.2,
+   "length": 0.604,
+   "start": [
+    13.495,
+    6.43
+   ],
+   "end": [
+    13.068,
+    6.857
+   ]
+  },
+  {
+   "net": "3V3",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 3.306,
+   "start": [
+    13.74,
+    19.415
+   ],
+   "end": [
+    11.403,
+    17.078
+   ]
+  },
+  {
+   "net": "3V3",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 6.279,
+   "start": [
+    9.422,
+    10.51
+   ],
+   "end": [
+    13.862,
+    14.95
+   ]
+  },
+  {
+   "net": "3V3",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 1.598,
+   "start": [
+    12.733,
+    16.08
+   ],
+   "end": [
+    13.862,
+    14.95
+   ]
+  },
+  {
+   "net": "3V3",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 0.993,
+   "start": [
+    11.403,
+    17.078
+   ],
+   "end": [
+    10.7,
+    16.375
+   ]
+  },
+  {
+   "net": "3V3",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 1.411,
+   "start": [
+    11.403,
+    17.078
+   ],
+   "end": [
+    12.4,
+    16.08
+   ]
+  },
+  {
+   "net": "3V3",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 1.585,
+   "start": [
+    13.74,
+    21.0
+   ],
+   "end": [
+    13.74,
+    19.415
+   ]
+  },
+  {
+   "net": "3V3",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 0.333,
+   "start": [
+    12.4,
+    16.08
+   ],
+   "end": [
+    12.733,
+    16.08
+   ]
+  },
+  {
+   "net": "3V3",
+   "layer": "F.Cu",
+   "width": 0.4,
+   "length": 2.422,
+   "start": [
+    7.0,
+    10.51
+   ],
+   "end": [
+    9.422,
+    10.51
+   ]
+  },
+  {
+   "net": "LED_A",
+   "layer": "F.Cu",
+   "width": 0.2,
+   "length": 1.711,
+   "start": [
+    6.217,
+    6.996
+   ],
+   "end": [
+    6.217,
+    8.707
+   ]
+  },
+  {
+   "net": "LED_A",
+   "layer": "F.Cu",
+   "width": 0.2,
+   "length": 1.108,
+   "start": [
+    7.0,
+    6.213
+   ],
+   "end": [
+    6.217,
+    6.996
+   ]
+  },
+  {
+   "net": "LED_A",
+   "layer": "F.Cu",
+   "width": 0.2,
+   "length": 1.108,
+   "start": [
+    6.217,
+    8.707
+   ],
+   "end": [
+    7.0,
+    9.49
+   ]
+  }
+ ],
+ "vias": [
+  {
+   "net": "CC2",
+   "at": [
+    13.67,
+    11.194
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "CC2",
+   "at": [
+    15.942,
+    10.4
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    21.975,
+    11.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    7.975,
+    11.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    4.475,
+    21.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    28.975,
+    18.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    7.975,
+    21.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    14.975,
+    0.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    0.975,
+    18.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    21.975,
+    21.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    25.475,
+    14.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    21.975,
+    14.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    14.975,
+    4.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    0.975,
+    14.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    4.475,
+    0.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    21.975,
+    18.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    7.975,
+    7.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    0.975,
+    21.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    0.975,
+    4.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    11.475,
+    4.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    25.475,
+    4.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    4.475,
+    4.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    21.975,
+    7.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    25.475,
+    18.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    28.975,
+    4.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    21.975,
+    4.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    28.975,
+    21.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    14.011,
+    9.092
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    21.975,
+    0.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    25.475,
+    0.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    0.975,
+    7.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    0.975,
+    11.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    4.475,
+    7.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    18.475,
+    18.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    7.975,
+    4.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    7.975,
+    0.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    18.475,
+    0.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    18.475,
+    4.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    11.475,
+    0.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    7.975,
+    18.475
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    25.475,
+    7.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "GND",
+   "at": [
+    7.975,
+    14.975
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "VBUS",
+   "at": [
+    12.433,
+    9.122
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "CC1",
+   "at": [
+    12.711,
+    11.852
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  },
+  {
+   "net": "CC1",
+   "at": [
+    13.495,
+    6.43
+   ],
+   "diameter": 0.6,
+   "drill": 0.3
+  }
+ ]
+}

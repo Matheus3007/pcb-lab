@@ -1,0 +1,8 @@
+# Machine-readable board config (human-facing requirements live in spec.md).
+layers: 2
+thickness: 1.6
+assembly_tier: economic     # economic | standard  (see docs/jlcpcb.md)
+origin: [100.0, 100.0]      # where board (0,0) sits on the KiCad sheet
+rules: {}                   # per-board overrides of toolchain/rules/jlc.yaml, with reasons
+silk_refs: false            # reference designators only on fab layer (dense boards; JLC does not need them)
+quantity: 5

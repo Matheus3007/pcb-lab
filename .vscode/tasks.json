@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "inputs": [
+    { "id": "board", "type": "promptString", "description": "Board name (folder under boards/)", "default": "pipeline-demo" },
+    { "id": "gate", "type": "pickString", "description": "Review gate", "options": ["1", "2", "3"], "default": "1" },
+    { "id": "ref", "type": "promptString", "description": "Git ref to diff against", "default": "HEAD" }
+  ],
+  "tasks": [
+    { "label": "pcb: all (build, render, check)", "type": "shell", "command": "make all BOARD=${input:board}", "group": { "kind": "build", "isDefault": true }, "problemMatcher": [] },
+    { "label": "pcb: check", "type": "shell", "command": "make check BOARD=${input:board}", "problemMatcher": [] },
+    { "label": "pcb: render", "type": "shell", "command": "make render BOARD=${input:board}", "problemMatcher": [] },
+    { "label": "pcb: fab outputs", "type": "shell", "command": "make fab BOARD=${input:board}", "problemMatcher": [] },
+    { "label": "pcb: review packet", "type": "shell", "command": "make gate BOARD=${input:board} GATE=${input:gate}", "problemMatcher": [] },
+    { "label": "pcb: diff", "type": "shell", "command": "make diff BOARD=${input:board} REF=${input:ref}", "problemMatcher": [] },
+    { "label": "pcb: parts (JLC stock/price)", "type": "shell", "command": "make parts BOARD=${input:board} REFRESH=1", "problemMatcher": [] }
+  ]
+}

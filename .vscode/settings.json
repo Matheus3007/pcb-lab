@@ -1,0 +1,13 @@
+{
+  "files.exclude": {
+    "toolchain/.venv": true,
+    "toolchain/.kipy-site": true,
+    "**/__pycache__": true
+  },
+  "search.exclude": { "**/build/work": true, "lib/3d": true },
+  "files.watcherExclude": { "**/build/work/**": true, "toolchain/.venv/**": true },
+  "livePreview.autoRefreshPreview": "On Changes to Saved Files",
+  "livePreview.openPreviewTarget": "Embedded Preview",
+  "markdown.preview.breaks": false,
+  "python.defaultInterpreterPath": "${workspaceFolder}/toolchain/.venv/bin/python"
+}
