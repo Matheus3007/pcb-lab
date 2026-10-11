@@ -243,5 +243,8 @@ def build(name: str, reroute: bool = False) -> dict:
     res["route"] = stage_route(b, reroute)
     res["stitch"] = stage_stitch(b)
     stage_dump(b)
+    # .kicad_prl is per-user GUI view state; the one pcbnew writes headless can leave KiCad
+    # showing an empty canvas. Let the GUI start from its own defaults instead.
+    b.pcb.with_suffix(".kicad_prl").unlink(missing_ok=True)
     shutil.copy(b.pcb, b.fab / b.pcb.name)
     return res
