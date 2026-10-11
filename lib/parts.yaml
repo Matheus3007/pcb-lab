@@ -170,3 +170,25 @@ PinHeader_2x10:
   pinout_source: "generic header, pin n = pad n (odd row / even row)"
   pinout_verified: 2026-10-11
   notes: "Owner hand-solders it (not in the JLC BOM). Body on the bottom side, pins down into the carrier's 2x10 socket."
+
+LMR36506RRPER:
+  lcsc: C2870127
+  value: LMR36506 buck
+  footprint: Rebot:VQFN-HR-9_2x2mm_TI_RPE0009A
+  symbol: Rebot:LMR36506RRPE
+  pins: {RT: 1, PGOOD: 2, EN: 3, VIN: 4, SW: 5, BOOT: 6, VCC: 7, FB: 8, GND: 9}
+  pinout_source: "TI LMR36506 ZHCSKN9B (rev. Dec 2022) p.4 fig.6-1 (FB variant, right) + table 6-1; RRPER = adjustable output, RT, PFM (p.3 device comparison)"
+  pinout_verified: 2026-10-11
+  extended_reason: "Self-contained ESC module needs a buck from 6S LiHV (26.1 V + spikes); no 40 V+ buck in JLC Basic/Preferred (XL1509/TPS5430 are 36-40 V SOIC-8 with large inductors). 65 V rating, 2x2 mm."
+  notes: "Vin 3.6-65 V, 0.6 A. VREF 1.0 V: VOUT = 1 + RFBT/RFBB (RFBT 100k recommended). RT to VCC = 1 MHz, to GND = 2.2 MHz (table 8-1). Required: CIN 2.2 uF + 100 nF HF at VIN, CBOOT 100 nF BOOT-SW, CVCC 1 uF VCC-GND (VCC: no external loads). EN may tie to VIN. PGOOD open-drain, may float or ground. Footprint: EasyEDA geometry checked against TI land pattern p.52."
+
+FNR3015S220MT:
+  lcsc: C167761
+  value: 22uH 3015
+  footprint: Inductor_SMD:L_Changjiang_FNR3015S
+  symbol: Device:L
+  pins: {"1": 1, "2": 2}
+  pinout_source: "two-terminal inductor, unpolarized; KiCad stock footprint for this exact series"
+  pinout_verified: 2026-10-11
+  extended_reason: "No power inductor (only multilayer signal inductors <=15 mA) in JLC Basic/Preferred."
+  notes: "Changjiang FNR3015S 22 uH +-20%, Isat 680 mA, DCR 598 mOhm, 3x3x1.5 mm shielded. Ripple at 24 V in / 11 V out / 1 MHz = 0.27 A p-p."

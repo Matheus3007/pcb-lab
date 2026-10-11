@@ -95,6 +95,20 @@
   "tier": "extended",
   "unit_price_usd": 0.186
  },
+ "C167761": {
+  "category": "Power Inductors",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_cjiang--Changjiang-Microelectronics-Tech-FNR3015S220MT_C167761.pdf",
+  "datasheet_file_id": "8588900810230517760",
+  "description": "22uH 598m\u03a9 680mA 690mA Magnetic Shielded Inductor \u00b120% SMD,3x3mm Power Inductors ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C167761",
+  "manufacturer": "cjiang (Changjiang Microelectronics Tech)",
+  "mpn": "FNR3015S220MT",
+  "package": "SMD,3x3mm",
+  "stock": 36955,
+  "tier": "extended",
+  "unit_price_usd": 0.0419
+ },
  "C19702": {
   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL10A106KP8NNNC_C19702.pdf",
@@ -150,6 +164,20 @@
   "stock": 1316134,
   "tier": "basic",
   "unit_price_usd": 0.0035
+ },
+ "C25741": {
+  "category": "Chip Resistor - Surface Mount",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010100_UNI-ROYAL-Uniroyal-Elec-0402WGF1003TCE_C25741.pdf",
+  "datasheet_file_id": "8579705919464263680",
+  "description": "-55\u2103~+155\u2103 100k\u03a9 50V 62.5mW Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0402 Chip Resistor - Surface Mount ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C25741",
+  "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+  "mpn": "0402WGF1003TCE",
+  "package": "0402",
+  "stock": 8472367,
+  "tier": "basic",
+  "unit_price_usd": 0.0021
  },
  "C25744": {
   "category": "Chip Resistor - Surface Mount",
@@ -221,6 +249,20 @@
   "tier": "extended",
   "unit_price_usd": 0.5326
  },
+ "C2870127": {
+  "category": "DC-DC Converters",
+  "datasheet": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302220630_Texas-Instruments-LMR36506RRPER_C2870127.pdf",
+  "datasheet_file_id": "8589837741866450944",
+  "description": "-40\u2103~+150\u2103@(TJ) 1 18uA 200kHz~2.2MHz 3.6V~65V 600mA Adjustable Buck Buck Built-in Yes VQFN-9(2x2) DC-DC Converters ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C2870127",
+  "manufacturer": "Texas Instruments",
+  "mpn": "LMR36506RRPER",
+  "package": "VQFN-9(2x2)",
+  "stock": 2904,
+  "tier": "extended",
+  "unit_price_usd": 1.5587
+ },
  "C307331": {
   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05B104KB54PNC_C307331.pdf",
@@ -248,6 +290,20 @@
   "stock": 23748,
   "tier": "extended",
   "unit_price_usd": 0.5896
+ },
+ "C377773": {
+  "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+  "datasheet": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_Samsung-Electro-Mechanics-CL21A225KBQNNNE_C377773.pdf",
+  "datasheet_file_id": "8588932555597369344",
+  "description": "2.2uF 50V X5R \u00b110% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C377773",
+  "manufacturer": "Samsung Electro-Mechanics",
+  "mpn": "CL21A225KBQNNNE",
+  "package": "0805",
+  "stock": 607650,
+  "tier": "basic",
+  "unit_price_usd": 0.0367
  },
  "C440198": {
   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",

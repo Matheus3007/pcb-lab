@@ -58,7 +58,7 @@ Context only, not yet a spec. Turn into `boards/<name>/spec.md` with the human o
   Aria, all motor phases).
 - **Drive-ESC modules** (~25 × 15 mm, identical, ~1–2 g): AM32 MCU + gate driver + small MOSFETs,
   no wires and no bulk cap. They plug into the carrier's inner face through **one 2×9 2.54 mm
-  through-hole header** (phases, battery, GND, 12 V, DShot), retained by one M2 screw (preferred) or
+  through-hole header** (phases, battery, GND, DShot, SWD), retained by one M2 screw (preferred) or
   Kapton tape alone. A swap is pull and push, no soldering. See `battlebot-esc-research.md`.
 - **Sizing:** the 2.5 A drive figure is battery-side. At low duty (stall against a wall) the phase
   current can be several times that, so modules are designed for **20–30 A peak phase current**

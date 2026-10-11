@@ -1,28 +1,32 @@
 # rebot-esc: review gate 1
-_generated 2026-10-11 16:35 · checks FAIL_
+_generated 2026-10-11 16:55 · checks FAIL_
 
 ## BOM
 | refs | value | MPN | LCSC | tier | stock | unit $ |
 |---|---|---|---|---|---|---|
 | C1, C2, C3 | 10uF | GRM21BR61H106KE43L | C440198 | basic | 1,367,301 | 0.2069 |
-| C12 | 10uF | CL21A106KAYNNNE | C15850 | basic | 4,303,759 | 0.0688 |
-| C4, C5, C6, C9, C10, C11, C13, C14, C15, C16 | 100nF | CL05B104KB54PNC | C307331 | basic | 16,047,630 | 0.0104 |
+| C17 | 2.2uF | CL21A225KBQNNNE | C377773 | basic | 607,650 | 0.0367 |
+| C20, C8 | 1uF | CL05A105KA5NQNC | C52923 | basic | 7,473,805 | 0.0087 |
+| C21, C12 | 10uF | CL21A106KAYNNNE | C15850 | basic | 4,303,759 | 0.0688 |
+| C4, C5, C6, C18, C19, C9, C10, C11, C13, C14, C15, C16 | 100nF | CL05B104KB54PNC | C307331 | basic | 16,047,630 | 0.0104 |
 | C7 | 1uF | CL10A105KB8NNNC | C15849 | basic | 8,604,279 | 0.0163 |
-| C8 | 1uF | CL05A105KA5NQNC | C52923 | basic | 7,473,805 | 0.0087 |
+| L1 | 22uH 3015 | FNR3015S220MT | C167761 | extended | 36,955 | 0.0419 |
 | Q1, Q2, Q3, Q4, Q5, Q6 | HSBB6066 60V | HSBB6066 | C2828498 | extended | 28,531 | 0.5326 |
 | R1, R5, R6, R7, R8, R9, R10 | 10 | 0402WGF100JTCE | C25077 | basic | 4,515,933 | 0.0029 |
 | R12, R15, R18 | 1k | 0402WGF1001TCE | C11702 | basic | 8,264,648 | 0.0035 |
-| R2, R3, R11, R13, R14, R16, R17, R19 | 10k | 0402WGF1002TCE | C25744 | basic | 19,702,227 | 0.0034 |
+| R20 | 100k | 0402WGF1003TCE | C25741 | basic | 8,472,367 | 0.0021 |
+| R21, R2, R3, R11, R13, R14, R16, R17, R19 | 10k | 0402WGF1002TCE | C25744 | basic | 19,702,227 | 0.0034 |
 | R4 | 220 | 0402WGF2200TCE | C25091 | basic | 1,316,134 | 0.0035 |
 | U1 | AT32F421G8U7 | AT32F421G8U7 | C2765098 | extended | 5,887 | 0.9577 |
 | U2 | DRV8300DRGER | DRV8300DRGER | C3655801 | extended | 23,748 | 0.5896 |
 | U3 | HT7533 3.3V | HT7533-1 | C14289 | basic | 75,616 | 0.1434 |
+| U4 | LMR36506 buck | LMR36506RRPER | C2870127 | extended | 2,904 | 1.5587 |
 
 ## Schematic (generated from circuit.py; read it next to the datasheets)
 ![schematic](../renders/schematic.png)
 
-- ✓ `schematic/pins_match` all 177 symbol pins match parts.yaml
-- ✓ `schematic/netlist_match` KiCad's netlist of the schematic equals circuit.py (39 nets)
+- ✓ `schematic/pins_match` all 202 symbol pins match parts.yaml
+- ✓ `schematic/netlist_match` KiCad's netlist of the schematic equals circuit.py (43 nets)
 
 ## Pin tables (pad → KiCad symbol name / parts.yaml name → electrical type → net)
 
@@ -37,7 +41,7 @@ _generated 2026-10-11 16:35 · checks FAIL_
 | 5 | Pin_5 | 5 | passive | GND |
 | 6 | Pin_6 | 6 | passive | GND |
 | 7 | Pin_7 | 7 | passive | NC |
-| 8 | Pin_8 | 8 | passive | 12V |
+| 8 | Pin_8 | 8 | passive | GND |
 | 9 | Pin_9 | 9 | passive | DSHOT |
 | 10 | Pin_10 | 10 | passive | SWDIO |
 | 11 | Pin_11 | 11 | passive | SWCLK |
@@ -93,19 +97,89 @@ _generated 2026-10-11 16:35 · checks FAIL_
 | 1 | — | 1 | passive | VBAT |
 | 2 | — | 2 | passive | GND |
 
+**U4**
+
+| pad | symbol | ours | type | net |
+|---|---|---|---|---|
+| 1 | RT | RT | input | BUCK_VCC |
+| 2 | PGOOD | PGOOD | open_collector | NC |
+| 3 | EN | EN | input | VBAT |
+| 4 | VIN | VIN | power_in | VBAT |
+| 5 | SW | SW | power_out | BUCK_SW |
+| 6 | BOOT | BOOT | passive | BUCK_BOOT |
+| 7 | VCC | VCC | power_out | BUCK_VCC |
+| 8 | FB | FB | input | BUCK_FB |
+| 9 | GND | GND | power_in | GND |
+
+**L1**
+
+| pad | symbol | ours | type | net |
+|---|---|---|---|---|
+| 1 | 1 | 1 | passive | BUCK_SW |
+| 2 | 2 | 2 | passive | VGATE |
+
+**C17**
+
+| pad | symbol | ours | type | net |
+|---|---|---|---|---|
+| 1 | — | 1 | passive | VBAT |
+| 2 | — | 2 | passive | GND |
+
+**C18**
+
+| pad | symbol | ours | type | net |
+|---|---|---|---|---|
+| 1 | — | 1 | passive | VBAT |
+| 2 | — | 2 | passive | GND |
+
+**C19**
+
+| pad | symbol | ours | type | net |
+|---|---|---|---|---|
+| 1 | — | 1 | passive | BUCK_BOOT |
+| 2 | — | 2 | passive | BUCK_SW |
+
+**C20**
+
+| pad | symbol | ours | type | net |
+|---|---|---|---|---|
+| 1 | — | 1 | passive | BUCK_VCC |
+| 2 | — | 2 | passive | GND |
+
+**C21**
+
+| pad | symbol | ours | type | net |
+|---|---|---|---|---|
+| 1 | — | 1 | passive | VGATE |
+| 2 | — | 2 | passive | GND |
+
+**R20**
+
+| pad | symbol | ours | type | net |
+|---|---|---|---|---|
+| 1 | — | 1 | passive | VGATE |
+| 2 | — | 2 | passive | BUCK_FB |
+
+**R21**
+
+| pad | symbol | ours | type | net |
+|---|---|---|---|---|
+| 1 | — | 1 | passive | BUCK_FB |
+| 2 | — | 2 | passive | GND |
+
 **U3**
 
 | pad | symbol | ours | type | net |
 |---|---|---|---|---|
 | 1 | GND | GND | power_in | GND |
-| 2 | VIN | VIN | power_in | 12V |
+| 2 | VIN | VIN | power_in | VGATE |
 | 3 | VOUT | VOUT | power_out | 3V3 |
 
 **C7**
 
 | pad | symbol | ours | type | net |
 |---|---|---|---|---|
-| 1 | — | 1 | passive | 12V |
+| 1 | — | 1 | passive | VGATE |
 | 2 | — | 2 | passive | GND |
 
 **C8**
@@ -205,7 +279,7 @@ _generated 2026-10-11 16:35 · checks FAIL_
 | 1 | INLA | INLA | input | INL_A |
 | 2 | INLB | INLB | input | INL_B |
 | 3 | INLC | INLC | input | INL_C |
-| 4 | GVDD | GVDD | power_in | 12V |
+| 4 | GVDD | GVDD | power_in | VGATE |
 | 5 | MODE | MODE | input | NC |
 | 6 | GND | GND | power_in | GND |
 | 7 | NC1 | NC1 | no_connect | NC |
@@ -232,14 +306,14 @@ _generated 2026-10-11 16:35 · checks FAIL_
 
 | pad | symbol | ours | type | net |
 |---|---|---|---|---|
-| 1 | — | 1 | passive | 12V |
+| 1 | — | 1 | passive | VGATE |
 | 2 | — | 2 | passive | GND |
 
 **C13**
 
 | pad | symbol | ours | type | net |
 |---|---|---|---|---|
-| 1 | — | 1 | passive | 12V |
+| 1 | — | 1 | passive | VGATE |
 | 2 | — | 2 | passive | GND |
 
 **C14**
@@ -434,6 +508,12 @@ _generated 2026-10-11 16:35 · checks FAIL_
   - note: Owner hand-solders it (not in the JLC BOM). Body on the bottom side, pins down into the carrier's 2x10 socket.
 - **H1** MountingHole_M2 (None): mechanical, no pins — verified 2026-10-11
   - pin map: 
+- **U4** LMR36506RRPER (C2870127): TI LMR36506 ZHCSKN9B (rev. Dec 2022) p.4 fig.6-1 (FB variant, right) + table 6-1; RRPER = adjustable output, RT, PFM (p.3 device comparison) — verified 2026-10-11
+  - pin map: RT=1, PGOOD=2, EN=3, VIN=4, SW=5, BOOT=6, VCC=7, FB=8, GND=9
+  - note: Vin 3.6-65 V, 0.6 A. VREF 1.0 V: VOUT = 1 + RFBT/RFBB (RFBT 100k recommended). RT to VCC = 1 MHz, to GND = 2.2 MHz (table 8-1). Required: CIN 2.2 uF + 100 nF HF at VIN, CBOOT 100 nF BOOT-SW, CVCC 1 uF VCC-GND (VCC: no external loads). EN may tie to VIN. PGOOD open-drain, may float or ground. Footprint: EasyEDA geometry checked against TI land pattern p.52.
+- **L1** FNR3015S220MT (C167761): two-terminal inductor, unpolarized; KiCad stock footprint for this exact series — verified 2026-10-11
+  - pin map: 1=1, 2=2
+  - note: Changjiang FNR3015S 22 uH +-20%, Isat 680 mA, DCR 598 mOhm, 3x3x1.5 mm shielded. Ripple at 24 V in / 11 V out / 1 MHz = 0.27 A p-p.
 - **U3** HT7533-1 (C14289): Holtek HT75xx-1 Rev. 2.80 p.5 pin descriptions, SOT89 (1=GND 2=VIN 3=VOUT); KiCad stock symbol agrees — verified 2026-10-11
   - pin map: GND=1, VIN=2, VOUT=3
   - note: Basic part. Vin max 30 V operating / 33 V abs, 100 mA, Iq 2.5 uA. SOT-89 theta-JA 200 C/W: from 12 V at 30 mA = 0.26 W, +52 C. Datasheet application uses 10 uF in/out; stable with ceramics.
@@ -466,24 +546,31 @@ _generated 2026-10-11 16:35 · checks FAIL_
 - ✓ MOSFET Vds: spike budget vs 60 V rating: 40 V (allowed 0 … 48)
 - ✓ BEMF divider at full LiHV vs 3.3 V MCU: 2.373 V (allowed 0 … 3.3)
 - ✓ BEMF clamp current at spike (10k series): 0.00364 A (allowed 0 … 0.005)
-- ✓ GVDD within DRV8300 4.8-20 V: 12 V (allowed 4.8 … 20)
-- ✓ Gate 12 V vs MOSFET Vgs +-20 V: 12 V (allowed 0 … 20)
+- ✓ Buck Vin: spike budget vs LMR36506 65 V: 40 V (allowed 0 … 58.5)
+- ✓ Gate rail = GVDD within DRV8300 4.8-20 V: 11 V (allowed 4.8 … 20)
+- ✓ Gate rail vs MOSFET Vgs +-20 V: 11 V (allowed 0 … 20)
+- ✓ Gate rail high enough for Rds(on) spec (10 V): 11 V (allowed 10 … 20)
+- ✓ Buck inductor peak current (24 V in, 50 mA load) vs Isat 0.68 A: 0.1854 A (allowed 0 … 0.544)
 - ✓ Bootstrap droop: Qg 33 nC / 100 nF: 0.33 V (allowed 0 … 1)
 - ✓ GVDD cap >= 10x bootstrap cap: 100 x (allowed 10 … 1e+06)
-- ✓ HT7533 Vin vs 30 V rating: 12 V (allowed 3.5 … 30)
-- ✓ HT7533 dissipation @30 mA (SOT-89 0.5 W): 0.261 W (allowed 0 … 0.5)
-- ✓ Jig flash: ST-LINK 5 V into the 12 V pin keeps 3V3 in regulation: 1.7 V (allowed 0.1 … 30)
+- ✓ HT7533 Vin vs 30 V rating: 11 V (allowed 3.5 … 30)
+- ✓ HT7533 dissipation @30 mA (SOT-89 0.5 W): 0.231 W (allowed 0 … 0.5)
+- ✓ Jig flash: ST-LINK 5 V on VBAT, buck dropout ~0.3 V, keeps HT7533 above 3.3 V: 1.4 V (allowed 0.1 … 30)
 
 ## Nets
-- `VBAT` (Power): J1.1, J1.2, J1.3, C1.1, C2.1, C3.1, C4.1, C5.1, C6.1, Q1.D, Q3.D, Q5.D
-- `GND` (Power): J1.4, J1.5, J1.6, C1.2, C2.2, C3.2, C4.2, C5.2, C6.2, U3.GND, C7.2, C8.2, U1.VSS, U1.EP, C9.2, C10.2, C11.2, R3.2, U2.GND, U2.EP, C12.2, C13.2, Q2.S, Q4.S, Q6.S, R12.2, R15.2, R18.2
-- `12V` (Gate): J1.8, U3.VIN, C7.1, U2.GVDD, C12.1, C13.1
+- `VBAT` (Power): J1.1, J1.2, J1.3, C1.1, C2.1, C3.1, C4.1, C5.1, C6.1, U4.VIN, U4.EN, C17.1, C18.1, Q1.D, Q3.D, Q5.D
+- `GND` (Power): J1.4, J1.5, J1.6, J1.8, C1.2, C2.2, C3.2, C4.2, C5.2, C6.2, U4.GND, C17.2, C18.2, C20.2, C21.2, R21.2, U3.GND, C7.2, C8.2, U1.VSS, U1.EP, C9.2, C10.2, C11.2, R3.2, U2.GND, U2.EP, C12.2, C13.2, Q2.S, Q4.S, Q6.S, R12.2, R15.2, R18.2
 - `DSHOT` (Default): J1.9, R4.1
 - `SWDIO` (Default): J1.10, U1.PA13
 - `SWCLK` (Default): J1.11, U1.PA14
 - `PH_A` (Power): J1.12, J1.13, J1.14, U2.SHA, C14.2, Q1.S, Q2.D, R11.1
 - `PH_B` (Power): J1.15, J1.16, J1.17, U2.SHB, C15.2, Q3.S, Q4.D, R14.1
 - `PH_C` (Power): J1.18, J1.19, J1.20, U2.SHC, C16.2, Q5.S, Q6.D, R17.1
+- `BUCK_VCC` (Default): U4.VCC, U4.RT, C20.1
+- `BUCK_SW` (Gate): U4.SW, L1.1, C19.2
+- `BUCK_BOOT` (Default): U4.BOOT, C19.1
+- `VGATE` (Gate): L1.2, C21.1, R20.1, U3.VIN, C7.1, U2.GVDD, C12.1, C13.1
+- `BUCK_FB` (Default): U4.FB, R20.2, R21.1
 - `3V3` (Default): U3.VOUT, C8.1, U1.VDD, C9.1, R1.1, R2.1
 - `VDDA` (Default): R1.2, U1.VDDA, C10.1
 - `NRST` (Default): U1.NRST, R2.2, C11.1
@@ -514,4 +601,4 @@ _generated 2026-10-11 16:35 · checks FAIL_
 - `FB_COMMON` (Default): R13.2, R16.2, R19.2, U1.PA1
 - `FB_B` (Default): R14.2, R15.1, R16.1, U1.PA4
 - `FB_C` (Default): R17.2, R18.1, R19.1, U1.PA5
-- NC: J1.7, U1.PA15, U1.PA2, U1.PA3, U1.PA6, U1.PB3, U1.PB5, U1.PB6, U1.PB7, U1.PF0, U1.PF1, U2.DT, U2.MODE, U2.NC1, U2.NC2
+- NC: J1.7, U1.PA15, U1.PA2, U1.PA3, U1.PA6, U1.PB3, U1.PB5, U1.PB6, U1.PB7, U1.PF0, U1.PF1, U2.DT, U2.MODE, U2.NC1, U2.NC2, U4.PGOOD

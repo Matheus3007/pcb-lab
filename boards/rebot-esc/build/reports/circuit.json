@@ -26,19 +26,43 @@
    "ok": true
   },
   {
-   "name": "GVDD within DRV8300 4.8-20 V",
-   "value": 12.0,
+   "name": "Buck Vin: spike budget vs LMR36506 65 V",
+   "value": 40.0,
+   "min": 0,
+   "max": 58.5,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "Gate rail = GVDD within DRV8300 4.8-20 V",
+   "value": 11.0,
    "min": 4.8,
    "max": 20,
    "unit": "V",
    "ok": true
   },
   {
-   "name": "Gate 12 V vs MOSFET Vgs +-20 V",
-   "value": 12.0,
+   "name": "Gate rail vs MOSFET Vgs +-20 V",
+   "value": 11.0,
    "min": 0,
    "max": 20,
    "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "Gate rail high enough for Rds(on) spec (10 V)",
+   "value": 11.0,
+   "min": 10,
+   "max": 20,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "Buck inductor peak current (24 V in, 50 mA load) vs Isat 0.68 A",
+   "value": 0.18541666666666667,
+   "min": 0,
+   "max": 0.544,
+   "unit": "A",
    "ok": true
   },
   {
@@ -59,7 +83,7 @@
   },
   {
    "name": "HT7533 Vin vs 30 V rating",
-   "value": 12.0,
+   "value": 11.0,
    "min": 3.5,
    "max": 30,
    "unit": "V",
@@ -67,15 +91,15 @@
   },
   {
    "name": "HT7533 dissipation @30 mA (SOT-89 0.5 W)",
-   "value": 0.26099999999999995,
+   "value": 0.23099999999999998,
    "min": 0,
    "max": 0.5,
    "unit": "W",
    "ok": true
   },
   {
-   "name": "Jig flash: ST-LINK 5 V into the 12 V pin keeps 3V3 in regulation",
-   "value": 1.7000000000000002,
+   "name": "Jig flash: ST-LINK 5 V on VBAT, buck dropout ~0.3 V, keeps HT7533 above 3.3 V",
+   "value": 1.4000000000000004,
    "min": 0.1,
    "max": 30,
    "unit": "V",

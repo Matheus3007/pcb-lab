@@ -4,12 +4,12 @@
   {
    "check": "schematic/pins_match",
    "severity": "ok",
-   "msg": "all 177 symbol pins match parts.yaml"
+   "msg": "all 202 symbol pins match parts.yaml"
   },
   {
    "check": "schematic/netlist_match",
    "severity": "ok",
-   "msg": "KiCad's netlist of the schematic equals circuit.py (39 nets)"
+   "msg": "KiCad's netlist of the schematic equals circuit.py (43 nets)"
   }
  ],
  "pin_table": {
@@ -68,7 +68,7 @@
     "symbol_name": "Pin_8",
     "name": "8",
     "type": "passive",
-    "net": "12V"
+    "net": "GND"
    },
    {
     "pad": "9",
@@ -252,6 +252,199 @@
     "net": "GND"
    }
   ],
+  "U4": [
+   {
+    "pad": "1",
+    "symbol_name": "RT",
+    "name": "RT",
+    "type": "input",
+    "net": "BUCK_VCC"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "PGOOD",
+    "name": "PGOOD",
+    "type": "open_collector",
+    "net": "NC"
+   },
+   {
+    "pad": "3",
+    "symbol_name": "EN",
+    "name": "EN",
+    "type": "input",
+    "net": "VBAT"
+   },
+   {
+    "pad": "4",
+    "symbol_name": "VIN",
+    "name": "VIN",
+    "type": "power_in",
+    "net": "VBAT"
+   },
+   {
+    "pad": "5",
+    "symbol_name": "SW",
+    "name": "SW",
+    "type": "power_out",
+    "net": "BUCK_SW"
+   },
+   {
+    "pad": "6",
+    "symbol_name": "BOOT",
+    "name": "BOOT",
+    "type": "passive",
+    "net": "BUCK_BOOT"
+   },
+   {
+    "pad": "7",
+    "symbol_name": "VCC",
+    "name": "VCC",
+    "type": "power_out",
+    "net": "BUCK_VCC"
+   },
+   {
+    "pad": "8",
+    "symbol_name": "FB",
+    "name": "FB",
+    "type": "input",
+    "net": "BUCK_FB"
+   },
+   {
+    "pad": "9",
+    "symbol_name": "GND",
+    "name": "GND",
+    "type": "power_in",
+    "net": "GND"
+   }
+  ],
+  "L1": [
+   {
+    "pad": "1",
+    "symbol_name": "1",
+    "name": "1",
+    "type": "passive",
+    "net": "BUCK_SW"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "2",
+    "name": "2",
+    "type": "passive",
+    "net": "VGATE"
+   }
+  ],
+  "C17": [
+   {
+    "pad": "1",
+    "symbol_name": "",
+    "name": "1",
+    "type": "passive",
+    "net": "VBAT"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "",
+    "name": "2",
+    "type": "passive",
+    "net": "GND"
+   }
+  ],
+  "C18": [
+   {
+    "pad": "1",
+    "symbol_name": "",
+    "name": "1",
+    "type": "passive",
+    "net": "VBAT"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "",
+    "name": "2",
+    "type": "passive",
+    "net": "GND"
+   }
+  ],
+  "C19": [
+   {
+    "pad": "1",
+    "symbol_name": "",
+    "name": "1",
+    "type": "passive",
+    "net": "BUCK_BOOT"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "",
+    "name": "2",
+    "type": "passive",
+    "net": "BUCK_SW"
+   }
+  ],
+  "C20": [
+   {
+    "pad": "1",
+    "symbol_name": "",
+    "name": "1",
+    "type": "passive",
+    "net": "BUCK_VCC"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "",
+    "name": "2",
+    "type": "passive",
+    "net": "GND"
+   }
+  ],
+  "C21": [
+   {
+    "pad": "1",
+    "symbol_name": "",
+    "name": "1",
+    "type": "passive",
+    "net": "VGATE"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "",
+    "name": "2",
+    "type": "passive",
+    "net": "GND"
+   }
+  ],
+  "R20": [
+   {
+    "pad": "1",
+    "symbol_name": "",
+    "name": "1",
+    "type": "passive",
+    "net": "VGATE"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "",
+    "name": "2",
+    "type": "passive",
+    "net": "BUCK_FB"
+   }
+  ],
+  "R21": [
+   {
+    "pad": "1",
+    "symbol_name": "",
+    "name": "1",
+    "type": "passive",
+    "net": "BUCK_FB"
+   },
+   {
+    "pad": "2",
+    "symbol_name": "",
+    "name": "2",
+    "type": "passive",
+    "net": "GND"
+   }
+  ],
   "U3": [
    {
     "pad": "1",
@@ -265,7 +458,7 @@
     "symbol_name": "VIN",
     "name": "VIN",
     "type": "power_in",
-    "net": "12V"
+    "net": "VGATE"
    },
    {
     "pad": "3",
@@ -281,7 +474,7 @@
     "symbol_name": "",
     "name": "1",
     "type": "passive",
-    "net": "12V"
+    "net": "VGATE"
    },
    {
     "pad": "2",
@@ -651,7 +844,7 @@
     "symbol_name": "GVDD",
     "name": "GVDD",
     "type": "power_in",
-    "net": "12V"
+    "net": "VGATE"
    },
    {
     "pad": "5",
@@ -807,7 +1000,7 @@
     "symbol_name": "",
     "name": "1",
     "type": "passive",
-    "net": "12V"
+    "net": "VGATE"
    },
    {
     "pad": "2",
@@ -823,7 +1016,7 @@
     "symbol_name": "",
     "name": "1",
     "type": "passive",
-    "net": "12V"
+    "net": "VGATE"
    },
    {
     "pad": "2",
@@ -1348,7 +1541,7 @@
  "power_flags": [
   "VBAT",
   "GND",
-  "12V",
+  "VGATE",
   "VDDA"
  ]
 }

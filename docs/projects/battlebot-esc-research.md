@@ -60,7 +60,7 @@ expensive at JLC.
 **Gate driver: TI DRV8300DRGER instead of NSG2065Q.** Genuine TI, 100 V, integrated bootstrap diodes,
 adjustable dead time (DT pin), 23.7k in stock, $0.59. INHx/INLx are active-high with MODE floating,
 the same polarity as the NSG2065Q ("in phase" in its datasheet), so the AT_B pin mapping and stock
-firmware still apply. GVDD 5–20 V: fed with ~12 V from the carrier.
+firmware still apply. GVDD 5–20 V: 11 V from the module's own buck (see Module supplies).
 - DRV8328 was considered: it runs straight from the battery (to 60 V, VDS overcurrent protection)
   and AM32 already supports it (ARK 4IN1, F051 targets). But only the C/D variants have the 3.3 V
   LDO, and DRV8328C has 33 in stock at JLC. Kept as a watch item.
@@ -70,13 +70,14 @@ firmware still apply. GVDD 5–20 V: fed with ~12 V from the carrier.
 Siliup SP60N05GNJ (60 V, 4.7 mΩ, $0.25). Branded alternative: AON7262E (10 mΩ). A 40 V option
 (Winsok WSD4070DN33) is listed but 60 V is preferred for regen margin.
 
-**Module supplies.** The carrier provides ~12 V (one buck shared by all ESC modules) for GVDD; the module
-makes 3.3 V with an HT7533 (Basic, 30 V max) from that 12 V. No buck or inductor on the module.
+**Module supplies (changed at gate 1, 2026-10-11).** Self-contained like an off-the-shelf ESC: an LMR36506
+(65 V, 2×2 mm) buck makes an 11 V gate rail from VBAT, an HT7533 makes 3.3 V from it. The carrier
+supplies only battery and DShot. (First plan was a shared 12 V buck on the carrier.)
 
 **Module connection (decided 2026-10-11): one 2×9 2.54 mm header carries everything.** Screw joints
 (SMD M2 standoffs carrying the phases) and pogo pins were considered and dropped: too many parts and
 failure points for a v1, and 5 screws per module for a rigid two-edge clamp.
-- Pins: phases A/B/C 3 each (9), battery + 3, GND 4, 12 V gate supply 1, DShot 1 = 18. About 3 A per
+- Pins (2×10): phases A/B/C 3 each (9), battery + 3, GND 4, key 1 (no pin), DShot 1, SWDIO 1, SWCLK 1 = 20. About 3 A per
   pin continuous, so ~9 A per phase continuous with short 20–30 A peaks; parallel pins mean one weak
   contact doesn't cut a function. Check against the first fight logs.
 - Through-hole on both sides (insertion forces and hits): female socket on the carrier, e.g.
