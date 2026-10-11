@@ -14,16 +14,16 @@ iFlight Xing 2207 1800 kV motor rewired to wye (~1040 kV).
 ## Mechanical
 - Envelope: rear-right channel of the chassis, one module at each end of the carrier
   (`RebotAssemblyV3.STEP`; channel ≈35 mm deep at the wheel end, 17–20 mm at the centre end).
-- Outline: **34 × 21 mm** (gate 2). The through-hole header's pads block a 25 × 5 mm strip of the top side, and
-  Economic assembly is one-sided, so the parts need the 34 × 15 mm above it. Two modules = 68 mm of the ~78 mm carrier.
+- Outline: **34 × 21 mm** (gate 2). Bottom edge: the 2×5 header (left) and the three motor pads (right, one
+  under each half bridge). Parts (one-sided, Economic) fill the 34 × 15 mm above. Two modules = 68 mm of the
+  ~78 mm carrier.
 - Thickness: 1.0 mm (keeps the stack ≈15 mm; Economic allows 0.8–1.6).
-- Parts: **top side only** (SMD); the male header is through-hole, body on the bottom side, pins down
-  into the carrier's socket.
+- Parts: **top side only** (SMD); the male 2×5 header is through-hole, body on the bottom side, pins down
+  into the carrier's socket. Motor pads on the top side, far edge.
 - Height: top-side parts ≤ 2 mm (MOSFETs ~1 mm, MCU/driver ~0.8 mm, 1206 caps ~1.6 mm).
 - Mounting: one M2 hole in the middle (screw into a standoff on the carrier, no current); must also
   work with Kapton tape only. Keep copper/parts clear of the screw head (≈ Ø4.5 mm).
-- Mass: ≈ 3 g each (1.0 mm FR-4 34×21 ≈ 1.3 g, parts ≈ 0.5 g, 2×10 header ≈ 1–1.2 g). The 2 g budget
-  didn't account for the header; still far below an off-the-shelf ESC with its leads and connectors.
+- Mass: ≈ 2.3 g each (1.0 mm FR-4 34×21 ≈ 1.3 g, parts ≈ 0.5 g, 2×5 header ≈ 0.5 g), plus the motor wires.
 - Environment: combat robot, **shock first** (weapon hits, arena slams). No tall or heavy parts,
   no parts on the edges that touch the screw head, keep the MCU/driver away from board flex near the header.
 
@@ -38,17 +38,18 @@ iFlight Xing 2207 1800 kV motor rewired to wye (~1040 kV).
   < 2.5 A battery-side for both motors); VBAT/GND up to ~10 A short peaks.
 - Critical signals: gate drive loops (driver → gate → source, short and tight), BEMF divider network
   to the MCU comparator, DShot input.
-- Connector: **2×10 2.54 mm male header, through-hole**, hand-soldered; mating 2×10 socket on the
-  carrier (2×9 parts researched: HX PZ2.54-2x9P ZZ C42372517 / HC-PM254-8.5H-2x9PZ C22373914). Pinout:
-  - Phases A, B, C: 3 pins each (9)
-  - VBAT: 3 (pins 1–3) · GND: 4 (4–6, 8) · **KEY: 7** · DShot: 9 · SWDIO: 10 · SWCLK: 11 ·
-    A: 12–14 · B: 15–17 · C: 18–20
-  - **Mechanically keyed:** pin 7 is pulled out of the module's header and hole 7 of the carrier's
-    socket is blocked (a cut pin soldered in). A module rotated 180° can't go in. Electrically a
-    rotated module would short the battery through body diodes and a motor winding, so the key is
-    required, not optional. The M2 screw hole also only aligns one way.
-- Programming: SWDIO/SWCLK on the main header. One-time AM32 bootloader flash with a 2×10 socket jig:
-  ST-LINK 5 V → VBAT pins (the buck passes ~4.7 V through in dropout, HT7533 makes 3.3 V), GND, SWDIO, SWCLK.
+- **Motor pads:** three 2.6 × 3.6 mm SMD solder pads (with vias to the inner layers) on the far edge, one
+  per phase, for lap-soldered 18–20 AWG motor wires, like an off-the-shelf ESC. Swap: unsolder/resolder
+  3 wires (~3–5 min, within the owner's 5-minute limit).
+- **Carrier connector: 2×5 2.54 mm male header, through-hole**, hand-soldered; mating 2×5 socket on the
+  carrier. Only battery-side current (a few A) flows through it. Pinout:
+  - VBAT: 1–3 · GND: 4–6 · **KEY: 7** · DShot: 8 · SWDIO: 9 · SWCLK: 10
+  - **Mechanically keyed:** pin 7 is pulled out of the module's header and hole 7 of the carrier's socket
+    is blocked. Rotated 180° (pin n → socket 11−n) the module's pin 4 hits the blocked hole. Without the
+    key a rotated module would put carrier VBAT on the MCU's DShot/SWD pins.
+- Programming: SWDIO/SWCLK on the main header. One-time AM32 bootloader flash with a 2×5 socket jig:
+  ST-LINK 5 V → VBAT pins (the buck passes ~4.7 V through in dropout, HT7533 makes 3.3 V), GND, SWDIO, SWCLK
+  (2×5 socket jig).
 - Current sense: **none on the module.** The owner doesn't use AM32 current limiting ("rather lose the
   ESC than the fight"); per-motor current is measured on the carrier, in each module's VBAT feed.
   Stock AM32 target (`OPENESC_20_F421`, NO_CURRENT_SENSE) unchanged.
@@ -76,4 +77,6 @@ iFlight Xing 2207 1800 kV motor rewired to wye (~1040 kV).
 | 2026-10-11 | Gate 1 review: items approved, one change pending | OK: header key at pin 7 (GND 4→3), size copper for 5 A continuous, 10 Ω gate resistors, own MOSFET footprint, MCU EP land. Item 5 changed: module made self-contained (owner's call), see next row |
 | 2026-10-11 | Self-contained power | LMR36506 65 V buck → 11 V gate rail on the module; carrier's 12 V removed; header pin 8 → GND |
 | 2026-10-11 | gate 1 approved | Self-contained power block accepted; on to outline + placement |
-| 2026-10-11 | Gate 2 placement | 34 × 21 mm, 4-layer; header along the bottom edge, three vertical half bridges on the right, supplies/MCU/driver left; 26 placement rules |
+| 2026-10-11 | Gate 2 placement (superseded) | 34 × 21 mm, 4-layer; header along the bottom edge, three vertical half bridges on the right, supplies/MCU/driver left; 26 placement rules |
+| 2026-10-11 | Architecture: motor pads on the module | Owner: phases to solder pads like a normal ESC, short 2×5 header for battery/DShot/SWD; gate 1 pre-approved for this change |
+| 2026-10-11 | Gate 2 placement (redo) | 2×5 header bottom-left, motor pads bottom-right under the half bridges; rest of the layout unchanged |

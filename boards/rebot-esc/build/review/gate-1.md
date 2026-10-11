@@ -1,5 +1,5 @@
 # rebot-esc: review gate 1
-_generated 2026-10-11 16:55 · checks FAIL_
+_generated 2026-10-11 17:46 · checks FAIL_
 
 ## BOM
 | refs | value | MPN | LCSC | tier | stock | unit $ |
@@ -25,7 +25,7 @@ _generated 2026-10-11 16:55 · checks FAIL_
 ## Schematic (generated from circuit.py; read it next to the datasheets)
 ![schematic](../renders/schematic.png)
 
-- ✓ `schematic/pins_match` all 202 symbol pins match parts.yaml
+- ✓ `schematic/pins_match` all 195 symbol pins match parts.yaml
 - ✓ `schematic/netlist_match` KiCad's netlist of the schematic equals circuit.py (43 nets)
 
 ## Pin tables (pad → KiCad symbol name / parts.yaml name → electrical type → net)
@@ -41,19 +41,27 @@ _generated 2026-10-11 16:55 · checks FAIL_
 | 5 | Pin_5 | 5 | passive | GND |
 | 6 | Pin_6 | 6 | passive | GND |
 | 7 | Pin_7 | 7 | passive | NC |
-| 8 | Pin_8 | 8 | passive | GND |
-| 9 | Pin_9 | 9 | passive | DSHOT |
-| 10 | Pin_10 | 10 | passive | SWDIO |
-| 11 | Pin_11 | 11 | passive | SWCLK |
-| 12 | Pin_12 | 12 | passive | PH_A |
-| 13 | Pin_13 | 13 | passive | PH_A |
-| 14 | Pin_14 | 14 | passive | PH_A |
-| 15 | Pin_15 | 15 | passive | PH_B |
-| 16 | Pin_16 | 16 | passive | PH_B |
-| 17 | Pin_17 | 17 | passive | PH_B |
-| 18 | Pin_18 | 18 | passive | PH_C |
-| 19 | Pin_19 | 19 | passive | PH_C |
-| 20 | Pin_20 | 20 | passive | PH_C |
+| 8 | Pin_8 | 8 | passive | DSHOT |
+| 9 | Pin_9 | 9 | passive | SWDIO |
+| 10 | Pin_10 | 10 | passive | SWCLK |
+
+**J2**
+
+| pad | symbol | ours | type | net |
+|---|---|---|---|---|
+| 1 | Pin_1 | 1 | passive | PH_A |
+
+**J3**
+
+| pad | symbol | ours | type | net |
+|---|---|---|---|---|
+| 1 | Pin_1 | 1 | passive | PH_B |
+
+**J4**
+
+| pad | symbol | ours | type | net |
+|---|---|---|---|---|
+| 1 | Pin_1 | 1 | passive | PH_C |
 
 **C1**
 
@@ -503,9 +511,18 @@ _generated 2026-10-11 16:55 · checks FAIL_
 | 2 | — | 2 | passive | FB_COMMON |
 
 ## Pinout evidence (ICs and connectors)
-- **J1** PinHeader_2x10 (None): generic header, pin n = pad n (odd row / even row) — verified 2026-10-11
-  - pin map: 1=1, 2=2, 3=3, 4=4, 5=5, 6=6, 7=7, 8=8, 9=9, 10=10, 11=11, 12=12, 13=13, 14=14, 15=15, 16=16, 17=17, 18=18, 19=19, 20=20
-  - note: Owner hand-solders it (not in the JLC BOM). Body on the bottom side, pins down into the carrier's 2x10 socket.
+- **J1** PinHeader_2x05 (None): generic header, pin n = pad n (odd row / even row) — verified 2026-10-11
+  - pin map: 1=1, 2=2, 3=3, 4=4, 5=5, 6=6, 7=7, 8=8, 9=9, 10=10
+  - note: Owner hand-solders it (not in the JLC BOM). Body on the bottom side, pins down into the carrier's 2x5 socket.
+- **J2** MotorPad (None): single solder pad (all copper is pad 1) — verified 2026-10-11
+  - pin map: 1=1
+  - note: Motor phase wire lap-soldered on top, like an ESC phase pad. Not a BOM part (copper only).
+- **J3** MotorPad (None): single solder pad (all copper is pad 1) — verified 2026-10-11
+  - pin map: 1=1
+  - note: Motor phase wire lap-soldered on top, like an ESC phase pad. Not a BOM part (copper only).
+- **J4** MotorPad (None): single solder pad (all copper is pad 1) — verified 2026-10-11
+  - pin map: 1=1
+  - note: Motor phase wire lap-soldered on top, like an ESC phase pad. Not a BOM part (copper only).
 - **H1** MountingHole_M2 (None): mechanical, no pins — verified 2026-10-11
   - pin map: 
 - **U4** LMR36506RRPER (C2870127): TI LMR36506 ZHCSKN9B (rev. Dec 2022) p.4 fig.6-1 (FB variant, right) + table 6-1; RRPER = adjustable output, RT, PFM (p.3 device comparison) — verified 2026-10-11
@@ -525,22 +542,22 @@ _generated 2026-10-11 16:55 · checks FAIL_
   - note: GVDD 4.8-20 V, >=10 uF local + small HF cap (sec. 9.2.2/10). Bootstrap cap BSTx-SHx: 100 nF min example for 59 nC; 33 nC gates here. MODE floating = non-inverted INLx (AM32 AT_B polarity); MODE to GVDD would invert. DT floating = fixed dead time, resistor to GND = variable. NC 7/8 may float or go to GND. RGE0024B thermal pad 2.45 mm (p.33-34). PowerPAD to GND.
 - **Q1** HSBB6066 (C2828498): Huashuo HSBB6066 datasheet Ver 3.0 p.1 PRPAK3X3 pin configuration (S S S G, D = top leads + pad), p.5 package outline — verified 2026-10-11
   - pin map: S=1/2/3, G=4, D=5
-  - note: 60 V, 4.4 mOhm typ / 5.2 max @10 V, Qg 33 nC, Vgs +-20 V, 130 A pulsed. Footprint is ours (lib/footprints/Rebot.pretty), drawn from the p.5 outline; EasyEDA's has an off-centre origin and a courtyard that misses the pads. 3D model: TODO before gate 2.
+  - note: 60 V, 4.4 mOhm typ / 5.2 max @10 V, Qg 33 nC, Vgs +-20 V, 130 A pulsed. Footprint is ours (lib/footprints/Rebot.pretty), drawn from the p.5 outline; EasyEDA's has an off-centre origin and a courtyard that misses the pads. 3D model: EasyEDA's, re-origined (see model:).
 - **Q2** HSBB6066 (C2828498): Huashuo HSBB6066 datasheet Ver 3.0 p.1 PRPAK3X3 pin configuration (S S S G, D = top leads + pad), p.5 package outline — verified 2026-10-11
   - pin map: S=1/2/3, G=4, D=5
-  - note: 60 V, 4.4 mOhm typ / 5.2 max @10 V, Qg 33 nC, Vgs +-20 V, 130 A pulsed. Footprint is ours (lib/footprints/Rebot.pretty), drawn from the p.5 outline; EasyEDA's has an off-centre origin and a courtyard that misses the pads. 3D model: TODO before gate 2.
+  - note: 60 V, 4.4 mOhm typ / 5.2 max @10 V, Qg 33 nC, Vgs +-20 V, 130 A pulsed. Footprint is ours (lib/footprints/Rebot.pretty), drawn from the p.5 outline; EasyEDA's has an off-centre origin and a courtyard that misses the pads. 3D model: EasyEDA's, re-origined (see model:).
 - **Q3** HSBB6066 (C2828498): Huashuo HSBB6066 datasheet Ver 3.0 p.1 PRPAK3X3 pin configuration (S S S G, D = top leads + pad), p.5 package outline — verified 2026-10-11
   - pin map: S=1/2/3, G=4, D=5
-  - note: 60 V, 4.4 mOhm typ / 5.2 max @10 V, Qg 33 nC, Vgs +-20 V, 130 A pulsed. Footprint is ours (lib/footprints/Rebot.pretty), drawn from the p.5 outline; EasyEDA's has an off-centre origin and a courtyard that misses the pads. 3D model: TODO before gate 2.
+  - note: 60 V, 4.4 mOhm typ / 5.2 max @10 V, Qg 33 nC, Vgs +-20 V, 130 A pulsed. Footprint is ours (lib/footprints/Rebot.pretty), drawn from the p.5 outline; EasyEDA's has an off-centre origin and a courtyard that misses the pads. 3D model: EasyEDA's, re-origined (see model:).
 - **Q4** HSBB6066 (C2828498): Huashuo HSBB6066 datasheet Ver 3.0 p.1 PRPAK3X3 pin configuration (S S S G, D = top leads + pad), p.5 package outline — verified 2026-10-11
   - pin map: S=1/2/3, G=4, D=5
-  - note: 60 V, 4.4 mOhm typ / 5.2 max @10 V, Qg 33 nC, Vgs +-20 V, 130 A pulsed. Footprint is ours (lib/footprints/Rebot.pretty), drawn from the p.5 outline; EasyEDA's has an off-centre origin and a courtyard that misses the pads. 3D model: TODO before gate 2.
+  - note: 60 V, 4.4 mOhm typ / 5.2 max @10 V, Qg 33 nC, Vgs +-20 V, 130 A pulsed. Footprint is ours (lib/footprints/Rebot.pretty), drawn from the p.5 outline; EasyEDA's has an off-centre origin and a courtyard that misses the pads. 3D model: EasyEDA's, re-origined (see model:).
 - **Q5** HSBB6066 (C2828498): Huashuo HSBB6066 datasheet Ver 3.0 p.1 PRPAK3X3 pin configuration (S S S G, D = top leads + pad), p.5 package outline — verified 2026-10-11
   - pin map: S=1/2/3, G=4, D=5
-  - note: 60 V, 4.4 mOhm typ / 5.2 max @10 V, Qg 33 nC, Vgs +-20 V, 130 A pulsed. Footprint is ours (lib/footprints/Rebot.pretty), drawn from the p.5 outline; EasyEDA's has an off-centre origin and a courtyard that misses the pads. 3D model: TODO before gate 2.
+  - note: 60 V, 4.4 mOhm typ / 5.2 max @10 V, Qg 33 nC, Vgs +-20 V, 130 A pulsed. Footprint is ours (lib/footprints/Rebot.pretty), drawn from the p.5 outline; EasyEDA's has an off-centre origin and a courtyard that misses the pads. 3D model: EasyEDA's, re-origined (see model:).
 - **Q6** HSBB6066 (C2828498): Huashuo HSBB6066 datasheet Ver 3.0 p.1 PRPAK3X3 pin configuration (S S S G, D = top leads + pad), p.5 package outline — verified 2026-10-11
   - pin map: S=1/2/3, G=4, D=5
-  - note: 60 V, 4.4 mOhm typ / 5.2 max @10 V, Qg 33 nC, Vgs +-20 V, 130 A pulsed. Footprint is ours (lib/footprints/Rebot.pretty), drawn from the p.5 outline; EasyEDA's has an off-centre origin and a courtyard that misses the pads. 3D model: TODO before gate 2.
+  - note: 60 V, 4.4 mOhm typ / 5.2 max @10 V, Qg 33 nC, Vgs +-20 V, 130 A pulsed. Footprint is ours (lib/footprints/Rebot.pretty), drawn from the p.5 outline; EasyEDA's has an off-centre origin and a courtyard that misses the pads. 3D model: EasyEDA's, re-origined (see model:).
 
 ## Design assertions
 - ✓ MOSFET Vds: spike budget vs 60 V rating: 40 V (allowed 0 … 48)
@@ -559,13 +576,13 @@ _generated 2026-10-11 16:55 · checks FAIL_
 
 ## Nets
 - `VBAT` (Power): J1.1, J1.2, J1.3, C1.1, C2.1, C3.1, C4.1, C5.1, C6.1, U4.VIN, U4.EN, C17.1, C18.1, Q1.D, Q3.D, Q5.D
-- `GND` (Power): J1.4, J1.5, J1.6, J1.8, C1.2, C2.2, C3.2, C4.2, C5.2, C6.2, U4.GND, C17.2, C18.2, C20.2, C21.2, R21.2, U3.GND, C7.2, C8.2, U1.VSS, U1.EP, C9.2, C10.2, C11.2, R3.2, U2.GND, U2.EP, C12.2, C13.2, Q2.S, Q4.S, Q6.S, R12.2, R15.2, R18.2
-- `DSHOT` (Default): J1.9, R4.1
-- `SWDIO` (Default): J1.10, U1.PA13
-- `SWCLK` (Default): J1.11, U1.PA14
-- `PH_A` (Power): J1.12, J1.13, J1.14, U2.SHA, C14.2, Q1.S, Q2.D, R11.1
-- `PH_B` (Power): J1.15, J1.16, J1.17, U2.SHB, C15.2, Q3.S, Q4.D, R14.1
-- `PH_C` (Power): J1.18, J1.19, J1.20, U2.SHC, C16.2, Q5.S, Q6.D, R17.1
+- `GND` (Power): J1.4, J1.5, J1.6, C1.2, C2.2, C3.2, C4.2, C5.2, C6.2, U4.GND, C17.2, C18.2, C20.2, C21.2, R21.2, U3.GND, C7.2, C8.2, U1.VSS, U1.EP, C9.2, C10.2, C11.2, R3.2, U2.GND, U2.EP, C12.2, C13.2, Q2.S, Q4.S, Q6.S, R12.2, R15.2, R18.2
+- `DSHOT` (Default): J1.8, R4.1
+- `SWDIO` (Default): J1.9, U1.PA13
+- `SWCLK` (Default): J1.10, U1.PA14
+- `PH_A` (Power): J2.1, U2.SHA, C14.2, Q1.S, Q2.D, R11.1
+- `PH_B` (Power): J3.1, U2.SHB, C15.2, Q3.S, Q4.D, R14.1
+- `PH_C` (Power): J4.1, U2.SHC, C16.2, Q5.S, Q6.D, R17.1
 - `BUCK_VCC` (Default): U4.VCC, U4.RT, C20.1
 - `BUCK_SW` (Gate): U4.SW, L1.1, C19.2
 - `BUCK_BOOT` (Default): U4.BOOT, C19.1

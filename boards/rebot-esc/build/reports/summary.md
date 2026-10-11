@@ -1,7 +1,7 @@
 # rebot-esc — checks FAIL
 
-143 errors · 0 warnings · 0 waived  
-board 34.05 × 21.05 mm · 55 footprints · 0 track segments · 0 vias · 0 mm copper
+136 errors · 0 warnings · 0 waived  
+board 34.05 × 21.05 mm · 58 footprints · 0 track segments · 0 vias · 0 mm copper
 
 ## circuit
 - ✓ `circuit/assertion` MOSFET Vds: spike budget vs 60 V rating: 40 V in [0, 48]
@@ -12,19 +12,19 @@ board 34.05 × 21.05 mm · 55 footprints · 0 track segments · 0 vias · 0 mm c
 - … 8 more `circuit/assertionok`
 
 ## schematic
-- ✓ `schematic/pins_match` all 202 symbol pins match parts.yaml
+- ✓ `schematic/pins_match` all 195 symbol pins match parts.yaml
 - ✓ `schematic/netlist_match` KiCad's netlist of the schematic equals circuit.py (43 nets)
 
 ## erc
 - ✓ `erc/ok` KiCad ERC: no violations
 
 ## drc
+- ✗ `drc/unconnected` unconnected: PTH pad 1 [PH_A] of J2; Pad 1 [PH_A] of R11 on F.Cu
 - ✗ `drc/unconnected` unconnected: PTH pad 1 [VBAT] of J1; Pad 1 [VBAT] of C17 on F.Cu
-- ✗ `drc/unconnected` unconnected: PTH pad 12 [PH_A] of J1; PTH pad 14 [PH_A] of J1
-- ✗ `drc/unconnected` unconnected: PTH pad 14 [PH_A] of J1; PTH pad 13 [PH_A] of J1
-- ✗ `drc/unconnected` unconnected: PTH pad 15 [PH_B] of J1; Pad 1 [PH_B] of R14 on F.Cu
-- ✗ `drc/unconnected` unconnected: PTH pad 16 [PH_B] of J1; PTH pad 15 [PH_B] of J1
-- … 138 more `drc/unconnectederror`
+- ✗ `drc/unconnected` unconnected: PTH pad 2 [VBAT] of J1; PTH pad 1 [VBAT] of J1
+- ✗ `drc/unconnected` unconnected: PTH pad 3 [VBAT] of J1; PTH pad 1 [VBAT] of J1
+- ✗ `drc/unconnected` unconnected: PTH pad 4 [GND] of J1; PTH pad 6 [GND] of J1
+- … 131 more `drc/unconnectederror`
 
 ## parity
 - ✓ `parity/ok` board matches the schematic (KiCad schematic parity)

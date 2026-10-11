@@ -1,7 +1,7 @@
 {
  "board": "rebot-esc",
  "pass": false,
- "errors": 143,
+ "errors": 136,
  "warnings": 0,
  "waived": 0,
  "findings": [
@@ -73,7 +73,7 @@
   {
    "check": "schematic/pins_match",
    "severity": "ok",
-   "msg": "all 202 symbol pins match parts.yaml"
+   "msg": "all 195 symbol pins match parts.yaml"
   },
   {
    "check": "schematic/netlist_match",
@@ -88,52 +88,17 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
+   "msg": "unconnected: PTH pad 1 [PH_A] of J2; Pad 1 [PH_A] of R11 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
    "msg": "unconnected: PTH pad 1 [VBAT] of J1; Pad 1 [VBAT] of C17 on F.Cu"
   },
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: PTH pad 12 [PH_A] of J1; PTH pad 14 [PH_A] of J1"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: PTH pad 14 [PH_A] of J1; PTH pad 13 [PH_A] of J1"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: PTH pad 15 [PH_B] of J1; Pad 1 [PH_B] of R14 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: PTH pad 16 [PH_B] of J1; PTH pad 15 [PH_B] of J1"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: PTH pad 17 [PH_B] of J1; PTH pad 15 [PH_B] of J1"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: PTH pad 18 [PH_C] of J1; PTH pad 20 [PH_C] of J1"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: PTH pad 19 [PH_C] of J1; Pad 1 [PH_C] of R17 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
    "msg": "unconnected: PTH pad 2 [VBAT] of J1; PTH pad 1 [VBAT] of J1"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: PTH pad 20 [PH_C] of J1; PTH pad 19 [PH_C] of J1"
   },
   {
    "check": "drc/unconnected",
@@ -149,11 +114,6 @@
    "check": "drc/unconnected",
    "severity": "error",
    "msg": "unconnected: PTH pad 5 [GND] of J1; PTH pad 6 [GND] of J1"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: PTH pad 6 [GND] of J1; PTH pad 8 [GND] of J1"
   },
   {
    "check": "drc/unconnected",
@@ -203,7 +163,7 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 1 [DSHOT] of R4 on F.Cu; PTH pad 9 [DSHOT] of J1"
+   "msg": "unconnected: Pad 1 [DSHOT] of R4 on F.Cu; PTH pad 8 [DSHOT] of J1"
   },
   {
    "check": "drc/unconnected",
@@ -223,17 +183,7 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 1 [GND] of Q2 on F.Cu; Pad 2 [GND] of R12 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
    "msg": "unconnected: Pad 1 [GND] of Q4 on F.Cu; Pad 2 [GND] of Q4 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: Pad 1 [GND] of Q4 on F.Cu; Pad 2 [GND] of R15 on F.Cu"
   },
   {
    "check": "drc/unconnected",
@@ -243,12 +193,7 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 1 [GND] of Q6 on F.Cu; Pad 2 [GND] of R18 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: Pad 1 [GND] of Q6 on F.Cu; Pad 3 [GND] of Q4 on F.Cu"
+   "msg": "unconnected: Pad 1 [GND] of Q6 on F.Cu; Pad 2 [GND] of Q6 on F.Cu"
   },
   {
    "check": "drc/unconnected",
@@ -258,22 +203,32 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 1 [PH_A] of Q1 on F.Cu; Pad 2 [PH_A] of Q1 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: Pad 1 [PH_A] of R11 on F.Cu; PTH pad 12 [PH_A] of J1"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: Pad 1 [PH_A] of R11 on F.Cu; Pad 5 [PH_A] of Q2 on F.Cu"
+   "msg": "unconnected: Pad 1 [PH_A] of Q1 on F.Cu; Pad 2 [PH_A] of C14 on F.Cu"
   },
   {
    "check": "drc/unconnected",
    "severity": "error",
    "msg": "unconnected: Pad 1 [PH_B] of Q3 on F.Cu; Pad 2 [PH_B] of C15 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [PH_B] of R14 on F.Cu; PTH pad 1 [PH_B] of J3"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [PH_C] of R17 on F.Cu; PTH pad 1 [PH_C] of J4"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [PH_C] of R17 on F.Cu; Pad 2 [PH_C] of C16 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [PH_C] of R17 on F.Cu; Pad 5 [PH_C] of Q6 on F.Cu"
   },
   {
    "check": "drc/unconnected",
@@ -353,6 +308,11 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
+   "msg": "unconnected: Pad 12 [PH_C] of U2 on F.Cu; Pad 2 [PH_C] of C16 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
    "msg": "unconnected: Pad 13 [GH_C] of U2 on F.Cu; Pad 1 [GH_C] of R9 on F.Cu"
   },
   {
@@ -379,6 +339,11 @@
    "check": "drc/unconnected",
    "severity": "error",
    "msg": "unconnected: Pad 16 [GH_B] of U2 on F.Cu; Pad 1 [GH_B] of R7 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 16 [GND] of U1 on F.Cu; Pad 29 [GND] of U1 on F.Cu"
   },
   {
    "check": "drc/unconnected",
@@ -463,11 +428,6 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 2 [GND] of C1 on F.Cu; Pad 2 [GND] of C21 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
    "msg": "unconnected: Pad 2 [GND] of C10 on F.Cu; Pad 2 [GND] of C8 on F.Cu"
   },
   {
@@ -483,12 +443,27 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C12 on F.Cu; Pad 6 [GND] of U2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C13 on F.Cu; Pad 2 [GND] of C9 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C13 on F.Cu; Pad 6 [GND] of U2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
    "msg": "unconnected: Pad 2 [GND] of C18 on F.Cu; Pad 2 [GND] of C17 on F.Cu"
   },
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 2 [GND] of C2 on F.Cu; Pad 2 [GND] of C4 on F.Cu"
+   "msg": "unconnected: Pad 2 [GND] of C18 on F.Cu; Pad 29 [GND] of U1 on F.Cu"
   },
   {
    "check": "drc/unconnected",
@@ -503,12 +478,27 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C20 on F.Cu; Pad 9 [GND] of U4 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C21 on F.Cu; Pad 2 [GND] of C1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C3 on F.Cu; Pad 2 [GND] of C5 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
    "msg": "unconnected: Pad 2 [GND] of C4 on F.Cu; Pad 2 [GND] of C1 on F.Cu"
   },
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 2 [GND] of C5 on F.Cu; Pad 2 [GND] of C3 on F.Cu"
+   "msg": "unconnected: Pad 2 [GND] of C4 on F.Cu; Pad 2 [GND] of C2 on F.Cu"
   },
   {
    "check": "drc/unconnected",
@@ -528,22 +518,27 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 2 [GND] of C9 on F.Cu; Pad 2 [GND] of C13 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
    "msg": "unconnected: Pad 2 [GND] of Q2 on F.Cu; Pad 1 [GND] of Q2 on F.Cu"
   },
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 2 [GND] of Q6 on F.Cu; Pad 1 [GND] of Q6 on F.Cu"
+   "msg": "unconnected: Pad 2 [GND] of Q4 on F.Cu; Pad 3 [GND] of Q4 on F.Cu"
   },
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 2 [GND] of Q6 on F.Cu; Pad 3 [GND] of Q6 on F.Cu"
+   "msg": "unconnected: Pad 2 [GND] of R12 on F.Cu; Pad 1 [GND] of Q2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of R15 on F.Cu; Pad 1 [GND] of Q4 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of R18 on F.Cu; Pad 1 [GND] of Q6 on F.Cu"
   },
   {
    "check": "drc/unconnected",
@@ -563,17 +558,12 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 2 [PH_A] of C14 on F.Cu; Pad 1 [PH_A] of Q1 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
    "msg": "unconnected: Pad 2 [PH_A] of C14 on F.Cu; Pad 18 [PH_A] of U2 on F.Cu"
   },
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 2 [PH_A] of Q1 on F.Cu; Pad 5 [PH_A] of Q2 on F.Cu"
+   "msg": "unconnected: Pad 2 [PH_A] of Q1 on F.Cu; Pad 1 [PH_A] of Q1 on F.Cu"
   },
   {
    "check": "drc/unconnected",
@@ -584,16 +574,6 @@
    "check": "drc/unconnected",
    "severity": "error",
    "msg": "unconnected: Pad 2 [PH_B] of Q3 on F.Cu; Pad 1 [PH_B] of Q3 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: Pad 2 [PH_C] of C16 on F.Cu; Pad 1 [PH_C] of R17 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: Pad 2 [PH_C] of C16 on F.Cu; Pad 12 [PH_C] of U2 on F.Cu"
   },
   {
    "check": "drc/unconnected",
@@ -618,12 +598,12 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 21 [SWDIO] of U1 on F.Cu; PTH pad 10 [SWDIO] of J1"
+   "msg": "unconnected: Pad 21 [SWDIO] of U1 on F.Cu; PTH pad 9 [SWDIO] of J1"
   },
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 22 [SWCLK] of U1 on F.Cu; PTH pad 11 [SWCLK] of J1"
+   "msg": "unconnected: Pad 22 [SWCLK] of U1 on F.Cu; PTH pad 10 [SWCLK] of J1"
   },
   {
    "check": "drc/unconnected",
@@ -633,12 +613,7 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 29 [GND] of U1 on F.Cu; Pad 16 [GND] of U1 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: Pad 29 [GND] of U1 on F.Cu; Pad 2 [GND] of C18 on F.Cu"
+   "msg": "unconnected: Pad 25 [GND] of U2 on F.Cu; Pad 6 [GND] of U2 on F.Cu"
   },
   {
    "check": "drc/unconnected",
@@ -653,7 +628,12 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 3 [GND] of Q4 on F.Cu; Pad 2 [GND] of Q4 on F.Cu"
+   "msg": "unconnected: Pad 3 [GND] of Q4 on F.Cu; Pad 1 [GND] of Q6 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 3 [GND] of Q6 on F.Cu; Pad 2 [GND] of Q6 on F.Cu"
   },
   {
    "check": "drc/unconnected",
@@ -669,11 +649,6 @@
    "check": "drc/unconnected",
    "severity": "error",
    "msg": "unconnected: Pad 3 [PH_C] of Q5 on F.Cu; Pad 2 [PH_C] of Q5 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: Pad 3 [PH_C] of Q5 on F.Cu; Pad 5 [PH_C] of Q6 on F.Cu"
   },
   {
    "check": "drc/unconnected",
@@ -728,6 +703,16 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
+   "msg": "unconnected: Pad 5 [PH_A] of Q2 on F.Cu; Pad 1 [PH_A] of R11 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 5 [PH_A] of Q2 on F.Cu; Pad 3 [PH_A] of Q1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
    "msg": "unconnected: Pad 5 [PH_B] of Q4 on F.Cu; Pad 1 [PH_B] of R14 on F.Cu"
   },
   {
@@ -738,7 +723,7 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 5 [PH_C] of Q6 on F.Cu; Pad 1 [PH_C] of R17 on F.Cu"
+   "msg": "unconnected: Pad 5 [PH_C] of Q6 on F.Cu; Pad 3 [PH_C] of Q5 on F.Cu"
   },
   {
    "check": "drc/unconnected",
@@ -768,21 +753,6 @@
   {
    "check": "drc/unconnected",
    "severity": "error",
-   "msg": "unconnected: Pad 6 [GND] of U2 on F.Cu; Pad 2 [GND] of C12 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: Pad 6 [GND] of U2 on F.Cu; Pad 2 [GND] of C13 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: Pad 6 [GND] of U2 on F.Cu; Pad 25 [GND] of U2 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
    "msg": "unconnected: Pad 7 [FB_COMMON] of U1 on F.Cu; Pad 2 [FB_COMMON] of R13 on F.Cu"
   },
   {
@@ -794,11 +764,6 @@
    "check": "drc/unconnected",
    "severity": "error",
    "msg": "unconnected: Pad 9 [GND] of U4 on F.Cu; Pad 2 [GND] of C18 on F.Cu"
-  },
-  {
-   "check": "drc/unconnected",
-   "severity": "error",
-   "msg": "unconnected: Pad 9 [GND] of U4 on F.Cu; Pad 2 [GND] of C20 on F.Cu"
   },
   {
    "check": "parity/ok",
@@ -1315,6 +1280,6 @@
   "tracks": 0,
   "vias": 0,
   "track_length": 0,
-  "parts": 55
+  "parts": 58
  }
 }

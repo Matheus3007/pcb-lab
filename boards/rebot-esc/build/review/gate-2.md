@@ -1,5 +1,5 @@
 # rebot-esc: review gate 2
-_generated 2026-10-11 17:35 · checks FAIL_
+_generated 2026-10-11 17:46 · checks FAIL_
 
 ## Renders
 ![placement](../renders/placement.png)
@@ -37,6 +37,9 @@ _generated 2026-10-11 17:35 · checks FAIL_
 
 ## Placement intent (from placement.yaml)
 - J1: {'at': [7.0, 16.0], 'rot': 270, 'side': 'bottom'}
+- J2: {'at': [21.0, 18.3]}
+- J3: {'at': [25.8, 18.3]}
+- J4: {'at': [30.6, 18.3]}
 - H1: {'at': [2.4, 2.4]}
 - Q1: {'at': [19.4, 4.4], 'rot': 0}
 - Q2: {'at': [19.4, 9.8], 'rot': 0}

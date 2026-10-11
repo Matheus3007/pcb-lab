@@ -4,7 +4,7 @@
   {
    "check": "schematic/pins_match",
    "severity": "ok",
-   "msg": "all 202 symbol pins match parts.yaml"
+   "msg": "all 195 symbol pins match parts.yaml"
   },
   {
    "check": "schematic/netlist_match",
@@ -68,89 +68,46 @@
     "symbol_name": "Pin_8",
     "name": "8",
     "type": "passive",
-    "net": "GND"
+    "net": "DSHOT"
    },
    {
     "pad": "9",
     "symbol_name": "Pin_9",
     "name": "9",
     "type": "passive",
-    "net": "DSHOT"
+    "net": "SWDIO"
    },
    {
     "pad": "10",
     "symbol_name": "Pin_10",
     "name": "10",
     "type": "passive",
-    "net": "SWDIO"
-   },
-   {
-    "pad": "11",
-    "symbol_name": "Pin_11",
-    "name": "11",
-    "type": "passive",
     "net": "SWCLK"
-   },
+   }
+  ],
+  "J2": [
    {
-    "pad": "12",
-    "symbol_name": "Pin_12",
-    "name": "12",
+    "pad": "1",
+    "symbol_name": "Pin_1",
+    "name": "1",
     "type": "passive",
     "net": "PH_A"
-   },
+   }
+  ],
+  "J3": [
    {
-    "pad": "13",
-    "symbol_name": "Pin_13",
-    "name": "13",
-    "type": "passive",
-    "net": "PH_A"
-   },
-   {
-    "pad": "14",
-    "symbol_name": "Pin_14",
-    "name": "14",
-    "type": "passive",
-    "net": "PH_A"
-   },
-   {
-    "pad": "15",
-    "symbol_name": "Pin_15",
-    "name": "15",
+    "pad": "1",
+    "symbol_name": "Pin_1",
+    "name": "1",
     "type": "passive",
     "net": "PH_B"
-   },
+   }
+  ],
+  "J4": [
    {
-    "pad": "16",
-    "symbol_name": "Pin_16",
-    "name": "16",
-    "type": "passive",
-    "net": "PH_B"
-   },
-   {
-    "pad": "17",
-    "symbol_name": "Pin_17",
-    "name": "17",
-    "type": "passive",
-    "net": "PH_B"
-   },
-   {
-    "pad": "18",
-    "symbol_name": "Pin_18",
-    "name": "18",
-    "type": "passive",
-    "net": "PH_C"
-   },
-   {
-    "pad": "19",
-    "symbol_name": "Pin_19",
-    "name": "19",
-    "type": "passive",
-    "net": "PH_C"
-   },
-   {
-    "pad": "20",
-    "symbol_name": "Pin_20",
-    "name": "20",
+    "pad": "1",
+    "symbol_name": "Pin_1",
+    "name": "1",
     "type": "passive",
     "net": "PH_C"
    }

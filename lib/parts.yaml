@@ -200,3 +200,25 @@ FNR3015S220MT:
   pinout_verified: 2026-10-11
   extended_reason: "No power inductor (only multilayer signal inductors <=15 mA) in JLC Basic/Preferred."
   notes: "Changjiang FNR3015S 22 uH +-20%, Isat 680 mA, DCR 598 mOhm, 3x3x1.5 mm shielded. Ripple at 24 V in / 11 V out / 1 MHz = 0.27 A p-p."
+
+PinHeader_2x05:
+  lcsc: null
+  dnp: true
+  value: 2x05 2.54mm (hand-soldered)
+  footprint: Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical
+  symbol: Connector_Generic:Conn_02x05_Odd_Even
+  pins: {"1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10}
+  pinout_source: "generic header, pin n = pad n (odd row / even row)"
+  pinout_verified: 2026-10-11
+  notes: "Owner hand-solders it (not in the JLC BOM). Body on the bottom side, pins down into the carrier's 2x5 socket."
+
+MotorPad:
+  lcsc: null
+  dnp: true
+  value: motor pad
+  footprint: Rebot:MotorPad_SMD_2.6x3.6mm
+  symbol: Connector_Generic:Conn_01x01
+  pins: {"1": 1}
+  pinout_source: "single solder pad (all copper is pad 1)"
+  pinout_verified: 2026-10-11
+  notes: "Motor phase wire lap-soldered on top, like an ESC phase pad. Not a BOM part (copper only)."

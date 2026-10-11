@@ -819,8 +819,8 @@
   },
   {
    "ref": "J1",
-   "value": "2x10 2.54mm (hand-soldered)",
-   "footprint": "Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Vertical",
+   "value": "2x05 2.54mm (hand-soldered)",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_2x05_P2.54mm_Vertical",
    "at": [
     7.0,
     16.0
@@ -831,7 +831,7 @@
    "courtyard": [
     5.185,
     14.185,
-    31.675,
+    18.975,
     20.365
    ],
    "smd": false,
@@ -846,82 +846,10 @@
     },
     {
      "num": "10",
-     "net": "SWDIO",
+     "net": "SWCLK",
      "at": [
       17.16,
       18.54
-     ]
-    },
-    {
-     "num": "11",
-     "net": "SWCLK",
-     "at": [
-      19.7,
-      16.0
-     ]
-    },
-    {
-     "num": "12",
-     "net": "PH_A",
-     "at": [
-      19.7,
-      18.54
-     ]
-    },
-    {
-     "num": "13",
-     "net": "PH_A",
-     "at": [
-      22.24,
-      16.0
-     ]
-    },
-    {
-     "num": "14",
-     "net": "PH_A",
-     "at": [
-      22.24,
-      18.54
-     ]
-    },
-    {
-     "num": "15",
-     "net": "PH_B",
-     "at": [
-      24.78,
-      16.0
-     ]
-    },
-    {
-     "num": "16",
-     "net": "PH_B",
-     "at": [
-      24.78,
-      18.54
-     ]
-    },
-    {
-     "num": "17",
-     "net": "PH_B",
-     "at": [
-      27.32,
-      16.0
-     ]
-    },
-    {
-     "num": "18",
-     "net": "PH_C",
-     "at": [
-      27.32,
-      18.54
-     ]
-    },
-    {
-     "num": "19",
-     "net": "PH_C",
-     "at": [
-      29.86,
-      16.0
      ]
     },
     {
@@ -929,14 +857,6 @@
      "net": "VBAT",
      "at": [
       7.0,
-      18.54
-     ]
-    },
-    {
-     "num": "20",
-     "net": "PH_C",
-     "at": [
-      29.86,
       18.54
      ]
     },
@@ -982,7 +902,7 @@
     },
     {
      "num": "8",
-     "net": "GND",
+     "net": "DSHOT",
      "at": [
       14.62,
       18.54
@@ -990,10 +910,169 @@
     },
     {
      "num": "9",
-     "net": "DSHOT",
+     "net": "SWDIO",
      "at": [
       17.16,
       16.0
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "J2",
+   "value": "motor pad",
+   "footprint": "Rebot:MotorPad_SMD_2.6x3.6mm",
+   "at": [
+    21.0,
+    18.3
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": true,
+   "courtyard": [
+    19.405,
+    16.205,
+    22.595,
+    20.395
+   ],
+   "smd": false,
+   "pads": [
+    {
+     "num": "1",
+     "net": "PH_A",
+     "at": [
+      20.25,
+      17.35
+     ]
+    },
+    {
+     "num": "1",
+     "net": "PH_A",
+     "at": [
+      21.0,
+      16.85
+     ]
+    },
+    {
+     "num": "1",
+     "net": "PH_A",
+     "at": [
+      21.0,
+      18.3
+     ]
+    },
+    {
+     "num": "1",
+     "net": "PH_A",
+     "at": [
+      21.75,
+      17.35
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "J3",
+   "value": "motor pad",
+   "footprint": "Rebot:MotorPad_SMD_2.6x3.6mm",
+   "at": [
+    25.8,
+    18.3
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": true,
+   "courtyard": [
+    24.205,
+    16.205,
+    27.395,
+    20.395
+   ],
+   "smd": false,
+   "pads": [
+    {
+     "num": "1",
+     "net": "PH_B",
+     "at": [
+      25.05,
+      17.35
+     ]
+    },
+    {
+     "num": "1",
+     "net": "PH_B",
+     "at": [
+      25.8,
+      16.85
+     ]
+    },
+    {
+     "num": "1",
+     "net": "PH_B",
+     "at": [
+      25.8,
+      18.3
+     ]
+    },
+    {
+     "num": "1",
+     "net": "PH_B",
+     "at": [
+      26.55,
+      17.35
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "J4",
+   "value": "motor pad",
+   "footprint": "Rebot:MotorPad_SMD_2.6x3.6mm",
+   "at": [
+    30.6,
+    18.3
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": true,
+   "courtyard": [
+    29.005,
+    16.205,
+    32.195,
+    20.395
+   ],
+   "smd": false,
+   "pads": [
+    {
+     "num": "1",
+     "net": "PH_C",
+     "at": [
+      29.85,
+      17.35
+     ]
+    },
+    {
+     "num": "1",
+     "net": "PH_C",
+     "at": [
+      30.6,
+      16.85
+     ]
+    },
+    {
+     "num": "1",
+     "net": "PH_C",
+     "at": [
+      30.6,
+      18.3
+     ]
+    },
+    {
+     "num": "1",
+     "net": "PH_C",
+     "at": [
+      31.35,
+      17.35
      ]
     }
    ]

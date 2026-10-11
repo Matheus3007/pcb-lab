@@ -2,7 +2,7 @@
 
 One sensorless BLDC channel: AT32F421 (stock AM32 target OPENESC_20_F421, HARDWARE_GROUP_AT_B pin map)
 -> DRV8300D three-phase gate driver -> 6x HSBB6066 60 V MOSFETs. Self-contained: battery + DShot in through
-one keyed 2x10 header; an LMR36506 buck makes the 11 V gate rail, an HT7533 the 3.3 V. The channel topology (BEMF network, gate resistors, bootstrap caps, MCU support parts)
+a keyed 2x5 header, motor wires on three solder pads; an LMR36506 buck makes the 11 V gate rail, an HT7533 the 3.3 V. The channel topology (BEMF network, gate resistors, bootstrap caps, MCU support parts)
 follows incutec OpenESC-20x20 rev3.3 (CERN-OHL-S-2.0), see docs/projects/battlebot-esc-research.md.
 """
 from pcbkit.circuit import Circuit, NetClass
@@ -22,23 +22,27 @@ PHASES = ("A", "B", "C")
 def circuit() -> Circuit:
     c = Circuit("rebot-esc")
 
-    # --- header: the only connection to the carrier -------------------------------------------
-    # 2x10, keyed: position 7 has no pin on the module and a blocked hole in the carrier's socket, so a
-    # module rotated 180 deg (pin n -> socket 21-n) can't go in: its pin 14 hits the blocked hole.
-    # Without the key a rotated module would short the battery through the high-side body diode of
-    # phase C, a motor winding and a low-side body diode (traced 2026-10-11), so the key is required.
-    with c.block("Carrier header (2x10, hand-soldered)"):
-        j1 = c.part("J1", "PinHeader_2x10")
+    # --- carrier header (power + signals) and motor pads ---------------------------------------
+    # Like an off-the-shelf ESC: the three phases go to solder pads for the motor wires on the far edge;
+    # only battery, GND, DShot and SWD reach the carrier, through a short keyed 2x5 header.
+    # Key: position 7 has no pin on the module and a blocked hole in the carrier's socket, so a module
+    # rotated 180 deg (pin n -> socket 11-n) can't go in (its pin 4 hits the blocked hole). Rotated,
+    # carrier VBAT would land on the MCU's DShot/SWD pins.
+    with c.block("Carrier header (2x5, hand-soldered) + motor pads"):
+        j1 = c.part("J1", "PinHeader_2x05")
+        ma = c.part("J2", "MotorPad")
+        mb = c.part("J3", "MotorPad")
+        mc = c.part("J4", "MotorPad")
         c.part("H1", "MountingHole_M2")   # retention screw, no current
     c.connect("VBAT", j1["1"], j1["2"], j1["3"])
-    c.connect("GND", j1["4"], j1["5"], j1["6"], j1["8"])
+    c.connect("GND", j1["4"], j1["5"], j1["6"])
     c.nc(j1["7"])                          # KEY: pin pulled from the header, socket hole blocked
-    c.connect("DSHOT", j1["9"])
-    c.connect("SWDIO", j1["10"])
-    c.connect("SWCLK", j1["11"])
-    c.connect("PH_A", j1["12"], j1["13"], j1["14"])
-    c.connect("PH_B", j1["15"], j1["16"], j1["17"])
-    c.connect("PH_C", j1["18"], j1["19"], j1["20"])
+    c.connect("DSHOT", j1["8"])
+    c.connect("SWDIO", j1["9"])
+    c.connect("SWCLK", j1["10"])
+    c.connect("PH_A", ma["1"])
+    c.connect("PH_B", mb["1"])
+    c.connect("PH_C", mc["1"])
     c.power_flag("VBAT", "GND")   # battery, through the carrier (the module is self-contained)
 
     # --- VBAT bulk / HF decoupling at the half bridges ----------------------------------------
