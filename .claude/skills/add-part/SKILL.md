@@ -48,6 +48,9 @@ If `make footprint` says MISSING: (`source toolchain/env.sh`) `easyeda2kicad --3
 (in the same output) with the KiCad footprint: `offset = (dx, -dy, 0)` because model Y is up while
 footprint Y is down. Usually also `rotate: [0, 0, 180]` (check the EasyEDA `.kicad_mod` model block).
 Confirm in `3d_iso.png` after the next `make all`: the body must sit on its pads.
+**Don't commit the STEP** (EasyEDA's license is unclear): add a `step <LCSC> lib/3d/<file>.step` line to
+`toolchain/third_party.sh`, its hash to `toolchain/third_party.sha256` (`sha256sum lib/3d/<file>.step`),
+and a row to `THIRD_PARTY.md`. `lib/3d/` is gitignored.
 
 ## 5. lib/parts.yaml entry
 ```yaml

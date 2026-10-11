@@ -13,3 +13,6 @@ toolchain/.kipy-site/
 boards/*/build/review/index.html
 # datasheets: re-downloadable via `make part`, not ours to redistribute
 lib/datasheets/
+# third-party data, fetched + checksum-verified by toolchain/third_party.sh (not ours to relicense)
+lib/jlc_rotations.csv
+lib/3d/

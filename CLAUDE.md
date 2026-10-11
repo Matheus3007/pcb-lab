@@ -137,6 +137,9 @@ Environment and tools:
   files in the zip (JLC shows them as an extra layer).
 - THT pads that anchor into a pour (connector shields) can get `starved_thermal` after a reroute: set
   `zone_connection: {SH: full}` on the part in parts.yaml (applied per pad by the builder).
+- **Licensing: only commit what we wrote (MIT).** Third-party data (community CPL rotations, EasyEDA
+  3D models, datasheets) is fetched + SHA-256-verified by `toolchain/third_party.sh`; add new models
+  there (and to `toolchain/third_party.sha256`, `THIRD_PARTY.md`), never `git add` them.
 - WSL has no sudo password: everything installs to `~/.local` (uv, JRE) or the repo.
 
 Schematic generation:
@@ -192,8 +195,8 @@ tools/pcbkit/kijobs/      scripts that run inside KiCad's Python (board build, D
 lib/parts.yaml            shared part definitions with pinout evidence
 lib/basic_passives.yaml   verified JLC Basic passives (R/C/LED by size and value)
 lib/datasheets/           downloaded by `make part` (gitignored)
-lib/3d/, lib/footprints/  models/footprints KiCad doesn't ship
-lib/jlc_cache.json        JLC catalog cache   lib/jlc_rotations.csv  CPL corrections
+lib/3d/ (fetched), lib/footprints/   models/footprints KiCad doesn't ship
+lib/jlc_cache.json        JLC catalog cache   lib/jlc_rotations.csv  community CPL hints (fetched, GPL)
 boards/_template/         copy to start a board
 boards/<name>/            spec.md, board.yaml, circuit.py, schematic.yaml (layout, optional), mechanical/,
                           placement.yaml, routing.yaml, waivers.yaml

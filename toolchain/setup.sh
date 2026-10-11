@@ -20,4 +20,5 @@ VIRTUAL_ENV="$PWD/.venv" uv pip install -q -r requirements.txt
   --target "$(wslpath -w "$PWD/.kipy-site")" -r "$(wslpath -w "$PWD/requirements-kicad.txt")"
 rm -rf .kipy-site/numpy* .kipy-site/bin   # use KiCad's own numpy
 chmod +x bin/*
+./third_party.sh
 echo "toolchain ready: source toolchain/env.sh"
