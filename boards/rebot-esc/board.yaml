@@ -1,0 +1,8 @@
+# Machine-readable board config (human-facing requirements live in spec.md).
+layers: 4                   # GND + power planes under the gate-drive and phase loops
+thickness: 1.0              # keeps the module stack ~15 mm (spec: Mechanical)
+assembly_tier: economic     # one-sided SMD; THT header on the bottom
+origin: [100.0, 100.0]      # where board (0,0) sits on the KiCad sheet
+rules: {}                   # per-board overrides of toolchain/rules/jlc.yaml, with reasons
+silk_refs: false            # dense board; refs on the fab layer only
+quantity: 10                # 2-2.5 robots x 2 modules + spares

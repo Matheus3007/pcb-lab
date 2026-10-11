@@ -1,0 +1,5 @@
+# Accepted warnings. Each entry needs a reason.
+# - check: drc/silk_over_copper
+#   ref: U3
+#   reason: "..."
+[]

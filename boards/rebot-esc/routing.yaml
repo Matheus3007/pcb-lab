@@ -1,0 +1,5 @@
+tracks: []      # {net, layer, width, points: [[x,y],...]}  routed BEFORE the autorouter
+vias: []        # {net, at: [x,y], diameter, drill}
+zones: []       # {net, layer, outline: board | [[x,y],...], clearance}
+stitch: []      # {net: GND, pitch: 3.5, via_diameter: 0.6, via_drill: 0.3, edge_margin: 1.0}
+autoroute: {enabled: true, max_passes: 100, timeout_s: 300}
