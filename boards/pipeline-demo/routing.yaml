@@ -12,4 +12,5 @@ stitch:         # GND stitching vias added after routing wherever they fit in bo
 autoroute:
   enabled: true
   max_passes: 100
+  attempts: 8          # best-of-N by routing quality (jogs, vias, bends, length)
   timeout_s: 300

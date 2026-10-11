@@ -1,7 +1,7 @@
 # pipeline-demo — checks PASS
 
 0 errors · 0 warnings · 2 waived  
-board 30.05 × 24.05 mm · 11 footprints · 43 track segments · 47 vias · 66.7 mm copper
+board 30.05 × 24.05 mm · 11 footprints · 40 track segments · 42 vias · 74.57 mm copper
 
 ## circuit
 - ✓ `circuit/assertion` LED current @Vf=1.8V: 0.0015 A in [0.0005, 0.005]
@@ -24,3 +24,6 @@ board 30.05 × 24.05 mm · 11 footprints · 43 track segments · 47 vias · 66.7
 ## current
 - ✓ `current/width` VBUS: min track 0.4 mm vs 0.033 mm needed for 0.2 A (IPC-2221, ΔT 10 °C, 1.0 oz)
 - ✓ `current/width` 3V3: min track 0.4 mm vs 0.033 mm needed for 0.2 A (IPC-2221, ΔT 10 °C, 1.0 oz)
+
+## routing
+- · `routing/stats` 28 bends total; per net: 3V3 5, CC1 2, CC2 4, LED_A 2, VBUS 15

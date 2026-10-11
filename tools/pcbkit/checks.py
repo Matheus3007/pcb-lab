@@ -110,6 +110,10 @@ def parts(b: Board, netlist: dict) -> tuple[list[dict], list[dict]]:
         except Exception as e:  # noqa: BLE001
             res.append(_f("parts/jlc_lookup", "error", f"{p['ref']} {p['lcsc']}: {e}"))
             continue
+        if info["tier"] == "extended" and not p["meta"].get("extended_reason"):
+            res.append(_f("parts/extended", "warning",
+                          f"{p['ref']} {p['lcsc']} is a plain Extended part (setup fee). Prefer Basic or Preferred "
+                          f"Extended; if none fits, add `extended_reason:` to its parts.yaml entry"))
         row = bom.setdefault(p["lcsc"], {**info, "refs": [], "value": p["value"], "footprint": p["footprint"]})
         row["refs"].append(p["ref"])
     qty = b.cfg.get("quantity", 5)
@@ -151,6 +155,19 @@ def current(b: Board, dump: dict, netlist: dict) -> list[dict]:
     return res
 
 
+# --------------------------------------------------------------------------- routing quality
+def routing(b: Board, dump: dict) -> list[dict]:
+    from . import routeq
+    q = routeq.analyze(dump)
+    res = [_f("routing/jog", "warning",
+              f"{j['net']} on {j['layer']}: {j['length']:.2f} mm sideways step at ({j['at'][0]:.2f}, {j['at'][1]:.2f}) "
+              f"(board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track)")
+           for j in q["jogs"]]
+    res.append(_f("routing/stats", "info", f"{q['bend_total']} bends total; per net: "
+                  + ", ".join(f"{n} {c}" for n, c in sorted(q["bends"].items()))))
+    return res
+
+
 # --------------------------------------------------------------------------- 3D models
 def models(b: Board) -> list[dict]:
     txt = b.pcb.read_text(encoding="utf-8")
@@ -188,6 +205,7 @@ def check(name: str) -> dict:
     pf, bom = parts(b, netlist)
     findings += pf
     findings += current(b, dump, netlist)
+    findings += routing(b, dump)
     findings += models(b)
     apply_waivers(b, findings)
 

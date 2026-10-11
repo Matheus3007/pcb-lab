@@ -175,6 +175,37 @@ def _canon(node) -> str:
     return "(" + " ".join(atoms + kids) + ")"
 
 
+def _sexpr_dump(node) -> str:
+    return node if isinstance(node, str) else "(" + " ".join(_sexpr_dump(c) for c in node) + ")"
+
+
+def _shuffle_dsn(src: Path, dst: Path, seed: int) -> None:
+    """Write a copy of the DSN with component, net and pin order permuted by `seed`.
+    Freerouting is deterministic for a given file but sensitive to item order, so this is
+    how we get reproducible variety between routing attempts. Seed 0 = canonical order."""
+    import random
+    text = src.read_text(encoding="utf-8")
+    rng = random.Random(seed)
+    tree = _sexpr(text.replace('(string_quote ")', "(string_quote QQ)"))[0]
+
+    def walk(node):
+        # canonical order first (KiCad's export order is random), then the seeded permutation
+        if not isinstance(node, list) or not node:
+            return
+        head = node[0]
+        if head in ("placement", "network", "pins") or (head == "component" and len(node) > 2):
+            first = 2 if head == "component" else 1
+            kids = sorted(node[first:], key=_sexpr_dump)
+            if seed:
+                rng.shuffle(kids)
+            node[first:] = kids
+        for c in node[1:]:
+            walk(c)
+
+    walk(tree)
+    dst.write_text(_sexpr_dump(tree).replace("(string_quote QQ)", '(string_quote ")'), encoding="utf-8")
+
+
 def _dsn_fingerprint(dsn: Path) -> str:
     """KiCad's DSN export is content-stable but not order-stable (component, net and pin
     order vary run to run), so hash a canonical form: sub-expressions sorted, pin lists sorted,
@@ -205,20 +236,57 @@ def stage_route(b: Board, reroute: bool = False) -> dict:
     lock = json.loads(lock_json.read_text()) if lock_json.exists() else {}
     if not reroute and lock.get("fingerprint") == fp and lock_ses.exists():
         kipy("specctra.py", "import", b.pcb, lock_ses)
+        _straighten(b, b.pcb)
         return {"autorouted": True, "source": "route.lock (input unchanged)", "routed_at": lock.get("routed_at")}
+    # Freerouting is random: route several times and keep the cleanest result (routeq.score:
+    # jogs dominate, then vias, bends, length). The winner becomes the new lock.
+    from . import routeq
     t0 = time.time()
-    r = run([TOOLBIN / "freerouting", "-de", dsn, "-do", ses, "-mp", auto.get("max_passes", 100), "-mt", 1],
-            timeout=auto.get("timeout_s", 600), check=False)
-    (b.work / "freerouting.log").write_text(r.stdout + r.stderr)
-    if not ses.exists():
-        raise StageError(f"freerouting produced no SES (see {b.work / 'freerouting.log'})")
+    attempts = int(auto.get("attempts", 5))
+    results, log = [], []
+    for i in range(attempts):
+        ses_i = b.work / f"{b.name}.attempt{i}.ses"
+        ses_i.unlink(missing_ok=True)
+        dsn_i = b.work / f"{b.name}.attempt{i}.dsn"
+        _shuffle_dsn(dsn, dsn_i, seed=i)
+        r = run([TOOLBIN / "freerouting", "-de", dsn_i, "-do", ses_i, "-mp", auto.get("max_passes", 100), "-mt", 1],
+                timeout=auto.get("timeout_s", 600), check=False)
+        log.append(f"=== attempt {i}\n{r.stdout}{r.stderr}")
+        if not ses_i.exists():
+            continue
+        trial = b.work / f"{b.name}.attempt{i}.kicad_pcb"
+        shutil.copy(b.pcb, trial)
+        kipy("specctra.py", "import", trial, ses_i)
+        _straighten(b, trial)
+        tj = b.work / f"attempt{i}.json"
+        kipy("dump.py", trial, tj, *b.origin)
+        d = json.loads(tj.read_text())
+        q = routeq.analyze(d)
+        results.append({"attempt": i, "score": round(routeq.score(d), 1), "jogs": len(q["jogs"]),
+                        "vias": d["totals"]["vias"], "bends": q["bend_total"],
+                        "length": d["totals"]["track_length"], "ses": ses_i})
+    (b.work / "freerouting.log").write_text("\n".join(log))
+    if not results:
+        raise StageError(f"freerouting produced no SES in {attempts} attempts (see {b.work / 'freerouting.log'})")
+    best = min(results, key=lambda x: x["score"])
+    shutil.copy(best["ses"], ses)
     kipy("specctra.py", "import", b.pcb, ses)
+    _straighten(b, b.pcb)
     shutil.copy(ses, lock_ses)
-    summary = re.findall(r"final score: [^,]+, \(([^)]*)\)|final score: ([0-9.]+) \(([^)]*)\)", r.stdout)
+    for x in results:
+        x.pop("ses")
     lock_json.write_text(json.dumps({"fingerprint": fp, "routed_at": time.strftime("%Y-%m-%d %H:%M:%S"),
                                      "freerouting": "see toolchain/versions.env",
-                                     "result": next((m[2] for m in summary if m[2]), None)}, indent=1) + "\n")
-    return {"autorouted": True, "source": "freerouting (new lock written)", "seconds": round(time.time() - t0, 1)}
+                                     "chosen": best["attempt"], "attempts": results}, indent=1) + "\n")
+    return {"autorouted": True, "source": f"freerouting: best of {len(results)} (attempt {best['attempt']}, "
+                                          f"{best['jogs']} jogs, {best['vias']} vias)",
+            "seconds": round(time.time() - t0, 1)}
+
+
+def _straighten(b: Board, pcb: Path) -> dict:
+    """Deterministic jog removal (kijobs/straighten.py), clearance-checked in KiCad."""
+    out = kipy("straighten.py", pcb, b.work / "geometry.json", *b.origin, b.rules()["copper_edge_clearance"])
+    return json.loads(out.strip().splitlines()[-1])
 
 
 def stage_stitch(b: Board) -> list[str]:

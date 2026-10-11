@@ -66,6 +66,11 @@
    "check": "current/width",
    "severity": "ok",
    "msg": "3V3: min track 0.4 mm vs 0.033 mm needed for 0.2 A (IPC-2221, ΔT 10 °C, 1.0 oz)"
+  },
+  {
+   "check": "routing/stats",
+   "severity": "info",
+   "msg": "28 bends total; per net: 3V3 5, CC1 2, CC2 4, LED_A 2, VBUS 15"
   }
  ],
  "bom": [
@@ -210,9 +215,9 @@
    30.05,
    24.05
   ],
-  "tracks": 43,
-  "vias": 47,
-  "track_length": 66.7,
+  "tracks": 40,
+  "vias": 42,
+  "track_length": 74.57,
   "parts": 11
  }
 }

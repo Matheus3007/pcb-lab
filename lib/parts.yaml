@@ -28,6 +28,7 @@ TYPE-C-31-M-12:
     SBU1: A8
     SBU2: B8
     SHIELD: SH
+  extended_reason: "Phase 0 demo; Basic/Preferred USB-C 16P alternatives not searched (owner: no need to optimize this board)"
   zone_connection: {SH: full}   # shield THT pads: solid to the GND pour (thermal spokes get starved by nearby routing)
   model:   # KiCad ships no model for this footprint; STEP from LCSC/EasyEDA, re-origined
     path: lib/3d/HRO_TYPE-C-31-M-12_C165948.step

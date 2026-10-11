@@ -1,6 +1,72 @@
 {
  "fingerprint": "24d391a3bbd6fd0080966cc0ed4a58c7498b59a21b45f5cc84aeb455edea13d1",
- "routed_at": "2026-10-11 10:41:28",
+ "routed_at": "2026-10-11 11:54:22",
  "freerouting": "see toolchain/versions.env",
- "result": "0 unrouted and 12 violations"
+ "chosen": 6,
+ "attempts": [
+  {
+   "attempt": 0,
+   "score": 150.5,
+   "jogs": 2,
+   "vias": 3,
+   "bends": 31,
+   "length": 70.48
+  },
+  {
+   "attempt": 1,
+   "score": 121.4,
+   "jogs": 0,
+   "vias": 5,
+   "bends": 26,
+   "length": 80.39
+  },
+  {
+   "attempt": 2,
+   "score": 138.9,
+   "jogs": 1,
+   "vias": 4,
+   "bends": 33,
+   "length": 73.95
+  },
+  {
+   "attempt": 3,
+   "score": 124.5,
+   "jogs": 1,
+   "vias": 4,
+   "bends": 26,
+   "length": 66.45
+  },
+  {
+   "attempt": 4,
+   "score": 123.1,
+   "jogs": 1,
+   "vias": 0,
+   "bends": 29,
+   "length": 74.1
+  },
+  {
+   "attempt": 5,
+   "score": 126.0,
+   "jogs": 1,
+   "vias": 4,
+   "bends": 27,
+   "length": 67.03
+  },
+  {
+   "attempt": 6,
+   "score": 111.6,
+   "jogs": 0,
+   "vias": 3,
+   "bends": 28,
+   "length": 74.57
+  },
+  {
+   "attempt": 7,
+   "score": 146.7,
+   "jogs": 0,
+   "vias": 2,
+   "bends": 39,
+   "length": 101.72
+  }
+ ]
 }

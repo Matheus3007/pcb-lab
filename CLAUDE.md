@@ -58,6 +58,15 @@ edit source → make all BOARD=<name> → read build/reports/summary.md + LOOK a
   read the pin table, and record it. Watch for clones with different pinouts (see XC6206 note).
 - **Footprint origin/orientation**: before placing a new footprint, read its pads/fab
   geometry (which way does a connector's mouth face at rot 0?) and confirm in the render.
+- **Routing: no unneeded bends.** Every bend, jog (short sideways step) and detour adds length, loop
+  area and impedance discontinuities, i.e. noise. Prefer straight runs and 45° transitions; never accept
+  a jog or a loop around a part when a direct path exists. Enforced by: best-of-N autorouting scored on
+  jogs/vias/bends/length (`routing.yaml autoroute.attempts`), the jog straightener (`kijobs/straighten.py`),
+  and the `routing/jog` check (warning: fix it or waive it with a reason). Sensitive nets (motor phases,
+  current sense, IMU SPI, USB) get scripted tracks in `routing.yaml`, never the autorouter.
+- **Part tier priority: JLC Basic > Preferred ("promotional") Extended > plain Extended**, where viable.
+  Basic and Preferred parts have no per-part setup fee and are always loaded on the machines. A plain
+  Extended part needs `extended_reason:` in parts.yaml (the `parts/extended` check warns otherwise).
 - **Prefer JLC Basic / Preferred parts.** `make parts BOARD=x` shows the tier, stock and price;
   `make part LCSC=C...` researches a new part; `make footprint FP=Lib:Name` inspects a footprint.
 - **3D models**: if KiCad has no model, fetch one (easyeda2kicad), re-origin it via
@@ -97,10 +106,14 @@ Environment and tools:
 - Zones: use `ZONE_CONNECTION_THT_THERMAL` (SMD pads solid). Full thermals on small SMD pads
   give `starved_thermal` DRC errors. `ISLAND_REMOVAL_MODE_ALWAYS` removes floating copper only;
   an island touching a pad of the net stays, so the stitcher adds a via to each such island.
-- **Freerouting is non-deterministic** even with `-mt 1` (unseeded randomness). Hence the
-  route lock (docs/pipeline.md). KiCad's DSN export varies component/net/pin ORDER run to run, so the
-  lock fingerprint is a canonical sorted S-expression. The DSN line `(string_quote ")` contains a lone
-  quote that breaks naive tokenizers.
+- **Freerouting is deterministic for a given DSN file but sensitive to item ORDER**, and KiCad's DSN
+  export shuffles component/net/pin order on every run. The pipeline puts the DSN in canonical (sorted)
+  order and then applies a seeded permutation per attempt, so best-of-N routing is both varied and
+  reproducible. The lock fingerprint is the canonical form minus the `(parser ...)` header. The DSN line
+  `(string_quote ")` contains a lone quote that breaks naive tokenizers.
+- Freerouting leaves jogs on most attempts; `kijobs/straighten.py` cuts them like KiCad's optimizer
+  (shorten both parallel runs, bridge with one segment, KiCad collision check). In KiCad's Python, never
+  hold SWIG track wrappers across board edits: snapshot plain data, look items up by UUID, use `b.Delete()`.
 - Freerouting has built-in analytics: the wrapper passes `--usage_and_diagnostic_data.disable_analytics=true`.
 - The repo lives on NTFS (`core.fileMode=false`): new scripts need
   `git update-index --chmod=+x <file>` or they're non-executable in clones.

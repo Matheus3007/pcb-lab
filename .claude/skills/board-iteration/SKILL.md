@@ -42,6 +42,17 @@ e.g. to try for a better result. Freerouting is random, so several attempts may 
 | `parts/stock` | low stock at JLC | pick an alternative, re-verify pinout |
 | `current/width` | trace too thin for the class current | raise NetClass `track_width` or use a pour |
 | `models/missing` | no 3D model | `/add-part` step 4 |
+| `routing/jog` | autorouter sideways step the straightener couldn't fix (no clearance) | `REROUTE=1` (more `attempts`), nudge the parts causing the squeeze, or script that net in `routing.yaml` |
+| `parts/extended` | plain Extended part without justification | find a Basic/Preferred alternative (`/add-part`), or add `extended_reason:` |
+
+## Routing quality (no unneeded bends)
+- Read `routing/stats` (bends per net) and look at `copper_top.png`/`copper_bottom.png` for detours,
+  loops around parts, and staircase paths. A net with many more bends than its neighbours is suspect.
+- `route.lock.json` lists every attempt's score (jogs, vias, bends, length). Raise `autoroute.attempts`
+  for important boards; attempts are reproducible (seeded DSN ordering).
+- Placement drives routing: line parts up so connected pads face each other, and the router has less to bend.
+- Sensitive or high-current nets: script them (`tracks:` in routing.yaml) with straight segments and
+  45° corners, before the autorouter runs.
 
 ## Placement technique
 - Read pad positions first (`make footprint`, or `build/reports/board.json` after a build). Place relative to

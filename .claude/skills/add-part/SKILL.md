@@ -8,7 +8,9 @@ description: Research, verify and add a part (IC, connector, sensor, MOSFET, any
 A wrong pinout or footprint passes every automated check. This procedure is the defense; don't skip steps.
 
 ## 1. Pick the LCSC part
-- Prefer JLC **Basic**, then **Preferred Extended**, then Extended. Check stock ≥ 10× what you need.
+- Prefer JLC **Basic**, then **Preferred ("promotional") Extended**, then plain Extended (per-part setup
+  fee). `make part` shows the tier. A plain Extended part needs `extended_reason:` in its parts.yaml
+  entry saying why no Basic/Preferred alternative works. Check stock ≥ 10× what you need.
 - Passives first come from `lib/basic_passives.yaml`; if missing, find a Basic one and add it there after a lookup.
 - Beware clones: the same MPN from a different manufacturer can have a **different pinout**.
 

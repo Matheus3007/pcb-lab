@@ -11,7 +11,9 @@ placement.yaml + routing.yaml ─┐
    kijobs/build_board.py (KiCad pcbnew): new board, rules, net classes, outline, footprints,
    pad nets, placement, scripted tracks/vias, zones ──▶ build/work/<board>.kicad_pcb
                                ▼
-   kijobs/specctra.py export ─▶ [route.lock hit? reuse route.lock.ses] / Freerouting ─▶ specctra.py import
+   kijobs/specctra.py export ─▶ [route.lock hit? reuse route.lock.ses]
+       / Freerouting × N seeded attempts ─▶ import + straighten each ─▶ keep best score ─▶ specctra.py import
+   kijobs/straighten.py: cut jogs (clearance-checked)
                                ▼
    kijobs/stitch.py: GND vias on a grid + one per orphan pour island
                                ▼
@@ -37,10 +39,14 @@ placement.yaml + routing.yaml ─┐
 | `make diff BOARD=x [REF=HEAD]` | semantic + visual diff vs committed results |
 | `make parts BOARD=x [REFRESH=1]` | JLC tier / stock / price per part |
 
-## Reproducibility: the route lock
+## Routing quality and reproducibility
 
-Freerouting has unseeded randomness, so two runs on the same input give different routing.
-Its result is therefore locked like a dependency: `boards/<name>/route.lock.json` holds a
+Freerouting is deterministic per input file but sensitive to item order. The pipeline routes
+`autoroute.attempts` times (default 5) with the DSN in canonical order plus a seeded permutation per
+attempt, straightens jogs in each result, and keeps the best `routeq.score`
+(20·jogs + 3·vias + 1·bends + 1·mm of copper). All attempts and scores are recorded in `route.lock.json`.
+
+The chosen routing is locked like a dependency: `boards/<name>/route.lock.json` holds a
 canonical fingerprint of the DSN input and `route.lock.ses` the routing. If the input is
 unchanged, the locked routing is reused, so the same sources always give a byte-identical
 `board.json`. Any change to parts/placement/nets/rules changes the fingerprint and reroutes.
