@@ -185,8 +185,9 @@ LMR36506RRPER:
   pins: {RT: 1, PGOOD: 2, EN: 3, VIN: 4, SW: 5, BOOT: 6, VCC: 7, FB: 8, GND: 9}
   pinout_source: "TI LMR36506 ZHCSKN9B (rev. Dec 2022) p.4 fig.6-1 (FB variant, right) + table 6-1; RRPER = adjustable output, RT, PFM (p.3 device comparison)"
   pinout_verified: 2026-10-11
-  model:   # EasyEDA C2870127 model, centred like the footprint (easyeda2kicad: no offset/rotation)
+  model:   # EasyEDA C2870127 model, centred like the footprint; its body hangs BELOW its origin (z -0.9..0), so lift it
     path: lib/3d/LMR36506RRPER_C2870127.step
+    offset: [0, 0, 0.9]
   extended_reason: "Self-contained ESC module needs a buck from 6S LiHV (26.1 V + spikes); no 40 V+ buck in JLC Basic/Preferred (XL1509/TPS5430 are 36-40 V SOIC-8 with large inductors). 65 V rating, 2x2 mm."
   notes: "Vin 3.6-65 V, 0.6 A. VREF 1.0 V: VOUT = 1 + RFBT/RFBB (RFBT 100k recommended). RT to VCC = 1 MHz, to GND = 2.2 MHz (table 8-1). Required: CIN 2.2 uF + 100 nF HF at VIN, CBOOT 100 nF BOOT-SW, CVCC 1 uF VCC-GND (VCC: no external loads). EN may tie to VIN. PGOOD open-drain, may float or ground. Footprint: EasyEDA geometry checked against TI land pattern p.52."
 

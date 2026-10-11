@@ -160,6 +160,8 @@ Schematic generation:
   old project first. Set the default class with `ns.SetDefaultNetclass(...)` after editing it.
 - A KiCad run killed by a timeout leaves `~*.kicad_pro.lck` in `build/work/`; KiCad then silently skips
   writing the project. Delete stale locks.
+- **Check an EasyEDA STEP's z range** before trusting it: the LMR36506 one hangs below its origin (z −0.9..0), so the
+  body sank into the board and the pads poked through in the render (fix: `model.offset: [0, 0, 0.9]`).
 - The `models` check also flags footprints with **no** model (our own `lib/footprints` start without one).
   parts.yaml `model.path` may be `${KICAD10_3DMODEL_DIR}/...` to borrow a stock model.
 - **Trace a 2xN board-to-board header plugged in rotated 180° (pin n -> 2N+1-n).** On an ESC the body

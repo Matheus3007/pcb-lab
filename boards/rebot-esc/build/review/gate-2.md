@@ -1,5 +1,5 @@
 # rebot-esc: review gate 2
-_generated 2026-10-11 17:55 · checks FAIL_
+_generated 2026-10-11 18:08 · checks FAIL_
 
 ## Renders
 ![placement](../renders/placement.png)
