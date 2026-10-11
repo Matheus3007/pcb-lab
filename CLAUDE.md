@@ -153,8 +153,15 @@ Schematic generation:
 - Sanity of the generator is proven by KiCad itself: `sch export netlist` must equal circuit.py.
 
 - Repo-local footprint libraries (`lib/footprints/<Lib>.pretty`) need an `fp-lib-table` next to the schematic
-  for ERC; `stage_schematic` writes one (forward-slash Windows paths). A brand-new board's first `make sch`
-  shows ~50 `lib_symbol_issues` warnings until `make build` has written a `.kicad_pro`; they are not real.
+  for ERC; `stage_schematic` writes one (forward-slash Windows paths) plus a minimal `.kicad_pro` if none
+  exists, because kicad-cli only reads lib tables inside a project.
+- **`pcbnew.NewBoard()` loads an existing `.kicad_pro`, and `SaveBoard` keeps that file's net classes**
+  (stale clearances/widths and pattern assignments beat the ones set in Python). `stage_board` deletes the
+  old project first. Set the default class with `ns.SetDefaultNetclass(...)` after editing it.
+- A KiCad run killed by a timeout leaves `~*.kicad_pro.lck` in `build/work/`; KiCad then silently skips
+  writing the project. Delete stale locks.
+- The `models` check also flags footprints with **no** model (our own `lib/footprints` start without one).
+  parts.yaml `model.path` may be `${KICAD10_3DMODEL_DIR}/...` to borrow a stock model.
 - **Trace a 2xN board-to-board header plugged in rotated 180° (pin n -> 2N+1-n).** On an ESC the body
   diodes can turn a "harmless" mismatch into a battery short (rebot-esc); key it mechanically.
 

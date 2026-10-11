@@ -56,6 +56,7 @@ class Builder:
         d = j["net_classes"].get("Default")
         if d:
             self._apply_class(default, d)
+            ns.SetDefaultNetclass(default)   # KiCad 10: edits to the Get'd default are not saved otherwise
         for name, c in j["net_classes"].items():
             if name == "Default":
                 continue

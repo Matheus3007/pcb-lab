@@ -137,6 +137,11 @@ def stage_schematic(b: Board) -> dict:
         for d in sorted((ROOT / "lib" / "footprints").glob("*.pretty")))
     (b.work / "fp-lib-table").write_text(f"(fp_lib_table\n\t(version 7)\n{fp_libs})\n", newline="\n")
     rec_path.write_text(json.dumps({"sha": sch.sha(text), "auto_uuids": gen.auto_uuids}))
+    # kicad-cli only reads sym-lib-table/fp-lib-table inside a project: make sure one exists before ERC
+    # (the board stage replaces it with the one SaveBoard writes).
+    pro = b.work / f"{b.name}.kicad_pro"
+    if not pro.exists():
+        pro.write_text(json.dumps({"meta": {"filename": pro.name, "version": 3}}), encoding="utf-8", newline="\n")
     # ERC (KiCad pin electrical types), committed without date/uuids
     raw = b.work / "erc.json"
     kicad_cli("sch", "erc", "--format", "json", "--severity-all", "--units", "mm", "-o", raw, path, ok_codes=(0, 5))
@@ -201,7 +206,8 @@ def stage_board(b: Board) -> dict:
     for p in netlist["parts"]:
         model = p.get("meta", {}).get("model")
         if model:
-            model["path_win"] = win(ROOT / model["path"])
+            # "${KICAD10_3DMODEL_DIR}/..." = a stock KiCad model (resolved by KiCad); else a repo path
+            model["path_win"] = model["path"] if model["path"].startswith("${") else win(ROOT / model["path"])
         lib = p["footprint"].split(":", 1)[0]
         local = ROOT / "lib" / "footprints" / f"{lib}.pretty"
         if local.is_dir():
@@ -217,10 +223,14 @@ def stage_board(b: Board) -> dict:
     }
     jp = b.work / "board_job.json"
     jp.write_text(json.dumps(job, indent=1))
-    if b.pcb.exists():
-        b.pcb.unlink()
+    # NewBoard() loads an existing .kicad_pro and SaveBoard keeps ITS net classes (stale widths/clearances
+    # and pattern assignments from the previous build win over circuit.py), so start from no project file.
+    for f in (b.pcb, b.pcb.with_suffix(".kicad_pro")):
+        if f.exists():
+            f.unlink()
     kipy("build_board.py", jp)
     return json.loads((b.work / "board_build.json").read_text())
+
 
 
 def _sexpr(text: str):

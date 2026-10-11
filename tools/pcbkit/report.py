@@ -72,6 +72,8 @@ def gate(name: str, n: int) -> str:
     if n == 1:   # gate 1 is before outline/placement: layout findings are noise there (they belong to gate 2)
         open_items = [f for f in open_items
                       if not f["check"].startswith(("drc/", "placement/", "routing/", "current/", "models/", "mech"))]
+    if n == 2:   # gate 2 is before routing: unrouted connections belong to gate 3
+        open_items = [f for f in open_items if f["check"] not in ("drc/unconnected", "current/width")]
     if open_items:
         L += ["## Open items (read first)"] + [f"- **{f['severity']}** `{f['check']}` {f['msg']}" for f in open_items] + [""]
     if n == 1:

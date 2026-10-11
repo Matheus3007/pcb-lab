@@ -197,6 +197,12 @@ def routing(b: Board, dump: dict) -> list[dict]:
 def models(b: Board) -> list[dict]:
     txt = b.pcb.read_text(encoding="utf-8")
     res = []
+    # footprints with no model at all (our own lib/footprints ones start without one)
+    for blk in re.split(r"\n\t\(footprint ", txt)[1:]:
+        ref = re.search(r'\(property "Reference" "([^"]+)"', blk)
+        if ref and "(model " not in blk and "(attr " in blk and "exclude_from_bom" not in blk \
+                and not ref[1].startswith(("H", "#")):
+            res.append(_f("models/missing", "warning", f"{ref[1]}: no 3D model referenced, 3D fit checks blind for this part"))
     for ref, path in re.findall(r'\(property "Reference" "([^"]+)".*?\(model "([^"]+)"', txt, flags=re.S):
         p = path.replace("${KICAD10_3DMODEL_DIR}", str(KICAD_3D))
         if re.match(r"^[A-Za-z]:\\", p):
