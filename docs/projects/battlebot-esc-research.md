@@ -77,6 +77,14 @@ makes 3.3 V with an HT7533 (Basic, 30 V max) from that 12 V. No buck or inductor
 tall, $0.08). Motor phases A/B/C go through **3 M2 screws** that also retain the module. VBAT, GND,
 12 V and DShot go through a small header with several pins each for power; the stack height is set
 by that header. A swap = 3 screws.
+- **Pull-out (2026-10-11).** SMTSO2020 drawing: brass, Ø5.56 × 2.0 mm flange with a Ø3.6 × 1.53 mm pilot
+  that sits **in a hole** in the PCB (PEM SMTSO style), so side loads go into the board, not the pad.
+  If the standoff is on the carrier's front, the screw pulls it away from the board (solder in tension).
+  **Mount it on the carrier's back instead**: the screw goes through the module and the carrier into the
+  standoff, and tightening presses the flange against the board (compression, solder unloaded). The
+  module then lies flat on the carrier, so its phase pads are clamped directly onto the carrier pads.
+  The 2.0 mm flange fits the ≤ 2 mm back-face budget. No pull-out rating is given in the drawing.
+  Real risks: over-torquing an M2 (use a small driver, gently) and brass thread wear over many swaps.
 
 **Placement.** The two modules are identical boards mounted **180° from each other** on the carrier,
 so each one's phase-screw edge faces its own motor: right module toward the wheel end, left module
