@@ -67,7 +67,9 @@ edit source → make all BOARD=<name> → read build/reports/summary.md + LOOK a
 - **Coordinates**: mm, board origin top-left, **+Y down** (KiCad convention), rotations CCW.
 - **CPL rotations**: `lib/jlc_rotations_confirmed.csv` (ours, verified in JLC's preview) is checked first,
   then `lib/jlc_rotations.csv` (community hints, often outdated: its HRO USB-C +180 and SOT-23 −90 were
-  both wrong in JLC's 2026 preview). The human confirms every part at gate 3.
+  both wrong in JLC's 2026 preview; confirmed: HRO USB-C 0° + 1.575 mm, KiCad SOT-23 180°). JLC places
+  parts from the EasyEDA footprint origin, so a connector whose KiCad origin differs needs an offset.
+  The human confirms every part at gate 3. The 2D close-up in JLC's preview is the clearest view; 3D is ambiguous.
 
 ## Skills (use them; they encode the procedures below)
 

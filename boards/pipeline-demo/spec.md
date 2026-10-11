@@ -21,3 +21,5 @@ red status LED, plus an unpopulated 4-pin header (VBUS, 3V3, GND, GND).
 | Date | Change / gate | Notes |
 |---|---|---|
 | 2026-10-11 | created; pipeline passes all checks | gates 1–3 packets generated for owner review |
+| 2026-10-11 | JLC preview, 4 rounds | Gerbers OK; fixed the shared origin, removed drill maps; CPL corrections confirmed: HRO USB-C 0° + 1.575 mm, SOT-23 180°; D1 polarity OK |
+| 2026-10-11 | gates 1–3 passed by owner (via JLC preview) | pipeline proven end to end; not ordered |

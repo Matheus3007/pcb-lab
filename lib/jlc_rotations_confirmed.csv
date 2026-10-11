@@ -12,5 +12,6 @@
 "^USB_C_Receptacle_HRO_TYPE-C-31-M-12",0,0,1.575
 # 2026-10-11 pipeline-demo (C5446 XC6206P332MR-G, KiCad SOT-23-3): community -90 put the legs off the pads;
 # 0 showed JLC's single leg on the LEFT (KiCad pads 1+2 are on the left) with its pin-1 dot bottom-right
-# (ours is top-left) -> JLC's SOT-23 model is 180 deg from KiCad. Set 180; TENTATIVE until the next preview.
+# (ours is top-left) -> JLC's SOT-23 model is 180 deg from KiCad. Preview 4 at 180: two legs on the two left
+# pads, single leg on pad 3, pin-1 dot top-left. CONFIRMED 2026-10-11.
 "^SOT-23",180
