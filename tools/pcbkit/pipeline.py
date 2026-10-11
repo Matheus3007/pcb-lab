@@ -4,8 +4,10 @@ Every stage reads sources from boards/<name>/ and writes to boards/<name>/build/
 """
 from __future__ import annotations
 
+import hashlib
 import importlib.util
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -149,23 +151,72 @@ def stage_board(b: Board) -> dict:
     return json.loads((b.work / "board_build.json").read_text())
 
 
-def stage_route(b: Board) -> dict:
+def _sexpr(text: str):
+    tokens = re.findall(r'"(?:[^"\\]|\\.)*"|[()]|[^\s()"]+', text)
+    stack = [[]]
+    for t in tokens:
+        if t == "(":
+            stack.append([])
+        elif t == ")":
+            node = stack.pop()
+            stack[-1].append(node)
+        else:
+            stack[-1].append(t)
+    return stack[0]
+
+
+def _canon(node) -> str:
+    if isinstance(node, str):
+        return node
+    atoms = [c for c in node if isinstance(c, str)]
+    if atoms and atoms[0] in ("pins",):
+        atoms = atoms[:1] + sorted(atoms[1:])
+    kids = sorted(_canon(c) for c in node if not isinstance(c, str))
+    return "(" + " ".join(atoms + kids) + ")"
+
+
+def _dsn_fingerprint(dsn: Path) -> str:
+    """KiCad's DSN export is content-stable but not order-stable (component, net and pin
+    order vary run to run), so hash a canonical form: sub-expressions sorted, pin lists sorted,
+    and the first atom (the file path) dropped."""
+    text = dsn.read_text(encoding="utf-8").replace('(string_quote ")', "(string_quote dq)")
+    tree = _sexpr(text)[0]
+    tree = [tree[0]] + tree[2:]
+    return hashlib.sha256(_canon(tree).encode()).hexdigest()
+
+
+def stage_route(b: Board, reroute: bool = False) -> dict:
+    """Autoroute with Freerouting, behind a lock: Freerouting is not deterministic (unseeded
+    randomness), so its result is committed as boards/<name>/route.lock.ses together with a
+    fingerprint of its input. Same input -> the locked result is reused (identical board);
+    changed input or --reroute -> route again and update the lock."""
     routing = yload(b.dir / "routing.yaml")
     auto = routing.get("autoroute", {"enabled": True})
     if not auto.get("enabled", True):
         return {"autorouted": False}
     dsn, ses = b.work / f"{b.name}.dsn", b.work / f"{b.name}.ses"
+    lock_json, lock_ses = b.dir / "route.lock.json", b.dir / "route.lock.ses"
     for f in (dsn, ses):
         f.unlink(missing_ok=True)
     kipy("specctra.py", "export", b.pcb, dsn)
+    fp = _dsn_fingerprint(dsn)
+    lock = json.loads(lock_json.read_text()) if lock_json.exists() else {}
+    if not reroute and lock.get("fingerprint") == fp and lock_ses.exists():
+        kipy("specctra.py", "import", b.pcb, lock_ses)
+        return {"autorouted": True, "source": "route.lock (input unchanged)", "routed_at": lock.get("routed_at")}
     t0 = time.time()
-    r = run([TOOLBIN / "freerouting", "-de", dsn, "-do", ses, "-mp", auto.get("max_passes", 100)],
+    r = run([TOOLBIN / "freerouting", "-de", dsn, "-do", ses, "-mp", auto.get("max_passes", 100), "-mt", 1],
             timeout=auto.get("timeout_s", 600), check=False)
     (b.work / "freerouting.log").write_text(r.stdout + r.stderr)
     if not ses.exists():
         raise StageError(f"freerouting produced no SES (see {b.work / 'freerouting.log'})")
     kipy("specctra.py", "import", b.pcb, ses)
-    return {"autorouted": True, "seconds": round(time.time() - t0, 1)}
+    shutil.copy(ses, lock_ses)
+    summary = re.findall(r"final score: [^,]+, \(([^)]*)\)|final score: ([0-9.]+) \(([^)]*)\)", r.stdout)
+    lock_json.write_text(json.dumps({"fingerprint": fp, "routed_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+                                     "freerouting": "see toolchain/versions.env",
+                                     "result": next((m[2] for m in summary if m[2]), None)}, indent=1) + "\n")
+    return {"autorouted": True, "source": "freerouting (new lock written)", "seconds": round(time.time() - t0, 1)}
 
 
 def stage_stitch(b: Board) -> list[str]:
@@ -182,14 +233,14 @@ def stage_dump(b: Board) -> dict:
     return json.loads(out.read_text())
 
 
-def build(name: str) -> dict:
+def build(name: str, reroute: bool = False) -> dict:
     b = Board(name)
     res = {"circuit": stage_circuit(b)}
     if not res["circuit"]["ok"]:
         raise StageError("circuit has errors:\n" + "\n".join(i["msg"] for i in res["circuit"]["issues"]))
     stage_geometry(b)
     res["board"] = stage_board(b)
-    res["route"] = stage_route(b)
+    res["route"] = stage_route(b, reroute)
     res["stitch"] = stage_stitch(b)
     stage_dump(b)
     shutil.copy(b.pcb, b.fab / b.pcb.name)

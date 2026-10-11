@@ -11,7 +11,7 @@ placement.yaml + routing.yaml ─┐
    kijobs/build_board.py (KiCad pcbnew): new board, rules, net classes, outline, footprints,
    pad nets, placement, scripted tracks/vias, zones ──▶ build/work/<board>.kicad_pcb
                                ▼
-   kijobs/specctra.py export ─▶ Freerouting (headless) ─▶ specctra.py import (+ zone fill)
+   kijobs/specctra.py export ─▶ [route.lock hit? reuse route.lock.ses] / Freerouting ─▶ specctra.py import
                                ▼
    kijobs/stitch.py: GND vias on a grid + one per orphan pour island
                                ▼
@@ -28,7 +28,7 @@ placement.yaml + routing.yaml ─┐
 | Target | Does |
 |---|---|
 | `make toolchain` | one-time install (uv, Python venv, Java 25, Freerouting, KiCad-Python deps) |
-| `make all BOARD=x` | build → render → check → dashboard. **The iteration command.** |
+| `make all BOARD=x [REROUTE=1]` | build → render → check → dashboard. **The iteration command.** |
 | `make build BOARD=x` | circuit → board → route → stitch → dump |
 | `make render[-fast] BOARD=x` | renders (fast = 2D only) |
 | `make check BOARD=x` | all checks; exits non-zero on any unwaived error |
@@ -36,6 +36,15 @@ placement.yaml + routing.yaml ─┐
 | `make gate BOARD=x GATE=n` | review packet for gate n |
 | `make diff BOARD=x [REF=HEAD]` | semantic + visual diff vs committed results |
 | `make parts BOARD=x [REFRESH=1]` | JLC tier / stock / price per part |
+
+## Reproducibility: the route lock
+
+Freerouting has unseeded randomness, so two runs on the same input give different routing.
+Its result is therefore locked like a dependency: `boards/<name>/route.lock.json` holds a
+canonical fingerprint of the DSN input and `route.lock.ses` the routing. If the input is
+unchanged, the locked routing is reused, so the same sources always give a byte-identical
+`board.json`. Any change to parts/placement/nets/rules changes the fingerprint and reroutes.
+Force a fresh route with `make all BOARD=x REROUTE=1`. Commit both lock files.
 
 ## Authoring conventions
 

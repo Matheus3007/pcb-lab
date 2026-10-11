@@ -196,9 +196,9 @@
    30.05,
    24.05
   ],
-  "tracks": 45,
-  "vias": 45,
-  "track_length": 78.19,
+  "tracks": 40,
+  "vias": 41,
+  "track_length": 80.1,
   "parts": 11
  }
 }

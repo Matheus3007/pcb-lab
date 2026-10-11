@@ -13,11 +13,12 @@ def main() -> int:
     ap.add_argument("--ref", default="HEAD", help="diff: git ref to compare against")
     ap.add_argument("--fast", action="store_true", help="render/all: skip 3D views")
     ap.add_argument("--gate", type=int, choices=[1, 2, 3], help="gate: which review packet")
+    ap.add_argument("--reroute", action="store_true", help="build/all: ignore route.lock and autoroute again")
     ap.add_argument("--refresh", action="store_true", help="parts: refresh JLC stock/price cache")
     a = ap.parse_args()
     try:
         if a.command in ("build", "all"):
-            res = pipeline.build(a.board)
+            res = pipeline.build(a.board, reroute=a.reroute)
             print(json.dumps({k: v for k, v in res.items() if k != "circuit"}))
         if a.command in ("render", "all"):
             from . import render

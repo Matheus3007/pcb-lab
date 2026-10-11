@@ -21,10 +21,10 @@ toolchain:
 	toolchain/setup.sh
 
 all: _need_board          ## build -> render -> check (+ dashboard). The iteration command.
-	@$(PCBKIT) all $(BOARD)
+	@$(PCBKIT) all $(BOARD) $(if $(REROUTE),--reroute,)
 
 build: _need_board        ## circuit -> outline -> place -> route -> stitch -> board.json
-	@$(PCBKIT) build $(BOARD)
+	@$(PCBKIT) build $(BOARD) $(if $(REROUTE),--reroute,)
 
 render: _need_board       ## 2D + 3D renders -> build/renders/
 	@$(PCBKIT) render $(BOARD)

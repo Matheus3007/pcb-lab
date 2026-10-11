@@ -31,8 +31,8 @@ for fp in b.GetFootprints():
         "side": "bottom" if fp.IsFlipped() else "top",
         "dnp": fp.IsDNP(), "courtyard": box(cbox),
         "smd": all(p.GetAttribute() == pcbnew.PAD_ATTRIB_SMD for p in fp.Pads()) and len(fp.Pads()) > 0,
-        "pads": [{"num": p.GetNumber(), "net": p.GetNetname(), "at": xy(p.GetPosition())}
-                 for p in fp.Pads()],
+        "pads": sorted(({"num": p.GetNumber(), "net": p.GetNetname(), "at": xy(p.GetPosition())}
+                        for p in fp.Pads()), key=lambda p: (p["num"], p["at"])),
     })
 
 tracks, vias = [], []
@@ -47,6 +47,8 @@ for t in b.GetTracks():
                        "length": round(pcbnew.ToMM(t.GetLength()), 3),
                        "start": xy(t.GetStart()), "end": xy(t.GetEnd())})
 
+tracks.sort(key=lambda t: (t["net"], t["layer"], t["start"], t["end"]))
+vias.sort(key=lambda v: (v["net"], v["at"]))
 edge = b.GetBoardEdgesBoundingBox()
 nets = {}
 for t in tracks:

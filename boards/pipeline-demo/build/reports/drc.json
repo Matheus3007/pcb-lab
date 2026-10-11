@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/drc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-10-11T09:48:47",
+    "date": "2026-10-11T09:57:31",
     "ignored_checks": [
         {
             "description": "Footprint has no courtyard defined",
@@ -43,7 +43,7 @@
                         "x": 102.0,
                         "y": 100.0
                     },
-                    "uuid": "002daf5c-3155-4644-ae9e-e529b1181b99"
+                    "uuid": "798bf0a6-c902-4248-b097-690f2082031b"
                 },
                 {
                     "description": "Segment of J1 on F.Silkscreen",
@@ -51,7 +51,7 @@
                         "x": 110.3,
                         "y": 101.65
                     },
-                    "uuid": "7e8becfa-34ba-4fe2-afb4-a80031746499"
+                    "uuid": "b349e8b4-b8ab-49ef-ac78-4eac5d2fc0b3"
                 }
             ],
             "severity": "warning",
@@ -66,7 +66,7 @@
                         "x": 102.0,
                         "y": 100.0
                     },
-                    "uuid": "002daf5c-3155-4644-ae9e-e529b1181b99"
+                    "uuid": "798bf0a6-c902-4248-b097-690f2082031b"
                 },
                 {
                     "description": "Segment of J1 on F.Silkscreen",
@@ -74,7 +74,7 @@
                         "x": 119.7,
                         "y": 101.65
                     },
-                    "uuid": "e3cb0fa6-576b-4286-a5ae-fc60c29d9ea4"
+                    "uuid": "16181ff6-bf88-4396-ae47-37e376921f1d"
                 }
             ],
             "severity": "warning",
