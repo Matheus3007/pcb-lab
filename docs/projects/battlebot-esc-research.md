@@ -77,18 +77,17 @@ makes 3.3 V with an HT7533 (Basic, 30 V max) from that 12 V. No buck or inductor
 tall, $0.08). Motor phases A/B/C go through **3 M2 screws** that also retain the module. VBAT, GND,
 12 V and DShot go through a small header with several pins each for power; the stack height is set
 by that header. A swap = 3 screws.
-- **Pull-out (2026-10-11).** SMTSO2020 drawing: brass, Ø5.56 × 2.0 mm flange with a Ø3.6 × 1.53 mm pilot
-  that sits **in a hole** in the PCB (PEM SMTSO style), so side loads go into the board, not the pad.
-  If the standoff is on the carrier's front, the screw pulls it away from the board (solder in tension).
-  **Mount it on the carrier's back instead**: the screw goes through the module and the carrier into the
-  standoff, and tightening presses the flange against the board (compression, solder unloaded). The
-  module then lies flat on the carrier, so its phase pads are clamped directly onto the carrier pads.
-  The 2.0 mm flange fits the ≤ 2 mm back-face budget. No pull-out rating is given in the drawing.
-  Real risks: over-torquing an M2 (use a small driver, gently) and brass thread wear over many swaps.
-
-**Placement.** The two modules are identical boards mounted **180° from each other** on the carrier,
-so each one's phase-screw edge faces its own motor: right module toward the wheel end, left module
-toward the centre end (where the left motor's wires arrive). AM32 reverses direction in software.
+- **Pull-out (2026-10-11, corrected).** SMTSO2020 drawing: brass, Ø5.56 × 2.0 mm flange with a Ø3.6 ×
+  1.53 mm pilot that sits **in a hole** in the PCB (PEM SMTSO style), so side loads go into the board.
+  With the standoff on the carrier's **front** and the screw threading into it from the module side,
+  the clamp force closes inside screw → module → standoff: the standoff's solder joint does **not**
+  carry the screw preload (an earlier note here said it did; that was wrong). The joint only sees the
+  module's inertia (≈1.5 g, a few newtons even in a big hit) and the **twisting torque while
+  tightening**, which is the real risk: snug an M2 gently with a small driver. Brass threads wear over
+  many swaps. No pull-out or torque rating is given in the drawing.
+- **Signal contacts:** the standoff height (2–3 mm) leaves room for SMD pogo pins on the carrier pressing
+  module pads (e.g. BWCD-L3.5W2.0H1.0, C2826547: Ø2 mm, 1.5 A, 36 V, 10k cycles, $0.08, 10.5k stock).
+  Battery/GND get several pins each. Exact working height vs standoff height: check the drawing.
 
 ## Open questions
 
