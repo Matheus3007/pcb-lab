@@ -45,6 +45,23 @@ Context only, not yet a spec. Turn into `boards/<name>/spec.md` with the human o
 - Bluetooth: optional plug-in module on a UART header.
 - MCU crash or link loss must stop DShot so all ESCs disarm (watchdog, weapon-off failsafe).
 
+## Architecture: carrier + plug-in ESC modules (decided 2026-10-11)
+- **Carrier** (~78 × 30 mm, vertical on the rear wall): MCU, IMU, power, logging, USB-C, bulk
+  capacitance, and **every wire** in the robot soldered to it (battery + link pigtails, receiver,
+  Aria, all motor phases).
+- **Drive-ESC modules** (~15 × 22 mm target, identical, ~1 g): AM32 MCU + gate driver + small
+  MOSFETs, no wires and no bulk cap. They lie flat on the carrier's inner face (~5 mm stack) on a
+  board-to-board header (VBAT, GND, phases A/B/C, DShot) and are retained by one M2 screw. A swap is
+  one screw, no soldering, about a minute.
+- **Sizing:** the 2.5 A drive figure is battery-side. At low duty (stall against a wall) the phase
+  current can be several times that, so modules are designed for **20–30 A peak phase current**
+  with the AM32 current limit set to match. Header pin count per phase must carry it.
+- **Fallback:** an adapter module with pads for an off-the-shelf ESC (e.g. BCube).
+- **v2 weapon ESC:** a larger module of the same kind with screw-down power lugs.
+- Expected stack at the channel waist: TPU pad 1.5 + carrier 1.0 + stack 5 + module 1.0 + parts
+  ~2 ≈ 10.5 mm of 13–15 mm available.
+- Only the controller section is non-modular: carry a spare carrier per event.
+
 ## Board location (measured from RebotAssemblyV3.STEP, 2026-10-11)
 STEP frame: z up (floor top z=2, lid underside z=37.5), x forward (chevron tip x=0), y lateral;
 y<0 is the user's "right" side (weapon motor side). The space under the lid is too shallow, so the
@@ -60,8 +77,6 @@ Height 35.5 mm floor to lid.
   hit (once, by a vert's victim landing on the lid), but mount it on soft TPU clips/pads anyway.
 
 ## Open
-- Modularity: a monolithic board means one dead ESC = swap the whole board. Proposed: carrier board
-  (controller, power, all soldered wires) + plug-in drive-ESC modules, screw-retained. Pending decision.
 - Drive ESC reference design: which AM32 target to clone (MCU, gate driver, FETs ≥ 40 V, 60 V preferred).
 - Layer count, copper weight, assembly tier (likely < 70 mm → Standard + panel if two-sided).
 - Cost per order cycle incl. shipping and Brazilian import tax.
