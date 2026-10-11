@@ -1,0 +1,2906 @@
+{
+ "board_bbox": [
+  -0.025,
+  -0.025,
+  34.025,
+  21.025
+ ],
+ "size_mm": [
+  34.05,
+  21.05
+ ],
+ "layers": 4,
+ "footprints": [
+  {
+   "ref": "C1",
+   "value": "10uF",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "at": [
+    19.4,
+    1.2
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    17.655,
+    0.175,
+    21.145,
+    2.225
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VBAT",
+     "at": [
+      18.45,
+      1.2
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      20.35,
+      1.2
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C10",
+   "value": "100nF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    0.9,
+    10.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    0.395,
+    9.645,
+    1.405,
+    11.555
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VDDA",
+     "at": [
+      0.9,
+      11.08
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      0.9,
+      10.12
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C11",
+   "value": "100nF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    0.9,
+    8.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    0.395,
+    7.645,
+    1.405,
+    9.555
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "NRST",
+     "at": [
+      0.9,
+      9.08
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      0.9,
+      8.12
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C12",
+   "value": "10uF",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "at": [
+    11.0,
+    13.0
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    9.255,
+    11.975,
+    12.745,
+    14.025
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VGATE",
+     "at": [
+      10.05,
+      13.0
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      11.95,
+      13.0
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C13",
+   "value": "100nF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    10.05,
+    10.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    9.545,
+    9.645,
+    10.555,
+    11.555
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VGATE",
+     "at": [
+      10.05,
+      11.08
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      10.05,
+      10.12
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C14",
+   "value": "100nF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    16.4,
+    5.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    15.895,
+    4.645,
+    16.905,
+    6.555
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "BST_A",
+     "at": [
+      16.4,
+      6.08
+     ]
+    },
+    {
+     "num": "2",
+     "net": "PH_A",
+     "at": [
+      16.4,
+      5.12
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C15",
+   "value": "100nF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    16.4,
+    8.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    15.895,
+    7.645,
+    16.905,
+    9.555
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "BST_B",
+     "at": [
+      16.4,
+      9.08
+     ]
+    },
+    {
+     "num": "2",
+     "net": "PH_B",
+     "at": [
+      16.4,
+      8.12
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C16",
+   "value": "100nF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    16.4,
+    11.4
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    15.895,
+    10.445,
+    16.905,
+    12.355
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "BST_C",
+     "at": [
+      16.4,
+      11.88
+     ]
+    },
+    {
+     "num": "2",
+     "net": "PH_C",
+     "at": [
+      16.4,
+      10.92
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C17",
+   "value": "2.2uF",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "at": [
+    8.7,
+    5.3
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    6.955,
+    4.275,
+    10.445,
+    6.325
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VBAT",
+     "at": [
+      7.75,
+      5.3
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      9.65,
+      5.3
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C18",
+   "value": "100nF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    6.0,
+    4.75
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    5.045,
+    4.245,
+    6.955,
+    5.255
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VBAT",
+     "at": [
+      5.52,
+      4.75
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      6.48,
+      4.75
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C19",
+   "value": "100nF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    9.4,
+    3.3
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    8.895,
+    2.345,
+    9.905,
+    4.255
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "BUCK_BOOT",
+     "at": [
+      9.4,
+      3.78
+     ]
+    },
+    {
+     "num": "2",
+     "net": "BUCK_SW",
+     "at": [
+      9.4,
+      2.82
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C2",
+   "value": "10uF",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "at": [
+    24.6,
+    1.2
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    22.855,
+    0.175,
+    26.345,
+    2.225
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VBAT",
+     "at": [
+      23.65,
+      1.2
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      25.55,
+      1.2
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C20",
+   "value": "1uF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    7.2,
+    0.75
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    6.245,
+    0.245,
+    8.155,
+    1.255
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "BUCK_VCC",
+     "at": [
+      6.72,
+      0.75
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      7.68,
+      0.75
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C21",
+   "value": "10uF",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "at": [
+    15.0,
+    2.3
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    13.975,
+    0.555,
+    16.025,
+    4.045
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VGATE",
+     "at": [
+      15.0,
+      3.25
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      15.0,
+      1.35
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C3",
+   "value": "10uF",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "at": [
+    29.8,
+    1.2
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    28.055,
+    0.175,
+    31.545,
+    2.225
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VBAT",
+     "at": [
+      28.85,
+      1.2
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      30.75,
+      1.2
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C4",
+   "value": "100nF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    22.0,
+    1.2
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    21.495,
+    0.245,
+    22.505,
+    2.155
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VBAT",
+     "at": [
+      22.0,
+      1.68
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      22.0,
+      0.72
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C5",
+   "value": "100nF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    27.2,
+    1.2
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    26.695,
+    0.245,
+    27.705,
+    2.155
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VBAT",
+     "at": [
+      27.2,
+      1.68
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      27.2,
+      0.72
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C6",
+   "value": "100nF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    32.4,
+    1.4
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    31.895,
+    0.445,
+    32.905,
+    2.355
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VBAT",
+     "at": [
+      32.4,
+      1.88
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      32.4,
+      0.92
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C7",
+   "value": "1uF",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "at": [
+    3.4,
+    13.6
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    1.875,
+    12.825,
+    4.925,
+    14.375
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VGATE",
+     "at": [
+      2.625,
+      13.6
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      4.175,
+      13.6
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C8",
+   "value": "1uF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    1.0,
+    13.3
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    0.495,
+    12.345,
+    1.505,
+    14.255
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "3V3",
+     "at": [
+      1.0,
+      13.78
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      1.0,
+      12.82
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "C9",
+   "value": "100nF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "at": [
+    8.95,
+    10.4
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    8.445,
+    9.445,
+    9.455,
+    11.355
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "3V3",
+     "at": [
+      8.95,
+      10.88
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      8.95,
+      9.92
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "H1",
+   "value": "M2",
+   "footprint": "MountingHole:MountingHole_2.2mm_M2",
+   "at": [
+    2.4,
+    2.4
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": true,
+   "courtyard": [
+    -0.098,
+    -0.096,
+    4.895,
+    4.896
+   ],
+   "smd": false,
+   "pads": [
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      2.4,
+      2.4
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "J1",
+   "value": "2x10 2.54mm (hand-soldered)",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_2x10_P2.54mm_Vertical",
+   "at": [
+    7.0,
+    16.0
+   ],
+   "rot": -90.0,
+   "side": "bottom",
+   "dnp": true,
+   "courtyard": [
+    5.185,
+    14.185,
+    31.675,
+    20.365
+   ],
+   "smd": false,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VBAT",
+     "at": [
+      7.0,
+      16.0
+     ]
+    },
+    {
+     "num": "10",
+     "net": "SWDIO",
+     "at": [
+      17.16,
+      18.54
+     ]
+    },
+    {
+     "num": "11",
+     "net": "SWCLK",
+     "at": [
+      19.7,
+      16.0
+     ]
+    },
+    {
+     "num": "12",
+     "net": "PH_A",
+     "at": [
+      19.7,
+      18.54
+     ]
+    },
+    {
+     "num": "13",
+     "net": "PH_A",
+     "at": [
+      22.24,
+      16.0
+     ]
+    },
+    {
+     "num": "14",
+     "net": "PH_A",
+     "at": [
+      22.24,
+      18.54
+     ]
+    },
+    {
+     "num": "15",
+     "net": "PH_B",
+     "at": [
+      24.78,
+      16.0
+     ]
+    },
+    {
+     "num": "16",
+     "net": "PH_B",
+     "at": [
+      24.78,
+      18.54
+     ]
+    },
+    {
+     "num": "17",
+     "net": "PH_B",
+     "at": [
+      27.32,
+      16.0
+     ]
+    },
+    {
+     "num": "18",
+     "net": "PH_C",
+     "at": [
+      27.32,
+      18.54
+     ]
+    },
+    {
+     "num": "19",
+     "net": "PH_C",
+     "at": [
+      29.86,
+      16.0
+     ]
+    },
+    {
+     "num": "2",
+     "net": "VBAT",
+     "at": [
+      7.0,
+      18.54
+     ]
+    },
+    {
+     "num": "20",
+     "net": "PH_C",
+     "at": [
+      29.86,
+      18.54
+     ]
+    },
+    {
+     "num": "3",
+     "net": "VBAT",
+     "at": [
+      9.54,
+      16.0
+     ]
+    },
+    {
+     "num": "4",
+     "net": "GND",
+     "at": [
+      9.54,
+      18.54
+     ]
+    },
+    {
+     "num": "5",
+     "net": "GND",
+     "at": [
+      12.08,
+      16.0
+     ]
+    },
+    {
+     "num": "6",
+     "net": "GND",
+     "at": [
+      12.08,
+      18.54
+     ]
+    },
+    {
+     "num": "7",
+     "net": "",
+     "at": [
+      14.62,
+      16.0
+     ]
+    },
+    {
+     "num": "8",
+     "net": "GND",
+     "at": [
+      14.62,
+      18.54
+     ]
+    },
+    {
+     "num": "9",
+     "net": "DSHOT",
+     "at": [
+      17.16,
+      16.0
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "L1",
+   "value": "22uH 3015",
+   "footprint": "Inductor_SMD:L_Changjiang_FNR3015S",
+   "at": [
+    12.0,
+    2.3
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    10.155,
+    0.505,
+    13.845,
+    4.095
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "BUCK_SW",
+     "at": [
+      10.85,
+      2.3
+     ]
+    },
+    {
+     "num": "2",
+     "net": "VGATE",
+     "at": [
+      13.15,
+      2.3
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "Q1",
+   "value": "HSBB6066 60V",
+   "footprint": "Rebot:PRPAK3x3-8_HSBB",
+   "at": [
+    19.4,
+    4.4
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    17.455,
+    2.255,
+    21.345,
+    6.545
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "PH_A",
+     "at": [
+      18.425,
+      5.875
+     ]
+    },
+    {
+     "num": "2",
+     "net": "PH_A",
+     "at": [
+      19.075,
+      5.875
+     ]
+    },
+    {
+     "num": "3",
+     "net": "PH_A",
+     "at": [
+      19.725,
+      5.875
+     ]
+    },
+    {
+     "num": "4",
+     "net": "GH_A_Q",
+     "at": [
+      20.375,
+      5.875
+     ]
+    },
+    {
+     "num": "5",
+     "net": "VBAT",
+     "at": [
+      19.4,
+      3.9
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "Q2",
+   "value": "HSBB6066 60V",
+   "footprint": "Rebot:PRPAK3x3-8_HSBB",
+   "at": [
+    19.4,
+    9.8
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    17.455,
+    7.655,
+    21.345,
+    11.945
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "GND",
+     "at": [
+      18.425,
+      11.275
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      19.075,
+      11.275
+     ]
+    },
+    {
+     "num": "3",
+     "net": "GND",
+     "at": [
+      19.725,
+      11.275
+     ]
+    },
+    {
+     "num": "4",
+     "net": "GL_A_Q",
+     "at": [
+      20.375,
+      11.275
+     ]
+    },
+    {
+     "num": "5",
+     "net": "PH_A",
+     "at": [
+      19.4,
+      9.3
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "Q3",
+   "value": "HSBB6066 60V",
+   "footprint": "Rebot:PRPAK3x3-8_HSBB",
+   "at": [
+    24.6,
+    4.4
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    22.655,
+    2.255,
+    26.545,
+    6.545
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "PH_B",
+     "at": [
+      23.625,
+      5.875
+     ]
+    },
+    {
+     "num": "2",
+     "net": "PH_B",
+     "at": [
+      24.275,
+      5.875
+     ]
+    },
+    {
+     "num": "3",
+     "net": "PH_B",
+     "at": [
+      24.925,
+      5.875
+     ]
+    },
+    {
+     "num": "4",
+     "net": "GH_B_Q",
+     "at": [
+      25.575,
+      5.875
+     ]
+    },
+    {
+     "num": "5",
+     "net": "VBAT",
+     "at": [
+      24.6,
+      3.9
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "Q4",
+   "value": "HSBB6066 60V",
+   "footprint": "Rebot:PRPAK3x3-8_HSBB",
+   "at": [
+    24.6,
+    9.8
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    22.655,
+    7.655,
+    26.545,
+    11.945
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "GND",
+     "at": [
+      23.625,
+      11.275
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      24.275,
+      11.275
+     ]
+    },
+    {
+     "num": "3",
+     "net": "GND",
+     "at": [
+      24.925,
+      11.275
+     ]
+    },
+    {
+     "num": "4",
+     "net": "GL_B_Q",
+     "at": [
+      25.575,
+      11.275
+     ]
+    },
+    {
+     "num": "5",
+     "net": "PH_B",
+     "at": [
+      24.6,
+      9.3
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "Q5",
+   "value": "HSBB6066 60V",
+   "footprint": "Rebot:PRPAK3x3-8_HSBB",
+   "at": [
+    29.8,
+    4.4
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    27.855,
+    2.255,
+    31.745,
+    6.545
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "PH_C",
+     "at": [
+      28.825,
+      5.875
+     ]
+    },
+    {
+     "num": "2",
+     "net": "PH_C",
+     "at": [
+      29.475,
+      5.875
+     ]
+    },
+    {
+     "num": "3",
+     "net": "PH_C",
+     "at": [
+      30.125,
+      5.875
+     ]
+    },
+    {
+     "num": "4",
+     "net": "GH_C_Q",
+     "at": [
+      30.775,
+      5.875
+     ]
+    },
+    {
+     "num": "5",
+     "net": "VBAT",
+     "at": [
+      29.8,
+      3.9
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "Q6",
+   "value": "HSBB6066 60V",
+   "footprint": "Rebot:PRPAK3x3-8_HSBB",
+   "at": [
+    29.8,
+    9.8
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    27.855,
+    7.655,
+    31.745,
+    11.945
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "GND",
+     "at": [
+      28.825,
+      11.275
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      29.475,
+      11.275
+     ]
+    },
+    {
+     "num": "3",
+     "net": "GND",
+     "at": [
+      30.125,
+      11.275
+     ]
+    },
+    {
+     "num": "4",
+     "net": "GL_C_Q",
+     "at": [
+      30.775,
+      11.275
+     ]
+    },
+    {
+     "num": "5",
+     "net": "PH_C",
+     "at": [
+      29.8,
+      9.3
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R1",
+   "value": "10",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    2.05,
+    10.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    1.535,
+    9.625,
+    2.565,
+    11.575
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "3V3",
+     "at": [
+      2.05,
+      11.11
+     ]
+    },
+    {
+     "num": "2",
+     "net": "VDDA",
+     "at": [
+      2.05,
+      10.09
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R10",
+   "value": "10",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    32.4,
+    11.4
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    31.885,
+    10.425,
+    32.915,
+    12.375
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "GL_C",
+     "at": [
+      32.4,
+      11.91
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GL_C_Q",
+     "at": [
+      32.4,
+      10.89
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R11",
+   "value": "10k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    17.6,
+    13.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    17.085,
+    12.625,
+    18.115,
+    14.575
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "PH_A",
+     "at": [
+      17.6,
+      14.11
+     ]
+    },
+    {
+     "num": "2",
+     "net": "FB_A",
+     "at": [
+      17.6,
+      13.09
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R12",
+   "value": "1k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    18.7,
+    13.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    18.185,
+    12.625,
+    19.215,
+    14.575
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "FB_A",
+     "at": [
+      18.7,
+      14.11
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      18.7,
+      13.09
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R13",
+   "value": "10k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    19.8,
+    13.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    19.285,
+    12.625,
+    20.315,
+    14.575
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "FB_A",
+     "at": [
+      19.8,
+      14.11
+     ]
+    },
+    {
+     "num": "2",
+     "net": "FB_COMMON",
+     "at": [
+      19.8,
+      13.09
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R14",
+   "value": "10k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    22.8,
+    13.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    22.285,
+    12.625,
+    23.315,
+    14.575
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "PH_B",
+     "at": [
+      22.8,
+      14.11
+     ]
+    },
+    {
+     "num": "2",
+     "net": "FB_B",
+     "at": [
+      22.8,
+      13.09
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R15",
+   "value": "1k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    23.9,
+    13.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    23.385,
+    12.625,
+    24.415,
+    14.575
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "FB_B",
+     "at": [
+      23.9,
+      14.11
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      23.9,
+      13.09
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R16",
+   "value": "10k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    25.0,
+    13.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    24.485,
+    12.625,
+    25.515,
+    14.575
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "FB_B",
+     "at": [
+      25.0,
+      14.11
+     ]
+    },
+    {
+     "num": "2",
+     "net": "FB_COMMON",
+     "at": [
+      25.0,
+      13.09
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R17",
+   "value": "10k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    28.0,
+    13.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    27.485,
+    12.625,
+    28.515,
+    14.575
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "PH_C",
+     "at": [
+      28.0,
+      14.11
+     ]
+    },
+    {
+     "num": "2",
+     "net": "FB_C",
+     "at": [
+      28.0,
+      13.09
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R18",
+   "value": "1k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    29.1,
+    13.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    28.585,
+    12.625,
+    29.615,
+    14.575
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "FB_C",
+     "at": [
+      29.1,
+      14.11
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      29.1,
+      13.09
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R19",
+   "value": "10k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    30.2,
+    13.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    29.685,
+    12.625,
+    30.715,
+    14.575
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "FB_C",
+     "at": [
+      30.2,
+      14.11
+     ]
+    },
+    {
+     "num": "2",
+     "net": "FB_COMMON",
+     "at": [
+      30.2,
+      13.09
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R2",
+   "value": "10k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    2.05,
+    8.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    1.535,
+    7.625,
+    2.565,
+    9.575
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "3V3",
+     "at": [
+      2.05,
+      9.11
+     ]
+    },
+    {
+     "num": "2",
+     "net": "NRST",
+     "at": [
+      2.05,
+      8.09
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R20",
+   "value": "100k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    12.0,
+    4.7
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    11.025,
+    4.185,
+    12.975,
+    5.215
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "VGATE",
+     "at": [
+      11.49,
+      4.7
+     ]
+    },
+    {
+     "num": "2",
+     "net": "BUCK_FB",
+     "at": [
+      12.51,
+      4.7
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R21",
+   "value": "10k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    9.4,
+    1.3
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    8.885,
+    0.325,
+    9.915,
+    2.275
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "BUCK_FB",
+     "at": [
+      9.4,
+      1.81
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      9.4,
+      0.79
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R3",
+   "value": "10k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    2.05,
+    6.6
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    1.535,
+    5.625,
+    2.565,
+    7.575
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "BOOT0",
+     "at": [
+      2.05,
+      7.11
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GND",
+     "at": [
+      2.05,
+      6.09
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R4",
+   "value": "220",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    4.9,
+    5.75
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    3.925,
+    5.235,
+    5.875,
+    6.265
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "DSHOT",
+     "at": [
+      4.39,
+      5.75
+     ]
+    },
+    {
+     "num": "2",
+     "net": "DSHOT_MCU",
+     "at": [
+      5.41,
+      5.75
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R5",
+   "value": "10",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    22.0,
+    6.0
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    21.485,
+    5.025,
+    22.515,
+    6.975
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "GH_A",
+     "at": [
+      22.0,
+      6.51
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GH_A_Q",
+     "at": [
+      22.0,
+      5.49
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R6",
+   "value": "10",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    22.0,
+    11.4
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    21.485,
+    10.425,
+    22.515,
+    12.375
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "GL_A",
+     "at": [
+      22.0,
+      11.91
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GL_A_Q",
+     "at": [
+      22.0,
+      10.89
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R7",
+   "value": "10",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    27.2,
+    6.0
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    26.685,
+    5.025,
+    27.715,
+    6.975
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "GH_B",
+     "at": [
+      27.2,
+      6.51
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GH_B_Q",
+     "at": [
+      27.2,
+      5.49
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R8",
+   "value": "10",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    27.2,
+    11.4
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    26.685,
+    10.425,
+    27.715,
+    12.375
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "GL_B",
+     "at": [
+      27.2,
+      11.91
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GL_B_Q",
+     "at": [
+      27.2,
+      10.89
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "R9",
+   "value": "10",
+   "footprint": "Resistor_SMD:R_0402_1005Metric",
+   "at": [
+    32.4,
+    6.0
+   ],
+   "rot": 90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    31.885,
+    5.025,
+    32.915,
+    6.975
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "GH_C",
+     "at": [
+      32.4,
+      6.51
+     ]
+    },
+    {
+     "num": "2",
+     "net": "GH_C_Q",
+     "at": [
+      32.4,
+      5.49
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "U1",
+   "value": "AT32F421G8U7",
+   "footprint": "Package_DFN_QFN:QFN-28-1EP_4x4mm_P0.4mm_EP2.4x2.4mm",
+   "at": [
+    5.6,
+    9.0
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    2.955,
+    6.355,
+    8.245,
+    11.645
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      5.0,
+      8.4
+     ]
+    },
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      5.0,
+      9.6
+     ]
+    },
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      6.2,
+      8.4
+     ]
+    },
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      6.2,
+      9.6
+     ]
+    },
+    {
+     "num": "1",
+     "net": "BOOT0",
+     "at": [
+      3.662,
+      7.8
+     ]
+    },
+    {
+     "num": "10",
+     "net": "FB_B",
+     "at": [
+      5.2,
+      10.938
+     ]
+    },
+    {
+     "num": "11",
+     "net": "FB_C",
+     "at": [
+      5.6,
+      10.938
+     ]
+    },
+    {
+     "num": "12",
+     "net": "",
+     "at": [
+      6.0,
+      10.938
+     ]
+    },
+    {
+     "num": "13",
+     "net": "INL_C",
+     "at": [
+      6.4,
+      10.938
+     ]
+    },
+    {
+     "num": "14",
+     "net": "INL_B",
+     "at": [
+      6.8,
+      10.938
+     ]
+    },
+    {
+     "num": "15",
+     "net": "INL_A",
+     "at": [
+      7.537,
+      10.2
+     ]
+    },
+    {
+     "num": "16",
+     "net": "GND",
+     "at": [
+      7.537,
+      9.8
+     ]
+    },
+    {
+     "num": "17",
+     "net": "3V3",
+     "at": [
+      7.537,
+      9.4
+     ]
+    },
+    {
+     "num": "18",
+     "net": "INH_C",
+     "at": [
+      7.537,
+      9.0
+     ]
+    },
+    {
+     "num": "19",
+     "net": "INH_B",
+     "at": [
+      7.537,
+      8.6
+     ]
+    },
+    {
+     "num": "2",
+     "net": "",
+     "at": [
+      3.662,
+      8.2
+     ]
+    },
+    {
+     "num": "20",
+     "net": "INH_A",
+     "at": [
+      7.537,
+      8.2
+     ]
+    },
+    {
+     "num": "21",
+     "net": "SWDIO",
+     "at": [
+      7.537,
+      7.8
+     ]
+    },
+    {
+     "num": "22",
+     "net": "SWCLK",
+     "at": [
+      6.8,
+      7.062
+     ]
+    },
+    {
+     "num": "23",
+     "net": "",
+     "at": [
+      6.4,
+      7.062
+     ]
+    },
+    {
+     "num": "24",
+     "net": "",
+     "at": [
+      6.0,
+      7.062
+     ]
+    },
+    {
+     "num": "25",
+     "net": "DSHOT_MCU",
+     "at": [
+      5.6,
+      7.062
+     ]
+    },
+    {
+     "num": "26",
+     "net": "",
+     "at": [
+      5.2,
+      7.062
+     ]
+    },
+    {
+     "num": "27",
+     "net": "",
+     "at": [
+      4.8,
+      7.062
+     ]
+    },
+    {
+     "num": "28",
+     "net": "",
+     "at": [
+      4.4,
+      7.062
+     ]
+    },
+    {
+     "num": "29",
+     "net": "GND",
+     "at": [
+      5.6,
+      9.0
+     ]
+    },
+    {
+     "num": "3",
+     "net": "",
+     "at": [
+      3.662,
+      8.6
+     ]
+    },
+    {
+     "num": "4",
+     "net": "NRST",
+     "at": [
+      3.662,
+      9.0
+     ]
+    },
+    {
+     "num": "5",
+     "net": "VDDA",
+     "at": [
+      3.662,
+      9.4
+     ]
+    },
+    {
+     "num": "6",
+     "net": "FB_A",
+     "at": [
+      3.662,
+      9.8
+     ]
+    },
+    {
+     "num": "7",
+     "net": "FB_COMMON",
+     "at": [
+      3.662,
+      10.2
+     ]
+    },
+    {
+     "num": "8",
+     "net": "",
+     "at": [
+      4.4,
+      10.938
+     ]
+    },
+    {
+     "num": "9",
+     "net": "",
+     "at": [
+      4.8,
+      10.938
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "U2",
+   "value": "DRV8300DRGER",
+   "footprint": "Package_DFN_QFN:VQFN-24-1EP_4x4mm_P0.5mm_EP2.45x2.45mm",
+   "at": [
+    13.2,
+    8.9
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    10.525,
+    6.225,
+    15.875,
+    11.575
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      12.38,
+      8.08
+     ]
+    },
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      12.38,
+      8.9
+     ]
+    },
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      12.38,
+      9.72
+     ]
+    },
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      13.2,
+      8.08
+     ]
+    },
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      13.2,
+      8.9
+     ]
+    },
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      13.2,
+      9.72
+     ]
+    },
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      14.02,
+      8.08
+     ]
+    },
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      14.02,
+      8.9
+     ]
+    },
+    {
+     "num": "",
+     "net": "",
+     "at": [
+      14.02,
+      9.72
+     ]
+    },
+    {
+     "num": "1",
+     "net": "INL_A",
+     "at": [
+      11.213,
+      7.65
+     ]
+    },
+    {
+     "num": "10",
+     "net": "GL_B",
+     "at": [
+      13.45,
+      10.888
+     ]
+    },
+    {
+     "num": "11",
+     "net": "GL_A",
+     "at": [
+      13.95,
+      10.888
+     ]
+    },
+    {
+     "num": "12",
+     "net": "PH_C",
+     "at": [
+      14.45,
+      10.888
+     ]
+    },
+    {
+     "num": "13",
+     "net": "GH_C",
+     "at": [
+      15.188,
+      10.15
+     ]
+    },
+    {
+     "num": "14",
+     "net": "BST_C",
+     "at": [
+      15.188,
+      9.65
+     ]
+    },
+    {
+     "num": "15",
+     "net": "PH_B",
+     "at": [
+      15.188,
+      9.15
+     ]
+    },
+    {
+     "num": "16",
+     "net": "GH_B",
+     "at": [
+      15.188,
+      8.65
+     ]
+    },
+    {
+     "num": "17",
+     "net": "BST_B",
+     "at": [
+      15.188,
+      8.15
+     ]
+    },
+    {
+     "num": "18",
+     "net": "PH_A",
+     "at": [
+      15.188,
+      7.65
+     ]
+    },
+    {
+     "num": "19",
+     "net": "GH_A",
+     "at": [
+      14.45,
+      6.912
+     ]
+    },
+    {
+     "num": "2",
+     "net": "INL_B",
+     "at": [
+      11.213,
+      8.15
+     ]
+    },
+    {
+     "num": "20",
+     "net": "BST_A",
+     "at": [
+      13.95,
+      6.912
+     ]
+    },
+    {
+     "num": "21",
+     "net": "",
+     "at": [
+      13.45,
+      6.912
+     ]
+    },
+    {
+     "num": "22",
+     "net": "INH_A",
+     "at": [
+      12.95,
+      6.912
+     ]
+    },
+    {
+     "num": "23",
+     "net": "INH_B",
+     "at": [
+      12.45,
+      6.912
+     ]
+    },
+    {
+     "num": "24",
+     "net": "INH_C",
+     "at": [
+      11.95,
+      6.912
+     ]
+    },
+    {
+     "num": "25",
+     "net": "GND",
+     "at": [
+      13.2,
+      8.9
+     ]
+    },
+    {
+     "num": "3",
+     "net": "INL_C",
+     "at": [
+      11.213,
+      8.65
+     ]
+    },
+    {
+     "num": "4",
+     "net": "VGATE",
+     "at": [
+      11.213,
+      9.15
+     ]
+    },
+    {
+     "num": "5",
+     "net": "",
+     "at": [
+      11.213,
+      9.65
+     ]
+    },
+    {
+     "num": "6",
+     "net": "GND",
+     "at": [
+      11.213,
+      10.15
+     ]
+    },
+    {
+     "num": "7",
+     "net": "",
+     "at": [
+      11.95,
+      10.888
+     ]
+    },
+    {
+     "num": "8",
+     "net": "",
+     "at": [
+      12.45,
+      10.888
+     ]
+    },
+    {
+     "num": "9",
+     "net": "GL_C",
+     "at": [
+      12.95,
+      10.888
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "U3",
+   "value": "HT7533 3.3V",
+   "footprint": "Package_TO_SOT_SMD:SOT-89-3",
+   "at": [
+    3.0,
+    17.4
+   ],
+   "rot": -90.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    0.455,
+    14.505,
+    5.545,
+    19.695
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "GND",
+     "at": [
+      4.5,
+      15.45
+     ]
+    },
+    {
+     "num": "2",
+     "net": "VGATE",
+     "at": [
+      3.0,
+      15.537
+     ]
+    },
+    {
+     "num": "3",
+     "net": "3V3",
+     "at": [
+      1.5,
+      15.45
+     ]
+    }
+   ]
+  },
+  {
+   "ref": "U4",
+   "value": "LMR36506 buck",
+   "footprint": "Rebot:VQFN-HR-9_2x2mm_TI_RPE0009A",
+   "at": [
+    7.2,
+    2.6
+   ],
+   "rot": 0.0,
+   "side": "top",
+   "dnp": false,
+   "courtyard": [
+    5.855,
+    1.255,
+    8.545,
+    3.945
+   ],
+   "smd": true,
+   "pads": [
+    {
+     "num": "1",
+     "net": "BUCK_VCC",
+     "at": [
+      6.38,
+      1.69
+     ]
+    },
+    {
+     "num": "2",
+     "net": "",
+     "at": [
+      6.3,
+      2.35
+     ]
+    },
+    {
+     "num": "3",
+     "net": "VBAT",
+     "at": [
+      6.3,
+      2.85
+     ]
+    },
+    {
+     "num": "4",
+     "net": "VBAT",
+     "at": [
+      6.38,
+      3.51
+     ]
+    },
+    {
+     "num": "5",
+     "net": "BUCK_SW",
+     "at": [
+      8.02,
+      3.51
+     ]
+    },
+    {
+     "num": "6",
+     "net": "BUCK_BOOT",
+     "at": [
+      8.1,
+      2.85
+     ]
+    },
+    {
+     "num": "7",
+     "net": "BUCK_VCC",
+     "at": [
+      8.1,
+      2.35
+     ]
+    },
+    {
+     "num": "8",
+     "net": "BUCK_FB",
+     "at": [
+      8.02,
+      1.69
+     ]
+    },
+    {
+     "num": "9",
+     "net": "GND",
+     "at": [
+      7.2,
+      2.05
+     ]
+    }
+   ]
+  }
+ ],
+ "nets": {},
+ "totals": {
+  "tracks": 0,
+  "vias": 0,
+  "track_length": 0
+ },
+ "tracks": [],
+ "vias": []
+}

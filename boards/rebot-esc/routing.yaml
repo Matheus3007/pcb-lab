@@ -1,5 +1,8 @@
-tracks: []      # {net, layer, width, points: [[x,y],...]}  routed BEFORE the autorouter
-vias: []        # {net, at: [x,y], diameter, drill}
-zones: []       # {net, layer, outline: board | [[x,y],...], clearance}
-stitch: []      # {net: GND, pitch: 3.5, via_diameter: 0.6, via_drill: 0.3, edge_margin: 1.0}
-autoroute: {enabled: true, max_passes: 100, timeout_s: 300}
+# Routing intent for rebot-esc. Net classes (widths/currents) live in circuit.py.
+# Gate 2 (placement): autorouting is OFF until the placement is approved; gate 3 turns it on and adds
+# the power pours (GND In1.Cu, VBAT In2.Cu) and scripted phase/gate tracks.
+tracks: []
+vias: []
+zones: []
+stitch: []
+autoroute: {enabled: false, max_passes: 100, timeout_s: 300}

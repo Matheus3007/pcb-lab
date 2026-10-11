@@ -157,7 +157,10 @@ def circuit() -> Circuit:
     c.connect("FB_COMMON", u1.PA1)
 
     # --- net classes --------------------------------------------------------------------------
-    c.net_class(NetClass("Power", track_width=1.0, clearance=0.2, current_a=5.0),   # 5 A continuous, short 20-30 A peaks (gate 1)
+    # Default (all signal nets): 4-layer JLC rules (toolchain/rules/jlc.yaml multilayer: 0.125 mm). The
+    # AT32F421 QFN-28 has 0.4 mm pitch, so its neighbouring pads are only 0.15 mm apart.
+    c.net_class(NetClass("Default", track_width=0.15, clearance=0.125))
+    c.net_class(NetClass("Power", track_width=1.0, clearance=0.15, current_a=5.0),   # 5 A cont., 20-30 A peaks (gate 1); 0.15 mm: GND meets the 0.4 mm-pitch MCU pads
                 "VBAT", "GND", "PH_A", "PH_B", "PH_C")
     c.net_class(NetClass("Gate", track_width=0.3, clearance=0.15, current_a=1.0),
                 "VGATE", "BUCK_SW", *(f"{k}_{p}{s}" for k in ("GH", "GL") for p in PHASES for s in ("", "_Q")),

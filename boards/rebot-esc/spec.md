@@ -14,14 +14,16 @@ iFlight Xing 2207 1800 kV motor rewired to wye (~1040 kV).
 ## Mechanical
 - Envelope: rear-right channel of the chassis, one module at each end of the carrier
   (`RebotAssemblyV3.STEP`; channel ≈35 mm deep at the wheel end, 17–20 mm at the centre end).
-- Max outline: **≈27.5–30 × 15 mm** (2×10 header ≈25.4 × 5 mm sets the length; the buck adds ~2–3 mm).
+- Outline: **34 × 21 mm** (gate 2). The through-hole header's pads block a 25 × 5 mm strip of the top side, and
+  Economic assembly is one-sided, so the parts need the 34 × 15 mm above it. Two modules = 68 mm of the ~78 mm carrier.
 - Thickness: 1.0 mm (keeps the stack ≈15 mm; Economic allows 0.8–1.6).
 - Parts: **top side only** (SMD); the male header is through-hole, body on the bottom side, pins down
   into the carrier's socket.
 - Height: top-side parts ≤ 2 mm (MOSFETs ~1 mm, MCU/driver ~0.8 mm, 1206 caps ~1.6 mm).
 - Mounting: one M2 hole in the middle (screw into a standoff on the carrier, no current); must also
   work with Kapton tape only. Keep copper/parts clear of the screw head (≈ Ø4.5 mm).
-- Mass budget: ≤ 2 g including header.
+- Mass: ≈ 3 g each (1.0 mm FR-4 34×21 ≈ 1.3 g, parts ≈ 0.5 g, 2×10 header ≈ 1–1.2 g). The 2 g budget
+  didn't account for the header; still far below an off-the-shelf ESC with its leads and connectors.
 - Environment: combat robot, **shock first** (weapon hits, arena slams). No tall or heavy parts,
   no parts on the edges that touch the screw head, keep the MCU/driver away from board flex near the header.
 
@@ -74,3 +76,4 @@ iFlight Xing 2207 1800 kV motor rewired to wye (~1040 kV).
 | 2026-10-11 | Gate 1 review: items approved, one change pending | OK: header key at pin 7 (GND 4→3), size copper for 5 A continuous, 10 Ω gate resistors, own MOSFET footprint, MCU EP land. Item 5 changed: module made self-contained (owner's call), see next row |
 | 2026-10-11 | Self-contained power | LMR36506 65 V buck → 11 V gate rail on the module; carrier's 12 V removed; header pin 8 → GND |
 | 2026-10-11 | gate 1 approved | Self-contained power block accepted; on to outline + placement |
+| 2026-10-11 | Gate 2 placement | 34 × 21 mm, 4-layer; header along the bottom edge, three vertical half bridges on the right, supplies/MCU/driver left; 26 placement rules |

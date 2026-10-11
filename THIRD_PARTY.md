@@ -8,6 +8,8 @@ pinned version and verifies it against `toolchain/third_party.sha256`.
 |---|---|---|
 | `lib/jlc_rotations.csv` | [matthewlai/JLCKicadTools](https://github.com/matthewlai/JLCKicadTools) `cpl_rotations_db.csv` @ `50ab537` | GPL-3.0 |
 | `lib/3d/HRO_TYPE-C-31-M-12_C165948.step` | LCSC/EasyEDA model for C165948, via easyeda2kicad | EasyEDA/LCSC terms (unclear) |
+| `lib/3d/HSBB6066_C2828498.step` | LCSC/EasyEDA model for C2828498, via easyeda2kicad | EasyEDA/LCSC terms (unclear) |
+| `lib/3d/LMR36506RRPER_C2870127.step` | LCSC/EasyEDA model for C2870127, via easyeda2kicad | EasyEDA/LCSC terms (unclear) |
 | `lib/datasheets/` | JLCPCB/LCSC datasheet downloads (`make part`) | manufacturers' copyright |
 
 Used at run time, not distributed: KiCad 10 (GPL-3.0, incl. its symbol/footprint/3D libraries, which

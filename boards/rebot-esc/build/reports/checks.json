@@ -1,0 +1,1320 @@
+{
+ "board": "rebot-esc",
+ "pass": false,
+ "errors": 143,
+ "warnings": 0,
+ "waived": 0,
+ "findings": [
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "MOSFET Vds: spike budget vs 60 V rating: 40 V in [0, 48]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "BEMF divider at full LiHV vs 3.3 V MCU: 2.373 V in [0, 3.3]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "BEMF clamp current at spike (10k series): 0.00364 A in [0, 0.005]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "Buck Vin: spike budget vs LMR36506 65 V: 40 V in [0, 58.5]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "Gate rail = GVDD within DRV8300 4.8-20 V: 11 V in [4.8, 20]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "Gate rail vs MOSFET Vgs +-20 V: 11 V in [0, 20]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "Gate rail high enough for Rds(on) spec (10 V): 11 V in [10, 20]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "Buck inductor peak current (24 V in, 50 mA load) vs Isat 0.68 A: 0.1854 A in [0, 0.544]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "Bootstrap droop: Qg 33 nC / 100 nF: 0.33 V in [0, 1]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "GVDD cap >= 10x bootstrap cap: 100 x in [10, 1e+06]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "HT7533 Vin vs 30 V rating: 11 V in [3.5, 30]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "HT7533 dissipation @30 mA (SOT-89 0.5 W): 0.231 W in [0, 0.5]"
+  },
+  {
+   "check": "circuit/assertion",
+   "severity": "ok",
+   "msg": "Jig flash: ST-LINK 5 V on VBAT, buck dropout ~0.3 V, keeps HT7533 above 3.3 V: 1.4 V in [0.1, 30]"
+  },
+  {
+   "check": "schematic/pins_match",
+   "severity": "ok",
+   "msg": "all 202 symbol pins match parts.yaml"
+  },
+  {
+   "check": "schematic/netlist_match",
+   "severity": "ok",
+   "msg": "KiCad's netlist of the schematic equals circuit.py (43 nets)"
+  },
+  {
+   "check": "erc/ok",
+   "severity": "ok",
+   "msg": "KiCad ERC: no violations"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 1 [VBAT] of J1; Pad 1 [VBAT] of C17 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 12 [PH_A] of J1; PTH pad 14 [PH_A] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 14 [PH_A] of J1; PTH pad 13 [PH_A] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 15 [PH_B] of J1; Pad 1 [PH_B] of R14 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 16 [PH_B] of J1; PTH pad 15 [PH_B] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 17 [PH_B] of J1; PTH pad 15 [PH_B] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 18 [PH_C] of J1; PTH pad 20 [PH_C] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 19 [PH_C] of J1; Pad 1 [PH_C] of R17 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 2 [VBAT] of J1; PTH pad 1 [VBAT] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 20 [PH_C] of J1; PTH pad 19 [PH_C] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 3 [VBAT] of J1; PTH pad 1 [VBAT] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 4 [GND] of J1; PTH pad 6 [GND] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 5 [GND] of J1; PTH pad 6 [GND] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: PTH pad 6 [GND] of J1; PTH pad 8 [GND] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [3V3] of C8 on F.Cu; Pad 1 [3V3] of R1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [3V3] of C8 on F.Cu; Pad 3 [3V3] of U3 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [3V3] of C9 on F.Cu; Pad 17 [3V3] of U1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [3V3] of R2 on F.Cu; Pad 1 [3V3] of R1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [BOOT0] of R3 on F.Cu; Pad 1 [BOOT0] of U1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [BUCK_FB] of R21 on F.Cu; Pad 8 [BUCK_FB] of U4 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [BUCK_SW] of L1 on F.Cu; Pad 2 [BUCK_SW] of C19 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [BUCK_VCC] of C20 on F.Cu; Pad 1 [BUCK_VCC] of U4 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [BUCK_VCC] of U4 on F.Cu; Pad 7 [BUCK_VCC] of U4 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [DSHOT] of R4 on F.Cu; PTH pad 9 [DSHOT] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [FB_A] of R12 on F.Cu; Pad 1 [FB_A] of R13 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [FB_B] of R15 on F.Cu; Pad 1 [FB_B] of R16 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [FB_C] of R18 on F.Cu; Pad 1 [FB_C] of R19 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [GND] of Q2 on F.Cu; Pad 2 [GND] of R12 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [GND] of Q4 on F.Cu; Pad 2 [GND] of Q4 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [GND] of Q4 on F.Cu; Pad 2 [GND] of R15 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [GND] of Q4 on F.Cu; Pad 3 [GND] of Q2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [GND] of Q6 on F.Cu; Pad 2 [GND] of R18 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [GND] of Q6 on F.Cu; Pad 3 [GND] of Q4 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [GND] of U3 on F.Cu; Pad 2 [GND] of C7 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [PH_A] of Q1 on F.Cu; Pad 2 [PH_A] of Q1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [PH_A] of R11 on F.Cu; PTH pad 12 [PH_A] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [PH_A] of R11 on F.Cu; Pad 5 [PH_A] of Q2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [PH_B] of Q3 on F.Cu; Pad 2 [PH_B] of C15 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [VBAT] of C1 on F.Cu; Pad 5 [VBAT] of Q1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [VBAT] of C17 on F.Cu; Pad 1 [VBAT] of C1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [VBAT] of C18 on F.Cu; Pad 4 [VBAT] of U4 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [VBAT] of C3 on F.Cu; Pad 5 [VBAT] of Q5 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [VBAT] of C4 on F.Cu; Pad 1 [VBAT] of C2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [VBAT] of C4 on F.Cu; Pad 5 [VBAT] of Q1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [VBAT] of C5 on F.Cu; Pad 1 [VBAT] of C3 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [VGATE] of C12 on F.Cu; Pad 1 [VGATE] of C7 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [VGATE] of C13 on F.Cu; Pad 1 [VGATE] of C12 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [VGATE] of C13 on F.Cu; Pad 4 [VGATE] of U2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [VGATE] of C21 on F.Cu; Pad 2 [VGATE] of L1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [VGATE] of C7 on F.Cu; Pad 2 [VGATE] of U3 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 1 [VGATE] of R20 on F.Cu; Pad 2 [VGATE] of L1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 10 [GL_B] of U2 on F.Cu; Pad 1 [GL_B] of R8 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 11 [GL_A] of U2 on F.Cu; Pad 1 [GL_A] of R6 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 13 [GH_C] of U2 on F.Cu; Pad 1 [GH_C] of R9 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 13 [INL_C] of U1 on F.Cu; Pad 3 [INL_C] of U2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 14 [BST_C] of U2 on F.Cu; Pad 1 [BST_C] of C16 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 14 [INL_B] of U1 on F.Cu; Pad 2 [INL_B] of U2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 15 [INL_A] of U1 on F.Cu; Pad 1 [INL_A] of U2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 16 [GH_B] of U2 on F.Cu; Pad 1 [GH_B] of R7 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 17 [3V3] of U1 on F.Cu; Pad 1 [3V3] of R2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 17 [BST_B] of U2 on F.Cu; Pad 1 [BST_B] of C15 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 18 [INH_C] of U1 on F.Cu; Pad 24 [INH_C] of U2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 19 [GH_A] of U2 on F.Cu; Pad 1 [GH_A] of R5 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 19 [INH_B] of U1 on F.Cu; Pad 23 [INH_B] of U2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [BUCK_FB] of R20 on F.Cu; Pad 1 [BUCK_FB] of R21 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [BUCK_SW] of C19 on F.Cu; Pad 5 [BUCK_SW] of U4 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [DSHOT_MCU] of R4 on F.Cu; Pad 25 [DSHOT_MCU] of U1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [FB_A] of R11 on F.Cu; Pad 1 [FB_A] of R12 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [FB_A] of R11 on F.Cu; Pad 6 [FB_A] of U1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [FB_B] of R14 on F.Cu; Pad 1 [FB_B] of R15 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [FB_B] of R14 on F.Cu; Pad 10 [FB_B] of U1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [FB_COMMON] of R13 on F.Cu; Pad 2 [FB_COMMON] of R16 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [FB_COMMON] of R16 on F.Cu; Pad 2 [FB_COMMON] of R19 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [FB_C] of R17 on F.Cu; Pad 1 [FB_C] of R18 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [FB_C] of R17 on F.Cu; Pad 11 [FB_C] of U1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C1 on F.Cu; Pad 2 [GND] of C21 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C10 on F.Cu; Pad 2 [GND] of C8 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C11 on F.Cu; Pad 2 [GND] of C10 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C12 on F.Cu; PTH pad 5 [GND] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C18 on F.Cu; Pad 2 [GND] of C17 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C2 on F.Cu; Pad 2 [GND] of C4 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C2 on F.Cu; Pad 2 [GND] of C5 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C20 on F.Cu; Pad 2 [GND] of R21 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C4 on F.Cu; Pad 2 [GND] of C1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C5 on F.Cu; Pad 2 [GND] of C3 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C6 on F.Cu; Pad 2 [GND] of C3 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C7 on F.Cu; Pad 2 [GND] of C8 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C9 on F.Cu; Pad 16 [GND] of U1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of C9 on F.Cu; Pad 2 [GND] of C13 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of Q2 on F.Cu; Pad 1 [GND] of Q2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of Q6 on F.Cu; Pad 1 [GND] of Q6 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of Q6 on F.Cu; Pad 3 [GND] of Q6 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of R21 on F.Cu; Pad 2 [GND] of C21 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [GND] of R3 on F.Cu; Pad 2 [GND] of C11 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [NRST] of R2 on F.Cu; Pad 1 [NRST] of C11 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [PH_A] of C14 on F.Cu; Pad 1 [PH_A] of Q1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [PH_A] of C14 on F.Cu; Pad 18 [PH_A] of U2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [PH_A] of Q1 on F.Cu; Pad 5 [PH_A] of Q2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [PH_B] of C15 on F.Cu; Pad 15 [PH_B] of U2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [PH_B] of Q3 on F.Cu; Pad 1 [PH_B] of Q3 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [PH_C] of C16 on F.Cu; Pad 1 [PH_C] of R17 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [PH_C] of C16 on F.Cu; Pad 12 [PH_C] of U2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [PH_C] of Q5 on F.Cu; Pad 1 [PH_C] of Q5 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 2 [VDDA] of R1 on F.Cu; Pad 1 [VDDA] of C10 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 20 [BST_A] of U2 on F.Cu; Pad 1 [BST_A] of C14 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 20 [INH_A] of U1 on F.Cu; Pad 22 [INH_A] of U2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 21 [SWDIO] of U1 on F.Cu; PTH pad 10 [SWDIO] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 22 [SWCLK] of U1 on F.Cu; PTH pad 11 [SWCLK] of J1"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 25 [GND] of U2 on F.Cu; Pad 1 [GND] of Q2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 29 [GND] of U1 on F.Cu; Pad 16 [GND] of U1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 29 [GND] of U1 on F.Cu; Pad 2 [GND] of C18 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 29 [GND] of U1 on F.Cu; Pad 2 [GND] of R3 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 3 [GND] of Q2 on F.Cu; Pad 2 [GND] of Q2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 3 [GND] of Q4 on F.Cu; Pad 2 [GND] of Q4 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 3 [PH_A] of Q1 on F.Cu; Pad 2 [PH_A] of Q1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 3 [PH_B] of Q3 on F.Cu; Pad 2 [PH_B] of Q3 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 3 [PH_C] of Q5 on F.Cu; Pad 2 [PH_C] of Q5 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 3 [PH_C] of Q5 on F.Cu; Pad 5 [PH_C] of Q6 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 4 [GH_A_Q] of Q1 on F.Cu; Pad 2 [GH_A_Q] of R5 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 4 [GH_B_Q] of Q3 on F.Cu; Pad 2 [GH_B_Q] of R7 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 4 [GH_C_Q] of Q5 on F.Cu; Pad 2 [GH_C_Q] of R9 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 4 [GL_A_Q] of Q2 on F.Cu; Pad 2 [GL_A_Q] of R6 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 4 [GL_B_Q] of Q4 on F.Cu; Pad 2 [GL_B_Q] of R8 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 4 [GL_C_Q] of Q6 on F.Cu; Pad 2 [GL_C_Q] of R10 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 4 [NRST] of U1 on F.Cu; Pad 2 [NRST] of R2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 4 [VBAT] of U4 on F.Cu; Pad 1 [VBAT] of C17 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 4 [VBAT] of U4 on F.Cu; Pad 3 [VBAT] of U4 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 4 [VGATE] of U2 on F.Cu; Pad 1 [VGATE] of R20 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 5 [PH_B] of Q4 on F.Cu; Pad 1 [PH_B] of R14 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 5 [PH_B] of Q4 on F.Cu; Pad 3 [PH_B] of Q3 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 5 [PH_C] of Q6 on F.Cu; Pad 1 [PH_C] of R17 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 5 [VBAT] of Q3 on F.Cu; Pad 1 [VBAT] of C2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 5 [VBAT] of Q3 on F.Cu; Pad 1 [VBAT] of C5 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 5 [VBAT] of Q5 on F.Cu; Pad 1 [VBAT] of C6 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 5 [VDDA] of U1 on F.Cu; Pad 2 [VDDA] of R1 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 6 [BUCK_BOOT] of U4 on F.Cu; Pad 1 [BUCK_BOOT] of C19 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 6 [GND] of U2 on F.Cu; Pad 2 [GND] of C12 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 6 [GND] of U2 on F.Cu; Pad 2 [GND] of C13 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 6 [GND] of U2 on F.Cu; Pad 25 [GND] of U2 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 7 [FB_COMMON] of U1 on F.Cu; Pad 2 [FB_COMMON] of R13 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 9 [GL_C] of U2 on F.Cu; Pad 1 [GL_C] of R10 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 9 [GND] of U4 on F.Cu; Pad 2 [GND] of C18 on F.Cu"
+  },
+  {
+   "check": "drc/unconnected",
+   "severity": "error",
+   "msg": "unconnected: Pad 9 [GND] of U4 on F.Cu; Pad 2 [GND] of C20 on F.Cu"
+  },
+  {
+   "check": "parity/ok",
+   "severity": "ok",
+   "msg": "board matches the schematic (KiCad schematic parity)"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C9 -> U1 pad 17: 1.51 mm (max 2.0) — MCU VDD decoupling"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C10 -> U1 pad 5: 2.85 mm (max 3.4) — VDDA decoupling"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C11 -> U1 pad 4: 2.76 mm (max 3.3) — NRST cap"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "R4 -> U1 pad 25: 1.33 mm (max 1.8) — DShot series resistor at PB4"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C13 -> U2 pad 4: 1.51 mm (max 2.0) — GVDD HF decoupling"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C12 -> U2 pad 4: 3.92 mm (max 4.4) — GVDD bulk"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C14 -> U2 pad 20: 2.59 mm (max 3.1) — bootstrap A at BSTA"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C15 -> U2 pad 17: 1.21 mm (max 1.7) — bootstrap B at BSTB"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C16 -> U2 pad 14: 1.76 mm (max 2.3) — bootstrap C at BSTC"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C18 -> U4 pad 4: 1.24 mm (max 1.7) — buck input HF cap at VIN"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C17 -> U4 pad 4: 2.25 mm (max 2.8) — buck input cap"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C19 -> U4 pad 6: 1.30 mm (max 1.8) — buck bootstrap at BOOT"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C20 -> U4 pad 7: 1.65 mm (max 2.2) — buck VCC cap"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "R21 -> U4 pad 8: 1.39 mm (max 1.9) — feedback divider at FB"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "L1 -> U4 pad 5: 3.08 mm (max 3.6) — inductor at SW"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C7 -> U3 pad 2: 1.97 mm (max 3.0) — LDO input cap"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C8 -> U3 pad 3: 1.74 mm (max 3.0) — LDO output cap"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "R5 -> Q1 pad 4: 1.67 mm (max 2.2) — HS gate resistor A"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "R6 -> Q2 pad 4: 1.67 mm (max 2.2) — LS gate resistor A"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "R7 -> Q3 pad 4: 1.67 mm (max 2.2) — HS gate resistor B"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "R8 -> Q4 pad 4: 1.67 mm (max 2.2) — LS gate resistor B"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "R9 -> Q5 pad 4: 1.67 mm (max 2.2) — HS gate resistor C"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "R10 -> Q6 pad 4: 1.67 mm (max 2.2) — LS gate resistor C"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C1 -> Q1 pad 5: 2.86 mm (max 3.4) — VBAT bulk at HS drain A"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C2 -> Q3 pad 5: 2.86 mm (max 3.4) — VBAT bulk at HS drain B"
+  },
+  {
+   "check": "placement/near",
+   "severity": "ok",
+   "msg": "C3 -> Q5 pad 5: 2.86 mm (max 3.4) — VBAT bulk at HS drain C"
+  },
+  {
+   "check": "parts/tiers",
+   "severity": "info",
+   "msg": "17 unique parts: basic 12, preferred 0, extended 5 (extended: C2870127 LMR36506RRPER, C167761 FNR3015S220MT, C2765098 AT32F421G8U7, C3655801 DRV8300DRGER, C2828498 HSBB6066)"
+  },
+  {
+   "check": "routing/stats",
+   "severity": "info",
+   "msg": "0 bends total; per net: "
+  }
+ ],
+ "bom": [
+  {
+   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2411041759_Murata-Electronics-GRM21BR61H106KE43L_C440198.pdf",
+   "datasheet_file_id": "8588884955182718976",
+   "description": "10uF 50V X5R ±10% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C440198",
+   "manufacturer": "Murata Electronics",
+   "mpn": "GRM21BR61H106KE43L",
+   "package": "0805",
+   "stock": 1367301,
+   "tier": "basic",
+   "unit_price_usd": 0.2069,
+   "refs": [
+    "C1",
+    "C2",
+    "C3"
+   ],
+   "value": "10uF",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric"
+  },
+  {
+   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+   "datasheet": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2304140030_Samsung-Electro-Mechanics-CL21A225KBQNNNE_C377773.pdf",
+   "datasheet_file_id": "8588932555597369344",
+   "description": "2.2uF 50V X5R ±10% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C377773",
+   "manufacturer": "Samsung Electro-Mechanics",
+   "mpn": "CL21A225KBQNNNE",
+   "package": "0805",
+   "stock": 607650,
+   "tier": "basic",
+   "unit_price_usd": 0.0367,
+   "refs": [
+    "C17"
+   ],
+   "value": "2.2uF",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric"
+  },
+  {
+   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05A105KA5NQNC_C52923.pdf",
+   "datasheet_file_id": "8579707174974914560",
+   "description": "1uF 25V X5R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C52923",
+   "manufacturer": "Samsung Electro-Mechanics",
+   "mpn": "CL05A105KA5NQNC",
+   "package": "0402",
+   "stock": 7473805,
+   "tier": "basic",
+   "unit_price_usd": 0.0087,
+   "refs": [
+    "C20",
+    "C8"
+   ],
+   "value": "1uF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric"
+  },
+  {
+   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL21A106KAYNNNE_C15850.pdf",
+   "datasheet_file_id": "8579706853615591424",
+   "description": "10uF 25V X5R ±10% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C15850",
+   "manufacturer": "Samsung Electro-Mechanics",
+   "mpn": "CL21A106KAYNNNE",
+   "package": "0805",
+   "stock": 4303759,
+   "tier": "basic",
+   "unit_price_usd": 0.0688,
+   "refs": [
+    "C21",
+    "C12"
+   ],
+   "value": "10uF",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric"
+  },
+  {
+   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05B104KB54PNC_C307331.pdf",
+   "datasheet_file_id": "8554627388281098240",
+   "description": "100nF 50V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C307331",
+   "manufacturer": "Samsung Electro-Mechanics",
+   "mpn": "CL05B104KB54PNC",
+   "package": "0402",
+   "stock": 16047630,
+   "tier": "basic",
+   "unit_price_usd": 0.0104,
+   "refs": [
+    "C4",
+    "C5",
+    "C6",
+    "C18",
+    "C19",
+    "C9",
+    "C10",
+    "C11",
+    "C13",
+    "C14",
+    "C15",
+    "C16"
+   ],
+   "value": "100nF",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric"
+  },
+  {
+   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL10A105KB8NNNC_C15849.pdf",
+   "datasheet_file_id": "8556213788459761664",
+   "description": "1uF 50V X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C15849",
+   "manufacturer": "Samsung Electro-Mechanics",
+   "mpn": "CL10A105KB8NNNC",
+   "package": "0603",
+   "stock": 8604279,
+   "tier": "basic",
+   "unit_price_usd": 0.0163,
+   "refs": [
+    "C7"
+   ],
+   "value": "1uF",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric"
+  },
+  {
+   "category": "Power Inductors",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_cjiang--Changjiang-Microelectronics-Tech-FNR3015S220MT_C167761.pdf",
+   "datasheet_file_id": "8588900810230517760",
+   "description": "22uH 598mΩ 680mA 690mA Magnetic Shielded Inductor ±20% SMD,3x3mm Power Inductors ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C167761",
+   "manufacturer": "cjiang (Changjiang Microelectronics Tech)",
+   "mpn": "FNR3015S220MT",
+   "package": "SMD,3x3mm",
+   "stock": 36955,
+   "tier": "extended",
+   "unit_price_usd": 0.0419,
+   "refs": [
+    "L1"
+   ],
+   "value": "22uH 3015",
+   "footprint": "Inductor_SMD:L_Changjiang_FNR3015S"
+  },
+  {
+   "category": "MOSFETs",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2105241831_HUASHUO-HSBB6066_C2828498.pdf",
+   "datasheet_file_id": "8757802694280908800",
+   "description": "-55℃~+150℃ 1 N-channel 1.67nF 2.3V 25pF 33nC@10V 438pF 45W 5.2mΩ@10V 60A 60V N-Channel PRPAK3x3-8L MOSFETs ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C2828498",
+   "manufacturer": "HUASHUO",
+   "mpn": "HSBB6066",
+   "package": "PRPAK3x3-8L",
+   "stock": 28531,
+   "tier": "extended",
+   "unit_price_usd": 0.5326,
+   "refs": [
+    "Q1",
+    "Q2",
+    "Q3",
+    "Q4",
+    "Q5",
+    "Q6"
+   ],
+   "value": "HSBB6066 60V",
+   "footprint": "Rebot:PRPAK3x3-8_HSBB"
+  },
+  {
+   "category": "Chip Resistor - Surface Mount",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2411221126_UNI-ROYAL-Uniroyal-Elec-0402WGF100JTCE_C25077.pdf",
+   "datasheet_file_id": "8579705954880966656",
+   "description": "-55℃~+155℃ 10Ω 50V 62.5mW Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C25077",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "mpn": "0402WGF100JTCE",
+   "package": "0402",
+   "stock": 4515933,
+   "tier": "basic",
+   "unit_price_usd": 0.0029,
+   "refs": [
+    "R1",
+    "R5",
+    "R6",
+    "R7",
+    "R8",
+    "R9",
+    "R10"
+   ],
+   "value": "10",
+   "footprint": "Resistor_SMD:R_0402_1005Metric"
+  },
+  {
+   "category": "Chip Resistor - Surface Mount",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010216_UNI-ROYAL-Uniroyal-Elec-0402WGF1001TCE_C11702.pdf",
+   "datasheet_file_id": "8579705924167974912",
+   "description": "-55℃~+155℃ 1kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C11702",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "mpn": "0402WGF1001TCE",
+   "package": "0402",
+   "stock": 8264648,
+   "tier": "basic",
+   "unit_price_usd": 0.0035,
+   "refs": [
+    "R12",
+    "R15",
+    "R18"
+   ],
+   "value": "1k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric"
+  },
+  {
+   "category": "Chip Resistor - Surface Mount",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010100_UNI-ROYAL-Uniroyal-Elec-0402WGF1003TCE_C25741.pdf",
+   "datasheet_file_id": "8579705919464263680",
+   "description": "-55℃~+155℃ 100kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C25741",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "mpn": "0402WGF1003TCE",
+   "package": "0402",
+   "stock": 8472367,
+   "tier": "basic",
+   "unit_price_usd": 0.0021,
+   "refs": [
+    "R20"
+   ],
+   "value": "100k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric"
+  },
+  {
+   "category": "Chip Resistor - Surface Mount",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2411221126_UNI-ROYAL-Uniroyal-Elec-0402WGF1002TCE_C25744.pdf",
+   "datasheet_file_id": "8556212101498380288",
+   "description": "-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C25744",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "mpn": "0402WGF1002TCE",
+   "package": "0402",
+   "stock": 19702227,
+   "tier": "basic",
+   "unit_price_usd": 0.0034,
+   "refs": [
+    "R21",
+    "R2",
+    "R3",
+    "R11",
+    "R13",
+    "R14",
+    "R16",
+    "R17",
+    "R19"
+   ],
+   "value": "10k",
+   "footprint": "Resistor_SMD:R_0402_1005Metric"
+  },
+  {
+   "category": "Chip Resistor - Surface Mount",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2205311900_UNI-ROYAL-Uniroyal-Elec-0402WGF2200TCE_C25091.pdf",
+   "datasheet_file_id": "8579705994546499584",
+   "description": "-55℃~+155℃ 220Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C25091",
+   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+   "mpn": "0402WGF2200TCE",
+   "package": "0402",
+   "stock": 1316134,
+   "tier": "basic",
+   "unit_price_usd": 0.0035,
+   "refs": [
+    "R4"
+   ],
+   "value": "220",
+   "footprint": "Resistor_SMD:R_0402_1005Metric"
+  },
+  {
+   "category": "Microcontrollers (MCU/MPU/SOC)",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_ARTERY-AT32F421G8U7_C2765098.pdf",
+   "datasheet_file_id": "8588894236372164608",
+   "description": "-40℃~+105℃ 120MHz 16KB 2.4V~3.6V 23 32 Bit 64KB ARM Cortex-M4 Built-in+External FLASH QFN-28-EP(4x4) Microcontrollers (MCU/MPU/SOC) ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C2765098",
+   "manufacturer": "ARTERY",
+   "mpn": "AT32F421G8U7",
+   "package": "QFN-28-EP(4x4)",
+   "stock": 5887,
+   "tier": "extended",
+   "unit_price_usd": 0.9577,
+   "refs": [
+    "U1"
+   ],
+   "value": "AT32F421G8U7",
+   "footprint": "Package_DFN_QFN:QFN-28-1EP_4x4mm_P0.4mm_EP2.4x2.4mm"
+  },
+  {
+   "category": "Brushless DC (BLDC) Motor Driver",
+   "datasheet": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302220130_Texas-Instruments-DRV8300DRGER_C3655801.pdf",
+   "datasheet_file_id": "8589836222165389312",
+   "description": "-40℃~+125℃ 1.5A 10ns 3 5V~20V 5ns 750mA 800uA Interleaved conduction protection、Dead-time control、Built-in bootstrap diode Low Side、High Side MOSFET VQFN-24(4x4) Brushless DC (BLDC) Motor Driver ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C3655801",
+   "manufacturer": "Texas Instruments",
+   "mpn": "DRV8300DRGER",
+   "package": "VQFN-24(4x4)",
+   "stock": 23748,
+   "tier": "extended",
+   "unit_price_usd": 0.5896,
+   "refs": [
+    "U2"
+   ],
+   "value": "DRV8300DRGER",
+   "footprint": "Package_DFN_QFN:VQFN-24-1EP_4x4mm_P0.5mm_EP2.45x2.45mm"
+  },
+  {
+   "category": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
+   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2312191111_Holtek-Semicon-HT7533-1_C14289.pdf",
+   "datasheet_file_id": "8579707787284303872",
+   "description": "-40℃~+85℃@(Ta) 1 100mA 2.5uA 25mV@(1mA) 3.3V 30V Fixed Positive SOT-89-3 Voltage Regulators - Linear, Low Drop Out (LDO) Regulators ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C14289",
+   "manufacturer": "Holtek Semicon",
+   "mpn": "HT7533-1",
+   "package": "SOT-89-3",
+   "stock": 75616,
+   "tier": "basic",
+   "unit_price_usd": 0.1434,
+   "refs": [
+    "U3"
+   ],
+   "value": "HT7533 3.3V",
+   "footprint": "Package_TO_SOT_SMD:SOT-89-3"
+  },
+  {
+   "category": "DC-DC Converters",
+   "datasheet": "https://wmsc.lcsc.com/wmsc/upload/file/pdf/v2/lcsc/2302220630_Texas-Instruments-LMR36506RRPER_C2870127.pdf",
+   "datasheet_file_id": "8589837741866450944",
+   "description": "-40℃~+150℃@(TJ) 1 18uA 200kHz~2.2MHz 3.6V~65V 600mA Adjustable Buck Buck Built-in Yes VQFN-9(2x2) DC-DC Converters ROHS",
+   "fetched": "2026-10-11",
+   "lcsc": "C2870127",
+   "manufacturer": "Texas Instruments",
+   "mpn": "LMR36506RRPER",
+   "package": "VQFN-9(2x2)",
+   "stock": 2904,
+   "tier": "extended",
+   "unit_price_usd": 1.5587,
+   "refs": [
+    "U4"
+   ],
+   "value": "LMR36506 buck",
+   "footprint": "Rebot:VQFN-HR-9_2x2mm_TI_RPE0009A"
+  }
+ ],
+ "stats": {
+  "size_mm": [
+   34.05,
+   21.05
+  ],
+  "tracks": 0,
+  "vias": 0,
+  "track_length": 0,
+  "parts": 55
+ }
+}

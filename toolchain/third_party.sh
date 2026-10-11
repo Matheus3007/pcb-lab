@@ -26,6 +26,8 @@ step() {
   mv "$(find "$tmp" -path "*$1.3dshapes/*.step" | head -1)" "$dest"
 }
 step C165948 lib/3d/HRO_TYPE-C-31-M-12_C165948.step
+step C2828498 lib/3d/HSBB6066_C2828498.step
+step C2870127 lib/3d/LMR36506RRPER_C2870127.step
 
 # verify everything listed in the manifest
 (cd "$root" && sha256sum -c --quiet toolchain/third_party.sha256) || { echo "third_party: checksum mismatch (see above)"; exit 1; }

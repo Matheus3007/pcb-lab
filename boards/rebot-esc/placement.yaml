@@ -1,6 +1,99 @@
-# Units mm/deg, board coords (+Y down). Every footprint needs an entry under parts.
-parts: {}
-#  J1: {at: [15.0, 3.65], rot: 180, side: top}
-rules: []
-#  - {rule: near, ref: C1, to: U1, pin_pad: "3", max_dist: 2.0, why: "decoupling"}
-#  - {rule: on_edge, ref: J1, edge: top, why: "connector must reach the edge"}
+# Placement for rebot-esc. Units: mm / degrees, board coords (+Y down). Board 34 x 21 mm.
+# Bottom edge: the 2x10 header (bottom side, pins down into the carrier). At rot 270 pin 1 is at the
+# left and pins run +X: odd row y=16.0, even row y=18.54, pairs at x = 7.0 + 2.54 k.
+# VBAT pins 1-3 at x 7.0-9.5, GND 4-8 at 9.5-14.6, signals 9-11, phases A 12-14 (19.7-22.2),
+# B 15-17 (24.8-27.3), C 18-20 (27.3-29.9).
+# Top row: retention hole, 11 V buck + inductor, VBAT caps over the high-side drains.
+# Middle: MCU, gate driver, three vertical half bridges at x = 19.4 / 24.6 / 29.8.
+# Band under the low-side FETs: the BEMF dividers, next to the phase nodes they sense.
+
+parts:
+  J1: {at: [7.0, 16.0], rot: 270, side: bottom}
+  H1: {at: [2.4, 2.4]}
+  # --- half bridges (drain pad up at rot 0): HS drain = VBAT, LS drain = phase, LS source = GND
+  Q1: {at: [19.4, 4.4], rot: 0}
+  Q2: {at: [19.4, 9.8], rot: 0}
+  Q3: {at: [24.6, 4.4], rot: 0}
+  Q4: {at: [24.6, 9.8], rot: 0}
+  Q5: {at: [29.8, 4.4], rot: 0}
+  Q6: {at: [29.8, 9.8], rot: 0}
+  R5: {at: [22.0, 6.0], rot: 90}      # gate resistors right of each FET's gate pad (pad 4, bottom right)
+  R6: {at: [22.0, 11.4], rot: 90}
+  R7: {at: [27.2, 6.0], rot: 90}
+  R8: {at: [27.2, 11.4], rot: 90}
+  R9: {at: [32.4, 6.0], rot: 90}
+  R10: {at: [32.4, 11.4], rot: 90}
+  # --- VBAT bulk (0805) over each high-side drain, HF caps between the columns
+  C1: {at: [19.4, 1.2], rot: 0}
+  C2: {at: [24.6, 1.2], rot: 0}
+  C3: {at: [29.8, 1.2], rot: 0}
+  C4: {at: [22.0, 1.2], rot: 90}
+  C5: {at: [27.2, 1.2], rot: 90}
+  C6: {at: [32.4, 1.4], rot: 90}
+  # --- BEMF dividers in a row under the low-side FETs (top 10k, bottom 1k, star 10k per phase)
+  R11: {at: [17.6, 13.6], rot: 90}
+  R12: {at: [18.7, 13.6], rot: 90}
+  R13: {at: [19.8, 13.6], rot: 90}
+  R14: {at: [22.8, 13.6], rot: 90}
+  R15: {at: [23.9, 13.6], rot: 90}
+  R16: {at: [25.0, 13.6], rot: 90}
+  R17: {at: [28.0, 13.6], rot: 90}
+  R18: {at: [29.1, 13.6], rot: 90}
+  R19: {at: [30.2, 13.6], rot: 90}
+  # --- gate driver: inputs on the left (from the MCU), gate outputs right/top/bottom (to the FETs)
+  U2: {at: [13.2, 8.9], rot: 0}
+  C13: {at: [10.05, 10.6], rot: 90}    # GVDD HF at pin 4 (left side)
+  C12: {at: [11.0, 13.0], rot: 0}     # GVDD bulk 10 uF
+  C14: {at: [16.4, 5.6], rot: 90}     # boot A: BSTA pin 20 (top) to SHA pin 18 (right)
+  C15: {at: [16.4, 8.6], rot: 90}     # boot B: BSTB 17 / SHB 15 (right)
+  C16: {at: [16.4, 11.4], rot: 90}    # boot C: BSTC 14 (right) / SHC 12 (bottom)
+  # --- MCU: PWM outputs on the right face the driver; BEMF inputs left/bottom
+  U1: {at: [5.6, 9.0], rot: 0}
+  C9: {at: [8.95, 10.4], rot: 90}      # VDD at pin 17 (right side)
+  R3: {at: [2.05, 6.6], rot: 90}      # BOOT0 pull-down, pin 1 (top of left side)
+  R2: {at: [2.05, 8.6], rot: 90}      # NRST pull-up, pin 4
+  C11: {at: [0.9, 8.6], rot: 90}      # NRST cap
+  R1: {at: [2.05, 10.6], rot: 90}     # VDDA filter, pin 5
+  C10: {at: [0.9, 10.6], rot: 90}     # VDDA cap
+  R4: {at: [4.9, 5.75], rot: 0}        # DShot series, PB4 pin 25 (top)
+  # --- 11 V buck (U4 pins: left 1 RT, 2 PG, 3 EN, 4 VIN; right 8 FB, 7 VCC, 6 BOOT, 5 SW)
+  U4: {at: [7.2, 2.6], rot: 0}
+  C20: {at: [7.2, 0.75], rot: 0}      # VCC cap above the part
+  R21: {at: [9.4, 1.3], rot: 90}      # FB to GND, at pin 8
+  C19: {at: [9.4, 3.3], rot: 90}      # BOOT-SW, at pins 6/5
+  L1: {at: [12.0, 2.3], rot: 0}
+  C21: {at: [15.0, 2.3], rot: 90}     # Cout 10 uF
+  R20: {at: [12.0, 4.7], rot: 0}      # VGATE to FB
+  C18: {at: [6.0, 4.75], rot: 0}      # Cin HF at VIN pin 4
+  C17: {at: [8.7, 5.3], rot: 0}      # Cin 2.2 uF
+  # --- 3.3 V LDO, bottom-left corner beside the header
+  U3: {at: [3.0, 17.4], rot: 270}   # pins up toward C7/C8, tab toward the bottom edge
+  C7: {at: [3.4, 13.6], rot: 0}       # LDO in: pad 1 over VIN (pin 2), pad 2 over GND (pin 1)
+  C8: {at: [1.0, 13.3], rot: 90}      # LDO out, over VOUT (pin 3)
+rules:   # max_dist = as placed + 0.5 mm, so later moves can't drift these parts away
+  - {rule: near, ref: C9, to: U1, pin_pad: "17", max_dist: 2.0, why: "MCU VDD decoupling"}
+  - {rule: near, ref: C10, to: U1, pin_pad: "5", max_dist: 3.4, why: "VDDA decoupling"}
+  - {rule: near, ref: C11, to: U1, pin_pad: "4", max_dist: 3.3, why: "NRST cap"}
+  - {rule: near, ref: R4, to: U1, pin_pad: "25", max_dist: 1.8, why: "DShot series resistor at PB4"}
+  - {rule: near, ref: C13, to: U2, pin_pad: "4", max_dist: 2.0, why: "GVDD HF decoupling"}
+  - {rule: near, ref: C12, to: U2, pin_pad: "4", max_dist: 4.4, why: "GVDD bulk"}
+  - {rule: near, ref: C14, to: U2, pin_pad: "20", max_dist: 3.1, why: "bootstrap A at BSTA"}
+  - {rule: near, ref: C15, to: U2, pin_pad: "17", max_dist: 1.7, why: "bootstrap B at BSTB"}
+  - {rule: near, ref: C16, to: U2, pin_pad: "14", max_dist: 2.3, why: "bootstrap C at BSTC"}
+  - {rule: near, ref: C18, to: U4, pin_pad: "4", max_dist: 1.7, why: "buck input HF cap at VIN"}
+  - {rule: near, ref: C17, to: U4, pin_pad: "4", max_dist: 2.8, why: "buck input cap"}
+  - {rule: near, ref: C19, to: U4, pin_pad: "6", max_dist: 1.8, why: "buck bootstrap at BOOT"}
+  - {rule: near, ref: C20, to: U4, pin_pad: "7", max_dist: 2.2, why: "buck VCC cap"}
+  - {rule: near, ref: R21, to: U4, pin_pad: "8", max_dist: 1.9, why: "feedback divider at FB"}
+  - {rule: near, ref: L1, to: U4, pin_pad: "5", max_dist: 3.6, why: "inductor at SW"}
+  - {rule: near, ref: C7, to: U3, pin_pad: "2", max_dist: 3.0, why: "LDO input cap"}
+  - {rule: near, ref: C8, to: U3, pin_pad: "3", max_dist: 3.0, why: "LDO output cap"}
+  - {rule: near, ref: R5, to: Q1, pin_pad: "4", max_dist: 2.2, why: "HS gate resistor A"}
+  - {rule: near, ref: R6, to: Q2, pin_pad: "4", max_dist: 2.2, why: "LS gate resistor A"}
+  - {rule: near, ref: R7, to: Q3, pin_pad: "4", max_dist: 2.2, why: "HS gate resistor B"}
+  - {rule: near, ref: R8, to: Q4, pin_pad: "4", max_dist: 2.2, why: "LS gate resistor B"}
+  - {rule: near, ref: R9, to: Q5, pin_pad: "4", max_dist: 2.2, why: "HS gate resistor C"}
+  - {rule: near, ref: R10, to: Q6, pin_pad: "4", max_dist: 2.2, why: "LS gate resistor C"}
+  - {rule: near, ref: C1, to: Q1, pin_pad: "5", max_dist: 3.4, why: "VBAT bulk at HS drain A"}
+  - {rule: near, ref: C2, to: Q3, pin_pad: "5", max_dist: 3.4, why: "VBAT bulk at HS drain B"}
+  - {rule: near, ref: C3, to: Q5, pin_pad: "5", max_dist: 3.4, why: "VBAT bulk at HS drain C"}
