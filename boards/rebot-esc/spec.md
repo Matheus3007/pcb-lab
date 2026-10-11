@@ -26,7 +26,7 @@ iFlight Xing 2207 1800 kV motor rewired to wye (~1040 kV).
   no parts on the edges that touch the screw head, keep the MCU/driver away from board flex near the header.
 
 ## Electrical
-- Layers: 4 (signal / GND / power / signal) · copper: 1 oz outer (2 oz TBD, see open questions)
+- Layers: 4 (signal / GND / power / signal) · copper: **1 oz**, wide pours for phases/VBAT/GND
 - Inputs (all from the carrier through the header):
   - VBAT: 6S LiHV, 18–26.1 V, regen spikes above that; MOSFETs and driver rated 60/100 V.
   - 12 V gate supply (GVDD), shared buck on the carrier.
@@ -52,19 +52,16 @@ iFlight Xing 2207 1800 kV motor rewired to wye (~1040 kV).
   see research notes). Keep everything else Basic.
 
 ## Fab
-- Quantity: 10 (2–2.5 robots × 2 + spares) · finish: TBD · mask color: TBD
-- Assembly: Economic, one side. Header: TBD (JLC through-hole assembly or hand-soldered).
+- Quantity: 10 (2–2.5 robots × 2 + spares) · finish: **ENIG** · mask color: **black**
+- Assembly: Economic, one side SMD. The through-hole header is **hand-soldered by the owner** (not in the JLC BOM).
 
 ## Open questions
-- Header soldering: JLC through-hole assembly (extra fee) or hand-soldered by the owner?
-- First flash: does the owner have an ST-LINK? SWD as test pads (pogo jig / hold-down) or a tiny
-  header footprint?
-- Per-module current sense (shunt + amplifier on PA3 → per-motor current in telemetry), or
-  carrier-level only?
-- Copper weight: 1 oz (cheaper) vs 2 oz outer (phase current peaks).
-- Finish / mask color.
+- SWD access (owner has an ST-LINK; must be flashable by hand, no micro pads): proposed SWDIO + SWCLK
+  on the main header (2×9 → 2×10), flashed through a 4-wire socket jig. Awaiting OK.
+- Per-module current sense: owner leans yes if light; trade-offs sent, awaiting OK.
 
 ## Changelog
 | Date | Change / gate | Notes |
 |---|---|---|
 | 2026-10-11 | Scaffolded, spec draft | From the Rebot planning discussion |
+| 2026-10-11 | Interview answers | Hand-soldered header, 1 oz, black ENIG |
