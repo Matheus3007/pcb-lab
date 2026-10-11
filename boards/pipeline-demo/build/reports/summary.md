@@ -1,7 +1,7 @@
 # pipeline-demo — checks PASS
 
 0 errors · 0 warnings · 2 waived  
-board 30.05 × 24.05 mm · 11 footprints · 40 track segments · 41 vias · 80.1 mm copper
+board 30.05 × 24.05 mm · 11 footprints · 43 track segments · 47 vias · 66.7 mm copper
 
 ## circuit
 - ✓ `circuit/assertion` LED current @Vf=1.8V: 0.0015 A in [0.0005, 0.005]

@@ -28,6 +28,7 @@ TYPE-C-31-M-12:
     SBU1: A8
     SBU2: B8
     SHIELD: SH
+  zone_connection: {SH: full}   # shield THT pads: solid to the GND pour (thermal spokes get starved by nearby routing)
   model:   # KiCad ships no model for this footprint; STEP from LCSC/EasyEDA, re-origined
     path: lib/3d/HRO_TYPE-C-31-M-12_C165948.step
     offset: [0, 1.575, 0]   # EasyEDA fp origin is 1.575 mm forward of KiCad's (pads y=-2.47 vs -4.045)

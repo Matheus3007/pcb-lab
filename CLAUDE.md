@@ -105,6 +105,14 @@ Environment and tools:
 - Committed artifacts must be stable across identical builds: the DRC report has its `date` and
   per-item `uuid` stripped; renders are only replaced when pixels change visibly
   (antialiasing and ray-tracer noise otherwise churn git); the dashboard HTML is untracked.
+- **Windows KiCad auto-updates** (10.0.5 → 10.0.7 on 2026-10-11). After an update, run `make all` on every
+  board and update `toolchain/versions.env`. The route-lock fingerprint ignores the DSN `(parser ...)`
+  header (host_version), so updates alone don't force reroutes.
+- To view a board in the GUI use `make open BOARD=x`. KiCad's project manager reopens whatever project
+  the user had last (e.g. their own `Documents\KiCad Projects\...`), which looks like "a blank PCB".
+  The pcbnew-written `.kicad_prl` can hide everything in the GUI, so the build deletes it.
+- THT pads that anchor into a pour (connector shields) can get `starved_thermal` after a reroute: set
+  `zone_connection: {SH: full}` on the part in parts.yaml (applied per pad by the builder).
 - WSL has no sudo password: everything installs to `~/.local` (uv, JRE) or the repo.
 
 Parts and data:

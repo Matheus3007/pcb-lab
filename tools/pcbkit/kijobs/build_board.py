@@ -146,10 +146,15 @@ class Builder:
                 fp.SetDNP(True)
                 fp.SetExcludedFromBOM(True)
                 fp.SetExcludedFromPosFiles(True)
+            conn = p.get("meta", {}).get("zone_connection", {})
+            modes = {"full": pcbnew.ZONE_CONNECTION_FULL, "thermal": pcbnew.ZONE_CONNECTION_THERMAL,
+                     "none": pcbnew.ZONE_CONNECTION_NONE}
             for pad in fp.Pads():
                 net = p["pad_nets"].get(pad.GetNumber())
                 if net:
                     pad.SetNet(self.nets[net])
+                if pad.GetNumber() in conn:
+                    pad.SetLocalZoneConnection(modes[conn[pad.GetNumber()]])
             self.board.Add(fp)
             spot = place.get(p["ref"])
             if spot is None:

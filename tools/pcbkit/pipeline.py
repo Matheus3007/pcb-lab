@@ -181,7 +181,9 @@ def _dsn_fingerprint(dsn: Path) -> str:
     and the first atom (the file path) dropped."""
     text = dsn.read_text(encoding="utf-8").replace('(string_quote ")', "(string_quote dq)")
     tree = _sexpr(text)[0]
-    tree = [tree[0]] + tree[2:]
+    # drop the file path and the (parser ...) header (it carries host_version, so a KiCad
+    # update would otherwise invalidate every lock without any design change)
+    tree = [tree[0]] + [c for c in tree[2:] if not (isinstance(c, list) and c and c[0] == "parser")]
     return hashlib.sha256(_canon(tree).encode()).hexdigest()
 
 
