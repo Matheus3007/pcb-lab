@@ -179,8 +179,10 @@ Parts and data:
   "XC6206P332MR" differs). Always verify the exact manufacturer behind the LCSC ID.
 - Verified Basic passives live in `lib/basic_passives.yaml`. Reuse them before searching.
 - KiCad stock 3D models are incomplete (e.g. no model for `USB_C_Receptacle_HRO_TYPE-C-31-M-12`).
-  easyeda2kicad models use EasyEDA's footprint origin: compare pad coordinates of both footprints to get
-  `model.offset` (Y is up in model space, down in footprint space). That connector needed `[0, 1.575, 0]`, rot 180.
+  easyeda2kicad models use EasyEDA's footprint origin. Don't derive `model.offset` from pad coordinates alone:
+  slice the STEP (e.g. at z = -0.5 for THT legs) and match a feature to the footprint (Y is up in model space,
+  down in footprint space). HRO TYPE-C-31-M-12: `[0, -1.07, 0]`, rot 180. The 1.575 mm figure is its JLC CPL
+  offset, a different thing; reusing it sank the model 2.65 mm into the board (spotted by the owner).
 - `MountingHole_*` and other parts with no pins: `pins: {}` in parts.yaml, `dnp: true`.
 
 Geometry and placement:

@@ -36,7 +36,8 @@ TYPE-C-31-M-12:
   zone_connection: {SH: full}   # shield THT pads: solid to the GND pour (thermal spokes get starved by nearby routing)
   model:   # KiCad ships no model for this footprint; STEP from LCSC/EasyEDA, re-origined
     path: lib/3d/HRO_TYPE-C-31-M-12_C165948.step
-    offset: [0, 1.575, 0]   # EasyEDA fp origin is 1.575 mm forward of KiCad's (pads y=-2.47 vs -4.045)
+    offset: [0, -1.07, 0]   # after rot 180, the model's shell legs (Y-up -4.2 / 0.0) must land on the footprint's
+                            # leg holes (y -3.13 / +1.05): -1.07. (1.575 is the JLC CPL origin offset, not this.)
     rotate: [0, 0, 180]
   pinout_source: "USB Type-C spec pin names; KiCad footprint is specific to this exact part (HRO TYPE-C-31-M-12), pads named by spec pin"
   pinout_verified: 2026-10-11
