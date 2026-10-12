@@ -42,6 +42,10 @@ e.g. to try for a better result. Freerouting is random, so several attempts may 
 | `parts/stock` | low stock at JLC | pick an alternative, re-verify pinout |
 | `current/width` | trace too thin for the class current | raise NetClass `track_width` or use a pour |
 | `models/missing` | no 3D model | `/add-part` step 4 |
+| `layout/return_path` | signal over a gap in its reference GND (often: routing on the layer next to it) | make that layer a plane (`autoroute.plane_layers`), move the track, or stitch the gap |
+| `layout/finger` | narrow dead-end GND pour tongue without a via | add a scripted GND via at its tip, or a keepout / larger zone `min_width` |
+| `layout/loop` | hot loop too big or returning through far vias | move the cap to the IC pins; add GND vias at each GND pad (`vias:` in routing.yaml) |
+| `layout/pair`, `layout/vias` | diff pair routed unlike, sensitive net with many vias | script the net in routing.yaml, or reroute |
 | `routing/jog` | autorouter sideways step the straightener couldn't fix (no clearance) | `REROUTE=1` (more `attempts`), nudge the parts causing the squeeze, or script that net in `routing.yaml` |
 | `schematic/pin_name` | KiCad symbol and parts.yaml disagree on a pad's function | read the datasheet: fix `pins` (wrong pinout!) or add `symbol_aliases` (spelling only) |
 | `schematic/pin_unmapped` | symbol pin numbers ≠ footprint pads | pick a symbol matching the footprint, or a local symbol in lib/symbols/ |

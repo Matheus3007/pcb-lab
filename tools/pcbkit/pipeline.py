@@ -404,6 +404,7 @@ def stage_stitch(b: Board) -> list[str]:
 def stage_dump(b: Board) -> dict:
     out = b.reports / "board.json"
     kipy("dump.py", b.pcb, out, *b.origin)
+    kipy("copper.py", b.pcb, b.work / "copper.json", *b.origin)   # geometry for the layout checks
     return json.loads(out.read_text())
 
 

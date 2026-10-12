@@ -108,7 +108,21 @@ too, and both must still be checked against the datasheet at gate 1.
 circuit validation + assertions · KiCad DRC (all severities, unconnected items) ·
 placement rules · assembly tier (sides, min package, min board size) · JLC part lookup
 (tier counts, stock vs quantity, pinout evidence present) · current capacity vs IPC-2221
-per net class · missing 3D models · waivers.
+per net class · routing quality (jogs, off-45° segments, bends) · missing 3D models · waivers.
+
+**Layout hygiene (`pcbkit/layout.py`, `layout/*`)**: geometry DRC doesn't judge, run on the copper polygons that
+`kijobs/copper.py` exports after stitching (`build/work/copper.json`). Configured in `routing.yaml layout:`.
+
+| Check | What it flags | Default |
+|---|---|---|
+| `layout/return_path` | signal track length with no GND under it on its reference layer (nearest plane: F↔In1, In2↔B on JLC 4-layer; F↔B on 2-layer). Own vias' clearance holes don't count. | warn > 0.3 mm per net |
+| `layout/finger` | dead-end GND pour tongues narrower than 0.8 mm and longer than 3 mm with no via/pad (stubs that ring/radiate) | always on |
+| `layout/loop` | area enclosed by a listed current loop's pads (e.g. buck VIN-cap-GND), and whether each same-net hop is joined on the parts' layer or has a GND via within 1.5 mm of each pad | per `loops:` |
+| `layout/pair` | differential pair length skew, layers and via count alike | per `pairs:` |
+| `layout/vias` | via count on sensitive nets (each via changes the return-current plane) | per `sensitive:` |
+
+Floating copper is handled earlier: pours delete unconnected islands, the stitcher puts a via in every
+island that touches a pad, and DRC fails on anything left unconnected.
 
 ## Environment notes
 

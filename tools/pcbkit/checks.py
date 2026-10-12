@@ -242,6 +242,8 @@ def check(name: str) -> dict:
     findings += pf
     findings += current(b, dump, netlist)
     findings += routing(b, dump)
+    from . import layout
+    findings += layout.check(b.work, dump, (yload(b.dir / "routing.yaml", default={}) or {}).get("layout", {}))
     findings += models(b)
     apply_waivers(b, findings)
 
