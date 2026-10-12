@@ -67,7 +67,8 @@ edit source → make all BOARD=<name> → read build/reports/summary.md + LOOK a
   area and impedance discontinuities, i.e. noise. Prefer straight runs and 45° transitions; never accept
   a jog or a loop around a part when a direct path exists. Enforced by: best-of-N autorouting scored on
   jogs/vias/bends/length (`routing.yaml autoroute.attempts`), the jog straightener (`kijobs/straighten.py`),
-  and the `routing/jog` check (warning: fix it or waive it with a reason). Sensitive nets (motor phases,
+  and the `routing/jog` check (warning: fix it or waive it with a reason). **All copper runs at 0/45/90°**: the
+  router gets `(snap_angle fortyfive_degree)`, the straightener only bridges at 45°, and `routing/angle` flags the rest. Sensitive nets (motor phases,
   current sense, IMU SPI, USB) get scripted tracks in `routing.yaml`, never the autorouter.
 - **Part tier priority: JLC Basic > Preferred ("promotional") Extended > plain Extended**, where viable.
   Basic and Preferred parts have no per-part setup fee and are always loaded on the machines. A plain

@@ -3,6 +3,7 @@
 A *jog* is a short segment whose two neighbours on the same net and layer run parallel to
 each other: the trace steps sideways and continues in the same direction. Jogs are autorouter
 artifacts that add length and bends for nothing (noise, impedance discontinuities, ugly).
+An *off-grid* segment is one not at a multiple of 45 degrees (crooked trace).
 """
 from __future__ import annotations
 
@@ -11,6 +12,7 @@ from collections import defaultdict
 
 PARALLEL_DEG = 5.0      # neighbours count as parallel within this angle
 JOG_MAX_MM = 1.5        # a sideways step shorter than this (or 4x track width) is a jog
+GRID_TOL_DEG = 0.5      # a segment within this of a multiple of 45 degrees is on the grid
 
 
 def _key(p):
@@ -35,7 +37,12 @@ def analyze(dump: dict) -> dict:
     for t in dump["tracks"]:
         if t["length"] > 0:
             by_layer[(t["net"], t["layer"])].append(t)
-    jogs, bends = [], defaultdict(int)
+    jogs, bends, offgrid = [], defaultdict(int), []
+    for t in dump["tracks"]:
+        if t["length"] > 0.05:
+            a = math.degrees(math.atan2(t["end"][1] - t["start"][1], t["end"][0] - t["start"][0])) % 45
+            if GRID_TOL_DEG < a < 45 - GRID_TOL_DEG:
+                offgrid.append({"net": t["net"], "layer": t["layer"], "at": t["start"], "angle": round(a, 1)})
     for (net, layer), segs in by_layer.items():
         ends = defaultdict(list)
         for i, s in enumerate(segs):
@@ -62,12 +69,12 @@ def analyze(dump: dict) -> dict:
             dir_s = _angle(s, p)
             if _diff(dir_in, dir_out) <= PARALLEL_DEG and _diff(dir_in, dir_s) > PARALLEL_DEG:
                 jogs.append({"net": net, "layer": layer, "at": s["start"], "length": s["length"]})
-    return {"jogs": jogs, "bends": dict(bends), "bend_total": sum(bends.values())}
+    return {"jogs": jogs, "bends": dict(bends), "bend_total": sum(bends.values()), "offgrid": offgrid}
 
 
 def score(dump: dict) -> float:
     """Lower is better. Balanced so neither jogs nor detours can win alone:
-    a jog ~ 20 mm of extra copper, a via ~ 3 mm, a bend ~ 1 mm."""
+    a jog ~ 20 mm of extra copper, a via ~ 3 mm, a bend ~ 1 mm; an off-grid (crooked) segment ~ 30 mm."""
     q = analyze(dump)
     t = dump["totals"]
-    return 20 * len(q["jogs"]) + 3 * t["vias"] + 1 * q["bend_total"] + 1 * t["track_length"]
+    return 30 * len(q["offgrid"]) + 20 * len(q["jogs"]) + 3 * t["vias"] + 1 * q["bend_total"] + 1 * t["track_length"]

@@ -188,6 +188,10 @@ def routing(b: Board, dump: dict) -> list[dict]:
               f"{j['net']} on {j['layer']}: {j['length']:.2f} mm sideways step at ({j['at'][0]:.2f}, {j['at'][1]:.2f}) "
               f"(board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track)")
            for j in q["jogs"]]
+    res += [_f("routing/angle", "warning",
+               f"{o['net']} on {o['layer']}: segment at {o['angle']} deg off the 45-degree grid at ({o['at'][0]:.2f}, {o['at'][1]:.2f}); "
+               f"all copper should run at 0/45/90 degrees")
+            for o in q["offgrid"]]
     res.append(_f("routing/stats", "info", f"{q['bend_total']} bends total; per net: "
                   + ", ".join(f"{n} {c}" for n, c in sorted(q["bends"].items()))))
     return res

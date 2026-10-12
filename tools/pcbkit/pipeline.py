@@ -261,10 +261,17 @@ def _sexpr_dump(node) -> str:
     return node if isinstance(node, str) else "(" + " ".join(_sexpr_dump(c) for c in node) + ")"
 
 
-def _shuffle_dsn(src: Path, dst: Path, seed: int) -> None:
+SNAP_ANGLES = {"45": "fortyfive_degree", "90": "ninety_degree", "none": "none"}
+
+
+def _shuffle_dsn(src: Path, dst: Path, seed: int, snap: str = "45", planes: tuple = ()) -> None:
     """Write a copy of the DSN with component, net and pin order permuted by `seed`.
     Freerouting is deterministic for a given file but sensitive to item order, so this is
-    how we get reproducible variety between routing attempts. Seed 0 = canonical order."""
+    how we get reproducible variety between routing attempts. Seed 0 = canonical order.
+    `snap` adds (snap_angle ...) to the structure: KiCad's export has none, and Freerouting then
+    routes free-angle (crooked) traces. Default 45: only 0/45/90-degree segments.
+    `planes`: layers declared (type power), so Freerouting keeps signals off them (a GND pour alone
+    does not: it routed NRST/SWDIO through the In1 plane of rebot-ctrl)."""
     import random
     text = src.read_text(encoding="utf-8")
     rng = random.Random(seed)
@@ -285,6 +292,15 @@ def _shuffle_dsn(src: Path, dst: Path, seed: int) -> None:
             walk(c)
 
     walk(tree)
+    for node in tree:
+        if isinstance(node, list) and node and node[0] == "structure":
+            node[:] = [c for c in node if not (isinstance(c, list) and c and c[0] == "snap_angle")]
+            node.append(["snap_angle", SNAP_ANGLES[snap]])
+            for lay in node:
+                if isinstance(lay, list) and lay and lay[0] == "layer" and len(lay) > 1 and lay[1] in planes:
+                    for c in lay:
+                        if isinstance(c, list) and c and c[0] == "type":
+                            c[1:] = ["power"]
     dst.write_text(_sexpr_dump(tree).replace("(string_quote QQ)", '(string_quote ")'), encoding="utf-8")
 
 
@@ -314,7 +330,9 @@ def stage_route(b: Board, reroute: bool = False) -> dict:
     for f in (dsn, ses):
         f.unlink(missing_ok=True)
     kipy("specctra.py", "export", b.pcb, dsn)
-    fp = _dsn_fingerprint(dsn)
+    snap = str(auto.get("snap_angle", "45"))
+    planes = tuple(auto.get("plane_layers", []))
+    fp = _dsn_fingerprint(dsn) + ("" if snap == "none" else f"+snap{snap}") + "".join(f"+plane{p}" for p in planes)
     lock = json.loads(lock_json.read_text()) if lock_json.exists() else {}
     if not reroute and lock.get("fingerprint") == fp and lock_ses.exists():
         kipy("specctra.py", "import", b.pcb, lock_ses)
@@ -330,10 +348,14 @@ def stage_route(b: Board, reroute: bool = False) -> dict:
         ses_i = b.work / f"{b.name}.attempt{i}.ses"
         ses_i.unlink(missing_ok=True)
         dsn_i = b.work / f"{b.name}.attempt{i}.dsn"
-        _shuffle_dsn(dsn, dsn_i, seed=i)
-        r = run([TOOLBIN / "freerouting", "-de", dsn_i, "-do", ses_i, "-mp", auto.get("max_passes", 100), "-mt", 1],
-                timeout=auto.get("timeout_s", 600), check=False)
-        log.append(f"=== attempt {i}\n{r.stdout}{r.stderr}")
+        _shuffle_dsn(dsn, dsn_i, seed=i, snap=snap, planes=planes)
+        try:
+            r = run([TOOLBIN / "freerouting", "-de", dsn_i, "-do", ses_i, "-mp", auto.get("max_passes", 100), "-mt", 1],
+                    timeout=auto.get("timeout_s", 600), check=False)
+            log.append(f"=== attempt {i}\n{r.stdout}{r.stderr}")
+        except subprocess.TimeoutExpired:   # one slow attempt must not kill the build; the others still count
+            log.append(f"=== attempt {i}\ntimed out after {auto.get('timeout_s', 600)} s")
+            continue
         if not ses_i.exists():
             continue
         trial = b.work / f"{b.name}.attempt{i}.kicad_pcb"

@@ -1,10 +1,13 @@
 """Remove routing jogs: a short sideways step S between two parallel segments A and C.
 
 Like KiCad's interactive optimizer, the corner is cut instead of re-routing the whole kink:
-A is shortened by d before the step, C by d after it, and one straight bridge joins them. d grows
-from small to "the whole of A and C" and the first bridge that clears every other-net pad, track
-and via (KiCad collision shapes + clearances) and stays inside the outline minus the copper-edge
-clearance wins. Runs under KiCad's Python; deterministic.
+A is shortened by da before the step, C by dc after it, and one straight bridge joins them. The
+bridge is always at exactly 45 degrees to A and C (so a 0/45/90-degree route stays on that grid:
+an earlier version bridged at any angle and left crooked traces): its run along A equals the
+sideways offset h, i.e. da + dc = h - (the step's own along-A length). Splits from balanced to
+lopsided are tried; the first bridge that clears every other-net pad, track and via (KiCad
+collision shapes + clearances) and stays inside the outline minus the copper-edge clearance wins.
+Runs under KiCad's Python; deterministic.
 
 usage: kipy straighten.py BOARD.kicad_pcb GEOMETRY.json ORIGIN_X ORIGIN_Y EDGE_CLEARANCE_MM
 """
@@ -27,7 +30,7 @@ for c in geo.get("cutouts", []):
     outline = outline.difference(Polygon(c))
 
 PARALLEL_DEG, JOG_MAX_MM = 5.0, 1.5
-D_STEPS_MM = [0.3, 0.6, 1.0, 1.5, 2.5, 4.0, None]   # None = whole A and C
+SPLITS = [0.5, 0.25, 0.75, 0.0, 1.0]   # share of the needed along-run taken from A (rest from C)
 NM = pcbnew.FromMM(1)
 
 
@@ -128,9 +131,22 @@ for _ in range(100):
         done.add(s["uuid"])
         obs = obstacles(s["net"], s["layer"])
         width = min(a["w"], s["w"], c["w"])
-        for d in D_STEPS_MM:
-            Pa = P0 if d is None else toward(p, P0, d * NM)
-            Pc = P3 if d is None else toward(q, P3, d * NM)
+        # 45-degree bridge: along-A run must equal the sideways offset h
+        la, lc = math.dist(P0, p), math.dist(q, P3)
+        ux, uy = (p[0] - P0[0]) / la, (p[1] - P0[1]) / la
+        jx, jy = q[0] - p[0], q[1] - p[1]
+        h, along = abs(jx * uy - jy * ux), jx * ux + jy * uy
+        need = h - along                       # da + dc
+        cands = []
+        if need >= 0:
+            for f in SPLITS:
+                da, dc = need * f, need * (1 - f)
+                if da <= la + 1 and dc <= lc + 1:
+                    cands.append((toward(p, P0, da), toward(q, P3, dc)))
+        for Pa, Pc in cands:
+            bang = adiff(ang(P0, p), ang(Pa, Pc))
+            if abs(bang - 45) > 0.5:          # must be exactly 45 degrees to the run
+                continue
             if fits(Pa, Pc, width, s["net"], s["layer"], obs):
                 ta, ts, tc = by_uuid(a["uuid"]), by_uuid(s["uuid"]), by_uuid(c["uuid"])
                 # shorten A and C to the bridge ends (or drop them if fully consumed)
