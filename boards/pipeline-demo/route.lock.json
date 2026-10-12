@@ -1,20 +1,22 @@
 {
- "fingerprint": "24d391a3bbd6fd0080966cc0ed4a58c7498b59a21b45f5cc84aeb455edea13d1",
- "routed_at": "2026-10-11 11:54:22",
+ "fingerprint": "24d391a3bbd6fd0080966cc0ed4a58c7498b59a21b45f5cc84aeb455edea13d1+snap45",
+ "routed_at": "2026-10-12 01:04:53",
  "freerouting": "see toolchain/versions.env",
- "chosen": 6,
+ "chosen": 1,
  "attempts": [
   {
    "attempt": 0,
-   "score": 150.5,
-   "jogs": 2,
+   "score": 1670.7,
+   "unrouted": 3,
+   "jogs": 3,
    "vias": 3,
    "bends": 31,
-   "length": 70.48
+   "length": 70.69
   },
   {
    "attempt": 1,
    "score": 121.4,
+   "unrouted": 0,
    "jogs": 0,
    "vias": 5,
    "bends": 26,
@@ -22,47 +24,53 @@
   },
   {
    "attempt": 2,
-   "score": 138.9,
-   "jogs": 1,
+   "score": 659.0,
+   "unrouted": 1,
+   "jogs": 2,
    "vias": 4,
    "bends": 33,
-   "length": 73.95
+   "length": 73.99
   },
   {
    "attempt": 3,
-   "score": 124.5,
-   "jogs": 1,
+   "score": 1205.7,
+   "unrouted": 2,
+   "jogs": 5,
    "vias": 4,
-   "bends": 26,
-   "length": 66.45
+   "bends": 27,
+   "length": 66.7
   },
   {
    "attempt": 4,
-   "score": 123.1,
+   "score": 623.2,
+   "unrouted": 1,
    "jogs": 1,
    "vias": 0,
    "bends": 29,
-   "length": 74.1
+   "length": 74.19
   },
   {
    "attempt": 5,
-   "score": 126.0,
-   "jogs": 1,
+   "score": 1207.3,
+   "unrouted": 2,
+   "jogs": 5,
    "vias": 4,
-   "bends": 27,
-   "length": 67.03
+   "bends": 28,
+   "length": 67.28
   },
   {
    "attempt": 6,
-   "score": 111.6,
-   "jogs": 0,
+   "score": 631.6,
+   "unrouted": 1,
+   "jogs": 1,
    "vias": 3,
    "bends": 28,
-   "length": 74.57
+   "length": 74.64
   },
   {
    "attempt": 7,
    "score": 146.7,
+   "unrouted": 0,
    "jogs": 0,
    "vias": 2,
    "bends": 39,

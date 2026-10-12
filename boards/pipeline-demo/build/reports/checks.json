@@ -90,7 +90,17 @@
   {
    "check": "routing/stats",
    "severity": "info",
-   "msg": "28 bends total; per net: 3V3 5, CC1 2, CC2 4, LED_A 2, VBUS 15"
+   "msg": "26 bends total; per net: 3V3 6, CC1 3, CC2 4, LED_A 2, VBUS 11"
+  },
+  {
+   "check": "layout/return_path",
+   "severity": "ok",
+   "msg": "every signal track has unbroken GND on its reference layer"
+  },
+  {
+   "check": "layout/finger",
+   "severity": "ok",
+   "msg": "no unstitched dead-end GND tongues longer than 8.0 mm"
   }
  ],
  "bom": [
@@ -104,7 +114,7 @@
    "manufacturer": "Samsung Electro-Mechanics",
    "mpn": "CL05A105KA5NQNC",
    "package": "0402",
-   "stock": 7473805,
+   "stock": 7450558,
    "tier": "basic",
    "unit_price_usd": 0.0087,
    "refs": [
@@ -143,7 +153,7 @@
    "manufacturer": "Hubei KENTO Elec",
    "mpn": "KT-0603R",
    "package": "0603",
-   "stock": 7258640,
+   "stock": 7215588,
    "tier": "basic",
    "unit_price_usd": 0.0076,
    "refs": [
@@ -162,7 +172,7 @@
    "manufacturer": "Korean Hroparts Elec",
    "mpn": "TYPE-C-31-M-12",
    "package": "SMD",
-   "stock": 408411,
+   "stock": 407216,
    "tier": "extended",
    "unit_price_usd": 0.186,
    "refs": [
@@ -181,7 +191,7 @@
    "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
    "mpn": "0402WGF5101TCE",
    "package": "0402",
-   "stock": 5603466,
+   "stock": 5591233,
    "tier": "basic",
    "unit_price_usd": 0.0024,
    "refs": [
@@ -201,7 +211,7 @@
    "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
    "mpn": "0402WGF1001TCE",
    "package": "0402",
-   "stock": 8264648,
+   "stock": 8210004,
    "tier": "basic",
    "unit_price_usd": 0.0035,
    "refs": [
@@ -220,7 +230,7 @@
    "manufacturer": "Torex Semicon",
    "mpn": "XC6206P332MR-G",
    "package": "SOT-23-3L",
-   "stock": 422914,
+   "stock": 422736,
    "tier": "basic",
    "unit_price_usd": 0.1429,
    "refs": [
@@ -236,8 +246,9 @@
    24.05
   ],
   "tracks": 40,
-  "vias": 42,
-  "track_length": 74.57,
+  "vias": 41,
+  "track_length": 80.39,
+  "unrouted": 0,
   "parts": 11
  }
 }

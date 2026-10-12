@@ -14,3 +14,8 @@ autoroute:
   max_passes: 100
   attempts: 8          # best-of-N by routing quality (jogs, vias, bends, length)
   timeout_s: 300
+layout:
+  return_path:
+    # 2-layer board: every crossing cuts the other side's pour. These nets carry no fast edges: VBUS/3V3 are DC
+    # rails (decoupled at the loads), CC1/CC2 are static USB-C configuration pull-downs.
+    ignore: [VBUS, 3V3, CC1, CC2]
