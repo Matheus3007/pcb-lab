@@ -9,7 +9,7 @@
   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
   "mpn": "0402WGF1001TCE",
   "package": "0402",
-  "stock": 8264648,
+  "stock": 8210004,
   "tier": "basic",
   "unit_price_usd": 0.0035
  },
@@ -51,7 +51,7 @@
   "manufacturer": "Samsung Electro-Mechanics",
   "mpn": "CL05B103KB5NNNC",
   "package": "0402",
-  "stock": 3578774,
+  "stock": 3555916,
   "tier": "basic",
   "unit_price_usd": 0.005
  },
@@ -105,7 +105,7 @@
   "manufacturer": "JST",
   "mpn": "SM08B-SRSS-TB(LF)(SN)",
   "package": "SMD,P=1mm,Surface Mount\uff0cRight Angle",
-  "stock": 78598,
+  "stock": 78578,
   "tier": "extended",
   "unit_price_usd": 0.3322
  },
@@ -119,7 +119,7 @@
   "manufacturer": "Korean Hroparts Elec",
   "mpn": "TYPE-C-31-M-12",
   "package": "SMD",
-  "stock": 408411,
+  "stock": 407216,
   "tier": "extended",
   "unit_price_usd": 0.186
  },
@@ -147,7 +147,7 @@
   "manufacturer": "JST",
   "mpn": "SM04B-GHS-TB(LF)(SN)",
   "package": "SMD,P=1.25mm,Surface Mount\uff0cRight Angle",
-  "stock": 29302,
+  "stock": 29287,
   "tier": "extended",
   "unit_price_usd": 0.304
  },
@@ -161,7 +161,7 @@
   "manufacturer": "Winbond Elec",
   "mpn": "W25Q128JVPIQ",
   "package": "WSON-8-EP(5x6)",
-  "stock": 10357,
+  "stock": 10314,
   "tier": "extended",
   "unit_price_usd": 3.3812
  },
@@ -203,7 +203,7 @@
   "manufacturer": "Hubei KENTO Elec",
   "mpn": "KT-0603R",
   "package": "0603",
-  "stock": 7258640,
+  "stock": 7215588,
   "tier": "basic",
   "unit_price_usd": 0.0076
  },
@@ -217,7 +217,7 @@
   "manufacturer": "Samsung Electro-Mechanics",
   "mpn": "CL05A475MP5NRNC",
   "package": "0402",
-  "stock": 2096415,
+  "stock": 2076629,
   "tier": "basic",
   "unit_price_usd": 0.0167
  },
@@ -231,7 +231,7 @@
   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
   "mpn": "0402WGF1000TCE",
   "package": "0402",
-  "stock": 9215633,
+  "stock": 9193333,
   "tier": "basic",
   "unit_price_usd": 0.0012
  },
@@ -273,7 +273,7 @@
   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
   "mpn": "0402WGF1003TCE",
   "package": "0402",
-  "stock": 8472367,
+  "stock": 8442931,
   "tier": "basic",
   "unit_price_usd": 0.0021
  },
@@ -287,7 +287,7 @@
   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
   "mpn": "0402WGF1002TCE",
   "package": "0402",
-  "stock": 19702227,
+  "stock": 19612339,
   "tier": "basic",
   "unit_price_usd": 0.0034
  },
@@ -301,7 +301,7 @@
   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
   "mpn": "0402WGF2202TCE",
   "package": "0402",
-  "stock": 738728,
+  "stock": 738263,
   "tier": "basic",
   "unit_price_usd": 0.0024
  },
@@ -329,7 +329,7 @@
   "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
   "mpn": "0402WGF5101TCE",
   "package": "0402",
-  "stock": 5603466,
+  "stock": 5591233,
   "tier": "basic",
   "unit_price_usd": 0.0024
  },
@@ -385,7 +385,7 @@
   "manufacturer": "Samsung Electro-Mechanics",
   "mpn": "CL05B104KB54PNC",
   "package": "0402",
-  "stock": 16047630,
+  "stock": 16008995,
   "tier": "basic",
   "unit_price_usd": 0.0104
  },
@@ -413,7 +413,7 @@
   "manufacturer": "Samsung Electro-Mechanics",
   "mpn": "CL21A225KBQNNNE",
   "package": "0805",
-  "stock": 607650,
+  "stock": 604964,
   "tier": "basic",
   "unit_price_usd": 0.0367
  },
@@ -441,7 +441,7 @@
   "manufacturer": "Samsung Electro-Mechanics",
   "mpn": "CL21A226MAQNNNE",
   "package": "0805",
-  "stock": 3684306,
+  "stock": 3674151,
   "tier": "basic",
   "unit_price_usd": 0.2206
  },
@@ -455,7 +455,7 @@
   "manufacturer": "Samsung Electro-Mechanics",
   "mpn": "CL05A105KA5NQNC",
   "package": "0402",
-  "stock": 7473805,
+  "stock": 7450558,
   "tier": "basic",
   "unit_price_usd": 0.0087
  },
@@ -483,7 +483,7 @@
   "manufacturer": "STMicroelectronics",
   "mpn": "STM32G431CBU6",
   "package": "UFQFPN-48(7x7)",
-  "stock": 3591,
+  "stock": 3571,
   "tier": "extended",
   "unit_price_usd": 7.9252
  },
@@ -497,7 +497,7 @@
   "manufacturer": "Torex Semicon",
   "mpn": "XC6206P332MR-G",
   "package": "SOT-23-3L",
-  "stock": 422914,
+  "stock": 422736,
   "tier": "basic",
   "unit_price_usd": 0.1429
  },
@@ -511,7 +511,7 @@
   "manufacturer": "MDD(Microdiode Semiconductor)",
   "mpn": "B5819WS",
   "package": "SOD-323",
-  "stock": 495390,
+  "stock": 495062,
   "tier": "preferred",
   "unit_price_usd": 0.0245
  },
@@ -525,7 +525,7 @@
   "manufacturer": "Jiangsu Changjing Electronics Technology Co., Ltd.",
   "mpn": "B5819W SL",
   "package": "SOD-123",
-  "stock": 400685,
+  "stock": 394356,
   "tier": "basic",
   "unit_price_usd": 0.0281
  }
