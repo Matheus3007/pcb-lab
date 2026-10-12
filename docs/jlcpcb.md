@@ -16,6 +16,7 @@ explicitly allows it.
 | Via hole / pad | 0.15 / 0.25 mm (0.10/0.20 only if ≤1 mm thick + ENIG/OSP) | 0.30 / 0.55 mm (0.20/0.40 when dense) |
 | Min PTH drill (2+ layer) | 0.15 mm | 0.30 mm |
 | Min NPTH hole | 0.50 mm | 0.50 mm |
+| Hole-to-hole spacing | vias 0.20 mm, pad holes 0.45 mm (checked 2026-10-11) | 0.50 mm (boards may set vias-only 0.30 with a reason) |
 | PTH annular ring, 1 oz | 2-layer 0.18 (rec. 0.25); multilayer 0.15 (rec. 0.20) | recommended values |
 | Copper to routed edge | 0.20 mm | 0.30 mm |
 | Copper to V-cut edge | 0.40 mm | 0.50 mm |

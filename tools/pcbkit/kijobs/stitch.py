@@ -1,6 +1,7 @@
 """Add stitching vias for a net on a grid, wherever a via fits entirely inside that net's
-filled zones on all copper layers (so it cannot clash with other copper). Runs after
-routing. Runs under KiCad's Python.
+filled zones on all copper layers (so it cannot clash with other copper). Then every fill island
+without a via gets one: inside-the-pours spots first, else any spot that clears other-net copper
+on every layer (KiCad collision check). Runs after routing. Runs under KiCad's Python.
 
 usage: kipy stitch.py BOARD.kicad_pcb NET PITCH_MM VIA_DIA_MM VIA_DRILL_MM EDGE_MARGIN_MM
 """
@@ -68,6 +69,35 @@ def add_via(x, y):
     b.Add(v)
 
 
+_obs = None
+
+
+def clears(x, y):
+    """Fallback for islands: a via here collides with no other-net pad, track or via on any copper
+    layer (KiCad collision shapes + clearances). Other layers' pours of this net just refill around it."""
+    global _obs
+    if _obs is None:
+        _obs = {l: [] for l in layers}
+        items = [t for t in b.GetTracks() if t.GetNetname() != net_name] + [p for p in b.GetPads() if p.GetNetname() != net_name]
+        for it in items:
+            for l in layers:
+                if it.IsOnLayer(l):
+                    _obs[l].append((it.GetEffectiveShape(l), it.GetOwnClearance(l)))
+    probe = pcbnew.PCB_VIA(b)
+    probe.SetPosition(pcbnew.VECTOR2I(int(x), int(y)))
+    probe.SetWidth(pcbnew.FromMM(dia))
+    probe.SetDrill(pcbnew.FromMM(drill))
+    probe.SetNet(net)
+    edge = b.GetBoardEdgesBoundingBox()
+    if not (edge.GetX() + m < x < edge.GetRight() - m and edge.GetY() + m < y < edge.GetBottom() - m):
+        return False
+    for l in layers:
+        shape, own = probe.GetEffectiveShape(l), probe.GetOwnClearance(l)
+        if any(shape.Collide(o, max(own, c)) for o, c in _obs[l]):
+            return False
+    return True
+
+
 # Second pass: every fill island must hold a via or THT pad of the net, otherwise it is
 # only tied to its own layer (or floating). Search it on a fine grid for a via spot.
 pcbnew.ZONE_FILLER(b).Fill(b.Zones())
@@ -88,6 +118,15 @@ for l, polys in {l: fill_of(l) for l in layers}.items():
                 xx = box.GetX()
                 while xx < box.GetRight():
                     if ol.PointInside(pcbnew.VECTOR2I(int(xx), int(yy))) and fits(xx, yy):
+                        spot = (xx, yy)
+                        break
+                    xx += fine
+                yy += fine
+            yy = box.GetY()   # fallback: any spot in the island that clears other nets on every layer
+            while spot is None and yy < box.GetBottom():
+                xx = box.GetX()
+                while xx < box.GetRight():
+                    if ol.PointInside(pcbnew.VECTOR2I(int(xx), int(yy))) and clears(xx, yy):
                         spot = (xx, yy)
                         break
                     xx += fine

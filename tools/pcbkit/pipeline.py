@@ -366,7 +366,7 @@ def stage_route(b: Board, reroute: bool = False) -> dict:
         kipy("dump.py", trial, tj, *b.origin)
         d = json.loads(tj.read_text())
         q = routeq.analyze(d)
-        results.append({"attempt": i, "score": round(routeq.score(d), 1), "jogs": len(q["jogs"]),
+        results.append({"attempt": i, "score": round(routeq.score(d), 1), "unrouted": d["totals"].get("unrouted"), "jogs": len(q["jogs"]),
                         "vias": d["totals"]["vias"], "bends": q["bend_total"],
                         "length": d["totals"]["track_length"], "ses": ses_i})
     (b.work / "freerouting.log").write_text("\n".join(log))

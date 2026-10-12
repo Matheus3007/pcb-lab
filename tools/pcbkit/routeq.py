@@ -74,7 +74,7 @@ def analyze(dump: dict) -> dict:
 
 def score(dump: dict) -> float:
     """Lower is better. Balanced so neither jogs nor detours can win alone:
-    a jog ~ 20 mm of extra copper, a via ~ 3 mm, a bend ~ 1 mm; an off-grid (crooked) segment ~ 30 mm."""
+    a jog ~ 20 mm of extra copper, a via ~ 3 mm, a bend ~ 1 mm; an off-grid (crooked) segment ~ 30 mm; an unrouted connection ~ 500 mm (never wins)."""
     q = analyze(dump)
     t = dump["totals"]
-    return 30 * len(q["offgrid"]) + 20 * len(q["jogs"]) + 3 * t["vias"] + 1 * q["bend_total"] + 1 * t["track_length"]
+    return 500 * (t.get("unrouted") or 0) + 30 * len(q["offgrid"]) + 20 * len(q["jogs"]) + 3 * t["vias"] + 1 * q["bend_total"] + 1 * t["track_length"]

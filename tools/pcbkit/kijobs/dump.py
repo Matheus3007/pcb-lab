@@ -60,6 +60,11 @@ for v in vias:
     nets.setdefault(v["net"], {"track_length": 0.0, "min_width": None, "segments": 0})
     nets[v["net"]]["vias"] = nets[v["net"]].get("vias", 0) + 1
 
+try:   # connections still open (ratsnest); zones are not filled here, so GND-to-pour links count too
+    b.BuildConnectivity()
+    _unrouted = b.GetConnectivity().GetUnconnectedCount(True)
+except Exception:  # noqa: BLE001
+    _unrouted = None
 json.dump({
     "board_bbox": box(edge),
     "size_mm": [round(pcbnew.ToMM(edge.GetWidth()), 3), round(pcbnew.ToMM(edge.GetHeight()), 3)],
@@ -67,7 +72,8 @@ json.dump({
     "footprints": sorted(fps, key=lambda f: f["ref"]),
     "nets": dict(sorted(nets.items())),
     "totals": {"tracks": len(tracks), "vias": len(vias),
-               "track_length": round(sum(t["length"] for t in tracks), 2)},
+               "track_length": round(sum(t["length"] for t in tracks), 2),
+               "unrouted": _unrouted},
     "tracks": tracks, "vias": vias,
 }, open(out, "w", encoding="utf-8", newline="\n"), indent=1)
 print(f"dumped {len(fps)} footprints, {len(tracks)} tracks, {len(vias)} vias")
