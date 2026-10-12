@@ -163,11 +163,17 @@ Schematic generation:
   (stale clearances/widths and pattern assignments beat the ones set in Python). `stage_board` deletes the
   old project first. Set the default class with `ns.SetDefaultNetclass(...)` after editing it.
 - A KiCad run killed by a timeout leaves `~*.kicad_pro.lck` in `build/work/`; KiCad then silently skips
-  writing the project. Delete stale locks.
+  writing the project and DRC/routing run on KiCad's default rules (0.3 drill, 0.5 via, 0.2 track: 160 bogus
+  errors on rebot-ctrl). `stage_board` now deletes stale locks and fails if the `.kicad_pro` wasn't written.
 - **Check an EasyEDA STEP's z range** before trusting it: the LMR36506 one hangs below its origin (z −0.9..0), so the
   body sank into the board and the pads poked through in the render (fix: `model.offset: [0, 0, 0.9]`).
 - The `models` check also flags footprints with **no** model (our own `lib/footprints` start without one).
   parts.yaml `model.path` may be `${KICAD10_3DMODEL_DIR}/...` to borrow a stock model.
+- **4-layer stackup: give each signal layer a solid GND neighbour.** JLC's thin prepreg sits between F/In1 and
+  In2/B, so B.Cu's return current flows in In2, not In1. Routing on In2 cut holes under B.Cu traces (and the
+  reverse): rebot-ctrl went F | GND | GND | B (`autoroute.plane_layers: [In1.Cu, In2.Cu]`), checked by `layout/return_path`.
+- **GND pads boxed in by signal traces become pour islands with no room for a stitching via** (the router
+  doesn't know they need the pour). `routing.yaml fanout:` gives every small SMD GND pad its own via before routing.
 - **Trace a 2xN board-to-board header plugged in rotated 180° (pin n -> 2N+1-n).** On an ESC the body
   diodes can turn a "harmless" mismatch into a battery short (rebot-esc); key it mechanically.
 

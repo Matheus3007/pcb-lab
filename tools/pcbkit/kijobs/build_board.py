@@ -191,6 +191,86 @@ class Builder:
             via.SetNet(self.nets[v["net"]])
             self.board.Add(via)
 
+    def fanout(self):
+        """Give every small SMD pad of a net (GND) its own short track + via to the plane, before routing.
+        Pads that only reach the plane through a pour can be boxed in by signal traces (pour islands with no
+        room for a via); a via at each pad also gives the shortest, lowest-inductance return. Pads whose
+        position is already a point of a scripted track of the net are left alone."""
+        fo = self.job.get("fanout")
+        if not fo:
+            return
+        import math
+        b, net = self.board, fo.get("net", "GND")
+        dia, drill, width = fo.get("via_diameter", 0.45), fo.get("via_drill", 0.2), fo.get("width", 0.3)
+        clr, max_area, skip = fo.get("clearance", 0.2), fo.get("max_pad_area_mm2", 2.0), set(fo.get("skip", []))
+        scripted = [pt for t in self.job.get("tracks", []) if t["net"] == net for pt in t["points"]]
+        edge = b.GetBoardEdgesBoundingBox()
+        m = mm(fo.get("edge_margin", 0.8))
+        obstacles = [p for p in b.GetPads() if p.GetNetname() != net] + \
+                    [t for t in b.GetTracks() if t.GetNetname() != net]
+        own_vias = [v.GetPosition() for v in b.GetTracks() if isinstance(v, pcbnew.PCB_VIA)]
+        placed, skipped = 0, []
+
+        def clear(item):
+            for o in obstacles:
+                for l in (pcbnew.F_Cu, pcbnew.B_Cu, pcbnew.In1_Cu, pcbnew.In2_Cu):
+                    if item.IsOnLayer(l) and o.IsOnLayer(l) and \
+                            item.GetEffectiveShape(l).Collide(o.GetEffectiveShape(l), mm(clr)):
+                        return False
+            return True
+
+        for fp in b.GetFootprints():
+            for pad in fp.Pads():
+                key = f"{fp.GetReference()}.{pad.GetNumber()}"
+                if pad.GetNetname() != net or pad.GetAttribute() != pcbnew.PAD_ATTRIB_SMD or key in skip:
+                    continue
+                bb = pad.GetBoundingBox()
+                if pcbnew.ToMM(bb.GetWidth()) * pcbnew.ToMM(bb.GetHeight()) > max_area:
+                    continue
+                pc = pad.GetPosition()
+                if any(abs(self.ox + x - pcbnew.ToMM(pc.x)) < 0.05 and abs(self.oy + y - pcbnew.ToMM(pc.y)) < 0.05
+                       for x, y in scripted):
+                    continue
+                cc = fp.GetPosition()
+                base = math.atan2(pc.y - cc.y, pc.x - cc.x) if (pc.x, pc.y) != (cc.x, cc.y) else 0.0
+                base = round(base / (math.pi / 4)) * (math.pi / 4)   # keep the fanout track on the 45-degree grid
+                hw, hh = pcbnew.ToMM(bb.GetWidth()) / 2, pcbnew.ToMM(bb.GetHeight()) / 2
+                done = False
+                for k in (0, 1, -1, 2, -2, 3, -3, 4):
+                    a = base + k * math.pi / 4
+                    dx, dy = math.cos(a), math.sin(a)
+                    t_exit = min(hw / abs(dx) if abs(dx) > 1e-6 else 1e9, hh / abs(dy) if abs(dy) > 1e-6 else 1e9)
+                    for extra in (0.0, 0.15, 0.3):
+                        d = t_exit + clr + dia / 2 + extra
+                        at = pcbnew.VECTOR2I(int(pc.x + mm(d * dx)), int(pc.y + mm(d * dy)))
+                        if not (edge.GetX() + m < at.x < edge.GetRight() - m and edge.GetY() + m < at.y < edge.GetBottom() - m):
+                            continue
+                        if any(math.hypot(at.x - o.x, at.y - o.y) < mm(dia + 0.25) for o in own_vias):
+                            continue
+                        via = pcbnew.PCB_VIA(b)
+                        via.SetPosition(at)
+                        via.SetWidth(mm(dia))
+                        via.SetDrill(mm(drill))
+                        via.SetNet(self.nets[net])
+                        tr = pcbnew.PCB_TRACK(b)
+                        tr.SetStart(pc)
+                        tr.SetEnd(at)
+                        tr.SetWidth(mm(min(width, pcbnew.ToMM(min(bb.GetWidth(), bb.GetHeight())))))
+                        tr.SetLayer(pad.GetLayer() if pad.IsOnLayer(pcbnew.F_Cu) else pcbnew.B_Cu)
+                        tr.SetNet(self.nets[net])
+                        if clear(via) and clear(tr):
+                            b.Add(tr)
+                            b.Add(via)
+                            own_vias.append(at)
+                            placed += 1
+                            done = True
+                            break
+                    if done:
+                        break
+                if not done:
+                    skipped.append(key)
+        self.report["fanout"] = {"placed": placed, "no_room": skipped}
+
     def zones(self):
         g = self.job["geometry"]
         for zd in self.job.get("zones", []):
@@ -215,6 +295,7 @@ class Builder:
         self.outline()
         self.footprints()
         self.tracks()
+        self.fanout()
         self.zones()
         pcbnew.ZONE_FILLER(self.board).Fill(self.board.Zones())
         pcbnew.SaveBoard(self.job["board_path"], self.board)

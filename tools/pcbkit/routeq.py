@@ -39,7 +39,9 @@ def analyze(dump: dict) -> dict:
             by_layer[(t["net"], t["layer"])].append(t)
     jogs, bends, offgrid = [], defaultdict(int), []
     for t in dump["tracks"]:
-        if t["length"] > 0.05:
+        # a segment shorter than its own width (router snapping onto an off-grid pad centre) sits inside
+        # the track's round end cap: no copper edge runs at that angle
+        if t["length"] > max(0.05, t["width"]):
             a = math.degrees(math.atan2(t["end"][1] - t["start"][1], t["end"][0] - t["start"][0])) % 45
             if GRID_TOL_DEG < a < 45 - GRID_TOL_DEG:
                 offgrid.append({"net": t["net"], "layer": t["layer"], "at": t["start"], "angle": round(a, 1)})

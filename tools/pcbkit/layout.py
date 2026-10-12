@@ -4,7 +4,7 @@ on build/work/copper.json (kijobs/copper.py) and build/reports/board.json (kijob
 Configured by routing.yaml `layout:` (all keys optional):
   reference_layers: {F.Cu: In1.Cu, ...}   # which layer is each signal layer's return path
   return_path: {ignore: [NET, ...], max_gap_mm: 0.3}   # per net, total length over gaps
-  fingers: {max_mm: 3.0, min_width_mm: 0.8}
+  fingers: {max_mm: 8.0, min_width_mm: 0.8}   # 8 mm ~ lambda/20 at 1 GHz on FR4 (v ~ 0.55 c)
   loops: [{name, path: [REF.PAD, ...], max_area_mm2, same_layer_return: true, via_max_mm: 1.5}]
   pairs: [{nets: [P, N], max_skew_mm, max_vias}]
   sensitive: [{nets: [...], max_vias: 2}, ...]
@@ -90,7 +90,7 @@ def return_path(cu: Copper, dump: dict, cfg: dict, ground: str) -> list[dict]:
 def fingers(cu: Copper, dump: dict, cfg: dict, ground: str) -> list[dict]:
     """Dead-end narrow tongues of a pour (stubs that resonate/radiate) with no via or pad on them."""
     fc = cfg.get("fingers", {})
-    max_len, r = fc.get("max_mm", 3.0), fc.get("min_width_mm", 0.8) / 2
+    max_len, r = fc.get("max_mm", 8.0), fc.get("min_width_mm", 0.8) / 2
     res = []
     for layer in cu.layers:
         fill = cu.fill[layer].get(ground)

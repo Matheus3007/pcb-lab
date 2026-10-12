@@ -219,7 +219,7 @@ def stage_board(b: Board) -> dict:
         "parts": netlist["parts"], "geometry": geo,
         "placement": placement.get("parts", {}),
         "tracks": routing.get("tracks", []), "vias": routing.get("vias", []),
-        "zones": routing.get("zones", []),
+        "zones": routing.get("zones", []), "fanout": routing.get("fanout"),
     }
     jp = b.work / "board_job.json"
     jp.write_text(json.dumps(job, indent=1))
@@ -228,7 +228,13 @@ def stage_board(b: Board) -> dict:
     for f in (b.pcb, b.pcb.with_suffix(".kicad_pro")):
         if f.exists():
             f.unlink()
+    # a KiCad run that was killed leaves ~<name>.kicad_pro.lck; KiCad then silently skips writing the
+    # project, and the board falls back to default rules and net classes
+    for lck in b.work.glob("~*.lck"):
+        lck.unlink()
     kipy("build_board.py", jp)
+    if not b.pcb.with_suffix(".kicad_pro").exists():
+        raise StageError(f"{b.pcb.with_suffix('.kicad_pro').name} was not written: rules and net classes would be KiCad defaults")
     return json.loads((b.work / "board_build.json").read_text())
 
 

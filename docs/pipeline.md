@@ -116,13 +116,14 @@ per net class · routing quality (jogs, off-45° segments, bends) · missing 3D 
 | Check | What it flags | Default |
 |---|---|---|
 | `layout/return_path` | signal track length with no GND under it on its reference layer (nearest plane: F↔In1, In2↔B on JLC 4-layer; F↔B on 2-layer). Own vias' clearance holes don't count. | warn > 0.3 mm per net |
-| `layout/finger` | dead-end GND pour tongues narrower than 0.8 mm and longer than 3 mm with no via/pad (stubs that ring/radiate) | always on |
+| `layout/finger` | dead-end GND pour tongues narrower than 0.8 mm and longer than 8 mm (~λ/20 at 1 GHz on FR4) with no via/pad (stubs that ring/radiate) | always on |
 | `layout/loop` | area enclosed by a listed current loop's pads (e.g. buck VIN-cap-GND), and whether each same-net hop is joined on the parts' layer or has a GND via within 1.5 mm of each pad | per `loops:` |
 | `layout/pair` | differential pair length skew, layers and via count alike | per `pairs:` |
 | `layout/vias` | via count on sensitive nets (each via changes the return-current plane) | per `sensitive:` |
 
-Floating copper is handled earlier: pours delete unconnected islands, the stitcher puts a via in every
-island that touches a pad, and DRC fails on anything left unconnected.
+Floating copper is handled earlier: `routing.yaml fanout:` gives every small SMD pad of the net (GND) its own
+short track + via before routing (so the router keeps them clear), pours delete unconnected islands, the stitcher
+puts a via in every island that still touches a pad, and DRC fails on anything left unconnected.
 
 ## Environment notes
 
