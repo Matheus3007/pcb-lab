@@ -1,7 +1,33 @@
 # Routing intent for rebot-ctrl. Net classes (widths/currents) live in circuit.py.
-# Placement first (autoroute off); turned on once the placement is done.
-tracks: []
-vias: []
-zones: []
-stitch: []
-autoroute: {enabled: false, max_passes: 100, timeout_s: 300}
+# 4 layers: In1.Cu = solid GND plane (reference for SPI/USB/DShot), F.Cu/In2.Cu/B.Cu = signal routing
+# with GND pours filling the rest. GND stitching vias tie the pours to the plane.
+# GND islands the stitcher can't reach (traces underneath on other layers): scripted before the autorouter.
+tracks:
+  # buck U2 exposed pad (its only GND) -> R6's GND pad -> via
+  - {net: GND, layer: F.Cu, width: 0.3, points: [[3.0, 22.95], [3.0, 21.7], [3.51, 21.19], [3.51, 21.0], [3.86, 20.65], [4.25, 20.65]]}
+  # GND pads of R7 / C13 / C12 under the MCU -> via right of C12
+  - {net: GND, layer: F.Cu, width: 0.3, points: [[16.2, 18.89], [16.23, 18.92], [19.3, 18.92]]}
+  # FLASH_CS: MCU pad 44 sits between SPI_MOSI (43) and IMU_INT1 (45), which both leave straight down;
+  # Freerouting boxed it in on every attempt. Fixed escape: drop to In2 right below the pad, run along
+  # y 18.3 under the SPI fan-out, come up beside U5 pin 1. The router fits MOSI/INT1 past the via (0.2 mm gaps).
+  - {net: FLASH_CS, layer: F.Cu, width: 0.15, points: [[15.75, 17.44], [15.75, 18.3]]}
+  - {net: FLASH_CS, layer: In2.Cu, width: 0.15, points: [[15.75, 18.3], [21.7, 18.3], [22.8, 17.2]]}
+  - {net: FLASH_CS, layer: F.Cu, width: 0.15, points: [[22.8, 17.2], [23.59, 17.2]]}
+vias:
+  - {net: FLASH_CS, at: [15.75, 18.3], diameter: 0.45, drill: 0.2}
+  - {net: FLASH_CS, at: [22.8, 17.2], diameter: 0.45, drill: 0.2}
+  - {net: GND, at: [4.25, 20.65], diameter: 0.45, drill: 0.2}
+  - {net: GND, at: [19.3, 18.92], diameter: 0.45, drill: 0.2}
+zones:
+  - {net: GND, layer: In1.Cu, outline: board, clearance: 0.2}
+  - {net: GND, layer: F.Cu, outline: board, clearance: 0.2}
+  - {net: GND, layer: B.Cu, outline: board, clearance: 0.2}
+  - {net: GND, layer: In2.Cu, outline: board, clearance: 0.2}   # fills between In2 routing; the stitcher needs GND on every layer
+stitch:
+  - {net: GND, pitch: 3.0, via_diameter: 0.45, via_drill: 0.2, edge_margin: 0.8}
+autoroute:
+  enabled: true
+  max_passes: 100
+  attempts: 4          # best-of-N by routing quality (jogs, vias, bends, length)
+  plane_layers: [In1.Cu]   # solid GND reference: no signal routing on it
+  timeout_s: 900       # 0.5 mm QFN + LGA on 4 layers: an attempt takes ~5 min, 300 s was too tight

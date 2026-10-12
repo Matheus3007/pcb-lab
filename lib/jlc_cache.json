@@ -41,6 +41,20 @@
   "tier": "basic",
   "unit_price_usd": 0.014
  },
+ "C15195": {
+  "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05B103KB5NNNC_C15195.pdf",
+  "datasheet_file_id": "8579707307011465216",
+  "description": "10nF 50V X7R \u00b110% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C15195",
+  "manufacturer": "Samsung Electro-Mechanics",
+  "mpn": "CL05B103KB5NNNC",
+  "package": "0402",
+  "stock": 3578774,
+  "tier": "basic",
+  "unit_price_usd": 0.005
+ },
  "C1525": {
   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05B104KO5NNNC_C1525.pdf",
   "description": "100nF 16V X7R \u00b110% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
@@ -81,6 +95,20 @@
   "tier": "basic",
   "unit_price_usd": 0.0688
  },
+ "C160407": {
+  "category": "Wire To Board Connector",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_JST-SM08B-SRSS-TB-LF-SN_C160407.pdf",
+  "datasheet_file_id": "8588894213878788096",
+  "description": "-25\u2103~+85\u2103 1 10mm 1A 1mm 1x8P 2.9mm 4.32mm 50V 8 8P Auxiliary Solder Pin Copper alloy PA SH Surface Mount, Right Angle Tin UL94V-0 White SMD,P=1mm,\u5367\u8d34 Wire To Board Connector ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C160407",
+  "manufacturer": "JST",
+  "mpn": "SM08B-SRSS-TB(LF)(SN)",
+  "package": "SMD,P=1mm,Surface Mount\uff0cRight Angle",
+  "stock": 78598,
+  "tier": "extended",
+  "unit_price_usd": 0.3322
+ },
  "C165948": {
   "category": "USB Connectors",
   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2205251630_Korean-Hroparts-Elec-TYPE-C-31-M-12_C165948.pdf",
@@ -109,6 +137,34 @@
   "tier": "extended",
   "unit_price_usd": 0.0419
  },
+ "C189895": {
+  "category": "Wire To Board Connector",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_JST-SM04B-GHS-TB-LF-SN_C189895.pdf",
+  "datasheet_file_id": "8588905132734365696",
+  "description": "-25\u2103~+85\u2103 1 1.25mm 1A 1x4P 4 4.13mm 4.25mm 4P 50V 8.25mm Auxiliary Solder Pin GH PA9T Phosphor bronze Surface Mount, Right Angle Tin UL94V-0 White SMD,P=1.25mm,\u5367\u8d34 Wire To Board Connector ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C189895",
+  "manufacturer": "JST",
+  "mpn": "SM04B-GHS-TB(LF)(SN)",
+  "package": "SMD,P=1.25mm,Surface Mount\uff0cRight Angle",
+  "stock": 29302,
+  "tier": "extended",
+  "unit_price_usd": 0.304
+ },
+ "C190862": {
+  "category": "NOR FLASH",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Winbond-Elec-W25Q128JVPIQ_C190862.pdf",
+  "datasheet_file_id": "8588881960005472256",
+  "description": "-40\u2103~+85\u2103 100,000 cycles 10uA 120ms@(32KB) 128Mbit 133MHz 2.7V~3.6V 20 Years Power-on reset\u3001Hardware write protection\u3001Software write protection\u3001Write enable latch\u3001Absolute write protection\u3001Power lock protection SPI WSON-8-EP(5x6) NOR FLASH ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C190862",
+  "manufacturer": "Winbond Elec",
+  "mpn": "W25Q128JVPIQ",
+  "package": "WSON-8-EP(5x6)",
+  "stock": 10357,
+  "tier": "extended",
+  "unit_price_usd": 3.3812
+ },
  "C19702": {
   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL10A106KP8NNNC_C19702.pdf",
@@ -123,6 +179,20 @@
   "tier": "basic",
   "unit_price_usd": 0.0305
  },
+ "C22461202": {
+  "category": "Accelerometers",
+  "datasheet": null,
+  "datasheet_file_id": "8603009365653659648",
+  "description": "-40\u2103~+85\u2103 1.71V~3.6V 3uA 4.5KB IMU (accelerometer + gyroscope) Motion event detection\u3001Synchronization and timestamp SPI\u3001I2C\u3001I3C X,Y,Z X,Y,Z \u00b132g \u00b14000dps LGA-14(2.5x3) Accelerometers ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C22461202",
+  "manufacturer": "STMicroelectronics",
+  "mpn": "LSM6DSV32XTR",
+  "package": "LGA-14(2.5x3)",
+  "stock": 4683,
+  "tier": "extended",
+  "unit_price_usd": 4.3617
+ },
  "C2286": {
   "category": "LED Indication - Discrete",
   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_1810231112_Hubei-KENTO-Elec-KT-0603R_C2286.pdf",
@@ -136,6 +206,34 @@
   "stock": 7258640,
   "tier": "basic",
   "unit_price_usd": 0.0076
+ },
+ "C23733": {
+  "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05A475MP5NRNC_C23733.pdf",
+  "datasheet_file_id": "8579707315714920448",
+  "description": "10V 4.7uF X5R \u00b120% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C23733",
+  "manufacturer": "Samsung Electro-Mechanics",
+  "mpn": "CL05A475MP5NRNC",
+  "package": "0402",
+  "stock": 2096415,
+  "tier": "basic",
+  "unit_price_usd": 0.0167
+ },
+ "C25076": {
+  "category": "Chip Resistor - Surface Mount",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2205311900_UNI-ROYAL-Uniroyal-Elec-0402WGF1000TCE_C25076.pdf",
+  "datasheet_file_id": "8579705907481001984",
+  "description": "-55\u2103~+155\u2103 100\u03a9 50V 62.5mW Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0402 Chip Resistor - Surface Mount ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C25076",
+  "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+  "mpn": "0402WGF1000TCE",
+  "package": "0402",
+  "stock": 9215633,
+  "tier": "basic",
+  "unit_price_usd": 0.0012
  },
  "C25077": {
   "category": "Chip Resistor - Surface Mount",
@@ -192,6 +290,20 @@
   "stock": 19702227,
   "tier": "basic",
   "unit_price_usd": 0.0034
+ },
+ "C25768": {
+  "category": "Chip Resistor - Surface Mount",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2206010100_UNI-ROYAL-Uniroyal-Elec-0402WGF2202TCE_C25768.pdf",
+  "datasheet_file_id": "8579705997331927040",
+  "description": "-55\u2103~+155\u2103 22k\u03a9 50V 62.5mW Thick Film Resistor \u00b11% \u00b1100ppm/\u2103 0402 Chip Resistor - Surface Mount ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C25768",
+  "manufacturer": "UNI-ROYAL(Uniroyal Elec)",
+  "mpn": "0402WGF2202TCE",
+  "package": "0402",
+  "stock": 738728,
+  "tier": "basic",
+  "unit_price_usd": 0.0024
  },
  "C25804": {
   "category": "Chip Resistor - Surface Mount",
@@ -319,6 +431,20 @@
   "tier": "basic",
   "unit_price_usd": 0.2069
  },
+ "C45783": {
+  "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL21A226MAQNNNE_C45783.pdf",
+  "datasheet_file_id": "8579706866429190144",
+  "description": "22uF 25V X5R \u00b120% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C45783",
+  "manufacturer": "Samsung Electro-Mechanics",
+  "mpn": "CL21A226MAQNNNE",
+  "package": "0805",
+  "stock": 3684306,
+  "tier": "basic",
+  "unit_price_usd": 0.2206
+ },
  "C52923": {
   "category": "Multilayer Ceramic Capacitors MLCC - SMD/SMT",
   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Samsung-Electro-Mechanics-CL05A105KA5NQNC_C52923.pdf",
@@ -333,6 +459,34 @@
   "tier": "basic",
   "unit_price_usd": 0.0087
  },
+ "C529355": {
+  "category": "Microcontrollers (MCU/MPU/SOC)",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_STMicroelectronics-STM32G431CBT6_C529355.pdf",
+  "datasheet_file_id": "8588885073542189056",
+  "description": "-40\u2103~+85\u2103 1.71V~3.6V 128KB 12bit 12bit 170MHz 32 Bit 32KB 38 ARM Cortex-M4F Built-in FLASH LQFP-48(7x7) Microcontrollers (MCU/MPU/SOC) ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C529355",
+  "manufacturer": "STMicroelectronics",
+  "mpn": "STM32G431CBT6",
+  "package": "LQFP-48(7x7)",
+  "stock": 5347,
+  "tier": "extended",
+  "unit_price_usd": 5.0213
+ },
+ "C529356": {
+  "category": "Microcontrollers (MCU/MPU/SOC)",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_STMicroelectronics-STM32G431CBU6_C529356.pdf",
+  "datasheet_file_id": "8588886250049060864",
+  "description": "-40\u2103~+85\u2103 1.71V~3.6V 128KB 12bit 12bit 170MHz 32 Bit 32KB 42 ARM Cortex-M4F Built-in FLASH UFQFPN-48(7x7) Microcontrollers (MCU/MPU/SOC) ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C529356",
+  "manufacturer": "STMicroelectronics",
+  "mpn": "STM32G431CBU6",
+  "package": "UFQFPN-48(7x7)",
+  "stock": 3591,
+  "tier": "extended",
+  "unit_price_usd": 7.9252
+ },
  "C5446": {
   "category": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Torex-Semicon-XC6206P332MR-G_C5446.pdf",
@@ -346,5 +500,33 @@
   "stock": 422914,
   "tier": "basic",
   "unit_price_usd": 0.1429
+ },
+ "C64886": {
+  "category": "Schottky Diodes",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2407291648_MDD-Microdiode-Semiconductor-B5819WS_C64886.pdf",
+  "datasheet_file_id": "8757105821027180544",
+  "description": "-55\u2103~+125\u2103 1A 1mA@40V 25A 40V 900mV@3A Independent SOD-323 Schottky Diodes ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C64886",
+  "manufacturer": "MDD(Microdiode Semiconductor)",
+  "mpn": "B5819WS",
+  "package": "SOD-323",
+  "stock": 495390,
+  "tier": "preferred",
+  "unit_price_usd": 0.0245
+ },
+ "C8598": {
+  "category": "Schottky Diodes",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Jiangsu-Changjing-Electronics-Technology-Co---Ltd--B5819W-SL_C8598.pdf",
+  "datasheet_file_id": "8579707605708554240",
+  "description": "1A 40V 600mV@1A 9A Independent SOD-123 Schottky Diodes ROHS",
+  "fetched": "2026-10-11",
+  "lcsc": "C8598",
+  "manufacturer": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+  "mpn": "B5819W SL",
+  "package": "SOD-123",
+  "stock": 400685,
+  "tier": "basic",
+  "unit_price_usd": 0.0281
  }
 }

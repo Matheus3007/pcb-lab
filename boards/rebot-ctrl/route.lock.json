@@ -1,0 +1,44 @@
+{
+ "fingerprint": "30113556fd6eed7a39faddd5144f9a6da34bb8e9697c64fdf2e66ef136affc08+snap45+planeIn1.Cu",
+ "routed_at": "2026-10-11 22:48:37",
+ "freerouting": "see toolchain/versions.env",
+ "chosen": 1,
+ "attempts": [
+  {
+   "attempt": 0,
+   "score": 6752.1,
+   "unrouted": 10,
+   "jogs": 36,
+   "vias": 57,
+   "bends": 295,
+   "length": 536.14
+  },
+  {
+   "attempt": 1,
+   "score": 5420.4,
+   "unrouted": 8,
+   "jogs": 21,
+   "vias": 50,
+   "bends": 275,
+   "length": 545.4
+  },
+  {
+   "attempt": 2,
+   "score": 7866.1,
+   "unrouted": 12,
+   "jogs": 37,
+   "vias": 55,
+   "bends": 311,
+   "length": 560.15
+  },
+  {
+   "attempt": 3,
+   "score": 8354.0,
+   "unrouted": 13,
+   "jogs": 41,
+   "vias": 52,
+   "bends": 307,
+   "length": 541.05
+  }
+ ]
+}

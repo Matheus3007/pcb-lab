@@ -20,14 +20,14 @@ parts:
   C16: {at: [19.8, 15.6], rot: 90}    # NRST (pin 7, right)
   D3: {at: [13.0, 19.85], rot: 90}     # status LED
   R8: {at: [14.4, 20.2], rot: 90}
-  # ESC signal resistors, grid between J1 and the MCU top
-  R17: {at: [19.6, 7.0], rot: 0}      # TLM 1k (pin 8)
-  R13: {at: [21.7, 7.0], rot: 0}      # CURR divider top (pin 7)
-  R15: {at: [23.8, 7.0], rot: 0}      # VBAT divider top (pin 2)
-  R12: {at: [19.6, 8.05], rot: 0}     # M4
-  R11: {at: [21.7, 8.05], rot: 0}     # M3
-  R10: {at: [23.8, 8.05], rot: 0}     # M2
-  R9: {at: [25.9, 8.05], rot: 0}      # M1
+  # ESC signal resistors: each under its own J1 pin, two staggered rows (straight drops, no maze)
+  R17: {at: [19.1, 7.0], rot: 0}       # TLM 1k, under J1 pin 8
+  R13: {at: [20.1, 8.0], rot: 0}       # CURR divider top, under pin 7
+  R15: {at: [25.1, 7.0], rot: 0}       # VBAT divider top, under pin 2
+  R12: {at: [21.1, 7.0], rot: 0}       # M4, under pin 6
+  R11: {at: [22.1, 8.0], rot: 0}       # M3, under pin 5
+  R10: {at: [23.1, 7.0], rot: 0}       # M2, under pin 4
+  R9: {at: [24.1, 8.0], rot: 0}        # M1, under pin 3
   # ADC dividers + NRST, column right of the MCU (PA1 / PA0 / NRST)
   R14: {at: [19.8, 11.6], rot: 90}
   C17: {at: [20.85, 11.6], rot: 90}

@@ -1,7 +1,7 @@
-# rebot-ctrl — checks FAIL
+# rebot-ctrl — checks PASS
 
-142 errors · 0 warnings · 5 waived  
-board 30.05 × 28.05 mm · 58 footprints · 0 track segments · 0 vias · 0 mm copper
+0 errors · 0 warnings · 27 waived  
+board 30.05 × 28.05 mm · 58 footprints · 423 track segments · 84 vias · 545.4 mm copper
 
 ## circuit
 - ✓ `circuit/assertion` Buck Vin: spike budget vs LMR36506 65 V: 40 V in [0, 58.5]
@@ -13,7 +13,7 @@ board 30.05 × 28.05 mm · 58 footprints · 0 track segments · 0 vias · 0 mm c
 
 ## schematic
 - ✓ `schematic/pins_match` all 209 symbol pins match parts.yaml
-- ✓ `schematic/netlist_match` KiCad's netlist of the schematic equals circuit.py (44 nets)
+- ✓ `schematic/netlist_match` KiCad's netlist of the schematic equals circuit.py (43 nets)
 
 ## erc
 - ! `erc/pin_to_pin` Pins of type Bidirectional and Power output are connected: Symbol U4 Pin 2 [SDX, Bidirectional, Line]; Symbol #FLG02 Pin 1 [Power output, Line] _(waived: LSM6DSV32X DS13511 table 2: SDx must be tied to VDD_IO or GND when the analog hub/Qvar is unused; tied to GND)_
@@ -21,14 +21,8 @@ board 30.05 × 28.05 mm · 58 footprints · 0 track segments · 0 vias · 0 mm c
 - ! `erc/pin_to_pin` Pins of type Bidirectional and Power output are connected: Symbol U5 Pin 7 [~{HOLD}/~{RESET}/IO_{3}, Bidirectional, Line]; Symbol U3 Pin 2 [VO, Power output, Line] _(waived: W25Q128JV: /HOLD tied high for standard (non-quad) SPI, as the datasheet requires; IO3 is never driven)_
 
 ## drc
-- ✗ `drc/unconnected` unconnected: PTH pad SH [GND] of J3; PTH pad SH [GND] of J3
-- ✗ `drc/unconnected` unconnected: PTH pad SH [GND] of J3; PTH pad SH [GND] of J3
-- ✗ `drc/unconnected` unconnected: PTH pad SH [GND] of J3; Pad 2 [GND] of C10 on F.Cu
-- ✗ `drc/unconnected` unconnected: Pad 1 [+5V] of C6 on F.Cu; Pad 1 [+5V] of D2 on F.Cu
-- ✗ `drc/unconnected` unconnected: Pad 1 [+5V] of C7 on F.Cu; Pad 1 [+5V] of C6 on F.Cu
 - ! `drc/silk_edge_clearance` Silkscreen clipped by board edge (board setup constraints silk clearance 0.1500 mm; actual 0.0000 mm): Polygon on Edge.Cuts; Segment of J3 on F.Silkscreen _(waived: USB-C footprint silk outline intentionally reaches the board edge (connector overhang marker, as in pipeline-demo); clipped by fab)_
 - ! `drc/silk_edge_clearance` Silkscreen clipped by board edge (board setup constraints silk clearance 0.1500 mm; actual 0.1400 mm): Polygon on Edge.Cuts; Segment of J3 on F.Silkscreen _(waived: USB-C footprint silk outline intentionally reaches the board edge (connector overhang marker, as in pipeline-demo); clipped by fab)_
-- … 137 more `drc/unconnectederror`
 
 ## parity
 - ✓ `parity/ok` board matches the schematic (KiCad schematic parity)
@@ -47,5 +41,20 @@ board 30.05 × 28.05 mm · 58 footprints · 0 track segments · 0 vias · 0 mm c
 ## parts
 - · `parts/tiers` 24 unique parts: basic 15, preferred 1, extended 8 (extended: C160407 SM08B-SRSS-TB(LF)(SN), C189895 SM04B-GHS-TB(LF)(SN), C165948 TYPE-C-31-M-12, C2870127 LMR36506RRPER, C167761 FNR3015S220MT, C529356 STM32G431CBU6, C22461202 LSM6DSV32XTR, C190862 W25Q128JVPIQ)
 
+## current
+- ✓ `current/width` GND: min track 0.3 mm vs 0.115 mm needed for 0.5 A (IPC-2221, ΔT 10 °C, 1.0 oz)
+- ✓ `current/width` VBAT: min track 0.4 mm vs 0.115 mm needed for 0.5 A (IPC-2221, ΔT 10 °C, 1.0 oz)
+- ✓ `current/width` +5V: min track 0.4 mm vs 0.115 mm needed for 0.5 A (IPC-2221, ΔT 10 °C, 1.0 oz)
+- ✓ `current/width` VBUS: min track 0.4 mm vs 0.115 mm needed for 0.5 A (IPC-2221, ΔT 10 °C, 1.0 oz)
+- ✓ `current/width` BUCK_SW: min track 0.4 mm vs 0.115 mm needed for 0.5 A (IPC-2221, ΔT 10 °C, 1.0 oz)
+- … 2 more `current/widthok`
+
 ## routing
-- · `routing/stats` 0 bends total; per net: 
+- ! `routing/jog` BOOT0 on B.Cu: 0.66 mm sideways step at (13.90, 18.47) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: 0.5 mm-pitch QFN escape (pad 46 between INT1 and NC pad 47) plus the hop around the FLASH_CS via; DC strap, no signal integrity concern)_
+- ! `routing/jog` BOOT0 on B.Cu: 0.45 mm sideways step at (14.37, 18.94) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: 0.5 mm-pitch QFN escape (pad 46 between INT1 and NC pad 47) plus the hop around the FLASH_CS via; DC strap, no signal integrity concern)_
+- ! `routing/jog` BUCK_FB on F.Cu: 1.42 mm sideways step at (3.82, 22.10) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: buck feedback divider node routed around L1/C pads; short, low impedance divider, no switching current on it)_
+- ! `routing/jog` BUCK_FB on F.Cu: 0.35 mm sideways step at (4.79, 20.84) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: buck feedback divider node routed around L1/C pads; short, low impedance divider, no switching current on it)_
+- ! `routing/jog` CRSF_RX on F.Cu: 0.35 mm sideways step at (10.64, 14.50) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: QFN pin escape (pads 31/32 at 0.5 mm pitch) to the 0402 series resistors; 420 kbaud UART, steps < 0.5 mm)_
+- ! `routing/angle` SPI_MISO on F.Cu: segment at 44.4 deg off the 45-degree grid at (14.80, 17.48); all copper should run at 0/45/90 degrees _(waived: router stub inside U1 pad 42's copper (pad spans y 17.0..17.88); not visible on the board)_
+- · `routing/stats` 275 bends total; per net: +5V 8, 3V3 31, BOOT0 12, BUCK_BOOT 4, BUCK_FB 7, BUCK_SW 2, BUCK_VCC 9, CC1 3, CC2 4, CRSF_IN 2, CRSF_OUT 1, CRSF_RX 2, CRSF_TX 5, CURR_ADC 8, DSHOT1 7, DSHOT2 9, DSHOT3 5, DSHOT4 7, ESC_CURR 1, ESC_TLM 1, FLASH_CS 3, GND 5, IMU_CS 12, IMU_INT1 8, LED 4, LED_A 1, M1 3, M2 2, M3 1, M4 1, NRST 9, SPI_MISO 12, SPI_MOSI 7, SPI_SCK 9, SWCLK 3, SWDIO 8, TLM_RX 6, USB_DM 6, USB_DP 10, V5_BUCK 7, VBAT 17, VBAT_ADC 9, VBUS 4
+- … 16 more `routing/jogwarningw`

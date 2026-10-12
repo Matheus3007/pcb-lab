@@ -145,7 +145,7 @@ def circuit() -> Circuit:
     c.connect("IMU_CS", u1.PA15, u4.CS, r_cs_imu["1"])
     c.connect("FLASH_CS", u1.PB6, u5.CS, r_cs_fl["1"])
     c.connect("IMU_INT1", u1.PB7, u4.INT1)
-    c.connect("IMU_INT2", u1.PB9, u4.INT2)
+    c.nc(u1.PB9, u4.INT2)   # INT2 unused: one data-ready interrupt (INT1) is enough; frees a route at the MCU
     c.connect("3V3", u4.VDD, u4.VDDIO, u5.VCC, u5.WP, u5.HOLD, c_imu1["1"], c_imu2["1"], c_fl["1"],
               r_cs_imu["2"], r_cs_fl["2"])
     c.connect("GND", u4.GND, u4.SDX, u4.SCX, u5.GND, u5.EP, c_imu1["2"], c_imu2["2"], c_fl["2"])
@@ -158,8 +158,11 @@ def circuit() -> Circuit:
         c.connect(n, tp["1"])
 
     # --- net classes ----------------------------------------------------------------------------
-    c.net_class(NetClass("Default", track_width=0.15, clearance=0.125))   # 4-layer JLC rules, 0.5 mm QFN
-    c.net_class(NetClass("Power", track_width=0.4, clearance=0.15, current_a=0.5),
+    # 4-layer JLC rules, 0.5 mm QFN; 0.45/0.2 vias (JLC multilayer standard) so fan-out fits 3 signal layers
+    c.net_class(NetClass("Default", track_width=0.15, clearance=0.125, via_diameter=0.45, via_drill=0.2))
+    # same 0.45/0.2 vias: KiCad's SES import takes the drill from the net class and the pad from the
+    # route, so mixed via sizes gave 0.45/0.3 vias (0.075 mm annular ring)
+    c.net_class(NetClass("Power", track_width=0.4, clearance=0.15, current_a=0.5, via_diameter=0.45, via_drill=0.2),
                 "VBAT", "GND", "+5V", "V5_BUCK", "VBUS", "3V3", "BUCK_SW")
 
     # --- design intent --------------------------------------------------------------------------

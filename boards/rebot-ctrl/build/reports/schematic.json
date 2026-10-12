@@ -9,7 +9,7 @@
   {
    "check": "schematic/netlist_match",
    "severity": "ok",
-   "msg": "KiCad's netlist of the schematic equals circuit.py (44 nets)"
+   "msg": "KiCad's netlist of the schematic equals circuit.py (43 nets)"
   }
  ],
  "pin_table": {
@@ -940,7 +940,7 @@
     "symbol_name": "PB9",
     "name": "PB9",
     "type": "bidirectional",
-    "net": "IMU_INT2"
+    "net": "NC"
    },
    {
     "pad": "48",
@@ -1355,7 +1355,7 @@
     "symbol_name": "INT2",
     "name": "INT2",
     "type": "output",
-    "net": "IMU_INT2"
+    "net": "NC"
    },
    {
     "pad": "10",

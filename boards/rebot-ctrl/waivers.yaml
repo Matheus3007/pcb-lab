@@ -11,3 +11,43 @@
 - check: drc/silk_edge_clearance
   match: "of J3 on F.Silkscreen"
   reason: "USB-C footprint silk outline intentionally reaches the board edge (connector overhang marker, as in pipeline-demo); clipped by fab"
+# Routing (2026-10-11, locked route: best of 4 attempts, 21 jogs). Every jog below was looked at in copper_top.png.
+- check: routing/jog
+  match: "BOOT0 on"
+  reason: "0.5 mm-pitch QFN escape (pad 46 between INT1 and NC pad 47) plus the hop around the FLASH_CS via; DC strap, no signal integrity concern"
+- check: routing/jog
+  match: "CRSF_"
+  reason: "QFN pin escape (pads 31/32 at 0.5 mm pitch) to the 0402 series resistors; 420 kbaud UART, steps < 0.5 mm"
+- check: routing/jog
+  match: "DSHOT"
+  reason: "fan-out of four adjacent TIM3 pins into the staggered resistor rows under the 1.0 mm-pitch J1; DShot600 edges (~100 ns) see a sub-mm step as nothing"
+- check: routing/jog
+  match: "M1 on F.Cu"
+  reason: "J1 (JST-SH, 1.0 mm pitch) pad to the staggered resistor row; the step is the stagger itself"
+- check: routing/jog
+  match: "M2 on F.Cu"
+  reason: "J1 (JST-SH, 1.0 mm pitch) pad to the staggered resistor row; the step is the stagger itself"
+- check: routing/jog
+  match: "GND on F.Cu"
+  reason: "scripted track from U2's exposed pad around its own pins to R6/the via (routing.yaml); intentional"
+- check: routing/jog
+  match: "IMU_CS on"
+  reason: "0.12 mm step at the via landing; below the pad width, invisible electrically"
+- check: routing/jog
+  match: "IMU_INT1 on"
+  reason: "data-ready interrupt (level, not clocked); steps around C12/C13 under the MCU"
+- check: routing/jog
+  match: "SPI_MISO on"
+  reason: "QFN and WSON pin escapes; SPI at <=10 MHz over < 15 mm, a sub-mm step is far below the edge-rate wavelength"
+- check: routing/jog
+  match: "NRST on"
+  reason: "reset line (RC-filtered, DC) to the SWD test pad; routes around the IMU and flash"
+- check: routing/jog
+  match: "BUCK_FB on"
+  reason: "buck feedback divider node routed around L1/C pads; short, low impedance divider, no switching current on it"
+- check: routing/jog
+  match: "VBAT on"
+  reason: "VBAT sense divider input (100k, ~0 A) and the In2 run from J1 to the buck; DC"
+- check: routing/angle
+  match: "SPI_MISO on F.Cu: segment at 44.4 deg off the 45-degree grid at (14.80, 17.48)"
+  reason: "router stub inside U1 pad 42's copper (pad spans y 17.0..17.88); not visible on the board"
