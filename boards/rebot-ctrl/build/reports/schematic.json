@@ -625,7 +625,7 @@
     "symbol_name": "PC13",
     "name": "PC13",
     "type": "bidirectional",
-    "net": "NC"
+    "net": "IMU_INT1"
    },
    {
     "pad": "3",
@@ -926,7 +926,7 @@
     "symbol_name": "PB7",
     "name": "PB7",
     "type": "bidirectional",
-    "net": "IMU_INT1"
+    "net": "NC"
    },
    {
     "pad": "46",

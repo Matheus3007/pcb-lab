@@ -1,7 +1,7 @@
 # rebot-ctrl — checks PASS
 
-0 errors · 0 warnings · 27 waived  
-board 30.05 × 28.05 mm · 58 footprints · 423 track segments · 84 vias · 545.4 mm copper
+0 errors · 0 warnings · 47 waived  
+board 30.05 × 28.05 mm · 58 footprints · 519 track segments · 118 vias · 605.28 mm copper
 
 ## circuit
 - ✓ `circuit/assertion` Buck Vin: spike budget vs LMR36506 65 V: 40 V in [0, 58.5]
@@ -46,15 +46,22 @@ board 30.05 × 28.05 mm · 58 footprints · 423 track segments · 84 vias · 545
 - ✓ `current/width` VBAT: min track 0.4 mm vs 0.115 mm needed for 0.5 A (IPC-2221, ΔT 10 °C, 1.0 oz)
 - ✓ `current/width` +5V: min track 0.4 mm vs 0.115 mm needed for 0.5 A (IPC-2221, ΔT 10 °C, 1.0 oz)
 - ✓ `current/width` VBUS: min track 0.4 mm vs 0.115 mm needed for 0.5 A (IPC-2221, ΔT 10 °C, 1.0 oz)
-- ✓ `current/width` BUCK_SW: min track 0.4 mm vs 0.115 mm needed for 0.5 A (IPC-2221, ΔT 10 °C, 1.0 oz)
+- ✓ `current/width` BUCK_SW: min track 0.24 mm vs 0.115 mm needed for 0.5 A (IPC-2221, ΔT 10 °C, 1.0 oz)
 - … 2 more `current/widthok`
 
 ## routing
-- ! `routing/jog` BOOT0 on B.Cu: 0.66 mm sideways step at (13.90, 18.47) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: 0.5 mm-pitch QFN escape (pad 46 between INT1 and NC pad 47) plus the hop around the FLASH_CS via; DC strap, no signal integrity concern)_
-- ! `routing/jog` BOOT0 on B.Cu: 0.45 mm sideways step at (14.37, 18.94) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: 0.5 mm-pitch QFN escape (pad 46 between INT1 and NC pad 47) plus the hop around the FLASH_CS via; DC strap, no signal integrity concern)_
-- ! `routing/jog` BUCK_FB on F.Cu: 1.42 mm sideways step at (3.82, 22.10) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: buck feedback divider node routed around L1/C pads; short, low impedance divider, no switching current on it)_
-- ! `routing/jog` BUCK_FB on F.Cu: 0.35 mm sideways step at (4.79, 20.84) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: buck feedback divider node routed around L1/C pads; short, low impedance divider, no switching current on it)_
-- ! `routing/jog` CRSF_RX on F.Cu: 0.35 mm sideways step at (10.64, 14.50) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: QFN pin escape (pads 31/32 at 0.5 mm pitch) to the 0402 series resistors; 420 kbaud UART, steps < 0.5 mm)_
-- ! `routing/angle` SPI_MISO on F.Cu: segment at 44.4 deg off the 45-degree grid at (14.80, 17.48); all copper should run at 0/45/90 degrees _(waived: router stub inside U1 pad 42's copper (pad spans y 17.0..17.88); not visible on the board)_
-- · `routing/stats` 275 bends total; per net: +5V 8, 3V3 31, BOOT0 12, BUCK_BOOT 4, BUCK_FB 7, BUCK_SW 2, BUCK_VCC 9, CC1 3, CC2 4, CRSF_IN 2, CRSF_OUT 1, CRSF_RX 2, CRSF_TX 5, CURR_ADC 8, DSHOT1 7, DSHOT2 9, DSHOT3 5, DSHOT4 7, ESC_CURR 1, ESC_TLM 1, FLASH_CS 3, GND 5, IMU_CS 12, IMU_INT1 8, LED 4, LED_A 1, M1 3, M2 2, M3 1, M4 1, NRST 9, SPI_MISO 12, SPI_MOSI 7, SPI_SCK 9, SWCLK 3, SWDIO 8, TLM_RX 6, USB_DM 6, USB_DP 10, V5_BUCK 7, VBAT 17, VBAT_ADC 9, VBUS 4
-- … 16 more `routing/jogwarningw`
+- ! `routing/jog` 3V3 on F.Cu: 0.74 mm sideways step at (10.24, 17.36) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: 3V3 distribution, DC and decoupled at every pin; sub-mm steps around the QFN pins and fan-out vias)_
+- ! `routing/jog` 3V3 on F.Cu: 0.28 mm sideways step at (10.76, 16.84) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: 3V3 distribution, DC and decoupled at every pin; sub-mm steps around the QFN pins and fan-out vias)_
+- ! `routing/jog` 3V3 on F.Cu: 0.35 mm sideways step at (18.77, 16.82) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: 3V3 distribution, DC and decoupled at every pin; sub-mm steps around the QFN pins and fan-out vias)_
+- ! `routing/jog` BUCK_FB on F.Cu: 1.33 mm sideways step at (3.82, 22.10) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: buck feedback node leaves U2 pin 8 around the GND pad's top exit to the divider; short, low-impedance divider node, no switching current)_
+- ! `routing/jog` BUCK_SW on F.Cu: 0.20 mm sideways step at (5.11, 25.66) (board coords, +Y down); straighten it (REROUTE=1, placement, or a scripted track) _(waived: 0.2 mm step where the SW node meets the bootstrap cap C3; adds no measurable loop area (SW trace is 2 mm long))_
+- · `routing/stats` 320 bends total; per net: +5V 11, 3V3 51, BOOT0 13, BUCK_BOOT 3, BUCK_FB 7, BUCK_SW 14, BUCK_VCC 7, CC1 3, CC2 3, CRSF_IN 3, CRSF_OUT 3, CRSF_RX 4, CRSF_TX 8, CURR_ADC 9, DSHOT1 5, DSHOT2 3, DSHOT3 5, DSHOT4 7, ESC_CURR 1, ESC_TLM 1, FLASH_CS 3, GND 7, IMU_CS 13, IMU_INT1 7, LED 7, LED_A 1, M1 6, M2 2, M3 4, M4 1, NRST 12, SPI_MISO 9, SPI_MOSI 12, SPI_SCK 11, SWCLK 6, SWDIO 7, TLM_RX 5, USB_DM 5, USB_DP 5, V5_BUCK 7, VBAT 14, VBAT_ADC 12, VBUS 3
+- … 37 more `routing/jogwarningw`
+
+## layout
+- · `layout/return_path` BOOT0: 0.28 mm of track has no GND under it on the reference layer (worst 0.28 mm on B.Cu over a gap in In2.Cu at (13.41, 18.26)); the return current detours around the gap (loop area, crosstalk)
+- ✓ `layout/finger` no unstitched dead-end GND tongues longer than 8.0 mm
+- ✓ `layout/loop` buck HF input loop (C2): 2.12 mm² enclosed by C2.1 → U2.4 → U2.9 → C2.2 (max 3.0 mm²)
+- ✓ `layout/loop` buck HF input loop (C2): U2.9 and C2.2 (GND) are not joined by copper on F.Cu; nearest GND vias 1.20 / 0.67 mm from them (max 1.5 mm, so the return drops straight into the plane)
+- ✓ `layout/loop` buck bulk input loop (C1): 3.86 mm² enclosed by C1.1 → U2.4 → U2.9 → C1.2 (max 6.0 mm²)
+- ✓ `layout/pair` USB_DP/USB_DM: lengths 16.15/11.92 mm, skew 4.23 mm (max 5.0)

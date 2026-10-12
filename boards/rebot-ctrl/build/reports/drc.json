@@ -199,6 +199,20 @@
    "type": "net_conflict"
   },
   {
+   "description": "Pad missing net given by schematic (unconnected-(U1-PB7-Pad45))",
+   "items": [
+    {
+     "description": "Pad 45 [<no net>] of U1 on F.Cu",
+     "pos": {
+      "x": 116.25,
+      "y": 117.4375
+     }
+    }
+   ],
+   "severity": "warning",
+   "type": "net_conflict"
+  },
+  {
    "description": "Pad missing net given by schematic (unconnected-(U1-PB9-Pad47))",
    "items": [
     {
@@ -234,20 +248,6 @@
      "pos": {
       "x": 113.75,
       "y": 117.4375
-     }
-    }
-   ],
-   "severity": "warning",
-   "type": "net_conflict"
-  },
-  {
-   "description": "Pad missing net given by schematic (unconnected-(U1-PC13-Pad2))",
-   "items": [
-    {
-     "description": "Pad 2 [<no net>] of U1 on F.Cu",
-     "pos": {
-      "x": 118.4375,
-      "y": 116.25
      }
     }
    ],

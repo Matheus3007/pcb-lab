@@ -1,19 +1,43 @@
 # Routing intent for rebot-ctrl. Net classes (widths/currents) live in circuit.py.
-# 4 layers: In1.Cu = solid GND plane (reference for SPI/USB/DShot), F.Cu/In2.Cu/B.Cu = signal routing
-# with GND pours filling the rest. GND stitching vias tie the pours to the plane.
+# 4 layers: F.Cu signal | In1.Cu solid GND | In2.Cu solid GND | B.Cu signal. JLC's stackup puts thin prepreg
+# between F/In1 and In2/B, so each outer layer has an unbroken GND plane 0.1 mm away (layout/return_path:
+# routing on In2 cut holes under B.Cu tracks and vice versa). GND pours fill the rest of F/B; stitching ties all four.
 # GND islands the stitcher can't reach (traces underneath on other layers): scripted before the autorouter.
 tracks:
   # buck U2 exposed pad (its only GND) -> R6's GND pad -> via
   - {net: GND, layer: F.Cu, width: 0.3, points: [[3.0, 22.95], [3.0, 21.7], [3.51, 21.19], [3.51, 21.0], [3.86, 20.65], [4.25, 20.65]]}
+  # buck input caps: GND via right at each cap's GND pad (U2's GND pad exits at the top, VIN at the bottom-left,
+  # so no same-layer return path fits: TI's alternative is a via to the plane at every GND pad of the loop)
+  - {net: GND, layer: F.Cu, width: 0.3, points: [[0.9, 23.02], [0.9, 22.35]]}
+  - {net: GND, layer: F.Cu, width: 0.3, points: [[3.95, 26.3], [4.9, 26.3]]}
+  # USB pair, scripted (sensitive; the router on two signal layers made D+ 22 mm and D- 2.6 mm long).
+  # (0.15 mm between the 0.5 mm-pitch receptacle pads, 0.2 mm elsewhere.) At the receptacle D+ (A6/B6) joins above the pads (under the shell), D- (A7/B7) below them; both drop
+  # to B.Cu (over the solid In2 GND plane), run as a parallel 45-degree pair and come up beside U1 pads 33/34,
+  # above the line of pad 35 (VDD), whose 3V3 feed leaves straight left to C11.
+  - {net: USB_DP, layer: F.Cu, width: 0.15, points: [[5.25, 7.69], [5.25, 7.05], [5.58, 6.72], [5.98, 6.72], [6.25, 6.99], [6.25, 7.69]]}
+  - {net: USB_DP, layer: F.Cu, width: 0.15, points: [[5.98, 6.72], [5.98, 5.94]]}
+  - {net: USB_DP, layer: B.Cu, width: 0.2, points: [[5.98, 5.94], [5.98, 11.28], [10.3, 15.6]]}
+  - {net: USB_DP, layer: F.Cu, width: 0.2, points: [[10.3, 15.6], [10.45, 15.75], [11.56, 15.75]]}
+  - {net: USB_DM, layer: F.Cu, width: 0.15, points: [[5.75, 7.69], [5.75, 8.34], [6.05, 8.64], [6.53, 8.64], [6.75, 8.42]]}
+  - {net: USB_DM, layer: F.Cu, width: 0.15, points: [[6.75, 7.69], [6.75, 9.25]]}
+  - {net: USB_DM, layer: B.Cu, width: 0.2, points: [[6.75, 9.25], [6.75, 11.3], [10.3, 14.85]]}
+  - {net: USB_DM, layer: F.Cu, width: 0.2, points: [[10.3, 14.85], [10.7, 15.25], [11.56, 15.25]]}
   # GND pads of R7 / C13 / C12 under the MCU -> via right of C12
   - {net: GND, layer: F.Cu, width: 0.3, points: [[16.2, 18.89], [16.23, 18.92], [19.3, 18.92]]}
   # FLASH_CS: MCU pad 44 sits between SPI_MOSI (43) and IMU_INT1 (45), which both leave straight down;
-  # Freerouting boxed it in on every attempt. Fixed escape: drop to In2 right below the pad, run along
+  # Freerouting boxed it in on every attempt. Fixed escape: drop to B.Cu right below the pad, run along
   # y 18.3 under the SPI fan-out, come up beside U5 pin 1. The router fits MOSI/INT1 past the via (0.2 mm gaps).
   - {net: FLASH_CS, layer: F.Cu, width: 0.15, points: [[15.75, 17.44], [15.75, 18.3]]}
-  - {net: FLASH_CS, layer: In2.Cu, width: 0.15, points: [[15.75, 18.3], [21.7, 18.3], [22.8, 17.2]]}
+  - {net: FLASH_CS, layer: B.Cu, width: 0.15, points: [[15.75, 18.3], [21.7, 18.3], [22.8, 17.2]]}
   - {net: FLASH_CS, layer: F.Cu, width: 0.15, points: [[22.8, 17.2], [23.59, 17.2]]}
 vias:
+  - {net: USB_DP, at: [5.98, 5.94], diameter: 0.45, drill: 0.2}
+  - {net: USB_DP, at: [10.3, 15.6], diameter: 0.45, drill: 0.2}
+  - {net: USB_DM, at: [6.75, 9.25], diameter: 0.45, drill: 0.2}
+  - {net: USB_DM, at: [10.3, 14.85], diameter: 0.45, drill: 0.2}
+  - {net: GND, at: [3.0, 21.75], diameter: 0.45, drill: 0.2}   # U2 GND pad: 0.55 mm above its end
+  - {net: GND, at: [0.9, 22.35], diameter: 0.45, drill: 0.2}   # C2 (VIN HF) GND
+  - {net: GND, at: [4.9, 26.3], diameter: 0.45, drill: 0.2}    # C1 (VIN bulk) GND
   - {net: FLASH_CS, at: [15.75, 18.3], diameter: 0.45, drill: 0.2}
   - {net: FLASH_CS, at: [22.8, 17.2], diameter: 0.45, drill: 0.2}
   - {net: GND, at: [4.25, 20.65], diameter: 0.45, drill: 0.2}
@@ -22,12 +46,29 @@ zones:
   - {net: GND, layer: In1.Cu, outline: board, clearance: 0.2}
   - {net: GND, layer: F.Cu, outline: board, clearance: 0.2}
   - {net: GND, layer: B.Cu, outline: board, clearance: 0.2}
-  - {net: GND, layer: In2.Cu, outline: board, clearance: 0.2}   # fills between In2 routing; the stitcher needs GND on every layer
+  - {net: GND, layer: In2.Cu, outline: board, clearance: 0.2}   # second solid plane (B.Cu's reference)
+fanout:   # every small SMD GND pad gets its own track + via to the planes before routing (no boxed-in pour islands)
+  net: GND
+  via_diameter: 0.45
+  via_drill: 0.2
+  width: 0.3
+  skip: [C12.2, C13.2]   # already on the scripted GND track under the MCU
 stitch:
   - {net: GND, pitch: 3.0, via_diameter: 0.45, via_drill: 0.2, edge_margin: 0.8}
 autoroute:
   enabled: true
   max_passes: 100
-  attempts: 4          # best-of-N by routing quality (jogs, vias, bends, length)
-  plane_layers: [In1.Cu]   # solid GND reference: no signal routing on it
+  attempts: 6          # best-of-N by routing quality (jogs, vias, bends, length)
+  plane_layers: [In1.Cu, In2.Cu]   # solid GND references: no signal routing on them
   timeout_s: 900       # 0.5 mm QFN + LGA on 4 layers: an attempt takes ~5 min, 300 s was too tight
+layout:   # layout hygiene checks (pcbkit/layout.py)
+  loops:
+    # LMR36506 datasheet 9.4.1: the VIN-GND input loop carries the switching current edges; keep it tiny
+    - {name: "buck HF input loop (C2)", path: [C2.1, U2.4, U2.9, C2.2], max_area_mm2: 3.0}
+    - {name: "buck bulk input loop (C1)", path: [C1.1, U2.4, U2.9, C1.2], max_area_mm2: 6.0}
+  pairs:
+    # full speed (12 Mb/s, 4-20 ns edges): 1 mm of skew is ~7 ps, so 5 mm is still nothing; same layers/vias matter more
+    - {nets: [USB_DP, USB_DM], max_skew_mm: 5.0, max_vias: 2}
+  sensitive:
+    - {nets: [USB_DP, USB_DM], max_vias: 2}
+    - {nets: [SPI_SCK, SPI_MOSI, SPI_MISO], max_vias: 4}   # three-ended nets (MCU, IMU, flash) on two layers

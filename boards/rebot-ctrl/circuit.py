@@ -106,7 +106,7 @@ def circuit() -> Circuit:
     c.connect("SWCLK", u1.PA14)
     c.connect("CRSF_RX", r_rx["2"], u1.PA10)    # USART1_RX
     c.connect("CRSF_TX", r_tx["2"], u1.PA9)     # USART1_TX
-    c.nc(u1.PC13, u1.PC14, u1.PC15, u1.PF0, u1.PF1, u1.PA2, u1.PA5, u1.PA8, u1.PC4, u1.PB2, u1.PB10,
+    c.nc(u1.PC14, u1.PC15, u1.PF0, u1.PF1, u1.PA2, u1.PA5, u1.PA8, u1.PC4, u1.PB2, u1.PB10,
          u1.PB11, u1.PB12, u1.PB13, u1.PB14, u1.PB15, u1.PC6, u1.PC10, u1.PC11)
 
     # --- ESC interface: DShot out, current + battery voltage in, serial telemetry in -------------
@@ -144,8 +144,10 @@ def circuit() -> Circuit:
     c.connect("SPI_MOSI", u1.PB5, u4.SDA, u5.DI)
     c.connect("IMU_CS", u1.PA15, u4.CS, r_cs_imu["1"])
     c.connect("FLASH_CS", u1.PB6, u5.CS, r_cs_fl["1"])
-    c.connect("IMU_INT1", u1.PB7, u4.INT1)
-    c.nc(u1.PB9, u4.INT2)   # INT2 unused: one data-ready interrupt (INT1) is enough; frees a route at the MCU
+    # INT1 on PC13 (EXTI13): pad 2 faces the IMU; PB7 (pad 45) sat boxed in by the SPI/flash-CS fan-out and
+    # failed to route on two signal layers. PC13 is a low-drive pin (3 mA sink, 2 MHz): fine for an input.
+    c.connect("IMU_INT1", u1.PC13, u4.INT1)
+    c.nc(u1.PB7, u1.PB9, u4.INT2)   # INT2 unused: one data-ready interrupt (INT1) is enough
     c.connect("3V3", u4.VDD, u4.VDDIO, u5.VCC, u5.WP, u5.HOLD, c_imu1["1"], c_imu2["1"], c_fl["1"],
               r_cs_imu["2"], r_cs_fl["2"])
     c.connect("GND", u4.GND, u4.SDX, u4.SCX, u5.GND, u5.EP, c_imu1["2"], c_imu2["2"], c_fl["2"])
