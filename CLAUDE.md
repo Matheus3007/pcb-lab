@@ -136,6 +136,9 @@ Environment and tools:
 - **Gerbers, drill and CPL must share the aux origin** (the builder puts it at the outline's bottom-left).
   Otherwise JLC's preview says "component may be offset" and auto-aligns. Don't ship drill-map
   files in the zip (JLC shows them as an extra layer).
+- **`kicad-cli pcb export gerbers --layers` exports only what is listed**: inner copper (In1.Cu, In2.Cu) must be
+  named or a 4-layer board ships as 2 layers. fab.py lists them from board.yaml `layers` and fails if the
+  copper gerber count differs (caught on rebot-ctrl's first fab).
 - THT pads that anchor into a pour (connector shields) can get `starved_thermal` after a reroute: set
   `zone_connection: {SH: full}` on the part in parts.yaml (applied per pad by the builder).
 - **Licensing: only commit what we wrote (MIT).** Third-party data (community CPL rotations, EasyEDA

@@ -14,9 +14,14 @@ import re
 import shutil
 import zipfile
 
-from .pipeline import ROOT, Board, kicad_cli
+from .pipeline import ROOT, Board, kicad_cli, yload
 
 GERBER_LAYERS = "F.Cu,B.Cu,F.Paste,B.Paste,F.Silkscreen,B.Silkscreen,F.Mask,B.Mask,Edge.Cuts"
+
+
+def _gerber_layers(n_copper: int) -> str:
+    """Inner copper (In1.Cu..In{n-2}.Cu) must be listed explicitly, or a 4-layer board ships as 2 layers."""
+    return ",".join([f"In{i}.Cu" for i in range(1, n_copper - 1)] + [GERBER_LAYERS])
 
 
 def _rotations():
@@ -47,10 +52,14 @@ def fab(name: str) -> dict:
     tmp = b.work / "gerbers"
     shutil.rmtree(tmp, ignore_errors=True)
     tmp.mkdir()
-    kicad_cli("pcb", "export", "gerbers", "-o", tmp, "--layers", GERBER_LAYERS,
+    n_copper = int(yload(b.dir / "board.yaml").get("layers", 2))
+    kicad_cli("pcb", "export", "gerbers", "-o", tmp, "--layers", _gerber_layers(n_copper),
               "--subtract-soldermask", "--check-zones", "--use-drill-file-origin", b.pcb)
     kicad_cli("pcb", "export", "drill", "-o", tmp, "--format", "excellon", "--excellon-units", "mm",
               "--drill-origin", "plot", "--excellon-separate-th", b.pcb)
+    copper = [f.name for f in tmp.iterdir() if re.search(r"_Cu\.g", f.name)]
+    if len(copper) != n_copper:
+        raise SystemExit(f"fab: {len(copper)} copper gerbers for a {n_copper}-layer board: {sorted(copper)}")
     zpath = out / f"{name}-gerbers.zip"
     with zipfile.ZipFile(zpath, "w", zipfile.ZIP_DEFLATED) as z:
         for f in sorted(tmp.iterdir()):
