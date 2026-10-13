@@ -1,0 +1,75 @@
+# Accepted findings. Each needs a reason. {check: prefix, match: substring of message, reason}
+- check: erc/pin_to_pin
+  match: "Symbol U4 Pin 2 [SDX"
+  reason: "LSM6DSV32X DS13511 table 2: SDx must be tied to VDD_IO or GND when the analog hub/Qvar is unused; tied to GND"
+- check: erc/pin_to_pin
+  match: "Symbol U5 Pin 3"
+  reason: "W25Q128JV: /WP tied high for standard (non-quad) SPI, as the datasheet requires; IO2 is never driven"
+- check: erc/pin_to_pin
+  match: "Symbol U5 Pin 7"
+  reason: "W25Q128JV: /HOLD tied high for standard (non-quad) SPI, as the datasheet requires; IO3 is never driven"
+- check: drc/silk_edge_clearance
+  match: "of J3 on F.Silkscreen"
+  reason: "USB-C footprint silk outline intentionally reaches the board edge (connector overhang marker, as in pipeline-demo); clipped by fab"
+# Routing (scripted parts). The DShot fan steps each line once from the J1 resistor row (1.06 mm pitch, under the
+# 1.0 mm-pitch connector) to the MCU's 0.5 mm-pitch pins: the step is the pitch change itself, at 45 degrees, over
+# unbroken In1 GND (layout/return_path).
+- check: routing/jog
+  match: "DSHOT1 on F.Cu"
+  reason: "scripted DShot fan: 1.06 mm -> 0.5 mm pitch step from the J1 resistor row into PA0 (one 45-degree step)"
+- check: routing/jog
+  match: "DSHOT2 on F.Cu"
+  reason: "scripted DShot fan: 1.06 mm -> 0.5 mm pitch step from the J1 resistor row into PA1 (one 45-degree step)"
+- check: routing/jog
+  match: "DSHOT3 on F.Cu"
+  reason: "scripted DShot fan: 1.06 mm -> 0.5 mm pitch step from the J1 resistor row into PA2 (one 45-degree step)"
+- check: routing/jog
+  match: "DSHOT4 on F.Cu"
+  reason: "scripted DShot fan: 1.06 mm -> 0.5 mm pitch step from the J1 resistor row into PA3 (one 45-degree step)"
+- check: routing/jog
+  match: "VBAT_ADC on F.Cu"
+  reason: "scripted VBAT-sense line from R15 (resistor row) into PF0 past the NRST via; RC-filtered DC divider"
+# Routing (autorouted, 2026-10-13: best of 8, signals on F.Cu/In2.Cu, In1 + B.Cu solid GND). Each jog was looked at in
+# copper_top/copper_in2.png; they are sub-mm steps around 0.5 mm-pitch pins, fan-out vias and test-pad keepouts.
+- check: routing/jog
+  match: "3V3 on"
+  reason: "3V3 distribution, DC and decoupled at every pin"
+- check: routing/jog
+  match: "+5V on"
+  reason: "+5V distribution (buck/USB -> LDO, receiver), DC with bulk caps at both ends"
+- check: routing/jog
+  match: "VBAT on"
+  reason: "battery feed to the buck and the VBAT divider, DC (buck input caps at U2)"
+- check: routing/jog
+  match: "BUCK_BOOT on"
+  reason: "bootstrap cap C3 to the LMR36506 BOOT pin, <3 mm; steps add no measurable loop area"
+- check: routing/jog
+  match: "BUCK_VCC on"
+  reason: "buck internal regulator pin to its 1 uF cap and RT; DC"
+- check: routing/jog
+  match: "CC1 on"
+  reason: "USB-C CC pull-down, static"
+- check: routing/jog
+  match: "CRSF_"
+  reason: "CRSF UART (420 kbaud) between the upright series resistors and the receiver connector pins"
+- check: routing/jog
+  match: "SWDIO on"
+  reason: "debug-only line to its bottom test pad"
+- check: routing/jog
+  match: "TLM_RX on"
+  reason: "ESC telemetry UART (115 kbaud), routed around the test-pad keepouts"
+- check: routing/jog
+  match: "SPI_MISO on"
+  reason: "step at the IMU LGA escape (0.5 mm pitch); SPI <= 10 MHz over ~20 mm with GND under it"
+- check: routing/jog
+  match: "SPI_MOSI on"
+  reason: "step under the flash on In2 (B.Cu GND below); SPI <= 10 MHz, net far shorter than the edge-rate wavelength"
+- check: layout/return_path
+  match: "CRSF_OUT:"
+  reason: "0.49 mm total past via antipads in In1 near the receiver connector; 420 kbaud UART"
+- check: layout/return_path
+  match: "SPI_MISO:"
+  reason: "0.30 mm (at the 0.3 mm limit) past one via antipad in In1 in the MCU-IMU channel"
+- check: layout/vias
+  match: "SPI_SCK:"
+  reason: "SCK reaches the IMU (beside the MCU) and the flash's far pin column (CLK on the side away from the MCU) on In2; 6 vias on a <=10 MHz clock with a GND plane next to every layer it uses"

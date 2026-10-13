@@ -1,0 +1,113 @@
+# Routing intent for rebot-ctrl-v2. Net classes (widths/currents) live in circuit.py.
+# 4 layers: F.Cu signal | In1.Cu solid GND | In2.Cu signal | B.Cu solid GND (all parts on top, test pads on B).
+# JLC's thin prepreg sits between F/In1 and In2/B: F.Cu returns in In1, In2.Cu returns in B.Cu (layout/return_path),
+# In2 traces are shielded by planes on both sides, and the face toward the ESC's FETs (B.Cu) is solid GND.
+tracks:
+  # USB pair, scripted (sensitive). Receptacle breakout (0.15 mm between its 0.5 mm-pitch pads): D- (A7/B7) joins
+  # above the pads (under the shell) and drops at (19.53, 5.94); D+ (A6/B6) joins below them and drops at (18.3, 9.25).
+  # On In2.Cu (between the In1 and B.Cu planes) the pair runs east, down the right board edge (outside the flash) and
+  # back west along y 16.85 / 17.3 to vias beside U1 pads 21/22 (PA11/PA12, bottom side). The MCU, IMU and flash
+  # then share one unbroken In2 region for the SPI fan-out; only the buck/LDO side is crossed (on F.Cu).
+  # Skew ~4 mm (D- goes round the outside): nothing at 12 Mb/s.
+  - {net: USB_DM, layer: F.Cu, width: 0.15, points: [[18.8, 7.69], [18.8, 7.05], [19.13, 6.72], [19.53, 6.72], [19.8, 6.99], [19.8, 7.69]]}
+  - {net: USB_DM, layer: F.Cu, width: 0.15, points: [[19.53, 6.72], [19.53, 5.94]]}
+  - {net: USB_DM, layer: In2.Cu, width: 0.2, points: [[19.53, 5.94], [19.99, 5.48], [24.0, 5.48], [24.2, 5.68], [24.2, 16.9], [23.8, 17.3], [8.08, 17.3], [7.68, 16.9], [7.68, 16.05]]}
+  - {net: USB_DM, layer: F.Cu, width: 0.2, points: [[7.68, 16.05], [7.68, 14.69]]}
+  - {net: USB_DP, layer: F.Cu, width: 0.15, points: [[19.3, 7.69], [19.3, 8.34], [19.0, 8.64], [18.52, 8.64], [18.3, 8.42]]}
+  - {net: USB_DP, layer: F.Cu, width: 0.15, points: [[18.3, 7.69], [18.3, 9.25]]}
+  - {net: USB_DP, layer: In2.Cu, width: 0.2, points: [[18.3, 9.25], [23.75, 9.25], [23.75, 16.45], [23.35, 16.85], [8.8, 16.85], [8.4, 16.45], [8.4, 15.6]]}
+  - {net: USB_DP, layer: F.Cu, width: 0.2, points: [[8.4, 15.6], [8.18, 15.38], [8.18, 14.69]]}
+  # USB-C VBUS: the two VBUS pad groups (A4/B9 x 21.5, A9/B4 x 16.6) are separated by the scripted D+/D- breakout,
+  # so they're joined on In2 under the receptacle body, above the D+ drop via. The F.Cu stubs (0.2 mm, bench USB
+  # current) pass 0.28 mm beside the 0.65 mm locating-peg holes and 0.15 mm from the CC2 / SBU pads.
+  - {net: VBUS, layer: F.Cu, width: 0.2, points: [[16.87, 7.3], [16.87, 5.0]]}
+  - {net: VBUS, layer: In2.Cu, width: 0.4, points: [[16.87, 5.0], [21.23, 5.0]]}
+  - {net: VBUS, layer: F.Cu, width: 0.2, points: [[21.23, 7.3], [21.23, 5.0]]}
+  - {net: VBUS, layer: F.Cu, width: 0.4, points: [[21.5, 8.2], [21.5, 8.85], [23.6, 8.85], [24.05, 9.3], [24.05, 9.95]]}   # A4/B9 -> D2 anode
+  # D2 cathode: its own via toward the +5V net (the USB lanes run under the right edge, so nothing else fits there)
+  - {net: +5V, layer: F.Cu, width: 0.4, points: [[21.95, 9.95], [21.95, 10.7]]}
+  # NRST: U1 pad 4 sits between the M1 (PA0) and VBAT-sense (PF0) fan lines; a fixed via right above it is TP5 (bottom)
+  - {net: NRST, layer: F.Cu, width: 0.15, points: [[7.68, 9.6], [7.68, 9.2], [8.03, 8.85], [8.2, 8.85]]}
+  # BOOT0: R7 (pull-down) beside the VBAT-sense parts, TP6 (bottom) on the via under its pad
+  - {net: BOOT0, layer: F.Cu, width: 0.15, points: [[13.1, 8.48], [13.1, 9.25]]}
+  # FLASH_CS: one straight line from PB7 (U1 right side) across the top of the IMU to the flash, with R19 (pull-up)
+  # on a stub. It is the upper boundary of the SPI fan-out: everything below it goes to the IMU / flash.
+  - {net: FLASH_CS, layer: F.Cu, width: 0.15, points: [[9.868, 11.5], [16.0, 11.5], [16.4, 11.9], [17.75, 11.9]]}
+  - {net: FLASH_CS, layer: F.Cu, width: 0.15, points: [[16.0, 11.5], [16.0, 11.01]]}
+  # BOOT0: PB8 between C10 and the FLASH_CS line, up to the TP6 via
+  - {net: BOOT0, layer: F.Cu, width: 0.15, points: [[9.868, 11.0], [12.6, 11.0], [13.1, 10.5], [13.1, 9.25]]}
+  # status LED: R8 -> D3 anode, one 45-degree segment past the C16 / C17 GND pads
+  - {net: LED_A, layer: F.Cu, width: 0.15, points: [[2.79, 12.4], [1.4, 11.01], [1.0, 11.01]]}
+  # U1's edge GND pins (VSS 16 / 32, VSSA 14) straight into the exposed pad: tied even when traces box them in
+  - {net: GND, layer: F.Cu, width: 0.15, points: [[9.868, 10.5], [9.0, 10.5]]}
+  - {net: GND, layer: F.Cu, width: 0.15, points: [[4.9925, 13.0], [6.0, 13.0]]}
+  - {net: GND, layer: F.Cu, width: 0.15, points: [[4.9925, 14.0], [6.0, 14.0]]}
+  # DShot fan (sensitive): J1 resistor row (1.06 mm pitch) into PA3..PA0 (0.5 mm pitch), one 45-degree step each,
+  # M4/M3 to the right, M2/M1 to the left; NRST leaves between M1 and the VBAT-sense line to its TP5 via
+  - {net: DSHOT4, layer: F.Cu, width: 0.15, points: [[4.84, 7.96], [4.84, 8.3], [5.68, 9.14], [5.68, 9.81]]}
+  - {net: DSHOT3, layer: F.Cu, width: 0.15, points: [[5.9, 7.96], [5.9, 8.6], [6.18, 8.88], [6.18, 9.81]]}
+  - {net: DSHOT2, layer: F.Cu, width: 0.15, points: [[6.96, 7.96], [6.96, 8.6], [6.68, 8.88], [6.68, 9.81]]}
+  - {net: DSHOT1, layer: F.Cu, width: 0.15, points: [[8.02, 7.96], [8.02, 8.3], [7.18, 9.14], [7.18, 9.81]]}
+  # VBAT sense: R15 -> PF0, and across to the divider bottom (R16) and filter (C18)
+  - {net: VBAT_ADC, layer: F.Cu, width: 0.15, points: [[9.08, 7.96], [9.08, 8.7], [8.68, 9.1], [8.68, 9.81]]}
+  - {net: VBAT_ADC, layer: F.Cu, width: 0.15, points: [[9.08, 7.96], [11.12, 7.96], [11.12, 9.05]]}
+  # MCU VDD pin 1 (top right corner) -> C10, under the VSS pin 32 stub
+  - {net: 3V3, layer: F.Cu, width: 0.2, points: [[9.18, 9.5], [9.4, 9.5], [10.0, 10.1], [11.12, 10.1]]}
+  - {net: 3V3, layer: F.Cu, width: 0.2, points: [[10.45, 9.55], [11.0, 10.1]]}   # C10's own via to the 3V3 on In2
+  # buck feedback divider GND (R6.2) boxed in by the USB lanes below: straight into the LMR36506 GND pad (U2.9)
+  - {net: GND, layer: F.Cu, width: 0.2, points: [[18.08, 17.6], [17.6, 18.08], [17.6, 18.5]]}
+  # buck output to the feedback divider top (R5), over the inductor (L1's SW pad sits between them)
+  - {net: V5_BUCK, layer: F.Cu, width: 0.4, points: [[20.48, 17.6], [20.48, 16.9], [20.83, 16.55], [23.8, 16.55], [24.15, 16.9], [24.15, 18.6]]}
+  # IMU VDDIO (pin 5) -> C20
+  - {net: 3V3, layer: F.Cu, width: 0.2, points: [[14.51, 13.75], [15.28, 13.75], [15.65, 14.12]]}
+  # IMU VDD (pin 8, top right) -> C19, under the FLASH_CS line
+  - {net: 3V3, layer: F.Cu, width: 0.2, points: [[14.35, 12.0], [15.3, 12.0], [15.62, 12.32], [15.62, 12.6]]}
+  - {net: 3V3, layer: F.Cu, width: 0.2, points: [[15.62, 12.6], [15.62, 14.09]]}   # C19 -> C20 (IMU VDD and VDDIO caps)
+  # NRST: TP5 via -> In2 (out of TP5's keepout notch) -> C16 at the left edge
+  - {net: NRST, layer: In2.Cu, width: 0.15, points: [[8.2, 8.85], [6.95, 8.85], [1.6, 14.2], [1.0, 14.2]]}
+  - {net: NRST, layer: F.Cu, width: 0.15, points: [[1.0, 13.48], [1.0, 14.2]]}
+vias:
+  - {net: VBUS, at: [16.87, 5.0], diameter: 0.45, drill: 0.2}
+  - {net: VBUS, at: [21.23, 5.0], diameter: 0.45, drill: 0.2}
+  - {net: USB_DM, at: [19.53, 5.94], diameter: 0.45, drill: 0.2}
+  - {net: USB_DP, at: [8.4, 15.6], diameter: 0.45, drill: 0.2}
+  - {net: USB_DP, at: [18.3, 9.25], diameter: 0.45, drill: 0.2}
+  - {net: USB_DM, at: [7.68, 16.05], diameter: 0.45, drill: 0.2}
+  # bottom-side test pads: a via in each pad, so the router (signals on F/In2 only) can reach it from above
+  - {net: 3V3, at: [8.45, 3.2], diameter: 0.45, drill: 0.2}      # TP1 (under the J1 body)
+  - {net: SWDIO, at: [4.15, 3.2], diameter: 0.45, drill: 0.2}    # TP3
+  - {net: SWCLK, at: [6.3, 3.2], diameter: 0.45, drill: 0.2}     # TP4
+  - {net: NRST, at: [8.2, 8.85], diameter: 0.45, drill: 0.2}     # TP5
+  - {net: BOOT0, at: [13.1, 9.25], diameter: 0.45, drill: 0.2}   # TP6
+  - {net: +5V, at: [21.95, 10.7], diameter: 0.45, drill: 0.2}     # D2 cathode
+  - {net: 3V3, at: [10.45, 9.55], diameter: 0.45, drill: 0.2}     # C10 / VDD pin 1
+  - {net: NRST, at: [1.0, 14.2], diameter: 0.45, drill: 0.2}      # C16
+zones:
+  - {net: GND, layer: F.Cu, outline: board, clearance: 0.2}
+  - {net: GND, layer: In1.Cu, outline: board, clearance: 0.2}   # F.Cu's reference
+  - {net: GND, layer: In2.Cu, outline: board, clearance: 0.2}   # fills between In2 traces
+  - {net: GND, layer: B.Cu, outline: board, clearance: 0.2}     # In2.Cu's reference
+fanout:   # every small SMD GND pad gets its own track + via to the planes before routing (no boxed-in pour islands)
+  net: GND
+  via_diameter: 0.45
+  via_drill: 0.2
+  width: 0.3
+stitch:
+  - {net: GND, pitch: 3.0, via_diameter: 0.45, via_drill: 0.2, edge_margin: 0.8}
+autoroute:
+  enabled: true
+  max_passes: 100
+  attempts: 8          # best-of-N by routing quality (unrouted, jogs, vias, bends, length)
+  plane_layers: [In1.Cu, B.Cu]   # solid GND references: signals only on F.Cu and In2.Cu
+  timeout_s: 900
+layout:   # layout hygiene checks (pcbkit/layout.py)
+  loops:
+    # LMR36506 datasheet 9.4.1: the VIN-GND input loop carries the switching current edges; keep it tiny
+    - {name: "buck HF input loop (C2)", path: [C2.1, U2.4, U2.9, C2.2], max_area_mm2: 3.0}
+    - {name: "buck bulk input loop (C1)", path: [C1.1, U2.4, U2.9, C1.2], max_area_mm2: 6.0}
+  pairs:
+    # full speed (12 Mb/s, 4-20 ns edges): 1 mm of skew is ~7 ps, so 5 mm is still nothing; same layers/vias matter more
+    - {nets: [USB_DP, USB_DM], max_skew_mm: 5.0, max_vias: 2}
+  sensitive:
+    - {nets: [USB_DP, USB_DM], max_vias: 2}
+    - {nets: [SPI_SCK, SPI_MOSI, SPI_MISO], max_vias: 4}   # three-ended nets (MCU, IMU, flash)

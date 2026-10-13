@@ -1,0 +1,80 @@
+{
+ "fingerprint": "426dacaea6c5f527f87a828d2e52911fa2e62f06b58bda64e5bd135e2b050cc3+snap45+planeIn1.Cu+planeB.Cu",
+ "routed_at": "2026-10-13 15:46:10",
+ "freerouting": "see toolchain/versions.env",
+ "chosen": 1,
+ "attempts": [
+  {
+   "attempt": 0,
+   "score": 3614.0,
+   "unrouted": 4,
+   "jogs": 30,
+   "vias": 84,
+   "bends": 247,
+   "length": 514.96
+  },
+  {
+   "attempt": 1,
+   "score": 2794.9,
+   "unrouted": 2,
+   "jogs": 33,
+   "vias": 90,
+   "bends": 288,
+   "length": 576.91
+  },
+  {
+   "attempt": 2,
+   "score": 3152.7,
+   "unrouted": 3,
+   "jogs": 27,
+   "vias": 86,
+   "bends": 282,
+   "length": 572.7
+  },
+  {
+   "attempt": 3,
+   "score": 4063.2,
+   "unrouted": 4,
+   "jogs": 48,
+   "vias": 83,
+   "bends": 313,
+   "length": 541.15
+  },
+  {
+   "attempt": 4,
+   "score": 3290.6,
+   "unrouted": 3,
+   "jogs": 36,
+   "vias": 88,
+   "bends": 278,
+   "length": 528.63
+  },
+  {
+   "attempt": 5,
+   "score": 3741.5,
+   "unrouted": 4,
+   "jogs": 33,
+   "vias": 83,
+   "bends": 294,
+   "length": 538.49
+  },
+  {
+   "attempt": 6,
+   "score": 3611.0,
+   "unrouted": 4,
+   "jogs": 29,
+   "vias": 85,
+   "bends": 262,
+   "length": 514.04
+  },
+  {
+   "attempt": 7,
+   "score": 2944.9,
+   "unrouted": 2,
+   "jogs": 40,
+   "vias": 88,
+   "bends": 311,
+   "length": 569.88
+  }
+ ]
+}

@@ -1,0 +1,110 @@
+{
+ "issues": [],
+ "assertions": [
+  {
+   "name": "Buck Vin: spike budget vs LMR36506 65 V",
+   "value": 40.0,
+   "min": 0,
+   "max": 58.5,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "Buck output (RFBT 100k / RFBB 22k)",
+   "value": 5.545454545454546,
+   "min": 5.3,
+   "max": 5.8,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "+5V rail after the OR diode (receiver supply)",
+   "value": 5.195454545454546,
+   "min": 4.75,
+   "max": 5.5,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "+5V vs XC6206 6.0 V max input",
+   "value": 5.545454545454546,
+   "min": 0,
+   "max": 6.0,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "XC6206 headroom (dropout ~0.25 V @ 100 mA)",
+   "value": 1.8954545454545464,
+   "min": 0.4,
+   "max": 3.0,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "XC6206 dissipation (SOT-23 ~0.25 W)",
+   "value": 0.1516363636363637,
+   "min": 0,
+   "max": 0.25,
+   "unit": "W",
+   "ok": true
+  },
+  {
+   "name": "+5V load: receiver 0.3 A + 3V3 rail vs LMR36506 0.6 A",
+   "value": 0.38,
+   "min": 0,
+   "max": 0.6,
+   "unit": "A",
+   "ok": true
+  },
+  {
+   "name": "D1 (B5819WS, SOD-323 ~0.2 W) dissipation at the full +5V load",
+   "value": 0.13299999999999998,
+   "min": 0,
+   "max": 0.2,
+   "unit": "W",
+   "ok": true
+  },
+  {
+   "name": "Buck inductor peak (24 V in, 0.4 A load) vs Isat 0.68 A",
+   "value": 0.4969117831204608,
+   "min": 0,
+   "max": 0.6120000000000001,
+   "unit": "A",
+   "ok": true
+  },
+  {
+   "name": "VBAT_ADC at full LiHV (100k/10k)",
+   "value": 2.3727272727272726,
+   "min": 0,
+   "max": 3.3,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "CURR_ADC if the ESC cable is reversed (VBAT on CURR)",
+   "value": 2.3727272727272726,
+   "min": 0,
+   "max": 3.3,
+   "unit": "V",
+   "ok": true
+  },
+  {
+   "name": "ESC current signal 3.3 V -> ADC counts after /11 (12-bit)",
+   "value": 372.2727272727273,
+   "min": 300,
+   "max": 4095,
+   "unit": "counts",
+   "ok": true
+  },
+  {
+   "name": "Status LED current (Vf 1.8-2.4 V)",
+   "value": 0.0014,
+   "min": 0.0005,
+   "max": 0.005,
+   "unit": "A",
+   "ok": true
+  }
+ ],
+ "ok": true
+}

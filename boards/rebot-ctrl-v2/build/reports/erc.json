@@ -1,0 +1,68 @@
+{
+ "kicad_version": "10.0.7",
+ "violations": [
+  {
+   "description": "Pins of type Bidirectional and Power output are connected",
+   "items": [
+    {
+     "description": "Symbol U4 Pin 2 [SDX, Bidirectional, Line]",
+     "pos": {
+      "x": 35.56,
+      "y": 294.64
+     }
+    },
+    {
+     "description": "Symbol #FLG02 Pin 1 [Power output, Line]",
+     "pos": {
+      "x": 43.18,
+      "y": 370.84
+     }
+    }
+   ],
+   "severity": "warning",
+   "type": "pin_to_pin"
+  },
+  {
+   "description": "Pins of type Bidirectional and Power output are connected",
+   "items": [
+    {
+     "description": "Symbol U5 Pin 3 [~{WP}/IO_{2}, Bidirectional, Line]",
+     "pos": {
+      "x": 93.98,
+      "y": 299.72
+     }
+    },
+    {
+     "description": "Symbol U3 Pin 2 [VO, Power output, Line]",
+     "pos": {
+      "x": 172.72,
+      "y": 101.6
+     }
+    }
+   ],
+   "severity": "warning",
+   "type": "pin_to_pin"
+  },
+  {
+   "description": "Pins of type Bidirectional and Power output are connected",
+   "items": [
+    {
+     "description": "Symbol U5 Pin 7 [~{HOLD}/~{RESET}/IO_{3}, Bidirectional, Line]",
+     "pos": {
+      "x": 93.98,
+      "y": 302.26
+     }
+    },
+    {
+     "description": "Symbol U3 Pin 2 [VO, Power output, Line]",
+     "pos": {
+      "x": 172.72,
+      "y": 101.6
+     }
+    }
+   ],
+   "severity": "warning",
+   "type": "pin_to_pin"
+  }
+ ]
+}

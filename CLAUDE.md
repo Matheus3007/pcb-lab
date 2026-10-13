@@ -174,6 +174,10 @@ Schematic generation:
   reverse): rebot-ctrl went F | GND | GND | B (`autoroute.plane_layers: [In1.Cu, In2.Cu]`), checked by `layout/return_path`.
 - **GND pads boxed in by signal traces become pour islands with no room for a stitching via** (the router
   doesn't know they need the pour). `routing.yaml fanout:` gives every small SMD GND pad its own via before routing.
+- **A scripted track on an inner signal layer is a wall for that layer** (rebot-ctrl-v2's In2 USB pair): every other In2
+  net must go round its ends or cross on F.Cu. Run such a pair along the board edge, not between parts that talk to each
+  other (it split the IMU from the flash and left SPI unroutable for 4 rounds). Bottom-side test pads cut holes in a B.Cu
+  plane: give them In2 keepouts (with a notch for their own net) or In2 traces fail layout/return_path.
 - **Trace a 2xN board-to-board header plugged in rotated 180° (pin n -> 2N+1-n).** On an ESC the body
   diodes can turn a "harmless" mismatch into a battery short (rebot-esc); key it mechanically.
 
