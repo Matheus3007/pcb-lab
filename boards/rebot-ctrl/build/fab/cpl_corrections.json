@@ -1,0 +1,46 @@
+[
+ {
+  "ref": "J2",
+  "footprint": "JST_GH_SM04B-GHS-TB_1x04-1MP_P1.25mm_Horizontal",
+  "rule": "^JST_GH_SM",
+  "rotation_delta": 180.0,
+  "offset": [
+   0.0,
+   0.0
+  ],
+  "source": "community hint (unverified)"
+ },
+ {
+  "ref": "J3",
+  "footprint": "USB_C_Receptacle_HRO_TYPE-C-31-M-12",
+  "rule": "^USB_C_Receptacle_HRO_TYPE-C-31-M-12",
+  "rotation_delta": 0.0,
+  "offset": [
+   0.0,
+   1.575
+  ],
+  "source": "confirmed"
+ },
+ {
+  "ref": "U3",
+  "footprint": "SOT-23-3",
+  "rule": "^SOT-23",
+  "rotation_delta": 180.0,
+  "offset": [
+   0.0,
+   0.0
+  ],
+  "source": "confirmed"
+ },
+ {
+  "ref": "U5",
+  "footprint": "WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4.3mm",
+  "rule": "^^WSON-8-1EP_6x5mm_P1.27mm",
+  "rotation_delta": -90.0,
+  "offset": [
+   0.0,
+   0.0
+  ],
+  "source": "community hint (unverified)"
+ }
+]

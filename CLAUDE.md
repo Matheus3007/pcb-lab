@@ -209,7 +209,9 @@ Geometry and placement:
 - One logical change per commit; message says what changed on the board and why
   (e.g. `bot-main: move IMU to board centroid to reduce vibration coupling`).
 - Committed: sources, `build/reports/`, `build/renders/`, `build/review/`. Ignored:
-  `build/work/` (intermediates, .kicad_pcb, .glb) and `build/fab/` (regenerated).
+  `build/work/` (intermediates, .kicad_pcb, .glb) and `build/fab/` (regenerated). Exception: the owner may ask
+  for a board's fab set on GitHub (rebot-ctrl, 2026-10-13); it's added with `git add -f`, and once tracked it must be
+  re-committed with every board change or it goes stale (the gerber zip also changes on every `make fab`: timestamps).
 - Every JLC order gets a tag `<board>/vX.Y`, and its fab outputs are attached to the tag (or saved).
 
 ## Repo layout
