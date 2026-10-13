@@ -487,6 +487,20 @@
   "tier": "extended",
   "unit_price_usd": 7.9252
  },
+ "C529358": {
+  "category": "Microcontrollers (MCU/MPU/SOC)",
+  "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_STMicroelectronics-STM32G431KBU6_C529358.pdf",
+  "datasheet_file_id": "8588886251692417024",
+  "description": "-40\u2103~+85\u2103 1.71V~3.6V 128KB 12bit 12bit 170MHz 26 32 Bit 32KB ARM Cortex-M4F Built-in FLASH UFQFPN-32(5x5) Microcontrollers (MCU/MPU/SOC) ROHS",
+  "fetched": "2026-10-13",
+  "lcsc": "C529358",
+  "manufacturer": "STMicroelectronics",
+  "mpn": "STM32G431KBU6",
+  "package": "UFQFPN-32(5x5)",
+  "stock": 1395,
+  "tier": "extended",
+  "unit_price_usd": 8.8481
+ },
  "C5446": {
   "category": "Voltage Regulators - Linear, Low Drop Out (LDO) Regulators",
   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2304140030_Torex-Semicon-XC6206P332MR-G_C5446.pdf",

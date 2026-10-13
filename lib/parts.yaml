@@ -287,6 +287,21 @@ STM32G431CBU6:
   extended_reason: "No STM32 G4 in JLC Basic/Preferred (Preferred MCUs: F030/F103/L151). G4 = Team-Micras code base; the 7x7 QFN instead of the locked LQFP-48 for size."
   notes: "PG10 = NRST (internal pull-up, 100 nF to GND), PB8 = BOOT0 (10k pull-down). PA11/PA12 are USB DM/DP only (no USART there). USB clock from HSI48 + CRS, no crystal needed. Used AFs: TIM3_CH1-4 = PA6/PA7/PB0/PB1 (AF2), USART1 TX/RX = PA9/PA10 (AF7), USART2_RX = PA3 (AF7), SPI1 SCK/MISO/MOSI = PB3/PB4/PB5 (AF5). PA0/PA1 = ADC12_IN1/IN2."
 
+STM32G431KBU6:
+  lcsc: C529358
+  value: STM32G431KBU6
+  footprint: Package_DFN_QFN:UFQFPN-32-1EP_5x5mm_P0.5mm_EP3.5x3.5mm
+  symbol: MCU_ST_STM32G4:STM32G431KBUx
+  pins: {VDD: [1, 17], PF0: 2, PF1: 3, PG10: 4, PA0: 5, PA1: 6, PA2: 7, PA3: 8, PA4: 9, PA5: 10, PA6: 11, PA7: 12,
+         PB0: 13, VSSA: 14, VDDA: 15, VSS: [16, 32, 33], PA8: 18, PA9: 19, PA10: 20, PA11: 21, PA12: 22, PA13: 23,
+         PA14: 24, PA15: 25, PB3: 26, PB4: 27, PB5: 28, PB6: 29, PB7: 30, PB8: 31}
+  pinout_source: "ST DS12589 Rev 2 p.44 fig.5 UFQFPN32 pinout; table 12 p.51-60 UFQFPN32 column; EP (33): p.165 fig.40 note 2 'connect and solder this backside pad to PCB ground'. AF table 13 p.61-62. KiCad STM32G431KBUx symbol agrees pin for pin (EP = VSS 33)"
+  pinout_verified: 2026-10-13
+  model:   # KiCad has no UFQFPN-32 EP3.5 model; same 5x5 body and pin row (0.55 vs 0.9 mm tall: conservative)
+    path: "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/QFN-32-1EP_5x5mm_P0.5mm_EP3.45x3.45mm.step"
+  extended_reason: "No STM32 G4 in JLC Basic/Preferred. Same die as the CBU6 (rebot-ctrl v1) in the 5x5 package, for rebot-ctrl-v2's smaller outline."
+  notes: "No VBAT/VREF+ pins (tied to VDD/VDDA inside). PG10 = NRST, PB8 = BOOT0. 26 I/Os: no PB1/PB2/PB9+/PC*. AFs used on rebot-ctrl-v2: TIM2_CH1-4 = PA0-PA3 (AF1), USART1 on PA9/PA10 (AF7; TX/RX swapped in CR2), USART2_RX = PA15 (AF7), SPI1 SCK/MISO/MOSI = PB3/PB4/PB5 (AF5). ADC: PA4 = ADC2_IN17, PF0 = ADC1_IN10 (table 12 p.51)."
+
 LSM6DSV32XTR:
   lcsc: C22461202
   value: LSM6DSV32X
