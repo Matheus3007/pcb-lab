@@ -11,7 +11,8 @@ import time
 
 from .pipeline import Board, yload
 
-VIEWS = ["schematic", "3d_iso", "3d_top", "3d_bottom", "top", "bottom", "placement", "copper_top", "copper_bottom"]
+VIEWS = ["schematic", "3d_iso", "3d_top", "3d_bottom", "top", "bottom", "placement", "copper_top", "copper_in1", "copper_in2",
+         "copper_bottom"]
 
 
 def _esc(s) -> str:
@@ -112,8 +113,9 @@ def gate(name: str, n: int) -> str:
             L.append(f"- {ref}: {spot}")
     if n == 3:
         L += ["## Renders", "![top](../renders/top.png)", "![bottom](../renders/bottom.png)",
-              "![copper top](../renders/copper_top.png)", "![copper bottom](../renders/copper_bottom.png)",
-              "![3d iso](../renders/3d_iso.png)", "", "## Fab files (build/fab/)"]
+              "![copper top](../renders/copper_top.png)"]
+        L += [f"![copper {v[7:]}](../renders/{v}.png)" for v in ("copper_in1", "copper_in2") if (b.renders / f"{v}.png").exists()]
+        L += ["![copper bottom](../renders/copper_bottom.png)", "![3d iso](../renders/3d_iso.png)", "", "## Fab files (build/fab/)"]
         L += [f"- {p.name}" for p in sorted(b.fab.iterdir())]
         cor = json.loads((b.fab / "cpl_corrections.json").read_text()) if (b.fab / "cpl_corrections.json").exists() else []
         L += ["", "## CPL rotation corrections applied (UNVERIFIED until you check JLC's preview)"]

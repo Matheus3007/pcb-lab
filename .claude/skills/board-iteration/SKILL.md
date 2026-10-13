@@ -11,7 +11,7 @@ make all BOARD=<name>            # build → render → check → dashboard (~45
 ```
 1. Read `boards/<name>/build/reports/summary.md` (printed by make). Fix errors from the top of each group.
 2. **Look at the renders** with Read: always `placement.png` and `3d_iso.png`, plus `top.png`,
-   `copper_top.png` and `copper_bottom.png` once routed. Describe what you see; look for parts too close to edges,
+   `copper_top.png` and `copper_bottom.png` once routed (4-layer boards: also `copper_in1.png`/`copper_in2.png`, seen from the top). Describe what you see; look for parts too close to edges,
    connectors not facing out, ugly routing, silk on pads, 3D models misaligned or missing.
 3. Repeat until `checks PASS` and the renders look right.
 4. `make diff BOARD=<name>` → put the highlights in the commit message. Commit sources +

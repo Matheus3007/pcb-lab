@@ -23,6 +23,10 @@ VIEWS_2D = {
     "copper_top": ("F.Cu,Edge.Cuts", []),
     "copper_bottom": ("B.Cu,Edge.Cuts", ["--mirror"]),
 }
+VIEWS_INNER = {   # 4-layer boards: inner copper seen from the top (a signal layer there is otherwise invisible)
+    "copper_in1": ("In1.Cu,Edge.Cuts", []),
+    "copper_in2": ("In2.Cu,Edge.Cuts", []),
+}
 VIEWS_3D = {
     "3d_top": ["--side", "top"],
     "3d_bottom": ["--side", "bottom"],
@@ -46,7 +50,8 @@ def render(name: str, three_d: bool = True) -> list[str]:
     b = Board(name)
     size = __import__("json").loads((b.reports / "board.json").read_text())["size_mm"]
     out = []
-    for view, (layers, extra) in VIEWS_2D.items():
+    views = dict(VIEWS_2D, **(VIEWS_INNER if b.cfg.get("layers", 2) >= 4 else {}))
+    for view, (layers, extra) in views.items():
         svg = b.work / f"{view}.svg"
         kicad_cli("pcb", "export", "svg", "--mode-single", "--page-size-mode", "2",
                   "--exclude-drawing-sheet", "--layers", layers, *extra, "-o", svg, b.pcb)
