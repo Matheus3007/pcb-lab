@@ -107,8 +107,13 @@ def assembly(b: Board, dump: dict, netlist: dict) -> list[dict]:
     size = dump["size_mm"]
     mn = rules["min_board_mm"]
     if size[0] < mn[0] or size[1] < mn[1]:
-        res.append(_f("assembly/board_size", "error",
-                      f"board {size[0]}x{size[1]} mm below {b.tier} PCBA minimum {mn[0]}x{mn[1]} mm (panelize)"))
+        if rules.get("jlc_adds_rails"):
+            res.append(_f("assembly/board_size", "info",
+                          f"board {size[0]}x{size[1]} mm below {b.tier} PCBA minimum {mn[0]}x{mn[1]} mm: "
+                          f"JLC adds edge rails itself (order option 'Edge Rails/Fiducials: Added by JLCPCB')"))
+        else:
+            res.append(_f("assembly/board_size", "error",
+                          f"board {size[0]}x{size[1]} mm below {b.tier} PCBA minimum {mn[0]}x{mn[1]} mm (panelize)"))
     order = ["01005", "0201", "0402", "0603", "0805", "1206"]
     min_pkg = order.index(rules["min_package"])
     for f in dump["footprints"]:

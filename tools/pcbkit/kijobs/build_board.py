@@ -50,6 +50,7 @@ class Builder:
         ds.m_MinSilkTextHeight = mm(r["min_silk_text_height"])
         ds.m_SilkClearance = mm(r["silk_clearance"])
         ds.m_ViasMinAnnularWidth = mm(r["min_annular_ring"])
+        ds.m_HoleClearance = mm(r["hole_clearance"])
 
         ns = ds.m_NetSettings
         default = ns.GetDefaultNetclass()

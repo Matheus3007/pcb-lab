@@ -7,6 +7,7 @@
   min_via_diameter: 0.55
   min_drill: 0.3
   min_annular_ring: 0.13
+  hole_clearance: 0.25     # drilled hole edge to other copper (KiCad's default; JLC's live minimum is 0.2)
   copper_edge_clearance: 0.3
   hole_to_hole: 0.5
   min_silk_text_height: 1.0
@@ -17,10 +18,11 @@ multilayer:
   min_via_diameter: 0.45
   min_drill: 0.2
   min_annular_ring: 0.125
+  hole_clearance: 0.25     # drilled hole edge to other copper (KiCad's default; JLC's live minimum is 0.2)
   copper_edge_clearance: 0.3
   hole_to_hole: 0.5
   min_silk_text_height: 1.0
   silk_clearance: 0.15
 assembly:
   economic: {sides: [top], min_package: "0402", min_board_mm: [10, 10]}
-  standard: {sides: [top, bottom], min_package: "0201", min_board_mm: [70, 70]}
+  standard: {sides: [top, bottom], min_package: "0201", min_board_mm: [70, 70], jlc_adds_rails: true}   # 2026-10-25: JLC pads a smaller board to 71x71 with its own rails (quote)

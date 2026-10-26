@@ -178,6 +178,9 @@ Schematic generation:
   net must go round its ends or cross on F.Cu. Run such a pair along the board edge, not between parts that talk to each
   other (it split the IMU from the flash and left SPI unroutable for 4 rounds). Bottom-side test pads cut holes in a B.Cu
   plane: give them In2 keepouts (with a notch for their own net) or In2 traces fail layout/return_path.
+- **Cost traps at JLC** (rebot-ctrl-v2, 2026-10-25): a via drill under 0.3 mm (+$51 on 5 boards incl. a Kelvin test and
+  TG155 JLC adds by itself) and one "Standard Only" part (the LSM6DSV32X) forcing Standard PCBA. Use 0.3/0.45 vias on dense
+  boards and check `componentProductType` before picking parts; see docs/jlcpcb.md.
 - **Trace a 2xN board-to-board header plugged in rotated 180° (pin n -> 2N+1-n).** On an ESC the body
   diodes can turn a "harmless" mismatch into a battery short (rebot-esc); key it mechanically.
 
