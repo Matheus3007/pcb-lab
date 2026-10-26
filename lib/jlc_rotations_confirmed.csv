@@ -18,9 +18,17 @@
 # 2026-10-25 rebot-ctrl-v2 (C529358 STM32G431KBU6, KiCad UFQFPN-32-1EP_5x5mm): at 0 (no rule matched) JLC's
 # pin-1 dot sat top-left while the board's pin 1 (silk triangle, pad at 9.18/9.81) is top-right, one quarter
 # turn CW away -> -90. Evidence: tools/jlc/runs/rebot-ctrl-v2-20261025-212720/14-placement-U1.png.
-# PENDING the re-check preview with this rule applied.
+# Re-check with -90 applied (run rebot-ctrl-v2-20261025-233038, 14-placement-U1.png): pin-1 dot on the silk triangle,
+# body centred on the 32 pads. CONFIRMED 2026-10-25.
 "^UFQFPN-32-1EP_5x5mm",-90
 # 2026-10-25 rebot-ctrl-v2 (C189895 SM04B-GHS-TB, KiCad JST_GH_..._Horizontal): with the community +180 JLC's
 # leads sat at the board edge while the signal pads are inward (mouth facing in) -> KiCad orientation is right,
-# rotation 0 (as for the HRO USB-C). Evidence: same run, 11-placement-J2.png. PENDING the re-check preview.
+# rotation 0 (as for the HRO USB-C). Evidence: same run, 11-placement-J2.png. Re-check at 0 (run 20261025-233038,
+# 11-placement-J2.png): leads on the signal pads, mouth at the left edge, MP tabs on their pads. CONFIRMED 2026-10-25.
 "^JST_GH_SM",0
+# 2026-10-25 rebot-ctrl-v2 (C24733358 GD25Q128EWIGY on KiCad WSON-8-1EP_6x5mm): JLC's EasyEDA model for this part is
+# 90 deg from the Winbond W25Q128JV's (C190862, where the community WSON -90 was right). With -90 it drew portrait
+# (5 wide x 6 tall) between the pad columns with its pin-1 dot top-right; board pin 1 is top-left -> correction 0.
+# Evidence: run 20261025-233038, 18-placement-U5.png. Keyed to the LCSC part, not the footprint. Re-check at 0 (run
+# 20261025-233523, 18-placement-U5.png): landscape over the pads, pin-1 dot on the silk triangle. CONFIRMED 2026-10-25.
+"lcsc:C24733358",0

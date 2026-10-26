@@ -40,6 +40,8 @@ def _read_rotations(path, confirmed):
         for r in csv.reader(line for line in f if not line.startswith("#")):
             if not r or r[0].startswith("Footprint"):
                 continue
+            # "lcsc:C123" keys a rule to the LCSC part (JLC rotates by the part's EasyEDA model, which can
+            # differ between parts on the same footprint); anything else is a footprint-name regex
             rows.append((re.compile(r[0].strip()), float(r[1]),
                          float(r[2]) if len(r) > 2 and r[2].strip() else 0.0,
                          float(r[3]) if len(r) > 3 and r[3].strip() else 0.0, confirmed))
@@ -85,6 +87,7 @@ def fab(name: str) -> dict:
     kicad_cli("pcb", "export", "pos", "--format", "csv", "--units", "mm", "--side", "both",
               "--exclude-dnp", "--use-drill-file-origin", "-o", pos, b.pcb)
     rules = _rotations()
+    lcsc_of = {p["ref"]: p["lcsc"] for p in netlist["parts"]}
     corrections = []
     with open(pos, newline="") as f, open(out / f"{name}-cpl.csv", "w", newline="") as g:
         w = csv.writer(g)
@@ -93,7 +96,9 @@ def fab(name: str) -> dict:
             fpname = r["Package"]
             rot, x, y = float(r["Rot"]), float(r["PosX"]), float(r["PosY"])
             for rx, drot, dx, dy, confirmed in rules:
-                if rx.search(fpname):
+                key = rx.pattern
+                hit = (key[5:] == lcsc_of.get(r["Ref"])) if key.startswith("lcsc:") else rx.search(fpname)
+                if hit:
                     rot = (rot + drot) % 360
                     a = math.radians(float(r["Rot"]))
                     x += dx * math.cos(a) - dy * math.sin(a)
