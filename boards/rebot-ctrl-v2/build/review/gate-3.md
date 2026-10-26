@@ -1,5 +1,5 @@
 # rebot-ctrl-v2: review gate 3
-_generated 2026-10-25 23:29 · checks PASS_
+_generated 2026-10-25 23:35 · checks PASS_
 
 ## Renders
 ![top](../renders/top.png)
@@ -22,7 +22,7 @@ _generated 2026-10-25 23:29 · checks PASS_
 - J3 `USB_C_Receptacle_HRO_TYPE-C-31-M-12`: +0° (rule `^USB_C_Receptacle_HRO_TYPE-C-31-M-12`, confirmed)
 - U1 `UFQFPN-32-1EP_5x5mm_P0.5mm_EP3.5x3.5mm`: -90° (rule `^UFQFPN-32-1EP_5x5mm`, confirmed)
 - U3 `SOT-23-3`: +180° (rule `^SOT-23`, confirmed)
-- U5 `WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4.3mm`: -90° (rule `^^WSON-8-1EP_6x5mm_P1.27mm`, community hint (unverified))
+- U5 `WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4.3mm`: +0° (rule `lcsc:C24733358`, confirmed)
 
 Parts cost per board ≈ $18.46 + extended-part fees (8 unique extended)
 
