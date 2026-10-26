@@ -15,3 +15,12 @@
 # (ours is top-left) -> JLC's SOT-23 model is 180 deg from KiCad. Preview 4 at 180: two legs on the two left
 # pads, single leg on pad 3, pin-1 dot top-left. CONFIRMED 2026-10-11.
 "^SOT-23",180
+# 2026-10-25 rebot-ctrl-v2 (C529358 STM32G431KBU6, KiCad UFQFPN-32-1EP_5x5mm): at 0 (no rule matched) JLC's
+# pin-1 dot sat top-left while the board's pin 1 (silk triangle, pad at 9.18/9.81) is top-right, one quarter
+# turn CW away -> -90. Evidence: tools/jlc/runs/rebot-ctrl-v2-20261025-212720/14-placement-U1.png.
+# PENDING the re-check preview with this rule applied.
+"^UFQFPN-32-1EP_5x5mm",-90
+# 2026-10-25 rebot-ctrl-v2 (C189895 SM04B-GHS-TB, KiCad JST_GH_..._Horizontal): with the community +180 JLC's
+# leads sat at the board edge while the signal pads are inward (mouth facing in) -> KiCad orientation is right,
+# rotation 0 (as for the HRO USB-C). Evidence: same run, 11-placement-J2.png. PENDING the re-check preview.
+"^JST_GH_SM",0
