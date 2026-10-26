@@ -9,7 +9,7 @@ from pcbkit.circuit import Circuit, NetClass
 
 # Basic passives (lib/basic_passives.yaml + JLC Basic lookups 2026-10-11)
 R100, R1K, R5K1, R10K, R22K, R100K = "C25076", "C11702", "C25905", "C25744", "C25768", "C25741"   # 0402 1%
-C10N, C100N, C1U, C4U7 = "C15195", "C307331", "C52923", "C23733"   # 0402: 10nF 50V, 100nF 50V, 1uF 25V, 4.7uF 10V
+C100N, C1U, C4U7 = "C307331", "C52923", "C23733"   # 0402: 100nF 50V, 1uF 25V, 4.7uF 10V
 C2U2_50V = "C377773"     # 0805
 C22U_25V = "C45783"      # 0805
 
@@ -120,10 +120,10 @@ def circuit() -> Circuit:
         r_m = [c.passive(f"R{9 + k}", "R", "100", "0402", lcsc=R100) for k in range(4)]
         r_cur_t = c.passive("R13", "R", "100k", "0402", lcsc=R100K)
         r_cur_b = c.passive("R14", "R", "10k", "0402", lcsc=R10K)
-        c_cur = c.passive("C17", "C", "10nF", "0402", lcsc=C10N)
+        c_cur = c.passive("C17", "C", "100nF", "0402", lcsc=C100N)   # 9.1k Thevenin: ~175 Hz, shares the 100nF BOM line
         r_vb_t = c.passive("R15", "R", "100k", "0402", lcsc=R100K)
         r_vb_b = c.passive("R16", "R", "10k", "0402", lcsc=R10K)
-        c_vb = c.passive("C18", "C", "10nF", "0402", lcsc=C10N)
+        c_vb = c.passive("C18", "C", "100nF", "0402", lcsc=C100N)
         r_tlm = c.passive("R17", "R", "1k", "0402", lcsc=R1K)
     for k, pin in enumerate((u1.PA0, u1.PA1, u1.PA2, u1.PA3)):   # TIM2_CH1..CH4 (AF1)
         c.connect(f"M{k + 1}", r_m[k]["1"])
@@ -139,7 +139,7 @@ def circuit() -> Circuit:
     # --- IMU + log flash on SPI1 ----------------------------------------------------------------
     with c.block("IMU LSM6DSV32X + 16 MB log flash (SPI1)"):
         u4 = c.part("U4", "LSM6DSV32XTR")
-        u5 = c.part("U5", "W25Q128JVPIQ")
+        u5 = c.part("U5", "GD25Q128EWIGY")   # W25Q128JVPIQ pin-compatible, ~$1.2 cheaper
         c_imu1 = c.passive("C19", "C", "100nF", "0402", lcsc=C100N)
         c_imu2 = c.passive("C20", "C", "100nF", "0402", lcsc=C100N)
         c_fl = c.passive("C21", "C", "100nF", "0402", lcsc=C100N)
@@ -164,8 +164,8 @@ def circuit() -> Circuit:
         c.connect(n, tp["1"])
 
     # --- net classes ----------------------------------------------------------------------------
-    c.net_class(NetClass("Default", track_width=0.15, clearance=0.125, via_diameter=0.45, via_drill=0.2))
-    c.net_class(NetClass("Power", track_width=0.4, clearance=0.15, current_a=0.5, via_diameter=0.45, via_drill=0.2),
+    c.net_class(NetClass("Default", track_width=0.15, clearance=0.125, via_diameter=0.45, via_drill=0.3))
+    c.net_class(NetClass("Power", track_width=0.4, clearance=0.15, current_a=0.5, via_diameter=0.45, via_drill=0.3),
                 "VBAT", "GND", "+5V", "V5_BUCK", "VBUS", "3V3", "BUCK_SW")
 
     # --- design intent --------------------------------------------------------------------------

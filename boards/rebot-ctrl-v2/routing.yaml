@@ -67,21 +67,21 @@ tracks:
   - {net: NRST, layer: In2.Cu, width: 0.15, points: [[8.2, 8.85], [6.95, 8.85], [1.6, 14.2], [1.0, 14.2]]}
   - {net: NRST, layer: F.Cu, width: 0.15, points: [[1.0, 13.48], [1.0, 14.2]]}
 vias:
-  - {net: VBUS, at: [16.87, 5.0], diameter: 0.45, drill: 0.2}
-  - {net: VBUS, at: [21.23, 5.0], diameter: 0.45, drill: 0.2}
-  - {net: USB_DM, at: [19.53, 5.94], diameter: 0.45, drill: 0.2}
-  - {net: USB_DP, at: [8.4, 15.6], diameter: 0.45, drill: 0.2}
-  - {net: USB_DP, at: [18.3, 9.25], diameter: 0.45, drill: 0.2}
-  - {net: USB_DM, at: [7.68, 16.05], diameter: 0.45, drill: 0.2}
+  - {net: VBUS, at: [16.87, 5.0], diameter: 0.45, drill: 0.3}
+  - {net: VBUS, at: [21.23, 5.0], diameter: 0.45, drill: 0.3}
+  - {net: USB_DM, at: [19.53, 5.94], diameter: 0.45, drill: 0.3}
+  - {net: USB_DP, at: [8.4, 15.6], diameter: 0.45, drill: 0.3}
+  - {net: USB_DP, at: [18.3, 9.25], diameter: 0.45, drill: 0.3}
+  - {net: USB_DM, at: [7.68, 16.05], diameter: 0.45, drill: 0.3}
   # bottom-side test pads: a via in each pad, so the router (signals on F/In2 only) can reach it from above
-  - {net: 3V3, at: [8.45, 3.2], diameter: 0.45, drill: 0.2}      # TP1 (under the J1 body)
-  - {net: SWDIO, at: [4.15, 3.2], diameter: 0.45, drill: 0.2}    # TP3
-  - {net: SWCLK, at: [6.3, 3.2], diameter: 0.45, drill: 0.2}     # TP4
-  - {net: NRST, at: [8.2, 8.85], diameter: 0.45, drill: 0.2}     # TP5
-  - {net: BOOT0, at: [13.1, 9.25], diameter: 0.45, drill: 0.2}   # TP6
-  - {net: +5V, at: [21.95, 10.7], diameter: 0.45, drill: 0.2}     # D2 cathode
-  - {net: 3V3, at: [10.45, 9.55], diameter: 0.45, drill: 0.2}     # C10 / VDD pin 1
-  - {net: NRST, at: [1.0, 14.2], diameter: 0.45, drill: 0.2}      # C16
+  - {net: 3V3, at: [8.45, 3.2], diameter: 0.45, drill: 0.3}      # TP1 (under the J1 body)
+  - {net: SWDIO, at: [4.15, 3.2], diameter: 0.45, drill: 0.3}    # TP3
+  - {net: SWCLK, at: [6.3, 3.2], diameter: 0.45, drill: 0.3}     # TP4
+  - {net: NRST, at: [8.2, 8.85], diameter: 0.45, drill: 0.3}     # TP5
+  - {net: BOOT0, at: [13.1, 9.25], diameter: 0.45, drill: 0.3}   # TP6
+  - {net: +5V, at: [21.95, 10.7], diameter: 0.45, drill: 0.3}     # D2 cathode
+  - {net: 3V3, at: [10.45, 9.55], diameter: 0.45, drill: 0.3}     # C10 / VDD pin 1
+  - {net: NRST, at: [1.0, 14.2], diameter: 0.45, drill: 0.3}      # C16
 zones:
   - {net: GND, layer: F.Cu, outline: board, clearance: 0.2}
   - {net: GND, layer: In1.Cu, outline: board, clearance: 0.2}   # F.Cu's reference
@@ -90,10 +90,10 @@ zones:
 fanout:   # every small SMD GND pad gets its own track + via to the planes before routing (no boxed-in pour islands)
   net: GND
   via_diameter: 0.45
-  via_drill: 0.2
+  via_drill: 0.3
   width: 0.3
 stitch:
-  - {net: GND, pitch: 3.0, via_diameter: 0.45, via_drill: 0.2, edge_margin: 0.8}
+  - {net: GND, pitch: 3.0, via_diameter: 0.45, via_drill: 0.3, edge_margin: 0.8}
 autoroute:
   enabled: true
   max_passes: 100

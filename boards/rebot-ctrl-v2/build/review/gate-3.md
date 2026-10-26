@@ -1,5 +1,5 @@
 # rebot-ctrl-v2: review gate 3
-_generated 2026-10-13 15:48 · checks PASS_
+_generated 2026-10-25 23:29 · checks PASS_
 
 ## Renders
 ![top](../renders/top.png)
@@ -18,12 +18,13 @@ _generated 2026-10-13 15:48 · checks PASS_
 - rebot-ctrl-v2.kicad_pcb
 
 ## CPL rotation corrections applied (UNVERIFIED until you check JLC's preview)
-- J2 `JST_GH_SM04B-GHS-TB_1x04-1MP_P1.25mm_Horizontal`: +180° (rule `^JST_GH_SM`, community hint (unverified))
+- J2 `JST_GH_SM04B-GHS-TB_1x04-1MP_P1.25mm_Horizontal`: +0° (rule `^JST_GH_SM`, confirmed)
 - J3 `USB_C_Receptacle_HRO_TYPE-C-31-M-12`: +0° (rule `^USB_C_Receptacle_HRO_TYPE-C-31-M-12`, confirmed)
+- U1 `UFQFPN-32-1EP_5x5mm_P0.5mm_EP3.5x3.5mm`: -90° (rule `^UFQFPN-32-1EP_5x5mm`, confirmed)
 - U3 `SOT-23-3`: +180° (rule `^SOT-23`, confirmed)
 - U5 `WSON-8-1EP_6x5mm_P1.27mm_EP3.4x4.3mm`: -90° (rule `^^WSON-8-1EP_6x5mm_P1.27mm`, community hint (unverified))
 
-Parts cost per board ≈ $19.70 + extended-part fees (8 unique extended)
+Parts cost per board ≈ $18.46 + extended-part fees (8 unique extended)
 
 ## Before paying
 1. Upload the gerber zip; inspect JLC's Gerber viewer (outline, cutouts, drills).

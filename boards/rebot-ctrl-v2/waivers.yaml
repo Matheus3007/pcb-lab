@@ -73,3 +73,13 @@
 - check: layout/vias
   match: "SPI_SCK:"
   reason: "SCK reaches the IMU (beside the MCU) and the flash's far pin column (CLK on the side away from the MCU) on In2; 6 vias on a <=10 MHz clock with a GND plane next to every layer it uses"
+# Reroute 2026-10-25 for 0.3/0.45 vias (JLC cost cut): best of 8 again. Looked at in copper_top/copper_in2.png.
+- check: routing/jog
+  match: "SPI_SCK on In2.Cu"
+  reason: "SCK detours ~3 mm round the SPI via cluster beside the IMU on In2 (B.Cu GND below, In1 above); SPI <= 10 MHz, a few mm is negligible at its edge rate"
+- check: routing/jog
+  match: "IMU_INT1 on F.Cu"
+  reason: "data-ready interrupt (edge once per sample, kHz): 1 mm step past the R18 pull-up at the IMU's bottom pads"
+- check: routing/jog
+  match: "BUCK_FB on F.Cu"
+  reason: "0.8 mm step between the feedback divider (R5/R6) and the LMR36506 FB pin; the FB run stays on the divider side, away from the SW node at L1"
