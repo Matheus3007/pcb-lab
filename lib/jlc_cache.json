@@ -221,6 +221,20 @@
   "tier": "basic",
   "unit_price_usd": 0.0167
  },
+ "C24733358": {
+  "category": "NOR FLASH",
+  "datasheet": null,
+  "datasheet_file_id": "",
+  "description": "WSON8(5x6) NOR FLASH ROHS",
+  "fetched": "2026-10-25",
+  "lcsc": "C24733358",
+  "manufacturer": "GigaDevice Semicon Beijing",
+  "mpn": "GD25Q128EWIGY",
+  "package": "WSON8(5x6)",
+  "stock": 2311,
+  "tier": "extended",
+  "unit_price_usd": 2.1258
+ },
  "C25076": {
   "category": "Chip Resistor - Surface Mount",
   "datasheet": "https://www.lcsc.com/datasheet/lcsc_datasheet_2205311900_UNI-ROYAL-Uniroyal-Elec-0402WGF1000TCE_C25076.pdf",
